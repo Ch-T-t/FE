@@ -1,0 +1,37 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENV_FILE_DEV }}" >> .env
+          cat .env
+
+      - name: Build, tag, and push image to dockerhub
+        id: build-image
+        env:
+          IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+          USERNAME_DOCKERHUB: ${{ secrets.USERNAME_DOCKERHUB }}
+          PASSWORD_DOCKERHUB: ${{ secrets.PASSWORD_DOCKERHUB }}
+          IMAGE_TAG: ${{ secrets.IMAGE_TAG }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        run: |
+          docker build -t $USERNAME_DOCKERHUB/$IMAGE_NAME:latest .
+          docker tag $USERNAME_DOCKERHUB/$IMAGE_NAME:latest $USERNAME_DOCKERHUB/$IMAGE_NAME:$IMAGE_TAG
+          docker login -u $USERNAME_DOCKERHUB -p $PASSWORD_DOCKERHUB
+          docker push $USERNAME_DOCKERHUB/$IMAGE_NAME:$IMAGE_TAG
+          docker push $USERNAME_DOCKERHUB/$IMAGE_NAME:latest
+          curl --location --insecure --request POST $WEBHOOK_URL
