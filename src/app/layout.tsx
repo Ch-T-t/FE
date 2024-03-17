@@ -8,6 +8,10 @@ import { SessionProvider } from 'next-auth/react';
 import ProviderWrapper from './ProviderWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({
+//   subsets: ['latin'],
+//   display: 'swap',
+// });
 
 export const metadata: Metadata = {
   title: 'SimpRaidenEi',
@@ -31,8 +35,8 @@ export default async function RootLayout({
   const session = await getServerSession();
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={inter.className}>
+      <body>
         <ProviderWrapper session={session}>
           <AntdRegistry>
             <ConfigProvider

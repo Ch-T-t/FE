@@ -51,7 +51,7 @@ export default function AuthPage() {
 
   return (
     <div className="w-full h-[900px] bg-cover bg-no-repeat bg-[url('https://static.chotot.com/storage/marketplace/login-background.webp')]">
-      <div className="w-1/3 m-auto p-[50px] rounded-lg shadow-xl mt-[100px] ">
+      <div className="w-1/3 m-auto p-[50px] rounded-lg shadow-xl max-lg:w-[80%] bg-white mt-[100px] cursor-pointer">
         <div className="flex items-center justify-center">
           <Image
             className="m-auto"
@@ -105,7 +105,7 @@ export default function AuthPage() {
               <p className="text-[14px] font-semibold">{item.label}</p>
             </div>
           ))}
-          <p onClick={() => signOut()}>Out</p>
+          {/* <p onClick={() => signOut()}>Out</p> */}
         </div>
         <p className="text-[14px] text-center cursor-pointer">
           {`${

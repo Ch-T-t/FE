@@ -45,6 +45,7 @@ const handler = NextAuth({
       return true;
     },
     async redirect({ url, baseUrl }) {
+      // return `http://192.168.1.106:3000/`;
       return baseUrl;
     },
     async jwt({ token, user, account, profile }) {
