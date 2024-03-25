@@ -25,6 +25,8 @@ interface IUserRegister {
   username: string;
   email: string;
   password: string;
+  verify_code: string;
+  new_password: string;
   rePassword: string;
 }
 

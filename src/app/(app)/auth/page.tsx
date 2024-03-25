@@ -12,7 +12,11 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 export default function AuthPage() {
-  const [currentForm, setCurrentForm] = useState<'LOGIN' | 'REGISTER'>('LOGIN');
+  const [currentForm, setCurrentForm] = useState<
+    'LOGIN' | 'REGISTER' | 'CONFIRMOTP' | 'FORGET' | 'RESETPASSWORD'
+  >('LOGIN');
+  const [authLoading, setAuthLoading] = useState(false);
+  const [email, setEmail] = useState('');
   const route = useRouter();
   const dispatch = useAppDispatch();
   const { data: session, status } = useSession();
@@ -26,8 +30,7 @@ export default function AuthPage() {
       icon: <GoogleSquareFilled className="text-[20px]" />,
     },
   ];
-  const onFinish = async (e: IUserLogin) => {
-    delete instanceAxios.defaults.headers.common.Authorization;
+  const onLogin = async (e: IUserLogin) => {
     await instanceAxios
       .post('/api/token/', e)
       .then((res) => {
@@ -48,6 +51,104 @@ export default function AuthPage() {
         console.log(err);
       });
   };
+  const onRegister = async (e: IUserRegister) => {
+    setAuthLoading(true);
+    await instanceAxios
+      .post('/api/user/register/', e)
+      .then((res) => {
+        notification.success({
+          message: 'Thông báo',
+          description: 'Đăng kí thành công',
+        });
+      })
+      .catch((err) => {
+        notification.error({
+          message: 'Thông báo',
+          description: 'Tài khoản hoặc username đã tồn tại',
+        });
+        console.log(err);
+      })
+      .finally(() => setAuthLoading(false));
+  };
+  const onConfirmOTP = async (e: IUserRegister) => {
+    setAuthLoading(true);
+    await instanceAxios
+      .get(`/api/user/verify/${e.verify_code}/`)
+      .then((res) => {
+        route.push('/');
+        notification.success({
+          message: 'Thông báo',
+          description: 'Đăng kí thành công',
+        });
+      })
+      .catch((err) => {
+        notification.error({
+          message: 'Thông báo',
+          description: 'Đã có lỗi xảy ra',
+        });
+        console.log(err);
+      })
+      .finally(() => setAuthLoading(false));
+  };
+
+  const onForgot = async (e: IUserRegister) => {
+    setAuthLoading(true);
+    await instanceAxios
+      .post('/api/user/forgot-password/', e)
+      .then((res) => {
+        notification.success({
+          message: 'Xác thực Email',
+          description: 'Vui lòng nhập mã OTP gửi đến eamil của bạn.',
+        });
+        setCurrentForm('RESETPASSWORD');
+      })
+      .catch((err) => {
+        notification.error({
+          message: 'Thông báo',
+          description: 'Email không tồn tại.',
+        });
+        console.log(err);
+      })
+      .finally(() => setAuthLoading(false));
+  };
+  const onReset = async (e: IUserRegister) => {
+    setAuthLoading(true);
+    await instanceAxios
+      .post('/api/user/reset-password/', { ...e, email })
+      .then((res) => {
+        notification.success({
+          message: 'Xác thực Email',
+          description: 'Vui lòng nhập mã OTP gửi đến eamil của bạn',
+        });
+        route.push('/');
+      })
+      .catch((err) => {
+        notification.error({
+          message: 'Thông báo',
+          description: 'Đã có lỗi xảy ra',
+        });
+        console.log(err);
+      })
+      .finally(() => setAuthLoading(false));
+  };
+
+  const onFinish = (e: IUserRegister) => {
+    if (currentForm === 'LOGIN') {
+      onLogin(e);
+    }
+    if (currentForm === 'FORGET') {
+      onForgot(e);
+    }
+    if (currentForm === 'REGISTER') {
+      onRegister(e);
+    }
+    if (currentForm === 'CONFIRMOTP') {
+      onConfirmOTP(e);
+    }
+    if (currentForm === 'RESETPASSWORD') {
+      onReset(e);
+    }
+  };
 
   return (
     <div className="w-full h-[900px] bg-cover bg-no-repeat bg-[url('https://static.chotot.com/storage/marketplace/login-background.webp')]">
@@ -63,34 +164,109 @@ export default function AuthPage() {
         <p className="py-[20px] text-center text-[30px] font-semibold">
           {currentForm === 'LOGIN' ? 'Đăng nhập' : 'Đăng kí'}
         </p>
-        {currentForm === 'LOGIN' ? (
-          <Form onFinish={onFinish}>
-            <Form.Item<IUserLogin>
-              name={'username'}
-              rules={[{ required: true }]}
-            >
-              <Input aria-label="adsas" placeholder="Tên đăng nhập" />
-            </Form.Item>
-            <Form.Item<IUserLogin>
-              name={'password'}
-              rules={[{ required: true }]}
-            >
-              <Input.Password aria-label="adsas" placeholder="******" />
-            </Form.Item>
-            <p className="py-[10px] text-blue-700 text-[12px]">Quên mật khẩu</p>
-            <Form.Item>
-              <Button
-                className={'w-full !bg-[#ffb057] !text-white'}
-                //   style={{ backgroundColor: '#ffb057' }}
-                htmlType="submit"
+        <Form onFinish={onFinish}>
+          {currentForm === 'LOGIN' && (
+            <>
+              <Form.Item<IUserLogin>
+                name={'username'}
+                rules={[{ required: true }]}
               >
-                ĐĂNG NHẬP
-              </Button>
+                <Input aria-label="adsas" placeholder="Tên đăng nhập" />
+              </Form.Item>
+              <Form.Item<IUserLogin>
+                name={'password'}
+                rules={[{ required: true }]}
+              >
+                <Input.Password aria-label="adsas" placeholder="******" />
+              </Form.Item>
+            </>
+          )}
+          {currentForm === 'REGISTER' && (
+            <>
+              <Form.Item<IUserRegister>
+                name={'username'}
+                rules={[{ required: true }]}
+              >
+                <Input placeholder="Tên đăng nhập" />
+              </Form.Item>
+              <Form.Item<IUserRegister>
+                name={'email'}
+                rules={[
+                  { required: true, message: 'Email không được để trống!' },
+                  { type: 'email', message: 'Email chưa đúng định dạng!' },
+                ]}
+              >
+                <Input placeholder="Email" />
+              </Form.Item>
+              <Form.Item<IUserRegister>
+                name={'password'}
+                rules={[{ required: true }]}
+              >
+                <Input.Password placeholder="******" />
+              </Form.Item>
+              <Form.Item<IUserRegister>
+                name={'rePassword'}
+                rules={[{ required: true }]}
+              >
+                <Input.Password placeholder="******" />
+              </Form.Item>
+            </>
+          )}
+          {currentForm === 'CONFIRMOTP' && (
+            <Form.Item<IUserRegister>
+              name={'verify_code'}
+              rules={[{ required: true }]}
+            >
+              <Input placeholder="Mã OTP" />
             </Form.Item>
-          </Form>
-        ) : (
-          <RegisterForm />
-        )}
+          )}
+          {currentForm === 'FORGET' && (
+            <Form.Item<IUserRegister>
+              name={'email'}
+              rules={[
+                { required: true, message: 'Email không được để trống!' },
+                { type: 'email', message: 'Email chưa đúng định dạng!' },
+              ]}
+            >
+              <Input
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
+            </Form.Item>
+          )}
+          {currentForm === 'RESETPASSWORD' && (
+            <>
+              <Form.Item<IUserRegister>
+                name={'verify_code'}
+                rules={[{ required: true }]}
+              >
+                <Input placeholder="Mã OTP" />
+              </Form.Item>
+              <Form.Item<IUserRegister>
+                name={'new_password'}
+                rules={[{ required: true }]}
+              >
+                <Input.Password placeholder="Mật khẩu mới" />
+              </Form.Item>
+            </>
+          )}
+          <p
+            className="py-[10px] text-blue-700 text-[12px]"
+            onClick={() => setCurrentForm('FORGET')}
+          >
+            Quên mật khẩu
+          </p>
+          <Form.Item>
+            <Button
+              className={'w-full !bg-[#ffb057] !text-white'}
+              //   style={{ backgroundColor: '#ffb057' }}
+              htmlType="submit"
+            >
+              ĐĂNG NHẬP
+            </Button>
+          </Form.Item>
+        </Form>
+
         <p className="w-full  relative text-center font-light before:w-1/4 before:h-[1px] before:bg-[#8c8c8c] before:absolute before:right-0 before:top-1/2 after:w-1/4 after:h-[1px] after:bg-[#8c8c8c] after:absolute after:left-0 after:top-1/2">
           Hoặc đăng nhập bằng
         </p>
