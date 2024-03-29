@@ -18,7 +18,7 @@ interface ITableDataType {
 }
 
 interface IUserLogin {
-  username: string;
+  email: string;
   password: string;
 }
 interface IUserRegister {

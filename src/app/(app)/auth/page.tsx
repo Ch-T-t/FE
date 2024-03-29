@@ -32,11 +32,11 @@ export default function AuthPage() {
   ];
   const onLogin = async (e: IUserLogin) => {
     await instanceAxios
-      .post('/api/token/', e)
+      .post('/api/auth/login/', e)
       .then((res) => {
-        dispatch(login(res.data.data.user));
-        setCookie('access', res.data.data.access);
-        setCookie('refresh', res.data.data.refresh);
+        dispatch(login(res.data.user));
+        setCookie('access', res.data.access);
+        setCookie('refresh', res.data.refresh);
         notification.success({
           message: 'Xin chào!!!',
           description: 'Cảm ơn bạn đã quan tâm đến chúng tôi.',
@@ -168,7 +168,7 @@ export default function AuthPage() {
           {currentForm === 'LOGIN' && (
             <>
               <Form.Item<IUserLogin>
-                name={'username'}
+                name={'email'}
                 rules={[{ required: true }]}
               >
                 <Input aria-label="adsas" placeholder="Tên đăng nhập" />
