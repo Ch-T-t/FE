@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 interface IJob {
   id?: number;
-  Name?: string;
+  name?: string;
   Url?: string;
   keyForm?: string;
   Creation_time?: string; // Nếu bạn muốn xử lý ngày thì có thể sử dụng kiểu Date

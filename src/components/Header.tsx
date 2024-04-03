@@ -91,6 +91,7 @@ export default function Header() {
             <Link href={'/'}>
               <Image
                 className="!w-[200px] m-auto"
+                loading="lazy"
                 preview={false}
                 src="https://static.chotot.com/storage/APP_WRAPPER/logo/chotot-logo-appwrapper.png"
                 alt="Chotot Logo"
