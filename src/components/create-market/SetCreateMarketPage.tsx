@@ -111,7 +111,7 @@ export default function SetCreateMarketPage(props: Props) {
               currentShopData.setCurrentData?.({
                 ...currentShopData.currentData,
                 address: address as string,
-                contact: { number },
+                contact: { number: phone || 0 },
                 activate: checked,
                 name: name as string,
               });

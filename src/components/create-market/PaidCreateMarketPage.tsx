@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import InputCustom from '../common/InputCustom';
 import { CloseOutlined } from '@ant-design/icons';
 import { CurrentShopDataContext } from '@/app/(app)/CurentFormContext';
+import { fetchCreateShop } from '@/api/allRequest';
 interface Props {
   onFinish?: (e?: any) => void;
 }
@@ -11,6 +12,23 @@ export default function PaidCreateMarketPage(props: Props) {
   const [email, setEmail] = useState(currentShopData.currentData?.email);
 
   const labelClassName = 'font-semibold pt-[20px] text-[18px]';
+
+  const fetchCreate = () => {
+    currentShopData.setCurrentData?.({
+      ...currentShopData.currentData,
+      email,
+    });
+    fetchCreateShop(
+      {
+        ...currentShopData.currentData,
+        email,
+      } || {}
+    )
+      .then((res) => {
+        props.onFinish?.();
+      })
+      .catch((err) => {});
+  };
 
   return (
     <div className="w-full rounded-lg overflow-hidden bg-white">
@@ -74,11 +92,7 @@ export default function PaidCreateMarketPage(props: Props) {
         </i>
         <Button
           onClick={() => {
-            props.onFinish?.();
-            currentShopData.setCurrentData?.({
-              ...currentShopData.currentData,
-              email,
-            });
+            fetchCreate();
           }}
           className="!bg-[#589f39] my-[20px] !py-[20px] !flex justify-center items-center !font-bold !text-white"
         >
