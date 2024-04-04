@@ -222,6 +222,30 @@ const laptopCompanyData: IJob[] = [
   },
 ];
 
+const phoneCompanyData: IJob[] = [
+  {
+    name: 'Apple',
+  },
+  {
+    name: 'Samsung',
+  },
+  {
+    name: 'Oppo',
+  },
+  {
+    name: 'Nokia',
+  },
+  {
+    name: 'Sony',
+  },
+  {
+    name: 'Realme',
+  },
+  {
+    name: 'Khác',
+  },
+];
+
 const laptopRamData: IJob[] = [
   {
     name: '4 GB',
@@ -258,7 +282,7 @@ const laptopCardData: IJob[] = [
   },
 ];
 
-const laptopMonitorSizedData: IJob[] = [
+const laptopScreenSizeData: IJob[] = [
   {
     name: '9 inch',
   },
@@ -389,12 +413,13 @@ const selectData = {
   laptopCompanyData,
   laptopRamData,
   laptopCardData,
-  laptopMonitorSizedData,
+  laptopScreenSizeData,
   goodHouseUsageStatus,
   guaranteeData,
   fridgeVolumeData,
   fridgeWattageData,
   washingWeightData,
+  phoneCompanyData,
 };
 
 export default selectData;

@@ -1,3 +1,4 @@
+import { ICreatePost } from '@/types/Job';
 import { createContext } from 'react';
 
 export const CurrentFormContext = createContext<{
@@ -9,4 +10,8 @@ export const CurrentFormContext = createContext<{
   setCurrentCategoryId?: React.Dispatch<React.SetStateAction<string | number>>;
   currentLabelAdress?: string;
   setCurrentLabelAdress?: React.Dispatch<React.SetStateAction<string>>;
+  currentData?: ICreatePost | undefined;
+  setCurrentData?: React.Dispatch<
+    React.SetStateAction<ICreatePost | undefined>
+  >;
 }>({});
