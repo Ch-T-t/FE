@@ -54,7 +54,7 @@ export default function SelectCustom(props: Props) {
 
           {value && (
             <p className="text-[14px]">
-              {props.data?.find((item) => item.id === value)?.Name}
+              {props.data?.find((item) => item.id === value)?.name}
             </p>
           )}
         </div>
@@ -72,11 +72,11 @@ export default function SelectCustom(props: Props) {
               key={index}
               onClick={() => {
                 setShowModal(false);
-                handleChange(item.id || '');
+                handleChange(item.value || '');
               }}
               className={`transform-gpu transition-transform duration-500 w-full relative flex justify-between hover:bg-gray-100 rounded-lg text-[#9b9b9b] text-[14px] px-[20px] py-[15px]`}
             >
-              {item.Name}
+              {item.name}
             </div>
           ))}
         </Flex>

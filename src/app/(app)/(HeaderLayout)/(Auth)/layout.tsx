@@ -1,10 +1,13 @@
 'use client';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { ICreatePost, IJobPostCreate } from '@/types/Job';
+import { ICreatePost, IJobPostCreate, IShop } from '@/types/Job';
 import { Button, Result } from 'antd';
 import { getCookie } from 'cookies-next';
 import React, { createContext, useEffect, useState } from 'react';
-import { CurrentFormContext } from '../../CurentFormContext';
+import {
+  CurrentFormContext,
+  CurrentShopDataContext,
+} from '../../CurentFormContext';
 
 export default function AuthLayout({
   children,
@@ -19,6 +22,7 @@ export default function AuthLayout({
   );
   const [currentLabelAdress, setCurrentLabelAdress] = useState('');
   const [currentData, setCurrentData] = useState<ICreatePost>();
+  const [currentShopData, setCurrentShopData] = useState<IShop>();
 
   // const logged = useAppSelector((state) => state.user.logged);
   const token = getCookie('access');
@@ -43,7 +47,14 @@ export default function AuthLayout({
               setCurrentData,
             }}
           >
-            {children}
+            <CurrentShopDataContext.Provider
+              value={{
+                currentData: currentShopData,
+                setCurrentData: setCurrentShopData,
+              }}
+            >
+              {children}
+            </CurrentShopDataContext.Provider>
           </CurrentFormContext.Provider>
         ) : (
           <Result

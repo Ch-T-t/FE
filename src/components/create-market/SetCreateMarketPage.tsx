@@ -1,13 +1,28 @@
 import { CameraFilled, CameraOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Flex, Image, Input, Space } from 'antd';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import InputCustom from '../common/InputCustom';
 import ModalLocationSelectCustom from '../common/ModalLocationSelectCustom';
 import TextAreaCustom from '../common/TextAreaCustom';
+import { CurrentShopDataContext } from '@/app/(app)/CurentFormContext';
+import { number } from 'prop-types';
 interface Props {
   onFinish?: (e?: any) => void;
 }
 export default function SetCreateMarketPage(props: Props) {
+  const currentShopData = useContext(CurrentShopDataContext);
+  const [name, setName] = useState<string | number | undefined>(
+    currentShopData.currentData?.name
+  );
+  const [address, setAddress] = useState<string | number | undefined>(
+    currentShopData.currentData?.address
+  );
+  const [checked, setChecked] = useState(false);
+  const [description, setDescription] = useState<string | number | undefined>(
+    currentShopData.currentData?.description
+  );
+  const [phone, setPhone] = useState<string | number | undefined>();
+
   const labelClassName = 'font-bold py-[20px] text-[20px]';
   return (
     <Flex vertical gap={30} className="w-full">
@@ -49,33 +64,58 @@ export default function SetCreateMarketPage(props: Props) {
         <Flex vertical className="w-2/3 m-auto">
           <Flex vertical>
             <p className={labelClassName}>Cửa hàng / Chuyên trang</p>
-            <InputCustom label="Tên cửa hàng" />
+            <InputCustom
+              type="text"
+              onChange={(e) => setName(e)}
+              label="Tên cửa hàng"
+            />
           </Flex>
           <Flex vertical>
             <p className={labelClassName}>Địa chỉ/Khu vực</p>
-            <ModalLocationSelectCustom label="Địa chỉ cửa hàng" />
+            <ModalLocationSelectCustom
+              onChange={(e) => setAddress(e)}
+              label="Địa chỉ cửa hàng"
+            />
           </Flex>
           <Flex vertical>
             <p className={labelClassName}>Cửa hàng / Chuyên trang</p>
             <Space>
-              <Checkbox />
+              <Checkbox
+                checked={checked}
+                onChange={(e) => setChecked(e.target.checked)}
+              />
               <p>Tôi muốn thêm vào cửa hàng chợ tốt Map</p>
             </Space>
           </Flex>
           <Flex vertical>
             <p className={labelClassName}>Liện hệ</p>
-            <InputCustom type="number" label="Số điện thoại liên hệ" required />
+            <InputCustom
+              onChange={(e) => setPhone(e)}
+              type="number"
+              label="Số điện thoại liên hệ"
+              required
+            />
           </Flex>
           <Flex vertical>
             <p className={labelClassName}>Giới thiệu</p>
             <TextAreaCustom
+              onChange={(e) => setDescription(e)}
               // textAreaClassName={`!min-h-[100px]`}
               label="Giới thiệu cửa hàng"
               required
             />
           </Flex>
           <Button
-            onClick={() => props.onFinish?.()}
+            onClick={() => {
+              props.onFinish?.();
+              currentShopData.setCurrentData?.({
+                ...currentShopData.currentData,
+                address: address as string,
+                contact: { number },
+                activate: checked,
+                name: name as string,
+              });
+            }}
             className="!bg-[#ff8800] my-[20px] !py-[20px] !flex justify-center items-center !font-bold !text-white"
           >
             TẠO VÀ THANH TOÁN

@@ -1,4 +1,4 @@
-import { ICreatePost } from '@/types/Job';
+import { ICreatePost, IShop } from '@/types/Job';
 import { createContext } from 'react';
 
 export const CurrentFormContext = createContext<{
@@ -14,4 +14,9 @@ export const CurrentFormContext = createContext<{
   setCurrentData?: React.Dispatch<
     React.SetStateAction<ICreatePost | undefined>
   >;
+}>({});
+
+export const CurrentShopDataContext = createContext<{
+  currentData?: IShop | undefined;
+  setCurrentData?: React.Dispatch<React.SetStateAction<IShop | undefined>>;
 }>({});

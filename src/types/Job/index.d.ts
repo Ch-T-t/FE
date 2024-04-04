@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 interface IJob {
   id?: number;
   name?: string;
+  value?: string;
   Url?: string;
   keyForm?: string;
   Creation_time?: string; // Nếu bạn muốn xử lý ngày thì có thể sử dụng kiểu Date
@@ -18,6 +19,17 @@ interface ICategory {
   urlSub?: string;
   icon: ReactNode;
   form?: ReactNode;
+}
+
+interface IShop {
+  id?: number;
+  name?: string;
+  address?: string;
+  activate?: boolean;
+  contact?: object;
+  user?: IUser;
+  email?: string;
+  description?: string;
 }
 
 interface IImage {

@@ -1,13 +1,18 @@
 'use client';
+import { CurrentShopDataContext } from '@/app/(app)/CurentFormContext';
 import ActiveCreateMarketPage from '@/components/create-market/ActiveCreateMarketPage';
 import ChooseCategoryPage from '@/components/create-market/ChooseCategoryPage';
 import PaidCreateMarketPage from '@/components/create-market/PaidCreateMarketPage';
 import SetCreateMarketPage from '@/components/create-market/SetCreateMarketPage';
 import { Flex, Space } from 'antd';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 export default function CreateMarketPage() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [finalStep, setFinalStep] = useState(false);
+
+  const currentShopData = useContext(CurrentShopDataContext);
+
   const lableStepList = [
     {
       step: 1,
@@ -30,7 +35,10 @@ export default function CreateMarketPage() {
       lablel: 'Thanh toán',
       children: (
         <PaidCreateMarketPage
-          onFinish={(e) => setCurrentStep(currentStep + 1)}
+          onFinish={(e) => {
+            setCurrentStep(currentStep + 1);
+            setFinalStep(true);
+          }}
         />
       ),
     },
@@ -44,7 +52,11 @@ export default function CreateMarketPage() {
     <div className="w-full">
       <Flex className="my-[20px]" gap={20} justify="center">
         {lableStepList.map((item, index) => (
-          <Space className="flex cursor-pointer" key={index}>
+          <Space
+            onClick={() => finalStep && setCurrentStep(index)}
+            className="flex cursor-pointer"
+            key={index}
+          >
             <div
               className={`w-[30px] h-[30px] flex justify-center items-center ${
                 currentStep === index ? `bg-[#fe9900]` : `bg-[#cfcfcf]`
