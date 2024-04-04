@@ -1,4 +1,5 @@
 'use client';
+import { fetchCreatePost } from '@/api/allRequest';
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import CreatePostAirConditionForm from '@/components/common/Form/CreatePostAirConditionForm';
 import ModalCategorySelectCustom from '@/components/common/ModalCategorySelectCustom';
@@ -50,6 +51,37 @@ export default function NewCreatePostPage() {
     setVideoFileList(newList);
   };
   const handleCancel = () => setPreviewOpen(false);
+
+  const fetchCreate = () => {
+    const formData = new FormData();
+    currentForm.currentData?.name &&
+      formData.append('name', currentForm.currentData?.name as string);
+    currentForm.currentData?.description &&
+      formData.append(
+        'description',
+        currentForm.currentData?.description as string
+      );
+    currentForm.currentData?.quantity &&
+      formData.append('quantity', currentForm.currentData?.quantity as string);
+    currentForm.currentData?.shop &&
+      formData.append('shop', currentForm.currentData?.shop as string);
+    currentForm.currentData?.item_category &&
+      formData.append(
+        'item_category',
+        currentForm.currentData?.item_category as string
+      );
+    for (const [key, value] of Object.entries(
+      currentForm.currentData?.infor || {}
+    )) {
+      if (value !== undefined && value !== null && value !== '') {
+        formData.append(key, value.toString());
+      }
+    }
+
+    fetchCreatePost(formData).then((res) => {
+      console.log('OK');
+    });
+  };
 
   return (
     <div className="w-4/5 flex flex-col gap-y-5 py-[20px] px-[30px] m-auto bg-white mt-[20px] rounded-lg">
@@ -153,7 +185,7 @@ export default function NewCreatePostPage() {
                   Xem trước
                 </button>
                 <button
-                  // onClick={onSubmit}
+                  onClick={fetchCreate}
                   className="flex-1 py-[10px] rounded-lg border text-white bg-[#da7502] border-[#da7502] hover:text-white hover:bg-[#da6702]"
                 >
                   Đăng tin
