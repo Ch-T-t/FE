@@ -1,4 +1,4 @@
-import { Flex } from 'antd';
+import { Flex, Form } from 'antd';
 import { useContext, useState } from 'react';
 import InputCustom from '../InputCustom';
 import ModalLocationSelectCustom from '../ModalLocationSelectCustom';
@@ -57,16 +57,26 @@ export default function CreatePostMotelRoomForm(props: Props) {
         />
       </Flex>
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
-      <InputCustom
-        defaultValue={currentForm.currentData?.infor?.title}
-        // onChange={(e) => setTitle(e || '')}
-        label={'Tiêu đề tin đăng'}
-      />
-      <TextAreaCustom
-        defaultValue={currentForm.currentData?.description}
-        // onChange={(e) => setDetailedDescription(e as string)}
-        label="Mô tả chi tiết"
-      />
+      <Form.Item
+        name={'title'}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <InputCustom
+          defaultValue={currentForm.currentData?.infor?.title}
+          // onChange={(e) => setTitle(e || '')}
+          label={'Tiêu đề tin đăng'}
+        />
+      </Form.Item>
+      <Form.Item
+        name={'description'}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <TextAreaCustom
+          defaultValue={currentForm.currentData?.description}
+          // onChange={(e) => setDetailedDescription(e as string)}
+          label="Mô tả chi tiết"
+        />
+      </Form.Item>
       <p className={titleClassName}>Thông tin người đăng</p>
       <HorizontalSelect
         defaultValue={currentForm.currentData?.infor?.seller_information}

@@ -42,16 +42,27 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
       />
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
+      <Form.Item
+        name={'title'}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
       <InputCustom
         defaultValue={currentForm.currentData?.infor?.title}
         // onChange={(e) => setTitle(e || '')}
         label={'Tiêu đề tin đăng'}
       />
-      <TextAreaCustom
-        defaultValue={currentForm.currentData?.description}
-        // onChange={(e) => setDetailedDescription(e as string)}
-        label="Mô tả chi tiết"
-      />
+      </Form.Item>
+      <Form.Item
+      <Form.Item
+        name={'description'}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <TextAreaCustom
+          defaultValue={currentForm.currentData?.description}
+          // onChange={(e) => setDetailedDescription(e as string)}
+          label="Mô tả chi tiết"
+        />
+      </Form.Item>
       <p className={titleClassName}>Thông tin người đăng</p>
       <HorizontalSelect
         defaultValue={currentForm.currentData?.infor?.seller_information}

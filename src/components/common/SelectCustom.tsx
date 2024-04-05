@@ -54,7 +54,7 @@ export default function SelectCustom(props: Props) {
 
           {value && (
             <p className="text-[14px]">
-              {props.data?.find((item) => item.id === value)?.name}
+              {props.data?.find((item) => item.value === value)?.name}
             </p>
           )}
         </div>

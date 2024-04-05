@@ -275,7 +275,7 @@ export default function Header() {
                   </Flex>
                 )}
               </div>
-              <Link href={'/creat-post'}>
+              <Link href={'/create-post'}>
                 <Space className="bg-[#dd8500] text-white rounded-md px-[15px] py-[5px] text-nowrap">
                   <ImportOutlined />
                   <p className=" font-semibold">Đăng tin</p>

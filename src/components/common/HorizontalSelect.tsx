@@ -27,14 +27,14 @@ export default function HorizontalSelect(props: Props) {
           <p
             key={index}
             onClick={() => {
-              props.onChange?.(item.id);
-              setValue(item.id);
+              props.onChange?.(item.value);
+              setValue(item.value);
             }}
             className={`px-[20px] py-[5px] rounded-full bg-[#f4f4f4] ${
-              value === item.id && 'bg-[#ffe9c2] text-[#da7502]'
+              value === item.name && 'bg-[#ffe9c2] text-[#da7502]'
             }`}
           >
-            {item.Name}
+            {item.name}
           </p>
         ))}
         {/* <p
