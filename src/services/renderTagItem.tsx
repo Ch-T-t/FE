@@ -26,7 +26,7 @@ const renderTagItem = (data: IProduct) => {
           <TagItem
             icon={<ScheduleOutlined />}
             title={`Tình trạng sử dụng: ${
-              data.Usage_status?.Name || textDefault
+              data.Usage_status?.name || textDefault
             } `}
           />
         );
@@ -36,7 +36,7 @@ const renderTagItem = (data: IProduct) => {
           <TagItem
             icon={<UserOutlined />}
             title={`Thông tin người bán: ${
-              data.Seller_information?.Name || textDefault
+              data.Seller_information?.name || textDefault
             }`}
           />
         );
@@ -45,7 +45,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<BarcodeOutlined />}
-            title={`Bảo hành: ${data.Guarantee?.Name || textDefault}`}
+            title={`Bảo hành: ${data.Guarantee?.name || textDefault}`}
           />
         );
         break;
@@ -53,7 +53,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<AuditOutlined />}
-            title={`Công ty: ${data.Company?.Name || textDefault}`}
+            title={`Công ty: ${data.Company?.name || textDefault}`}
           />
         );
         break;
@@ -61,7 +61,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<AlertOutlined />}
-            title={`Dung tích: ${data.Capacity?.Name || textDefault}`}
+            title={`Dung tích: ${data.Capacity?.name || textDefault}`}
           />
         );
         break;
@@ -69,7 +69,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<FilterOutlined />}
-            title={`Khối lượng: ${data.Volume?.Name || textDefault}`}
+            title={`Khối lượng: ${data.Volume?.name || textDefault}`}
           />
         );
         break;
@@ -77,7 +77,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<FunnelPlotOutlined />}
-            title={`Công suất: ${data.Wattage?.Name || textDefault}`}
+            title={`Công suất: ${data.Wattage?.name || textDefault}`}
           />
         );
         break;
@@ -86,7 +86,7 @@ const renderTagItem = (data: IProduct) => {
           <TagItem
             icon={undefined}
             title={`Khối lượng giặt: ${
-              data.Washing_volume?.Name || textDefault
+              data.Washing_volume?.name || textDefault
             }`}
           />
         );
@@ -95,7 +95,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<BgColorsOutlined />}
-            title={`Màu: ${data.Color?.Name || textDefault}`}
+            title={`Màu: ${data.Color?.name || textDefault}`}
           />
         );
         break;
@@ -103,7 +103,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<BorderInnerOutlined />}
-            title={`Bộ vi xử lí: ${data.Microprocessor?.Name || textDefault}`}
+            title={`Bộ vi xử lí: ${data.Microprocessor?.name || textDefault}`}
           />
         );
         break;
@@ -111,7 +111,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<InsertRowBelowOutlined />}
-            title={`Ram: ${data.Ram?.Name || textDefault}`}
+            title={`Ram: ${data.Ram?.name || textDefault}`}
           />
         );
         break;
@@ -119,7 +119,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<MergeCellsOutlined />}
-            title={`Ổ cứng: ${data.HardDrive?.Name || textDefault}`}
+            title={`Ổ cứng: ${data.HardDrive?.name || textDefault}`}
           />
         );
         break;
@@ -127,7 +127,7 @@ const renderTagItem = (data: IProduct) => {
         tabList.push(
           <TagItem
             icon={<BoxPlotOutlined />}
-            title={`Card màn hình: ${data.MonitorCard?.Name || textDefault}`}
+            title={`Card màn hình: ${data.MonitorCard?.name || textDefault}`}
           />
         );
         break;
@@ -136,7 +136,7 @@ const renderTagItem = (data: IProduct) => {
           <TagItem
             icon={<PictureOutlined />}
             title={`Kích thước màn hình ${
-              data.ScreenSize?.Name || textDefault
+              data.ScreenSize?.name || textDefault
             }`}
           />
         );

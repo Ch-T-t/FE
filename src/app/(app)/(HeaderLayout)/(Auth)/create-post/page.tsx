@@ -116,7 +116,8 @@ export default function CreatePostPage() {
           required: 'Vui lòng nhập đầy đủ',
         }}
         scrollToFirstError
-        onFinishFailed={() => {
+        onFinishFailed={(e) => {
+          console.log(e);
           notification.error({
             message: 'Thông báo',
             description: 'Vui lòng nhập đầy đủ!',

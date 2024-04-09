@@ -117,15 +117,20 @@ export default function CreatePostAirConditionForm(props: Props) {
           data={selectData.sellerInformationData}
         />
       </Form.Item>
-      <ModalLocationSelectCustom
-        defaultValue={currentForm.currentLabel}
-        // onChangeLabel={(e) => setDefaultLabel(e || '')}
-        // onChange={(location, address) => {
-        //   setLocationId((location as number) || 0);
-        //   setAddressId((address as number) || 0);
-        // }}
-        label={'Địa chỉ'}
-      />
+      <Form.Item
+        name={'address'}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <ModalLocationSelectCustom
+          defaultValue={currentForm.currentLabel}
+          // onChangeLabel={(e) => setDefaultLabel(e || '')}
+          // onChange={(location, address) => {
+          //   setLocationId((location as number) || 0);
+          //   setAddressId((address as number) || 0);
+          // }}
+          label={'Địa chỉ'}
+        />
+      </Form.Item>
     </Flex>
   );
 }
