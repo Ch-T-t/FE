@@ -5,9 +5,9 @@ import { login } from '@/app/reducers/userReducer';
 import LoginForm from '@/components/common/LoginForm';
 import RegisterForm from '@/components/common/RegisterForm';
 import { FacebookFilled, GoogleSquareFilled } from '@ant-design/icons';
+import { SignIn } from '@clerk/nextjs';
 import { Button, Form, Image, Input, message, notification } from 'antd';
 import { setCookie } from 'cookies-next';
-import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -19,7 +19,6 @@ export default function AuthPage() {
   const [email, setEmail] = useState('');
   const route = useRouter();
   const dispatch = useAppDispatch();
-  const { data: session, status } = useSession();
   const socialNetWorkLis = [
     {
       label: 'Facebook',
@@ -164,6 +163,7 @@ export default function AuthPage() {
         <p className="py-[20px] text-center text-[30px] font-semibold">
           {currentForm === 'LOGIN' ? 'Đăng nhập' : 'Đăng kí'}
         </p>
+        <SignIn />
         <Form onFinish={onFinish}>
           {currentForm === 'LOGIN' && (
             <>
@@ -266,14 +266,13 @@ export default function AuthPage() {
             </Button>
           </Form.Item>
         </Form>
-
         <p className="w-full  relative text-center font-light before:w-1/4 before:h-[1px] before:bg-[#8c8c8c] before:absolute before:right-0 before:top-1/2 after:w-1/4 after:h-[1px] after:bg-[#8c8c8c] after:absolute after:left-0 after:top-1/2">
           Hoặc đăng nhập bằng
         </p>
         <div className="flex gap-x-3 py-[20px]">
           {socialNetWorkLis.map((item, index) => (
             <div
-              onClick={() => signIn('google')}
+              // onClick={() => signIn('google')}
               key={index}
               className="flex px-[15px] py-[10px] items-center gap-x-3 border rounded"
             >

@@ -60,7 +60,11 @@ export default function CreatePostAirConditionForm(props: Props) {
             label={'Bảo Hành'}
           />
         </Form.Item>
-        <Form.Item className="w-1/2" rules={[{ required: true }]}>
+        <Form.Item
+          name={'wattage'}
+          className="w-1/2"
+          rules={[{ required: true }]}
+        >
           <SelectCustom
             data={selectData.fridgeWattageData}
             defaultValue={currentForm.currentData?.infor?.wattage}
@@ -76,12 +80,18 @@ export default function CreatePostAirConditionForm(props: Props) {
       </Space>
 
       {!checked && (
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.price}
-          type="number"
-          // onChange={(e) => setPrice(e || '')}
-          label={'Giá'}
-        />
+        <Form.Item
+          name={'price'}
+          className="w-1/2"
+          rules={[{ required: true }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.infor?.price}
+            type="number"
+            // onChange={(e) => setPrice(e || '')}
+            label={'Giá'}
+          />
+        </Form.Item>
       )}
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
