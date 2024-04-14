@@ -1,6 +1,6 @@
 'use client';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { ICreatePost, IJobPostCreate, IShop } from '@/types/Job';
+import { IPost, IJobPostCreate, IShop } from '@/types/Job';
 import { Button, Result } from 'antd';
 import { getCookie } from 'cookies-next';
 import React, { createContext, useEffect, useState } from 'react';
@@ -21,7 +21,7 @@ export default function AuthLayout({
     ''
   );
   const [currentLabelAdress, setCurrentLabelAdress] = useState('');
-  const [currentData, setCurrentData] = useState<ICreatePost>();
+  const [currentData, setCurrentData] = useState<IPost>();
   const [currentShopData, setCurrentShopData] = useState<IShop>();
 
   // const logged = useAppSelector((state) => state.user.logged);

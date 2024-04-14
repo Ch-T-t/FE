@@ -7,7 +7,7 @@ import TextAreaCustom from '../TextAreaCustom';
 
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import selectData from '@/services/selectData';
-import { IProduct, IRefrigeratorPost } from '@/types/Job';
+import { IPost, IProduct, IRefrigeratorPost } from '@/types/Job';
 import HorizontalSelect from '../HorizontalSelect';
 import { fetchPostDetail } from '@/api/allRequest';
 
@@ -33,8 +33,8 @@ export default function CreatePostAirConditionForm(props: Props) {
   return (
     <Flex vertical gap={20}>
       <p className={titleClassName}>Thông tin chi tiết</p>
-      <Form.Item
-        name={'usageStatusData'}
+      <Form.Item<IPost>
+        name={['infor', 'usage_status']}
         className="w-1/2"
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
@@ -48,8 +48,8 @@ export default function CreatePostAirConditionForm(props: Props) {
       </Form.Item>
 
       <Flex gap={10}>
-        <Form.Item
-          name={'guarantee'}
+        <Form.Item<IPost>
+          name={['infor', 'guarantee']}
           className="w-1/2"
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
@@ -60,8 +60,8 @@ export default function CreatePostAirConditionForm(props: Props) {
             label={'Bảo Hành'}
           />
         </Form.Item>
-        <Form.Item
-          name={'wattage'}
+        <Form.Item<IPost>
+          name={['infor', 'wattage']}
           className="w-1/2"
           rules={[{ required: true }]}
         >
@@ -80,8 +80,8 @@ export default function CreatePostAirConditionForm(props: Props) {
       </Space>
 
       {!checked && (
-        <Form.Item
-          name={'price'}
+        <Form.Item<IPost>
+          name={['infor', 'price']}
           className="w-1/2"
           rules={[{ required: true }]}
         >
@@ -95,8 +95,8 @@ export default function CreatePostAirConditionForm(props: Props) {
       )}
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
-      <Form.Item
-        name={'title'}
+      <Form.Item<IPost>
+        name={['infor', 'title']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
@@ -105,8 +105,8 @@ export default function CreatePostAirConditionForm(props: Props) {
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
-      <Form.Item
-        name={'description'}
+      <Form.Item<IPost>
+        name={['infor', 'detailed_description']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <TextAreaCustom
@@ -116,8 +116,8 @@ export default function CreatePostAirConditionForm(props: Props) {
         />
       </Form.Item>
       <p className={titleClassName}>Thông tin người bán</p>
-      <Form.Item
-        name={'sellerInformation'}
+      <Form.Item<IPost>
+        name={['infor', 'seller_information']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
@@ -128,7 +128,7 @@ export default function CreatePostAirConditionForm(props: Props) {
         />
       </Form.Item>
       <Form.Item
-        name={'address'}
+        name={['infor', 'address']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <ModalLocationSelectCustom

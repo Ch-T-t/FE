@@ -68,7 +68,8 @@ interface IAddress {
   Location: ILocation;
 }
 
-interface ICreatePost {
+interface IPost {
+  id?: string;
   name?: string;
   description?: string;
   created_at?: string;
