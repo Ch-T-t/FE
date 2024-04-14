@@ -11,6 +11,7 @@ import {
   CaretRightOutlined,
   HeartFilled,
 } from '@ant-design/icons';
+import { UserButton } from '@clerk/nextjs';
 import { Badge, Button, Carousel, Flex, Form, Image, Input } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

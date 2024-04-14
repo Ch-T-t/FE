@@ -27,6 +27,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import NotificationItem from './common/NotificationItem';
+import { SignOutButton, useAuth } from '@clerk/nextjs';
 
 export default function Header() {
   const [showModalMenu, setShowModalMenu] = useState(false);
@@ -40,6 +41,8 @@ export default function Header() {
   const user = useAppSelector((state) => state.user);
   const router = useRouter();
   const ref = useRef<HTMLElement>(null);
+  const { sessionId } = useAuth();
+
   const notificationRef = useRef<HTMLDivElement>(null);
 
   console.log(user);
@@ -50,6 +53,7 @@ export default function Header() {
       .then((res) => setCurrentCategoryList(res.data.data || []))
       .catch((err) => console.log(err));
   };
+
   useEffect(() => {
     const fetchNotification = async () => {
       await instanceAxios
@@ -256,21 +260,29 @@ export default function Header() {
                         <QuestionCircleOutlined className="!text-white p-[5px] bg-[#9b9b9b] rounded-full" />
                         Trợ giúp
                       </Space>
-                      <Space
-                        className="font-medium p-[10px] hover:bg-[#e1e1e1]"
-                        onClick={
-                          user.logged
-                            ? handleLogout
-                            : () => router.push('/auth')
-                        }
-                      >
-                        {user.logged ? (
-                          <LogoutOutlined className="!text-white p-[5px] bg-[#9b9b9b] rounded-full" />
-                        ) : (
+
+                      {sessionId || user.logged ? (
+                        <SignOutButton signOutCallback={handleLogout}>
+                          <Space className="font-medium p-[10px] hover:bg-[#e1e1e1]">
+                            <LogoutOutlined className="!text-white p-[5px] bg-[#9b9b9b] rounded-full" />
+                            Đăng xuất
+                          </Space>
+                        </SignOutButton>
+                      ) : (
+                        <Space
+                          className="font-medium p-[10px] hover:bg-[#e1e1e1]"
+                          onClick={() => {
+                            if (!sessionId && !user.logged) {
+                              router.push('/auth');
+                            }
+                          }}
+                        >
                           <UserAddOutlined className="!text-white p-[5px] bg-[#9b9b9b] rounded-full" />
-                        )}
-                        {user.logged ? 'Đăng xuất' : 'Đăng nhập'}
-                      </Space>
+                          Đăng nhập
+                        </Space>
+                      )}
+
+                      {/* {!sessionId || !user.logged ? 'Đăng xuất' : 'Đăng nhập'} */}
                     </Flex>
                   </Flex>
                 )}

@@ -5,11 +5,22 @@ import { login } from '@/app/reducers/userReducer';
 import LoginForm from '@/components/common/LoginForm';
 import RegisterForm from '@/components/common/RegisterForm';
 import { FacebookFilled, GoogleSquareFilled } from '@ant-design/icons';
-import { SignIn } from '@clerk/nextjs';
+import {
+  SignIn,
+  SignInButton,
+  SignOutButton,
+  SignedIn,
+  useAuth,
+  useSignIn,
+  useUser,
+} from '@clerk/nextjs';
+
 import { Button, Form, Image, Input, message, notification } from 'antd';
 import { setCookie } from 'cookies-next';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { useEffectOnce } from 'usehooks-ts';
 
 export default function AuthPage() {
   const [currentForm, setCurrentForm] = useState<
@@ -19,6 +30,24 @@ export default function AuthPage() {
   const [email, setEmail] = useState('');
   const route = useRouter();
   const dispatch = useAppDispatch();
+  const { getToken, isSignedIn } = useAuth();
+  const { signIn, isLoaded } = useSignIn();
+  useEffect(() => {
+    const fetchApi = async () => {
+      await instanceAxios
+        .post(`/api/token/google-oauth/`, {
+          access_token: getToken(),
+        })
+        .then((res) => console.log(res))
+        .catch((err) => {
+          console.log('assassdsdas', getToken());
+        });
+    };
+    if (signIn?.status === 'complete') {
+      fetchApi();
+    }
+  }, [getToken, isSignedIn, signIn?.status]);
+
   const socialNetWorkLis = [
     {
       label: 'Facebook',
@@ -29,6 +58,13 @@ export default function AuthPage() {
       icon: <GoogleSquareFilled className="text-[20px]" />,
     },
   ];
+
+  const signInWithGoogle = () =>
+    signIn?.authenticateWithRedirect({
+      strategy: 'oauth_google',
+      redirectUrl: '/sso-callback',
+      redirectUrlComplete: '/',
+    });
   const onLogin = async (e: IUserLogin) => {
     await instanceAxios
       .post('/api/auth/login/', e)
@@ -269,10 +305,15 @@ export default function AuthPage() {
         <p className="w-full  relative text-center font-light before:w-1/4 before:h-[1px] before:bg-[#8c8c8c] before:absolute before:right-0 before:top-1/2 after:w-1/4 after:h-[1px] after:bg-[#8c8c8c] after:absolute after:left-0 after:top-1/2">
           Hoặc đăng nhập bằng
         </p>
-        <div className="flex gap-x-3 py-[20px]">
+        <SignInButton>
+          <p className="w-full text-center my-[10px] border bg-[#ffb057] rounded-md text-white py-[5px]">
+            +
+          </p>
+        </SignInButton>
+        {/* <div className="flex gap-x-3 py-[20px]">
           {socialNetWorkLis.map((item, index) => (
             <div
-              // onClick={() => signIn('google')}
+              onClick={() => signInWithGoogle()}
               key={index}
               className="flex px-[15px] py-[10px] items-center gap-x-3 border rounded"
             >
@@ -280,8 +321,7 @@ export default function AuthPage() {
               <p className="text-[14px] font-semibold">{item.label}</p>
             </div>
           ))}
-          {/* <p onClick={() => signOut()}>Out</p> */}
-        </div>
+        </div> */}
         <p className="text-[14px] text-center cursor-pointer">
           {`${
             currentForm === 'LOGIN' ? 'Chưa có tài khoản' : 'Đã có tài khoản'

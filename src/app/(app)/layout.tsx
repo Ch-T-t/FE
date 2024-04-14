@@ -8,34 +8,13 @@ import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { SWRConfig } from 'swr';
 import { store } from '../store';
-import { useAuth } from '@clerk/nextjs';
+import { useAuth, useSignIn } from '@clerk/nextjs';
+import { useAppDispatch } from '../hooks';
+import { login } from '../reducers/userReducer';
+import { setCookie } from 'cookies-next';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   moment.locale('vi');
-  const { isLoaded, userId, sessionId, getToken } = useAuth();
-
-  useEffect(() => {
-    const fechAuthSocial = async () => {
-      console.log('adssadasasddas:', await getToken());
-      // if (status === 'authenticated') {
-      //   await instanceAxios
-      //     .post(`/api/token/google-oauth/`, {
-      //       access_token: session.user.accessToken,
-      //     })
-      //     .then((res) => console.log(res))
-      //     .catch((err) => {});
-      //   console.log(session);
-      // }
-      // if (status === 'loading') {
-      //   console.log('loaddddddddddddddddd');
-      // }
-      // if (status === 'unauthenticated') {
-      //   console.log('That baiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-      // }
-    };
-
-    fechAuthSocial();
-  }, [getToken]);
 
   return (
     <ConfigProvider
