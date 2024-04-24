@@ -57,7 +57,7 @@ export default function ModalCategorySelectCustom(props: Props) {
             {props.label} <span className="text-red-500">*</span>
           </Space>
           <p className="text-[14px]">
-            {subMenuList.find((item) => item.id === value)?.Name || value}
+            {subMenuList.find((item) => item.id === value)?.name || value}
           </p>
         </div>
 
@@ -101,7 +101,7 @@ export default function ModalCategorySelectCustom(props: Props) {
                   onClick={() => {
                     handleChange(item.id || '');
                     currentForm.setCurrentForm?.(item.keyForm || '');
-                    currentForm.setCurrentLabel?.(item.Name || '');
+                    currentForm.setCurrentLabel?.(item.name || '');
                     currentForm.setCurrentCategoryId?.(item.id || '');
                     props.onChangeKey?.(item.keyForm || '');
                     isSubMenu ? setShowModal(false) : setIsSubMenu(true);
@@ -110,7 +110,7 @@ export default function ModalCategorySelectCustom(props: Props) {
                 >
                   <Space className="">
                     {/* {!isSubMenu && <ProfileOutlined />} */}
-                    {item.Name}
+                    {item.name}
                   </Space>
                   <CaretRightOutlined />
                 </div>

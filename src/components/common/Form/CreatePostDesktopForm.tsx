@@ -1,4 +1,4 @@
-import { Flex, Space } from 'antd';
+import { Flex, Form, Space } from 'antd';
 import { useContext, useState } from 'react';
 import InputCustom from '../InputCustom';
 import ModalLocationSelectCustom from '../ModalLocationSelectCustom';
@@ -98,13 +98,12 @@ export default function CreatePostDesktopForm(props: Props) {
         name={'title'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
-      <InputCustom
-        defaultValue={currentForm.currentData?.infor?.title}
-        // onChange={(e) => setTitle(e || '')}
-        label={'Tiêu đề tin đăng'}
-      />
+        <InputCustom
+          defaultValue={currentForm.currentData?.infor?.title}
+          // onChange={(e) => setTitle(e || '')}
+          label={'Tiêu đề tin đăng'}
+        />
       </Form.Item>
-      <Form.Item
       <Form.Item
         name={'description'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}

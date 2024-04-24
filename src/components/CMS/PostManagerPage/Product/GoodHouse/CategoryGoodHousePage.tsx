@@ -119,7 +119,7 @@ export default function CategoryGoodHousePage() {
         <div className="flex gap-x-5 text-[20px] text-[#aea9c6]">
           <FormOutlined
             onClick={() => {
-              setcurrentValue(record.Name || '');
+              setcurrentValue(record.name || '');
               setCurrentID(record.id || 0);
               setOpenModalCreate(true);
             }}
@@ -156,7 +156,7 @@ export default function CategoryGoodHousePage() {
           inputName: ['Name'],
           // body: { asdas: 'asdd' },
           onOKModal() {
-            fetchCreateGoodHouseCategory({ Name: name, keyForm: keyForm })
+            fetchCreateGoodHouseCategory({ name: name, keyForm: keyForm })
               .then((res) => {
                 form.resetFields();
                 mutate('fetchCategoryGoodHouseList');

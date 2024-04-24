@@ -109,7 +109,7 @@ export default function WashingVolumePage() {
         <div className="flex gap-x-5 text-[20px] text-[#aea9c6]">
           <FormOutlined
             onClick={() => {
-              setcurrentValue(record.Name || '');
+              setcurrentValue(record.name || '');
               setCurrentID(record.id || 0);
               setOpenModalCreate(true);
             }}

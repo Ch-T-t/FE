@@ -263,7 +263,10 @@ export default function Header() {
 
                       {sessionId || user.logged ? (
                         <SignOutButton signOutCallback={handleLogout}>
-                          <Space className="font-medium p-[10px] hover:bg-[#e1e1e1]">
+                          <Space
+                            onClick={handleLogout}
+                            className="font-medium p-[10px] hover:bg-[#e1e1e1]"
+                          >
                             <LogoutOutlined className="!text-white p-[5px] bg-[#9b9b9b] rounded-full" />
                             Đăng xuất
                           </Space>
