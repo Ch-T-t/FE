@@ -1,11 +1,14 @@
+import { CurrentShopDataContext } from '@/app/(app)/CurentFormContext';
 import { Col, Image, Row } from 'antd';
-import React from 'react';
+import React, { useContext } from 'react';
 
 interface Props {
   onFinish?: (e?: any) => void;
 }
 
 export default function ChooseCategoryPage(props: Props) {
+  const currentShopData = useContext(CurrentShopDataContext);
+
   return (
     <div className="w-full p-[20px] bg-white rounded-xl cursor-pointer">
       <p className="pb-[20px] font-bold text-[20px]">
@@ -15,7 +18,13 @@ export default function ChooseCategoryPage(props: Props) {
         {[...Array(5)].map((_, index) => (
           <Col key={index} span={12}>
             <div
-              onClick={() => props.onFinish?.(index)}
+              onClick={() => {
+                props.onFinish?.(index);
+                currentShopData.setCurrentData?.({
+                  ...currentShopData.currentData,
+                  id: index,
+                });
+              }}
               className="w-full h-[150px] relative rounded-lg overflow-hidden"
             >
               <Image

@@ -60,7 +60,7 @@ export default function ModalCategorySelectFilterCustom(props: Props) {
             <div
               key={index}
               onClick={() => {
-                setLabel(item.Name || '');
+                setLabel(item.name || '');
                 props.onChange?.(item.id || '');
                 setShowModal(false);
               }}
@@ -68,7 +68,7 @@ export default function ModalCategorySelectFilterCustom(props: Props) {
             >
               <Space className="">
                 {/* {!isSubMenu && <ProfileOutlined />} */}
-                {item.Name}
+                {item.name}
               </Space>
               <CaretRightOutlined />
             </div>

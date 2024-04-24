@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 
 interface IJob {
   id?: number;
-  Name?: string;
+  name?: string;
+  value?: string;
   Url?: string;
   keyForm?: string;
   Creation_time?: string; // Nếu bạn muốn xử lý ngày thì có thể sử dụng kiểu Date
@@ -18,6 +19,17 @@ interface ICategory {
   urlSub?: string;
   icon: ReactNode;
   form?: ReactNode;
+}
+
+interface IShop {
+  id?: number;
+  name?: string;
+  address?: string;
+  activate?: boolean;
+  contact?: object;
+  user?: IUser;
+  email?: string;
+  description?: string;
 }
 
 interface IImage {
@@ -54,6 +66,68 @@ interface IAddress {
   Creation_time: string;
   Update_time: string;
   Location: ILocation;
+}
+
+interface IPost {
+  id?: string;
+  name?: string;
+  description?: string;
+  created_at?: string;
+  updated_at?: string;
+  quantity?: string;
+  shop?: string;
+  brand?: string;
+  item_category?: string;
+  infor?: {
+    image: IImage[];
+    location?: ILocation;
+    category?: string;
+    address?: IAddress;
+    career?: string;
+    type_of_work?: string;
+    pay_forms?: string;
+    sex?: string;
+    experience?: string;
+    map?: string;
+    title?: string;
+    number_of_recruitment?: string;
+    wage?: string;
+    detailed_description?: string;
+    minimum_age?: string;
+    maximum_age?: string;
+    video?: string;
+    contact_phone_number?: string;
+    url?: string;
+    usage_status?: string;
+    seller_information?: string;
+    guarantee?: string;
+    volume?: string;
+    wattage?: string;
+    washing_volume?: string;
+    free_giveaway?: string;
+    price?: string;
+    company?: string;
+    capacity?: string;
+    map?: string | number;
+    color?: string;
+    microprocessor?: string;
+    ram?: string;
+    hardDrive?: string;
+    monitorCard?: string;
+    screenSize?: string;
+    acreage?: string;
+    depositAmount?: string;
+    year_produce?: string;
+    seatNumber?: number;
+    walked?: number;
+    numberBathrooms?: number;
+    numberBedrooms?: number;
+    recruitment?: number;
+    workType?: string;
+    minAge?: string;
+    maxAge?: string;
+  };
+  // payMethod?:string;
 }
 
 interface IJobPost {

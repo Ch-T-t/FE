@@ -3,9 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ConfigProvider } from 'antd';
-import { getServerSession } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
-import ProviderWrapper from './ProviderWrapper';
+
+import { ClerkProvider } from '@clerk/nextjs';
 
 const inter = Inter({ subsets: ['latin'] });
 // const inter = Inter({
@@ -32,12 +31,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
-
   return (
-    <html lang="en" className={inter.className}>
-      <body>
-        <ProviderWrapper session={session}>
+    <ClerkProvider>
+      <html lang="en" className={inter.className}>
+        <body>
           <AntdRegistry>
             <ConfigProvider
               theme={{
@@ -57,8 +54,8 @@ export default async function RootLayout({
               {children}
             </ConfigProvider>
           </AntdRegistry>
-        </ProviderWrapper>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
