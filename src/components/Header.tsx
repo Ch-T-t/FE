@@ -4,9 +4,11 @@ import { logout } from '@/app/reducers/userReducer';
 import { IJob } from '@/types/Job';
 import {
   AimOutlined,
+  AppstoreOutlined,
   BellFilled,
   BellOutlined,
   CloseCircleFilled,
+  CommentOutlined,
   HeartFilled,
   ImportOutlined,
   LogoutOutlined,
@@ -89,12 +91,12 @@ export default function Header() {
   });
   return (
     !loading && (
-      <div className="w-full flex-col items-center justify-between gap-x-5 max-lg:px-[10px] py-[10px] bg-[#ffba00]">
+      <div className="w-full flex-col items-center justify-between gap-x-5 max-lg:px-[10px] py-[10px] bg-[#ffba00] max-lg:!sticky max-lg:!top-0 z-10">
         <div className="w-[75%] max-lg:w-full m-auto">
           <Flex className="w-full" align="center" justify="space-between">
-            <Link href={'/'}>
+            <Link className="max-lg:m-auto max-lg:justify-center" href={'/'}>
               <Image
-                className="!w-[200px] m-auto"
+                className="!w-[200px] m-auto max-lg:!w-[150px] max-lg:translate-x-1/4"
                 loading="lazy"
                 preview={false}
                 src="https://static.chotot.com/storage/APP_WRAPPER/logo/chotot-logo-appwrapper.png"
@@ -107,9 +109,9 @@ export default function Header() {
               align="center"
               className="relative "
             >
-              <div className="relative">
+              <div className="relative max-lg:hidden">
                 <BellOutlined
-                  className="text-[20px]"
+                  className="text-[20px] "
                   onClick={() => setOpenNotification(true)}
                 />
                 {openNotification && (
@@ -139,17 +141,20 @@ export default function Header() {
                   </div>
                 )}
               </div>
-              <Link className="text-black hover:text-black" href={'/chat'}>
+              <Link
+                className="text-black hover:text-black max-lg:hidden"
+                href={'/chat'}
+              >
                 <MessageOutlined className="text-[20px]" />
               </Link>
               <Link
-                className="text-black hover:text-black max-lg:text-[12px] text-nowrap"
+                className="text-black hover:text-black max-lg:text-[12px] text-nowrap max-lg:hidden"
                 href={''}
               >
                 <p>Đóng góp ý kiến</p>
               </Link>
               <Link
-                className="text-black hover:text-black max-lg:text-[12px] text-nowrap"
+                className="text-black hover:text-black max-lg:text-[12px] text-nowrap max-lg:hidden"
                 href={''}
               >
                 Trợ giúp
@@ -158,24 +163,32 @@ export default function Header() {
           </Flex>
           <Flex
             gap={50}
-            className="w-full max-lg:text-[12px] max-lg:!gap-1"
+            className="w-full max-lg:text-[12px] max-lg:!gap-1 "
             justify="space-between"
             align="center"
           >
-            <div className="w-2/5 flex items-center gap-x-3">
+            <div className="w-2/5 max-lg:w-4/5 flex items-center gap-x-3">
               <div className="relative w-full z-30">
                 <Input
-                  className="!w-full max-lg:!py-[5px] !pr-[100px] max-lg:!pr-[45px] max-lg:!text-[10px]"
+                  className="!w-full max-lg:!py-[5px] !pr-[100px] max-lg:!pr-[45px] max-lg:!pl-7 max-lg:!text-[10px]"
                   placeholder="Tìm kiếm"
                 />
-                <div className="absolute right-[5px] top-1/2 rounded-md -translate-y-1/2 bg-[#ffba00] px-[20px] py-[5px] max-lg:px-[10px] max-lg:py-[1px]">
+                <div className="absolute right-[5px] max-lg:left-0 max-lg:bg-transparent max-lg:right-auto top-1/2 rounded-md -translate-y-1/2 bg-[#ffba00] px-[20px] py-[5px] max-lg:px-[10px] max-lg:py-[1px]">
                   <SearchOutlined />
                 </div>
               </div>
             </div>
-            <div className="w-3/5 flex gap-3 items-center justify-between max-lg:w-[200px] max-lg:gap-x-2">
+
+            <div className="w-3/5 max-lg:w-1/5 flex gap-3 items-center justify-between max-lg:justify-center max-lg:gap-x-2 ">
               <Link
-                className="text-black hover:text-black"
+                className="text-black hover:text-black hidden max-lg:block"
+                href={'/chat'}
+              >
+                <CommentOutlined className="text-[20px]" />
+              </Link>
+              <AppstoreOutlined className="text-[20px] !hidden max-lg:!block" />
+              <Link
+                className="text-black hover:text-black max-lg:hidden"
                 href={'/post-manager'}
               >
                 <Flex className="text-nowrap" gap={10} align="center">
@@ -183,11 +196,15 @@ export default function Header() {
                   <p className="max-lg:hidden">Quản lí tin</p>
                 </Flex>
               </Link>
-              <Flex className="text-nowrap" gap={10} align="center">
-                <AimOutlined className="text-[20px]" />
+              <Flex
+                className="text-nowrap max-lg:!hidden"
+                gap={10}
+                align="center"
+              >
+                <AimOutlined className="text-[20px] max-lg:hidden" />
                 <p className="max-lg:hidden">Chợ tốt map</p>
               </Flex>
-              <div className="relative cursor-pointer text-nowrap">
+              <div className="relative cursor-pointer text-nowrap max-lg:hidden">
                 <Flex
                   className="text-nowrap"
                   onClick={() => setOpenMenu(true)}
@@ -290,7 +307,7 @@ export default function Header() {
                   </Flex>
                 )}
               </div>
-              <Link href={'/create-post'}>
+              <Link className="max-lg:hidden" href={'/create-post'}>
                 <Space className="bg-[#dd8500] text-white rounded-md px-[15px] py-[5px] text-nowrap">
                   <ImportOutlined />
                   <p className=" font-semibold">Đăng tin</p>
