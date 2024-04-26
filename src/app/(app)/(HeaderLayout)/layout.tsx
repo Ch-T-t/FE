@@ -11,6 +11,8 @@ import { useAppDispatch } from '@/app/hooks';
 import instanceAxios from '@/api/instanceAxios';
 import { login } from '@/app/reducers/userReducer';
 import { setCookie } from 'cookies-next';
+import Footer from '@/components/Footer';
+import FooterPhone from '@/components/FooterPhone';
 
 export default function HeaderLayout({
   children,
@@ -47,6 +49,8 @@ export default function HeaderLayout({
     <div>
       <Header />
       {children}
+      <Footer />
+      <FooterPhone />
     </div>
   );
 }
