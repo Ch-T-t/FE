@@ -3,7 +3,8 @@ import instanceAxios from '@/api/instanceAxios';
 import { useAppSelector } from '@/app/hooks';
 import CardItemHorizontalManager from '@/components/common/CardItemHorizontalManager';
 import { IProduct } from '@/types/Job';
-import { Avatar, Flex, List, Pagination } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Avatar, Flex, Image, List, Pagination, Space } from 'antd';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -18,46 +19,62 @@ export default function PostManagePage() {
     { key: 'not_active', label: 'Đã ẩn', children: <p>ok</p> },
     { key: 'different', label: 'Khác', children: <p>ok</p> },
   ];
-  useEffect(() => {
-    const fethUserPost = async () => {
-      await instanceAxios
-        .get(`/list_home/`)
-        .then((res) => setProductList(res.data.data || []))
-        .catch((err) => console.log(err));
-    };
-    fethUserPost();
-  }, [currentUser?.id]);
+  // useEffect(() => {
+  //   const fethUserPost = async () => {
+  //     await instanceAxios
+  //       .get(`/list_home/`)
+  //       .then((res) => setProductList(res.data.data || []))
+  //       .catch((err) => console.log(err));
+  //   };
+  //   fethUserPost();
+  // }, [currentUser?.id]);
   return (
-    <div className="w-2/3 m-auto">
-      <p className="py-[20px] font-bold">Quản lí tin đăng</p>
+    <div className="w-2/3 m-auto max-lg:w-full">
+      <p className="py-[20px] font-bold max-lg:hidden">Quản lí tin đăng</p>
       <Flex
         align="center"
         gap={20}
-        className="relative p-[10px] rounded-lg bg-white"
+        className="relative p-[10px] rounded-lg bg-white "
       >
-        <Avatar size={100} />
-        <Flex vertical gap={10}>
-          <p className="font-semibold text-[18px]">Khánh sky</p>
-          <Link href={'/user/1'}>
-            <p className="px-[20px] py-[5px] text-[14px] cursor-pointer rounded-lg text-[#4e8bef] border border-[#4e8bef]">
-              Xem trang cá nhân
-            </p>
-          </Link>
-        </Flex>
-        <Flex
-          align="center"
-          className="absolute right-0 top-1/2 -translate-y-1/2 py-[5px] pl-[5px] pr-[20px] rounded-s-full bg-[#ffba00]"
-          gap={10}
-        >
-          <Avatar size={30} />
-          <p className="text-[12px] font-medium">BlueCar Auto</p>
-        </Flex>
+        {currentUser?.id || 0 > 1 ? (
+          <>
+            <Avatar size={100} />
+            <Flex vertical gap={10}>
+              <p className="font-semibold text-[18px]">Khánh sky</p>
+              <Link href={'/user/1'}>
+                <p className="px-[20px] py-[5px] text-[14px] cursor-pointer rounded-lg text-[#4e8bef] border border-[#4e8bef]">
+                  Xem trang cá nhân
+                </p>
+              </Link>
+            </Flex>
+            <Flex
+              align="center"
+              className="absolute right-0 top-1/2 -translate-y-1/2 py-[5px] pl-[5px] pr-[20px] rounded-s-full bg-[#ffba00]"
+              gap={10}
+            >
+              <Avatar size={30} />
+              <p className="text-[12px] font-medium">BlueCar Auto</p>
+            </Flex>
+          </>
+        ) : (
+          <Flex>
+            <Flex align="center" gap={10}>
+              <Avatar />
+              <Flex vertical>
+                <p className="font-semibold">Tên chưa cung cấp</p>
+                <Space className="text-blue-500 text-[12px]">
+                  <PlusOutlined /> Tạo cửa hàng
+                </Space>
+              </Flex>
+            </Flex>
+          </Flex>
+        )}
       </Flex>
-      <Flex className="bg-white rounded-lg my-[10px] cursor-pointer">
+      <Flex className="bg-white rounded-lg my-[10px] overflow-x-auto no-scrollbar cursor-pointer text-nowrap max-lg:text-[12px]">
         {tabList.map((item, index) => (
           <p
             onClick={() => setCurrentTab(item.key)}
-            className={`flex-1 relative text-center transition-all py-[10px] uppercase text-[#9b9b9b] font-semibold ${
+            className={`flex-1 relative text-center px-2 transition-all py-[10px] uppercase text-[#9b9b9b] font-semibold ${
               currentTab === item.key &&
               "before:content-[''] before:absolute  before:bg-[#ffba00] before:w-full before:h-[2px] before:rounded-full before:top-full before:left-0"
             }`}
@@ -68,21 +85,32 @@ export default function PostManagePage() {
         ))}
       </Flex>
       <Flex className="w-full" vertical gap={5} align="center">
-        <List
-          className="w-full"
-          pagination={{
-            position: 'bottom',
-            align: 'center',
-            pageSize: 5,
-            total: productList.length,
-          }}
-          dataSource={productList}
-          renderItem={(item, index) => (
-            <List.Item>
-              <CardItemHorizontalManager data={item} key={index} />
-            </List.Item>
-          )}
-        />
+        {productList.length > 0 ? (
+          <List
+            className="w-full"
+            pagination={{
+              position: 'bottom',
+              align: 'center',
+              pageSize: 5,
+              total: productList.length,
+            }}
+            dataSource={productList}
+            renderItem={(item, index) => (
+              <List.Item>
+                <CardItemHorizontalManager data={item} key={index} />
+              </List.Item>
+            )}
+          />
+        ) : (
+          <div className="flex flex-col items-center justify-center">
+            <Image
+              preview={false}
+              alt=""
+              src="https://static.chotot.com/storage/ads-dashboard/svg/empty-frame.svg"
+            />
+            Không thấy dữ liệu
+          </div>
+        )}
         {/* {productList.map((item, index) => (
           <CardItemHorizontalManager key={index} />
         ))}

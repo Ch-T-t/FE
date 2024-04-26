@@ -196,7 +196,7 @@ export default function ProductInfoPage({
                   ))}
                 </div>
               </div>
-              {currentUser.id === productData?.User?.id ? (
+              {currentUser?.id === productData?.User?.id ? (
                 <>
                   <div className="flex items-center mt-[20px] gap-3 rounded-lg px-[10px] py-[5px] text-white justify-center bg-[#48862d]">
                     <EyeOutlined />

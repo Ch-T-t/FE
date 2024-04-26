@@ -46,7 +46,7 @@ export default function HeaderLayout({
     fechAuthSocial();
   }, [dispatch, getToken]);
   return (
-    <div>
+    <div className="overflow-hidden">
       <Header />
       {children}
       <Footer />
