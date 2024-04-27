@@ -35,13 +35,21 @@ export default function CardItemHorizontalManager(props: Props) {
           </p>
         </div>
         <Flex vertical gap={5}>
-          <p>{props.data?.Title || textDefault}</p>
+          <p className="truncate">{props.data?.Title || textDefault}</p>
           <b className="text-red-500 text-[14px]">${props.data?.Price || 0}</b>
-          <p className="text-[#9b9b9b] text-[12px]">
+          <p className="text-[#9b9b9b] text-[12px] max-lg:hidden">
             Hiện thị: <b className="text-[#9b9b9b]">03/06/23 - 07/10/23</b>
           </p>
+          <Flex vertical>
+            <p className="text-[#9b9b9b] text-[12px] hidden max-lg:block">
+              Ngày đăng: <b className="text-[#9b9b9b]">03/06/23</b>
+            </p>
+            <p className="text-[#9b9b9b] text-[12px] hidden max-lg:block">
+              Ngày hết hạn <b className="text-[#9b9b9b]">03/06/23</b>
+            </p>
+          </Flex>
         </Flex>
-        <button className="absolute bottom-5 text-[12px] font-semibold right-5 px-[20px] py-[5px] border border-green-500 text-green-500 rounded-lg">
+        <button className="absolute max-lg:hidden bottom-5 text-[12px] font-semibold right-5 px-[20px] py-[5px] border border-green-500 text-green-500 rounded-lg">
           Đợi duyệt
         </button>
         <Dropdown

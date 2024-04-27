@@ -12,42 +12,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Use an official Node.js image as the base image
 FROM node:20.11.1-alpine3.19
 
-RUN apk add --no-cache libc6-compat
+# Install necessary dependencies
+RUN apk add --no-cache libc6-compat \
+    && apk add --no-cache nginx \
+    && mkdir -p /run/nginx
 
-# Install Nginx
-RUN apk add --no-cache nginx
-RUN mkdir -p /run/nginx
-
-# Install Yarn
-RUN apk add --no-cache yarn
-
-EXPOSE 3000
-
+# Set environment variables
 ENV PORT 3000
 ENV NODE_ENV production
 
-WORKDIR /home/nextjs/app
-RUN mkdir -p .next/cache/images
+# Create a directory for the application
+WORKDIR /app
 
+# Copy package.json and yarn.lock into the container
 COPY package.json .
 COPY yarn.lock .
 
+# Install dependencies
 RUN yarn install
-RUN npx browserslist@latest --update-db
-RUN npx next telemetry disable
 
-# need to install linux specific swc builds
-RUN yarn add -D @swc/cli @swc/core
-
+# Copy the rest of the application code into the container
 COPY . .
 
+# Build the application
 RUN yarn build
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+# Expose port 3000
+EXPOSE 3000
 
-USER nextjs
-
-CMD [ "yarn", "start" ]
+# Start the application
+CMD ["yarn", "start"]

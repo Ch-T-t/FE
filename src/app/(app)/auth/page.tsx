@@ -83,6 +83,7 @@ export default function AuthPage() {
             : GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
         const user = result.user;
+        console.log(user);
         instanceAxios
           .post(
             `/api/auth/${providerType === 'FACEBOOK' ? 'facebook' : 'google'}/`,
