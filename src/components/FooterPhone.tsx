@@ -44,7 +44,7 @@ export default function FooterPhone() {
               <p className="text-[10px]">Thông báo</p>
             </Flex>
           </Link>
-          <Link className="text-[#9f9f9f]" href={'/user'}>
+          <Link className="text-[#9f9f9f]" href={'/profile'}>
             <Flex vertical justify="center" align="center">
               <UserOutlined className="text-[24px]" />
               <p className="text-[10px]">Tài khoản</p>

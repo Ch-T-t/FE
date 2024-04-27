@@ -13,10 +13,11 @@ import {
   EyeOutlined,
   HeartFilled,
   MessageFilled,
+  PhoneOutlined,
   ShareAltOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Avatar, Image, Rate, Space, message } from 'antd';
+import { Avatar, Flex, Image, Rate, Space, message } from 'antd';
 import moment from 'moment';
 import Link from 'next/link';
 import React, { useContext, useEffect, useRef, useState } from 'react';
@@ -255,6 +256,30 @@ export default function ProductInfoPage({
             </div>
           </div>
         </div>
+        <Flex className="hidden max-lg:block w-full fixed bottom-0 z-10 bg-white">
+          <Flex
+            align="center"
+            justify="center"
+            className="w-1/3 border-r bg-green-400 py-[12px]"
+            vertical
+          >
+            <PhoneOutlined />
+            <p className="text-[12px]">Goi điện</p>
+          </Flex>
+          <Flex align="center" justify="center" className="w-1/3" vertical>
+            <PhoneOutlined />
+            <p className="text-[12px]">Goi điện</p>
+          </Flex>
+          <Flex
+            align="center"
+            justify="center"
+            className="w-1/3 border-l "
+            vertical
+          >
+            <PhoneOutlined />
+            <p className="text-[12px]">Goi điện</p>
+          </Flex>
+        </Flex>
       </div>
     )
   );
