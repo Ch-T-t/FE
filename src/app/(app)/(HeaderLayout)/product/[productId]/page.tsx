@@ -70,9 +70,9 @@ export default function ProductInfoPage({
   };
   return (
     !loadingPage && (
-      <div className="w-3/4 m-auto">
+      <div className="w-3/4 max-lg:w-full m-auto">
         <div className="flex gap-x-5">
-          <div className="w-2/3 flex flex-col gap-y-5">
+          <div className="w-2/3 max-lg:w-full flex flex-col gap-y-5">
             <div className="w-full bg-white p-[10px] rounded-lg">
               <Image
                 width={'100%'}
@@ -148,7 +148,7 @@ export default function ProductInfoPage({
               </div>
             </div>
           </div>
-          <div className="w-1/3 flex flex-col gap-y-5">
+          <div className="w-1/3 max-lg:hidden flex flex-col gap-y-5">
             <div className="p-[15px] bg-white rounded-lg">
               <div className="flex gap-x-3">
                 <Avatar size={50} src={''} />
@@ -227,9 +227,10 @@ export default function ProductInfoPage({
             </Space>
           </div>
         </div>
-        <div className="relative">
-          <div className="rounded-lg my-[20px] bg-white font-semibold uppercase text-[20px] px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
-            Tin rao khåc cüa Nguyen Trung Quan
+        <div className="relative max-lg:bg-white max-lg:mt-[10px]">
+          <div className="flex justify-between rounded-lg my-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
+            <p>Tin tương tự</p>
+            <Space className="text-blue-800 text-[12px]">Xem tất cả</Space>
           </div>
           <button
             className="absolute -translate-x-full left-0 top-1/2"
