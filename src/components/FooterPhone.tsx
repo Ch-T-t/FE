@@ -10,7 +10,7 @@ import React from 'react';
 
 export default function FooterPhone() {
   return (
-    <div className="w-full hidden max-lg:block bg-white fixed bottom-0 px-[10px] py-[5px]">
+    <div className="w-full hidden max-lg:block bg-white  bottom-0 px-[10px] py-[5px]">
       <Flex justify="space-between" className="w-full relative">
         <Flex className="w-[40%]" justify="space-around">
           <Link className="text-[#9f9f9f]" href={'/'}>

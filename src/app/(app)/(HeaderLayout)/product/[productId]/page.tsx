@@ -256,7 +256,7 @@ export default function ProductInfoPage({
             </div>
           </div>
         </div>
-        <Flex className="hidden max-lg:block w-full fixed bottom-0 z-10 bg-white">
+        <div className="hidden max-lg:flex w-full fixed bottom-0 z-10 bg-white">
           <Flex
             align="center"
             justify="center"
@@ -279,7 +279,7 @@ export default function ProductInfoPage({
             <PhoneOutlined />
             <p className="text-[12px]">Goi điện</p>
           </Flex>
-        </Flex>
+        </div>
       </div>
     )
   );
