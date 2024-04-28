@@ -12,7 +12,9 @@ import {
   EditOutlined,
   EyeOutlined,
   HeartFilled,
+  MailOutlined,
   MessageFilled,
+  MessageOutlined,
   PhoneOutlined,
   ShareAltOutlined,
   WarningOutlined,
@@ -117,7 +119,7 @@ export default function ProductInfoPage({
                 </div>
               </div>
               <div className="py-[10px]">
-                <Space className="text-[#777777] ">
+                <Space className="text-[#777777] max-lg:text-[14px]">
                   <ShareAltOutlined />
                   <p className="truncate w-[500px]">
                     {productData?.Map || textDefault}
@@ -125,12 +127,12 @@ export default function ProductInfoPage({
                 </Space>
                 <Space className="text-[#777777] ">
                   <ShareAltOutlined />
-                  <p className="truncate w-[500px]">
+                  <p className="truncate w-[500px] max-lg:text-[14px]">
                     {moment(productData?.Creation_time).format('DD/MM/YYYY') ||
                       textDefault}
                   </p>
                 </Space>
-                <Space className="text-[#777777] ">
+                <Space className="text-[#777777] max-lg:text-[14px]">
                   <ShareAltOutlined />
                   <p className="truncate w-[500px]">{textCensorship}</p>
                 </Space>
@@ -138,7 +140,7 @@ export default function ProductInfoPage({
             </div>
             <div className="p-[10px] rounded-lg bg-white">
               <p className="font-semibold">Mô tả chi tiết</p>
-              <div className="py-[10px]">
+              <div className="py-[10px] max-lg:text-[14px]">
                 {productData?.Detailed_description || textDefault}
               </div>
             </div>
@@ -260,15 +262,26 @@ export default function ProductInfoPage({
           <Flex
             align="center"
             justify="center"
-            className="w-1/3 border-r bg-green-400 py-[12px]"
+            className="w-1/3 border-r bg-[#33a837] text-white py-[12px]"
             vertical
           >
-            <PhoneOutlined />
-            <p className="text-[12px]">Goi điện</p>
+            <Link
+              className="flex flex-col items-center justify-center text-white"
+              href="tel:+05890000111"
+            >
+              <PhoneOutlined />
+              <p className="text-[12px]">Goi điện</p>
+            </Link>
           </Flex>
+
           <Flex align="center" justify="center" className="w-1/3" vertical>
-            <PhoneOutlined />
-            <p className="text-[12px]">Goi điện</p>
+            <Link
+              className="flex flex-col items-center justify-center text-black hover:text-black"
+              href="mailto: email@example.com"
+            >
+              <MailOutlined />
+              <p className="text-[12px]">SMS</p>
+            </Link>
           </Flex>
           <Flex
             align="center"
@@ -276,8 +289,8 @@ export default function ProductInfoPage({
             className="w-1/3 border-l "
             vertical
           >
-            <PhoneOutlined />
-            <p className="text-[12px]">Goi điện</p>
+            <MessageOutlined />
+            <p className="text-[12px]">Chat</p>
           </Flex>
         </div>
       </div>

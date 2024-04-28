@@ -55,9 +55,9 @@ export default function UserIdPage({
     fechUserInfo();
   }, [params.userId]);
   return (
-    <div className="w-4/5 m-auto mt-[10px] ">
-      <div className="flex gap-x-5">
-        <div className="w-1/3 rounded-lg bg-white">
+    <div className="w-4/5 max-lg:w-full m-auto mt-[10px] ">
+      <div className="flex max-lg:flex-col gap-x-5">
+        <div className="w-1/3 max-lg:w-full rounded-lg bg-white">
           <div className="relative">
             <Image
               height={150}
@@ -143,7 +143,7 @@ export default function UserIdPage({
                 </p>
               </Flex>
             </Space>
-            <div className="flex w-full items-center mt-[10px] rounded-lg px-[10px] py-[5px] text-white justify-between bg-[#48862d]">
+            <div className="flex w-full max-lg:hidden items-center mt-[10px] rounded-lg px-[10px] py-[5px] text-white justify-between bg-[#48862d]">
               <MessageFilled />
               <b className="uppercase text-[14px] font-semibold">
                 Chat với người bán
@@ -151,7 +151,7 @@ export default function UserIdPage({
             </div>
           </div>
         </div>
-        <div className="w-2/3">
+        <div className="w-2/3 max-lg:w-full">
           <Flex className="flex rounded-lg text-[14px] px-[10px] bg-white">
             <p
               onClick={() => setCurrentTab('POST')}
