@@ -15,17 +15,25 @@ export default function FooterPhone() {
   const [openNotification, setOpenNotification] = useState(false);
 
   return (
-    <div className="w-full fixed z-50 hidden max-lg:block bg-white bottom-0 px-[10px] py-[5px]">
+    <div className="w-full fixed z-50 hidden max-lg:block bg-white bottom-0 px-[10px] max-lg:p-0 py-[5px]">
       {openNotification && (
         <div
           ref={notificationRef}
           className="overflow-y-auto bg-white rounded-lg"
         >
-          <Flex className="px-[10px] pt-[10px] justify-between">
+          <Flex className="px-[10px] pt-[10px] justify-between max-lg:!hidden">
             <b>Thông báo</b>
             <CloseCircleFilled onClick={() => setOpenNotification(false)} />
           </Flex>
-          <Flex gap={10} className="p-[10px]">
+          <Flex>
+            <p className="bg-[#e8e8e8] font-semibold w-1/2 text-center px-[20px] py-[10px] text-[16px] border-b-2 border-[#ffa031]">
+              Hoạt động
+            </p>
+            <p className=" w-1/2 text-center px-[20px] py-[10px] text-[16px]">
+              Tin mới
+            </p>
+          </Flex>
+          <Flex gap={10} className="p-[10px] max-lg:!hidden">
             <p className="bg-[#ffe9c2] px-[20px] py-[3px] text-[#ffa031] rounded-full text-[14px]">
               Tất cả
             </p>
@@ -35,7 +43,7 @@ export default function FooterPhone() {
           </Flex>
           <Flex
             vertical
-            className="border-t border-[#ffa031] max-lg:h-[457px] overflow-y-auto"
+            className="border-t border-[#ffa031] max-lg:h-[496px] overflow-y-auto"
           >
             {[...Array(5)].map((_, index) => (
               <NotificationItem key={index} />
