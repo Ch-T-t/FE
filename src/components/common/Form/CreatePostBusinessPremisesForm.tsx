@@ -19,12 +19,12 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
   const [checked, setChecked] = useState<boolean>();
   const titleClassName = 'pt-[20px] text-[20px] font-semibold';
   return (
-    <Flex vertical gap={20}>
+    <Flex vertical gap={15}>
       <p className={titleClassName}>Diện tích & Giá</p>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-x-[10px]">
         <Form.Item
           name={'acreage'}
-          className="w-1/2"
+          // className="w-1/2"
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
@@ -35,7 +35,7 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
         </Form.Item>
         <Form.Item
           name={'price'}
-          className="w-1/2"
+          // className="w-1/2"
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
@@ -45,18 +45,18 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
             label={'Giá'}
           />
         </Form.Item>
-      </Flex>
-      <Form.Item
-        name={'depositAmount'}
-        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
-      >
-        <InputCustom
-          className="!w-1/2"
-          defaultValue={currentForm.currentData?.infor?.depositAmount}
-          // onChange={(e) => setDepositAmount(e || '')}
-          label={'Số tiền cọc'}
-        />
-      </Form.Item>
+        <Form.Item
+          name={'depositAmount'}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            // className="!w-1/2"
+            defaultValue={currentForm.currentData?.infor?.depositAmount}
+            // onChange={(e) => setDepositAmount(e || '')}
+            label={'Số tiền cọc'}
+          />
+        </Form.Item>
+      </div>
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
       <Form.Item

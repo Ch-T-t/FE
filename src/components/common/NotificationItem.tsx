@@ -20,7 +20,7 @@ export default function NotificationItem() {
           </p>
           <p className="text-[12px] font-medium text-[#b4b4b4]">12 giờ truóc</p>
         </Flex>
-        <div>
+        <div className="max-lg:hidden">
           <Avatar size={60} shape="square" />
         </div>
       </Flex>

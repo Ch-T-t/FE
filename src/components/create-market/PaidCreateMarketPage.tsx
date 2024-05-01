@@ -32,7 +32,11 @@ export default function PaidCreateMarketPage(props: Props) {
 
   return (
     <div className="w-full rounded-lg overflow-hidden bg-white">
-      <Flex vertical gap={10} className="w-2/3 m-auto">
+      <Flex
+        vertical
+        gap={10}
+        className="w-2/3 max-lg:w-full max-lg:px-[20px] m-auto"
+      >
         <p className={labelClassName}>Dịch vụ</p>
         <Flex
           gap={20}

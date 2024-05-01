@@ -15,14 +15,14 @@ export default function CreateMarketPage() {
 
   const lableStepList = [
     {
-      step: 1,
+      step: 0,
       lablel: 'Chọn chuyên mục',
       children: (
         <ChooseCategoryPage onFinish={(e) => setCurrentStep(currentStep + 1)} />
       ),
     },
     {
-      step: 2,
+      step: 1,
       lablel: 'Thiết lập trang',
       children: (
         <SetCreateMarketPage
@@ -31,7 +31,7 @@ export default function CreateMarketPage() {
       ),
     },
     {
-      step: 3,
+      step: 2,
       lablel: 'Thanh toán',
       children: (
         <PaidCreateMarketPage
@@ -43,38 +43,42 @@ export default function CreateMarketPage() {
       ),
     },
     {
-      step: 4,
+      step: 3,
       lablel: 'Kích hoạt',
       children: <ActiveCreateMarketPage />,
     },
   ];
   return (
     <div className="w-full">
-      <Flex className="my-[20px]" gap={20} justify="center">
-        {lableStepList.map((item, index) => (
-          <Space
-            onClick={() => finalStep && setCurrentStep(index)}
-            className="flex cursor-pointer"
-            key={index}
-          >
-            <div
-              className={`w-[30px] h-[30px] flex justify-center items-center ${
-                currentStep === index ? `bg-[#fe9900]` : `bg-[#cfcfcf]`
-              } rounded-full`}
+      <div className="w-full overflow-x-auto no-scrollbar px-[10px]">
+        <Flex className="my-[20px] w-fit" gap={10} justify="center">
+          {lableStepList.map((item, index) => (
+            <Space
+              onClick={() => finalStep && setCurrentStep(index)}
+              className="flex cursor-pointer"
+              key={index}
             >
-              <b className={`text-white`}>{item.step}</b>
-            </div>
-            <p
-              className={`font-semibold ${
-                currentStep === index ? `text-black` : `text-[#cfcfcf]`
-              }`}
-            >
-              {item.lablel}
-            </p>
-          </Space>
-        ))}
-      </Flex>
-      <div className="w-4/5 m-auto">{lableStepList[currentStep].children}</div>
+              <div
+                className={`w-[30px] h-[30px] flex justify-center items-center ${
+                  currentStep >= index ? `bg-[#fe9900]` : `bg-[#cfcfcf]`
+                } rounded-full`}
+              >
+                <b className={`text-white`}>{item.step + 1}</b>
+              </div>
+              <p
+                className={`font-semibold text-nowrap ${currentStep > item.step && 'max-lg:hidden'} ${
+                  currentStep === index ? `text-black` : `text-[#cfcfcf]`
+                }`}
+              >
+                {item.lablel}
+              </p>
+            </Space>
+          ))}
+        </Flex>
+      </div>
+      <div className="w-4/5 max-lg:w-full m-auto">
+        {lableStepList[currentStep].children}
+      </div>
     </div>
   );
 }

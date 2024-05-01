@@ -1,16 +1,56 @@
 import {
   BellOutlined,
+  CloseCircleFilled,
   HomeOutlined,
   ProfileOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Flex, Space } from 'antd';
 import Link from 'next/link';
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import NotificationItem from './common/NotificationItem';
 
 export default function FooterPhone() {
+  const notificationRef = useRef<HTMLDivElement>(null);
+  const [openNotification, setOpenNotification] = useState(false);
+
   return (
-    <div className="w-full hidden max-lg:block bg-white fixed bottom-0 px-[10px] py-[5px]">
+    <div className="w-full fixed z-50 hidden max-lg:block bg-white bottom-0 px-[10px] max-lg:p-0 py-[5px]">
+      {openNotification && (
+        <div
+          ref={notificationRef}
+          className="overflow-y-auto bg-white rounded-lg"
+        >
+          <Flex className="px-[10px] pt-[10px] justify-between max-lg:!hidden">
+            <b>Thông báo</b>
+            <CloseCircleFilled onClick={() => setOpenNotification(false)} />
+          </Flex>
+          <Flex>
+            <p className="bg-[#e8e8e8] font-semibold w-1/2 text-center px-[20px] py-[10px] text-[16px] border-b-2 border-[#ffa031]">
+              Hoạt động
+            </p>
+            <p className=" w-1/2 text-center px-[20px] py-[10px] text-[16px]">
+              Tin mới
+            </p>
+          </Flex>
+          <Flex gap={10} className="p-[10px] max-lg:!hidden">
+            <p className="bg-[#ffe9c2] px-[20px] py-[3px] text-[#ffa031] rounded-full text-[14px]">
+              Tất cả
+            </p>
+            <p className="bg-[#ffe9c2] px-[20px] py-[3px] text-[#ffa031] rounded-full text-[14px]">
+              Chưa xem
+            </p>
+          </Flex>
+          <Flex
+            vertical
+            className="border-t border-[#ffa031] max-lg:h-[496px] overflow-y-auto"
+          >
+            {[...Array(5)].map((_, index) => (
+              <NotificationItem key={index} />
+            ))}
+          </Flex>
+        </div>
+      )}
       <Flex justify="space-between" className="w-full relative">
         <Flex className="w-[40%]" justify="space-around">
           <Link className="text-[#9f9f9f]" href={'/'}>
@@ -38,13 +78,18 @@ export default function FooterPhone() {
           </Flex>
         </Link>
         <Flex className="w-[40%]" justify="space-around">
-          <Link className="text-[#9f9f9f]" href={'/'}>
-            <Flex vertical justify="center" align="center">
-              <BellOutlined className="text-[24px]" />
-              <p className="text-[10px]">Thông báo</p>
-            </Flex>
-          </Link>
-          <Link className="text-[#9f9f9f]" href={'/user'}>
+          {/* <Link className="text-[#9f9f9f]" href={'/'}> */}
+          <Flex
+            onClick={() => setOpenNotification(!openNotification)}
+            vertical
+            justify="center"
+            align="center"
+          >
+            <BellOutlined className="text-[24px]" />
+            <p className="text-[10px]">Thông báo</p>
+          </Flex>
+          {/* </Link> */}
+          <Link className="text-[#9f9f9f]" href={'/profile'}>
             <Flex vertical justify="center" align="center">
               <UserOutlined className="text-[24px]" />
               <p className="text-[10px]">Tài khoản</p>

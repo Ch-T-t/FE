@@ -31,7 +31,7 @@ export default function CreatePostAirConditionForm(props: Props) {
     }
   });
   return (
-    <Flex vertical gap={20}>
+    <Flex vertical gap={15}>
       <p className={titleClassName}>Thông tin chi tiết</p>
       <Form.Item<IPost>
         name={['infor', 'usage_status']}

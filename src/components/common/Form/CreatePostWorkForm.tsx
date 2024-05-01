@@ -47,7 +47,7 @@ export default function CreatePostWorkForm(props: Props) {
   const [checked, setChecked] = useState<boolean>();
   const titleClassName = 'pt-[20px] text-[20px] font-semibold';
   return (
-    <Flex vertical gap={20}>
+    <Flex vertical gap={15}>
       <InputCustom
         required
         defaultValue={currentForm.currentData?.infor?.title}

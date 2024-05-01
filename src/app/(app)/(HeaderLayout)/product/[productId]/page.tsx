@@ -12,11 +12,14 @@ import {
   EditOutlined,
   EyeOutlined,
   HeartFilled,
+  MailOutlined,
   MessageFilled,
+  MessageOutlined,
+  PhoneOutlined,
   ShareAltOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Avatar, Image, Rate, Space, message } from 'antd';
+import { Avatar, Flex, Image, Rate, Space, message } from 'antd';
 import moment from 'moment';
 import Link from 'next/link';
 import React, { useContext, useEffect, useRef, useState } from 'react';
@@ -116,7 +119,7 @@ export default function ProductInfoPage({
                 </div>
               </div>
               <div className="py-[10px]">
-                <Space className="text-[#777777] ">
+                <Space className="text-[#777777] max-lg:text-[14px]">
                   <ShareAltOutlined />
                   <p className="truncate w-[500px]">
                     {productData?.Map || textDefault}
@@ -124,12 +127,12 @@ export default function ProductInfoPage({
                 </Space>
                 <Space className="text-[#777777] ">
                   <ShareAltOutlined />
-                  <p className="truncate w-[500px]">
+                  <p className="truncate w-[500px] max-lg:text-[14px]">
                     {moment(productData?.Creation_time).format('DD/MM/YYYY') ||
                       textDefault}
                   </p>
                 </Space>
-                <Space className="text-[#777777] ">
+                <Space className="text-[#777777] max-lg:text-[14px]">
                   <ShareAltOutlined />
                   <p className="truncate w-[500px]">{textCensorship}</p>
                 </Space>
@@ -137,7 +140,7 @@ export default function ProductInfoPage({
             </div>
             <div className="p-[10px] rounded-lg bg-white">
               <p className="font-semibold">Mô tả chi tiết</p>
-              <div className="py-[10px]">
+              <div className="py-[10px] max-lg:text-[14px]">
                 {productData?.Detailed_description || textDefault}
               </div>
             </div>
@@ -254,6 +257,41 @@ export default function ProductInfoPage({
               ))}
             </div>
           </div>
+        </div>
+        <div className="hidden max-lg:flex w-full fixed bottom-0 z-10 bg-white">
+          <Flex
+            align="center"
+            justify="center"
+            className="w-1/3 border-r bg-[#33a837] text-white py-[12px]"
+            vertical
+          >
+            <Link
+              className="flex flex-col items-center justify-center text-white"
+              href="tel:+05890000111"
+            >
+              <PhoneOutlined />
+              <p className="text-[12px]">Goi điện</p>
+            </Link>
+          </Flex>
+
+          <Flex align="center" justify="center" className="w-1/3" vertical>
+            <Link
+              className="flex flex-col items-center justify-center text-black hover:text-black"
+              href="mailto: email@example.com"
+            >
+              <MailOutlined />
+              <p className="text-[12px]">SMS</p>
+            </Link>
+          </Flex>
+          <Flex
+            align="center"
+            justify="center"
+            className="w-1/3 border-l "
+            vertical
+          >
+            <MessageOutlined />
+            <p className="text-[12px]">Chat</p>
+          </Flex>
         </div>
       </div>
     )

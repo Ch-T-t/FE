@@ -61,7 +61,7 @@ export default function SetCreateMarketPage(props: Props) {
         gap={10}
         className="w-full rounded-lg overflow-hidden bg-white"
       >
-        <Flex vertical className="w-2/3 m-auto">
+        <Flex vertical className="w-2/3 max-lg:w-full max-lg:px-[20px] m-auto">
           <Flex vertical>
             <p className={labelClassName}>Cửa hàng / Chuyên trang</p>
             <InputCustom
