@@ -126,6 +126,8 @@ interface IPost {
     workType?: string;
     minAge?: string;
     maxAge?: string;
+    postedNews?: string;
+    posterInformation?: string;
   };
   // payMethod?:string;
 }

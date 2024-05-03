@@ -7,7 +7,7 @@ import TextAreaCustom from '../TextAreaCustom';
 
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import selectData from '@/services/selectData';
-import { IGoodHousePost } from '@/types/Job';
+import { IGoodHousePost, IPost } from '@/types/Job';
 import HorizontalSelect from '../HorizontalSelect';
 
 interface Props {
@@ -23,58 +23,93 @@ export default function CreatePostWholeHouse(props: Props) {
   return (
     <Flex vertical gap={20}>
       <p className={titleClassName}>Địa chỉ</p>
-      <ModalLocationSelectCustom
-        // onChange={(location, address) => {
-        //   setLocationId((location as number) || 0);
-        //   setAddressId((address as number) || 0);
-        // }}
-        label={'Địa chỉ'}
-      />
+      <Form.Item<IPost>
+        name={['infor', 'address']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <ModalLocationSelectCustom
+          // onChange={(location, address) => {
+          //   setLocationId((location as number) || 0);
+          //   setAddressId((address as number) || 0);
+          // }}
+          label={'Địa chỉ'}
+        />
+      </Form.Item>
       <p className={titleClassName}>Thông tin chi tiết</p>
       <Flex gap={10}>
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.depositAmount}
-          // onChange={(e) => setDepositAmount(e || '')}
-          label={'Số tiền cọc'}
-        />
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.numberBedrooms}
-          type="number"
-          // onChange={(e) => setNumberBedrooms(e as number)}
-          label={'Số phòng ngủ'}
-        />
+        <Form.Item<IPost>
+          name={['infor', 'depositAmount']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.infor?.depositAmount}
+            // onChange={(e) => setDepositAmount(e || '')}
+            label={'Số tiền cọc'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['infor', 'numberBathrooms']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.infor?.numberBedrooms}
+            type="number"
+            // onChange={(e) => setNumberBedrooms(e as number)}
+            label={'Số phòng ngủ'}
+          />
+        </Form.Item>
       </Flex>
       <Flex gap={10}>
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.numberBathrooms}
-          // onChange={(e) => setNumberBathrooms(e as number)}
-          label={'Số phòng vệ sinh'}
-        />
-        <SelectCustom
-          defaultValue={currentForm.currentData?.infor?.usage_status}
-          // onChange={(e) => setInteriorCondition(e || '')}
-          label={'Tình trạng nội thất'}
-          data={selectData.goodHouseUsageStatus}
-        />
+        <Form.Item<IPost>
+          name={['infor', 'numberBathrooms']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.infor?.numberBathrooms}
+            // onChange={(e) => setNumberBathrooms(e as number)}
+            label={'Số phòng vệ sinh'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['infor', 'usage_status']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            defaultValue={currentForm.currentData?.infor?.usage_status}
+            // onChange={(e) => setInteriorCondition(e || '')}
+            label={'Tình trạng nội thất'}
+            data={selectData.goodHouseUsageStatus}
+          />
+        </Form.Item>
       </Flex>
       <p className={titleClassName}>Diện tích & Giá</p>
       <Flex gap={10}>
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.acreage}
-          // onChange={(e) => setAcreage(e || '')}
-          label={'Diện tích'}
-        />
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.price}
-          type="number"
-          // onChange={(e) => setPriceValue(e || '')}
-          label={'Giá'}
-        />
+        <Form.Item<IPost>
+          name={['infor', 'acreage']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.infor?.acreage}
+            // onChange={(e) => setAcreage(e || '')}
+            label={'Diện tích'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['infor', 'price']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.infor?.price}
+            type="number"
+            // onChange={(e) => setPriceValue(e || '')}
+            label={'Giá'}
+          />
+        </Form.Item>
       </Flex>
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
-      <Form.Item
-        name={'title'}
+      <Form.Item<IPost>
+        name={'name'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
@@ -83,7 +118,7 @@ export default function CreatePostWholeHouse(props: Props) {
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
-      <Form.Item
+      <Form.Item<IPost>
         name={'description'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
@@ -94,12 +129,17 @@ export default function CreatePostWholeHouse(props: Props) {
         />
       </Form.Item>
       <p className={titleClassName}>Thông tin người đăng</p>
-      <HorizontalSelect
-        defaultValue={currentForm.currentData?.infor?.seller_information}
-        label="Thông tin người bán"
-        // onChange={(e) => setSellerInformation(e as number)}
-        data={selectData.sellerInformationData}
-      />
+      <Form.Item<IPost>
+        name={['infor', 'seller_information']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <HorizontalSelect
+          defaultValue={currentForm.currentData?.infor?.seller_information}
+          label="Thông tin người bán"
+          // onChange={(e) => setSellerInformation(e as number)}
+          data={selectData.sellerInformationData}
+        />
+      </Form.Item>
     </Flex>
   );
 }

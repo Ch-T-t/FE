@@ -18,7 +18,7 @@ import ModalLocationSelectCustom from '../ModalLocationSelectCustom';
 import HorizontalSelect from '../HorizontalSelect';
 import ModalCategorySelectCustom from '../ModalCategorySelectCustom';
 import Dragger from 'antd/es/upload/Dragger';
-import { IJob, IJobPostCreate, IVehicle } from '@/types/Job';
+import { IJob, IJobPostCreate, IPost, IVehicle } from '@/types/Job';
 import getBase64, { FileType } from '@/services/getBase64';
 import { fetchCreateWorkPost } from '@/api/jobRequest';
 import Link from 'next/link';
@@ -63,61 +63,95 @@ export default function CreatePostMotobikeForm(props: Props) {
     <Flex vertical gap={20}>
       <p className={titleClassName}>Thông tin chi tiết</p>
       <Flex gap={10}>
-        <SelectCustom
-          data={selectData.motoCompanyData}
-          defaultValue={currentForm.currentData?.infor?.company}
-          // onChange={(e) => setCompany(e || '')}
-          label={'Hãng'}
-        />
-        <SelectCustom
-          data={selectData.yearData}
-          defaultValue={currentForm.currentData?.infor?.year_produce}
-          // onChange={(e) => setYearManufacture(e || '')}
-          label={'Năm sản xuất'}
-        />
+        <Form.Item<IPost>
+          name={['infor', 'company']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.motoCompanyData}
+            defaultValue={currentForm.currentData?.infor?.company}
+            // onChange={(e) => setCompany(e || '')}
+            label={'Hãng'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['infor', 'year_produce']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.yearData}
+            defaultValue={currentForm.currentData?.infor?.year_produce}
+            // onChange={(e) => setYearManufacture(e || '')}
+            label={'Năm sản xuất'}
+          />
+        </Form.Item>
       </Flex>
       <Flex gap={10}>
-        <SelectCustom
-          data={selectData.guaranteeData}
-          defaultValue={currentForm.currentData?.infor?.guarantee}
-          // onChange={(e) => setGuarantee(e || '')}
-          label={'Bảo hành'}
-        />
-        <SelectCustom
-          data={[]}
-          defaultValue={currentForm.currentData?.infor?.capacity}
-          // onChange={(e) => setCapacity(e || '')}
-          label={'Dung tích xe'}
-        />
+        <Form.Item<IPost>
+          name={['infor', 'guarantee']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.guaranteeData}
+            defaultValue={currentForm.currentData?.infor?.guarantee}
+            // onChange={(e) => setGuarantee(e || '')}
+            label={'Bảo hành'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['infor', 'capacity']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={[]}
+            defaultValue={currentForm.currentData?.infor?.capacity}
+            // onChange={(e) => setCapacity(e || '')}
+            label={'Dung tích xe'}
+          />
+        </Form.Item>
       </Flex>
-
-      <HorizontalSelect
-        // onChange={(e) => setUsageStatus(e || '')}
-        data={selectData.usageStatusData}
-        defaultValue={currentForm.currentData?.infor?.usage_status}
-        label={'Tình trạng'}
-      />
-      <InputCustom
-        defaultValue={currentForm.currentData?.infor?.walked}
-        // onChange={(e) => setWalked(e || '')}
-        label={'Số km đã đi'}
-      />
+      <Form.Item<IPost>
+        name={['infor', 'usage_status']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <HorizontalSelect
+          // onChange={(e) => setUsageStatus(e || '')}
+          data={selectData.usageStatusData}
+          defaultValue={currentForm.currentData?.infor?.usage_status}
+          label={'Tình trạng'}
+        />
+      </Form.Item>
+      <Form.Item<IPost>
+        name={['infor', 'walked']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <InputCustom
+          defaultValue={currentForm.currentData?.infor?.walked}
+          // onChange={(e) => setWalked(e || '')}
+          label={'Số km đã đi'}
+        />
+      </Form.Item>
       <Space>
         <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
         <p>Tôi muốn cho tặng miễn phí</p>
       </Space>
       {!checked && (
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.price}
-          type="number"
-          // onChange={(e) => setPrice(e || '')}
-          label={'Giá'}
-        />
+        <Form.Item<IPost>
+          name={['infor', 'price']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.infor?.price}
+            type="number"
+            // onChange={(e) => setPrice(e || '')}
+            label={'Giá'}
+          />
+        </Form.Item>
       )}
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
-      <Form.Item
-        name={'title'}
+      <Form.Item<IPost>
+        name={'name'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
@@ -126,7 +160,7 @@ export default function CreatePostMotobikeForm(props: Props) {
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
-      <Form.Item
+      <Form.Item<IPost>
         name={'description'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
@@ -137,8 +171,8 @@ export default function CreatePostMotobikeForm(props: Props) {
         />
       </Form.Item>
       <p className={titleClassName}>Thông tin người bán</p>
-      <Form.Item
-        name={'sellerInformation'}
+      <Form.Item<IPost>
+        name={['infor', 'seller_information']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
@@ -148,15 +182,20 @@ export default function CreatePostMotobikeForm(props: Props) {
           data={selectData.sellerInformationData}
         />
       </Form.Item>
-      <ModalLocationSelectCustom
-        // defaultValue={defaultLabel}
-        // onChangeLabel={(e) => setDefaultLabel(e || '')}
-        // onChange={(location, address) => {
-        //   setLocationId((location as number) || 0);
-        //   setAddressId((address as number) || 0);
-        // }}
-        label={'Địa chỉ'}
-      />
+      <Form.Item<IPost>
+        name={['infor', 'address']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <ModalLocationSelectCustom
+          // defaultValue={defaultLabel}
+          // onChangeLabel={(e) => setDefaultLabel(e || '')}
+          // onChange={(location, address) => {
+          //   setLocationId((location as number) || 0);
+          //   setAddressId((address as number) || 0);
+          // }}
+          label={'Địa chỉ'}
+        />
+      </Form.Item>
     </Flex>
   );
 }

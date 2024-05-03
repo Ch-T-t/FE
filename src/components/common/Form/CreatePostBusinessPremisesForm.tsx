@@ -6,7 +6,7 @@ import TextAreaCustom from '../TextAreaCustom';
 
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import selectData from '@/services/selectData';
-import { IGoodHousePost } from '@/types/Job';
+import { IGoodHousePost, IPost } from '@/types/Job';
 import HorizontalSelect from '../HorizontalSelect';
 
 interface Props {
@@ -45,8 +45,8 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
             label={'Giá'}
           />
         </Form.Item>
-        <Form.Item
-          name={'depositAmount'}
+        <Form.Item<IPost>
+          name={['infor', 'depositAmount']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
@@ -59,8 +59,8 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
       </div>
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
-      <Form.Item
-        name={'title'}
+      <Form.Item<IPost>
+        name={'name'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
@@ -69,7 +69,7 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
-      <Form.Item
+      <Form.Item<IPost>
         name={'description'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
@@ -80,8 +80,8 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
         />
       </Form.Item>
       <p className={titleClassName}>Thông tin người đăng</p>
-      <Form.Item
-        name={'sellerInformationData'}
+      <Form.Item<IPost>
+        name={['infor', 'seller_information']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
@@ -91,8 +91,8 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
           data={selectData.sellerInformationData}
         />
       </Form.Item>
-      <Form.Item
-        name={'address'}
+      <Form.Item<IPost>
+        name={['infor', 'address']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <ModalLocationSelectCustom
