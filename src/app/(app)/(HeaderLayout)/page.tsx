@@ -1,5 +1,6 @@
 'use client';
 import instanceAxios from '@/api/instanceAxios';
+import Introduce from '@/components/Introduce';
 import CardItem from '@/components/common/CardItem';
 import InputCustom from '@/components/common/InputCustom';
 import InputTest from '@/components/common/InputTest';
@@ -145,7 +146,7 @@ export default function HomePage() {
         </Flex>
       </div>
 
-      <div className="p-[10px]  relative rounded-lg bg-white">
+      <div className="p-[10px] relative rounded-lg bg-white">
         <p className="uppercase font-semibold py-[20px] p-[10px] text-[20px] max-lg:text-[14px]">
           Khám phá danh mục
         </p>
@@ -189,8 +190,9 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
       <div className="max-lg:bg-white">
-        <div className="rounded-lg bg-white max-lg:text-[14px] max-lg:border-none max-lg:shadow-none font-semibold uppercase text-[20px] px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
+        <div className="rounded-lg bg-white max-lg:text-[14px] max-lg:border-none max-lg:shadow-none font-semibold uppercase text-[16px] px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
           Tin đăng mới
         </div>
         <div className="flex flex-wrap justify-center gap-[9.5px] max-lg:gap-1 mt-[20px] max-lg:mt-[10px] max-lg:grid max-lg:gap-y-5 max-lg:grid-cols-2">
@@ -211,6 +213,9 @@ export default function HomePage() {
             />
           ))}
         </div>
+      </div>
+      <div className="bg-white p-[10px] rounded-md">
+        <Introduce />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import { useAppDispatch } from '@/app/hooks';
 import instanceAxios from '@/api/instanceAxios';
 import { login } from '@/app/reducers/userReducer';
 import { setCookie } from 'cookies-next';
-import Footer from '@/components/Footer';
+import Footer from '@/components/common/Footer';
 import FooterPhone from '@/components/FooterPhone';
 
 export default function HeaderLayout({
