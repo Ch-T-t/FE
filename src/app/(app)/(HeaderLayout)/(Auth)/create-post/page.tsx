@@ -3,6 +3,9 @@ import { fetchCreatePost } from '@/api/allRequest';
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import CreatePostAirConditionForm from '@/components/common/Form/CreatePostAirConditionForm';
 import CreatePostBusinessPremisesForm from '@/components/common/Form/CreatePostBusinessPremisesForm';
+import CreatePostCarForm from '@/components/common/Form/CreatePostCarForm';
+import CreatePostDesktopForm from '@/components/common/Form/CreatePostDesktopForm';
+import CreatePostElectronicDeviceForm from '@/components/common/Form/CreatePostElectronicDeviceForm';
 import InputCustom from '@/components/common/InputCustom';
 import ModalCategorySelectCustom from '@/components/common/ModalCategorySelectCustom';
 import PreviewProduct from '@/components/common/PreviewProduct';
@@ -232,7 +235,7 @@ export default function CreatePostPage() {
                   onChangeKey={(e) => currentForm.setCurrentForm?.(e)}
                   label="Danh mục tin đăng"
                 />
-                <CreatePostBusinessPremisesForm />
+                <CreatePostElectronicDeviceForm />
                 <Flex gap={20} className="my-[20px]">
                   <Form.Item className="flex-1">
                     <button

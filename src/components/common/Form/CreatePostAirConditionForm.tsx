@@ -35,7 +35,6 @@ export default function CreatePostAirConditionForm(props: Props) {
       <p className={titleClassName}>Thông tin chi tiết</p>
       <Form.Item<IPost>
         name={['infor', 'usage_status']}
-        className="w-1/2"
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect

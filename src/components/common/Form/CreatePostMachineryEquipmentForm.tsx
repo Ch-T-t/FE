@@ -34,7 +34,7 @@ export default function CreatePostMachineryEquipmentForm(props: Props) {
           label={'Tình trạng'}
         />
       </Form.Item>
-      <Flex gap={10} className="w-1/2">
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'guarantee']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -46,7 +46,7 @@ export default function CreatePostMachineryEquipmentForm(props: Props) {
             label={'Bảo Hành'}
           />
         </Form.Item>
-      </Flex>
+      </div>
 
       <Space>
         {/* <Checkbox checked={checked} onChange={() => setChecked(!checked)} /> */}

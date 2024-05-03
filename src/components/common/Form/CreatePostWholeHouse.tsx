@@ -36,7 +36,7 @@ export default function CreatePostWholeHouse(props: Props) {
         />
       </Form.Item>
       <p className={titleClassName}>Thông tin chi tiết</p>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'depositAmount']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -58,8 +58,6 @@ export default function CreatePostWholeHouse(props: Props) {
             label={'Số phòng ngủ'}
           />
         </Form.Item>
-      </Flex>
-      <Flex gap={10}>
         <Form.Item<IPost>
           name={['infor', 'numberBathrooms']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -81,9 +79,10 @@ export default function CreatePostWholeHouse(props: Props) {
             data={selectData.goodHouseUsageStatus}
           />
         </Form.Item>
-      </Flex>
+      </div>
+
       <p className={titleClassName}>Diện tích & Giá</p>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'acreage']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -105,7 +104,7 @@ export default function CreatePostWholeHouse(props: Props) {
             label={'Giá'}
           />
         </Form.Item>
-      </Flex>
+      </div>
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
       <Form.Item<IPost>

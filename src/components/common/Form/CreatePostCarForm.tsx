@@ -21,7 +21,7 @@ export default function CreatePostCarForm(props: Props) {
   return (
     <Flex vertical gap={15}>
       <p className={titleClassName}>Thông tin chi tiết</p>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'company']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -44,7 +44,7 @@ export default function CreatePostCarForm(props: Props) {
             label={'Năm sản xuất'}
           />
         </Form.Item>
-      </Flex>
+      </div>
       <Form.Item<IPost>
         name={['infor', 'carGear']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -65,7 +65,7 @@ export default function CreatePostCarForm(props: Props) {
           label={'Nhiên liệu'}
         />
       </Form.Item>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'guarantee']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -88,7 +88,7 @@ export default function CreatePostCarForm(props: Props) {
             label={'Số chỗ'}
           />
         </Form.Item>
-      </Flex>
+      </div>
       <Form.Item<IPost>
         name={['infor', 'usage_status']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -98,7 +98,7 @@ export default function CreatePostCarForm(props: Props) {
           label={'Tình trạng sử dụng'}
         />
       </Form.Item>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'walked']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -120,7 +120,7 @@ export default function CreatePostCarForm(props: Props) {
             label={'Giá'}
           />
         </Form.Item>
-      </Flex>
+      </div>
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
       <Form.Item<IPost>

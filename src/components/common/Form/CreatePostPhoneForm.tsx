@@ -33,7 +33,7 @@ export default function CreatePostPhoneForm(props: Props) {
           label={'Tình trạng'}
         />
       </Form.Item>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'company']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -56,8 +56,6 @@ export default function CreatePostPhoneForm(props: Props) {
             label={'Bảo hành'}
           />
         </Form.Item>
-      </Flex>
-      <Flex gap={10}>
         <Form.Item<IPost>
           name={['infor', 'color']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -80,7 +78,8 @@ export default function CreatePostPhoneForm(props: Props) {
             label={'Dung lượng'}
           />
         </Form.Item>
-      </Flex>
+      </div>
+
       <Space>
         {/* <Checkbox checked={checked} onChange={() => setChecked(!checked)} /> */}
         <p>Tôi muốn cho tặng miễn phí</p>

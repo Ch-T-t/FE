@@ -130,7 +130,7 @@ export default function CreatePostWorkForm(props: Props) {
       </Form.Item>
       <p className="py-[10px] text-[20px] font-semibold">Thông tin thêm</p>
 
-      <Flex gap={20}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'minAge']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -155,24 +155,22 @@ export default function CreatePostWorkForm(props: Props) {
             label={'Độ tuổi tối đa'}
           />
         </Form.Item>
-      </Flex>
+      </div>
 
-      <Flex className="text-[14px] cursor-pointer" gap={10}>
-        <Form.Item<IPost>
-          name={['infor', 'sex']}
-          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
-        >
-          <HorizontalSelect
-            // onChange={(e) => setGenderId(e as number)}
-            defaultValue={currentForm.currentData?.infor?.sex}
-            data={[
-              { id: 1, name: 'Nam' },
-              { id: 2, name: 'Nữ' },
-            ]}
-            label={'Giới tính'}
-          />
-        </Form.Item>
-      </Flex>
+      <Form.Item<IPost>
+        name={['infor', 'sex']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <HorizontalSelect
+          // onChange={(e) => setGenderId(e as number)}
+          defaultValue={currentForm.currentData?.infor?.sex}
+          data={[
+            { id: 1, name: 'Nam' },
+            { id: 2, name: 'Nữ' },
+          ]}
+          label={'Giới tính'}
+        />
+      </Form.Item>
       <Form.Item<IPost>
         name={['infor', 'experience']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}

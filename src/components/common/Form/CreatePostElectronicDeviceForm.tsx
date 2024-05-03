@@ -34,7 +34,7 @@ export default function CreatePostElectronicDeviceForm(props: Props) {
         />
       </Form.Item>
 
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'title']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -57,9 +57,6 @@ export default function CreatePostElectronicDeviceForm(props: Props) {
             label={'RAM'}
           />
         </Form.Item>
-      </Flex>
-
-      <Flex gap={10}>
         <Form.Item<IPost>
           name={['infor', 'hardDrive']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -82,8 +79,6 @@ export default function CreatePostElectronicDeviceForm(props: Props) {
             label={'Card màn hình'}
           />
         </Form.Item>
-      </Flex>
-      <Flex gap={10}>
         <Form.Item<IPost>
           name={['infor', 'screenSize']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -106,8 +101,6 @@ export default function CreatePostElectronicDeviceForm(props: Props) {
             label={'Màu sắc'}
           />
         </Form.Item>
-      </Flex>
-      <Flex gap={10} className="w-1/2">
         <Form.Item<IPost>
           name={['infor', 'guarantee']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -119,7 +112,11 @@ export default function CreatePostElectronicDeviceForm(props: Props) {
             label={'Bảo hành'}
           />
         </Form.Item>
-      </Flex>
+      </div>
+
+      {/* <Flex gap={10}></Flex>
+      <Flex gap={10}></Flex>
+      <Flex gap={10} className="w-1/2"></Flex> */}
       <Space>
         {/* <Checkbox checked={checked} onChange={() => setChecked(!checked)} /> */}
         <p>Tôi muốn cho tặng miễn phí</p>

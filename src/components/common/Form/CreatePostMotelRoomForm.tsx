@@ -34,7 +34,7 @@ export default function CreatePostMotelRoomForm(props: Props) {
         />
       </Form.Item>
       <p className={titleClassName}>Diện tích & Giá</p>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'acreage']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -56,9 +56,9 @@ export default function CreatePostMotelRoomForm(props: Props) {
             label={'Giá'}
           />
         </Form.Item>
-      </Flex>
+      </div>
       <p className={titleClassName}>Thông tin khác</p>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'depositAmount']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -80,7 +80,7 @@ export default function CreatePostMotelRoomForm(props: Props) {
             data={selectData.goodHouseUsageStatus}
           />
         </Form.Item>
-      </Flex>
+      </div>
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
       <Form.Item<IPost>
         name={'name'}

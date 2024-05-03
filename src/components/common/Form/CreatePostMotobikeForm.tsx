@@ -62,7 +62,7 @@ export default function CreatePostMotobikeForm(props: Props) {
   return (
     <Flex vertical gap={20}>
       <p className={titleClassName}>Thông tin chi tiết</p>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'company']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -85,8 +85,6 @@ export default function CreatePostMotobikeForm(props: Props) {
             label={'Năm sản xuất'}
           />
         </Form.Item>
-      </Flex>
-      <Flex gap={10}>
         <Form.Item<IPost>
           name={['infor', 'guarantee']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -109,7 +107,7 @@ export default function CreatePostMotobikeForm(props: Props) {
             label={'Dung tích xe'}
           />
         </Form.Item>
-      </Flex>
+      </div>
       <Form.Item<IPost>
         name={['infor', 'usage_status']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}

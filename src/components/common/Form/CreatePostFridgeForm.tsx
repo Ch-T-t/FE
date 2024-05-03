@@ -33,7 +33,7 @@ export default function CreatePostFridgeForm(props: Props) {
           label={'Tình trạng'}
         />
       </Form.Item>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'guarantee']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -56,7 +56,7 @@ export default function CreatePostFridgeForm(props: Props) {
             label={'Công suất'}
           />
         </Form.Item>
-      </Flex>
+      </div>
 
       <Space>
         {/* <Checkbox checked={checked} onChange={() => setChecked(!checked)} /> */}

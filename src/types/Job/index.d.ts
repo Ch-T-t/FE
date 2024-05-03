@@ -128,6 +128,8 @@ interface IPost {
     maxAge?: string;
     postedNews?: string;
     posterInformation?: string;
+    carGear?: string;
+    carFuel?: string;
   };
   // payMethod?:string;
 }

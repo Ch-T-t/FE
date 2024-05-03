@@ -21,7 +21,7 @@ export default function CreatePostLaptopForm(props: Props) {
   return (
     <Flex vertical gap={20}>
       <p className={titleClassName}>Thông tin chi tiết</p>
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'company']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -44,7 +44,7 @@ export default function CreatePostLaptopForm(props: Props) {
             label={'Bảo hành'}
           />
         </Form.Item>
-      </Flex>
+      </div>
       <Form.Item<IPost>
         name={['infor', 'usage_status']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -58,7 +58,7 @@ export default function CreatePostLaptopForm(props: Props) {
         />
       </Form.Item>
 
-      <Flex gap={10}>
+      <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
           name={['infor', 'color']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -81,8 +81,6 @@ export default function CreatePostLaptopForm(props: Props) {
             label={'RAM'}
           />
         </Form.Item>
-      </Flex>
-      <Flex gap={10}>
         <Form.Item<IPost>
           name={['infor', 'hardDrive']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -105,8 +103,6 @@ export default function CreatePostLaptopForm(props: Props) {
             label={'Card màn hình'}
           />
         </Form.Item>
-      </Flex>
-      <Flex gap={10}>
         <Form.Item<IPost>
           name={['infor', 'screenSize']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
@@ -129,7 +125,7 @@ export default function CreatePostLaptopForm(props: Props) {
             label={'Màu sắc'}
           />
         </Form.Item>
-      </Flex>
+      </div>
       <Space>
         {/* <Checkbox checked={checked} onChange={() => setChecked(!checked)} /> */}
         <p>Tôi muốn cho tặng miễn phí</p>
