@@ -6,7 +6,7 @@ import React from 'react';
 
 export default function SavePostPage() {
   return (
-    <div className="w-3/5 m-auto">
+    <div className="w-3/5 max-lg:w-full max-lg:px-[10px] m-auto">
       <p className="font-bold py-[20px] text-[20px]">Tin đăng đã lưu</p>
       <Flex vertical gap={10}>
         {[...Array(10)].map((item, index) => (
