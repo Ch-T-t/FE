@@ -10,6 +10,7 @@ import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import NotificationItem from './common/NotificationItem';
 import { useRouter } from 'next/navigation';
+import { useOnClickOutside } from 'usehooks-ts';
 
 export default function FooterPhone() {
   const notificationRef = useRef<HTMLDivElement>(null);
@@ -19,6 +20,9 @@ export default function FooterPhone() {
     router.push(url);
     setOpenNotification(false);
   };
+  useOnClickOutside(notificationRef, () => {
+    setOpenNotification(false);
+  });
 
   return (
     <div className="w-full max-h-[calc(100%-88px)] fixed z-50 hidden max-lg:flex max-lg:flex-col max-lg:justify-end bg-transparent bottom-0 px-[10px] max-lg:p-0 py-[5px]">

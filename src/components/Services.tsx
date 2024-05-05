@@ -15,7 +15,7 @@ export default function Services({ children }: { children: React.ReactNode }) {
       await instanceAxios
         .get('/api/user/get_me')
         .then((res) => {
-          dispatch(login(res.data.data));
+          dispatch(login(res.data));
         })
         .catch((err) => {
           dispatch(logout());

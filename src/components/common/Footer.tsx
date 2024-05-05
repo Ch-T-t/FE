@@ -1,11 +1,11 @@
 import { BehanceSquareFilled, FacebookFilled } from '@ant-design/icons';
 import { Flex, Image, Space } from 'antd';
 import Link from 'next/link';
-import React from 'react';
+import React, { useRef } from 'react';
 
 export default function Footer() {
   return (
-    <div className="max-lg:hidden w-full px-[200px] bg-white py-[10px]">
+    <div className="max-lg:hidden w-full px-[200px] mt-[20px] bg-white py-[20px]">
       <Flex gap={20} justify="space-around">
         <Flex vertical gap={10}>
           <p className="uppercase font-semibold">Hỗ trợ khách hàng</p>

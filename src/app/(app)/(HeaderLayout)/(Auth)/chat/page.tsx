@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 
 export default function ChatPage() {
   const [productData, setProductData] = useState<IProduct>();
+  const [detailChat, setDetailChat] = useState(false);
 
   useEffect(() => {
     const fethCurrentChat = async () => {
@@ -29,12 +30,12 @@ export default function ChatPage() {
     fethCurrentChat();
   }, []);
   return (
-    <div className="w-5/6 h-[630px] m-auto bg-white">
+    <div className="w-5/6 max-lg:w-full h-[630px] max-lg:h-[540px] m-auto bg-white">
       <Flex className="h-full">
         <Flex
           vertical
           justify="space-between"
-          className="w-2/5 h-full cursor-pointer"
+          className={`max-lg:w-full w-2/5 h-full cursor-pointer ${detailChat && 'max-lg:!hidden'}`}
         >
           <Flex vertical className="h-full">
             <Flex className="p-[10px]" gap={10}>
@@ -51,7 +52,10 @@ export default function ChatPage() {
             <Flex className="overflow-y-auto" vertical align="revert">
               <Flex vertical>
                 {[...Array(100)].map((_, index) => (
-                  <MessageTabItem key={index} />
+                  <MessageTabItem
+                    onClick={() => setDetailChat(true)}
+                    key={index}
+                  />
                 ))}
               </Flex>
             </Flex>
@@ -62,9 +66,13 @@ export default function ChatPage() {
             </Flex>
           </Flex>
         </Flex>
-        <Flex vertical className="w-3/5 h-full text-[14px]">
+        <Flex
+          vertical
+          className={`w-3/5 max-lg:w-full h-full text-[14px] ${detailChat ? 'max-lg:!flex' : 'max-lg:!hidden'}`}
+        >
           <Flex justify="space-between" className="p-[10px] border-b">
             <Flex justify="center" align="center" gap={10}>
+              <p onClick={() => setDetailChat(false)}>{`<`}</p>
               <Avatar src={productData?.User?.avatar || ''} size={50} />
               <Flex vertical>
                 <p>{productData?.User?.first_name}</p>
@@ -83,7 +91,7 @@ export default function ChatPage() {
             </Flex>
           </Flex>
           <div className="h-full flex flex-col-reverse overflow-y-auto">
-            <Flex vertical className="p-[10px]">
+            <Flex vertical gap={10} className="p-[10px]">
               {[...Array(50)].map((_, index) => (
                 <Flex key={index} justify={index % 2 === 0 ? 'start' : 'end'}>
                   <Flex

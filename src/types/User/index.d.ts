@@ -56,6 +56,7 @@ interface IUser {
   first_name?: string;
   last_name?: string;
   is_staff?: boolean;
+  fullname?: string;
   is_superuser?: boolean;
   last_updated?: string; // Dạng chuỗi đại diện cho thời điểm cập nhật gần nhất
   last_login?: string | null; // Dạng chuỗi đại diện cho thời điểm đăng nhập gần nhất hoặc null nếu chưa đăng nhập
