@@ -30,7 +30,7 @@ export default function ChatPage() {
     fethCurrentChat();
   }, []);
   return (
-    <div className="w-5/6 max-lg:w-full h-[630px] max-lg:h-[540px] m-auto bg-white">
+    <div className="w-5/6 max-lg:w-full h-[630px] max-lg:h-[calc(100%)] max-lg:mb-[85px] m-auto bg-white">
       <Flex className="h-full">
         <Flex
           vertical
@@ -68,29 +68,31 @@ export default function ChatPage() {
         </Flex>
         <Flex
           vertical
-          className={`w-3/5 max-lg:w-full h-full text-[14px] ${detailChat ? 'max-lg:!flex' : 'max-lg:!hidden'}`}
+          className={`w-3/5 max-lg:w-full max-lg:h-[calc(100vh-170px)] max-lg:overflow-y-auto relative text-[14px] ${detailChat ? 'max-lg:!flex' : 'max-lg:!hidden'}`}
         >
-          <Flex justify="space-between" className="p-[10px] border-b">
-            <Flex justify="center" align="center" gap={10}>
-              <p onClick={() => setDetailChat(false)}>{`<`}</p>
-              <Avatar src={productData?.User?.avatar || ''} size={50} />
+          <Flex vertical className="max-lg:absolute max-lg:top-0 max-lg:w-full">
+            <Flex justify="space-between" className="p-[10px] border-b">
+              <Flex justify="center" align="center" gap={10}>
+                <p onClick={() => setDetailChat(false)}>{`<`}</p>
+                <Avatar src={productData?.User?.avatar || ''} size={50} />
+                <Flex vertical>
+                  <p>{productData?.User?.first_name}</p>
+                  <Space> • Đang hoạt động</Space>
+                </Flex>
+              </Flex>
+              <MenuOutlined />
+            </Flex>
+            <Flex className="p-[10px] border-b" align="center" gap={10}>
+              <Avatar shape="square" src="" size={50} />
               <Flex vertical>
-                <p>{productData?.User?.first_name}</p>
-                <Space> • Đang hoạt động</Space>
+                <p>{productData?.Title || ''}</p>
+                <p className="text-red-500 font-semibold">
+                  ${productData?.Price?.toLocaleString()}
+                </p>
               </Flex>
             </Flex>
-            <MenuOutlined />
           </Flex>
-          <Flex className="p-[10px]  border-b" align="center" gap={10}>
-            <Avatar shape="square" src="" size={50} />
-            <Flex vertical>
-              <p>{productData?.Title || ''}</p>
-              <p className="text-red-500 font-semibold">
-                ${productData?.Price?.toLocaleString()}
-              </p>
-            </Flex>
-          </Flex>
-          <div className="h-full flex flex-col-reverse overflow-y-auto">
+          <div className="h-full max-lg:mt-[140px] flex flex-col-reverse overflow-y-auto">
             <Flex vertical gap={10} className="p-[10px]">
               {[...Array(50)].map((_, index) => (
                 <Flex key={index} justify={index % 2 === 0 ? 'start' : 'end'}>
@@ -113,7 +115,10 @@ export default function ChatPage() {
               ))}
             </Flex>
           </div>
-          <Flex gap={10} className="m-[20px] text-[20px]">
+          <Flex
+            gap={10}
+            className="m-[20px] text-[20px] max-lg:fixed max-lg:bg-white max-lg:w-full max-lg:m-0 max-lg:p-[20px] max-lg:bottom-0 max-lg:z-[100]"
+          >
             <FileImageOutlined />
             <DeploymentUnitOutlined />
             <Input className="text-[14px]" placeholder="..." />
