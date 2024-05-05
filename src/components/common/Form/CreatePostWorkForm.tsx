@@ -50,76 +50,76 @@ export default function CreatePostWorkForm(props: Props) {
   return (
     <Flex vertical gap={15}>
       <Form.Item<IPost>
-        name={['infor', 'title']}
+        name={['info', 'title']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
           required
-          defaultValue={currentForm.currentData?.infor?.title}
+          defaultValue={currentForm.currentData?.info?.title}
           // onChange={(e) => setTitle(e as string)}
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'recruitment']}
+        name={['info', 'recruitment']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
           required
           type="number"
-          defaultValue={currentForm.currentData?.infor?.recruitment}
+          defaultValue={currentForm.currentData?.info?.recruitment}
           // onChange={(e) => setRecruitment(e as number)}
           label={'Số lượng tuyển dụng'}
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'career']}
+        name={['info', 'career']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <SelectCustom
           // onChange={(e) => setCareerId(e as number)}
           data={selectData.workCarrerData}
-          defaultValue={currentForm.currentData?.infor?.career}
+          defaultValue={currentForm.currentData?.info?.career}
           label={'Nghành nghề'}
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'workType']}
+        name={['info', 'workType']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <SelectCustom
           // onChange={(e) => setWorkTypeId(e as number)}
           data={selectData.workTypeData}
-          defaultValue={currentForm.currentData?.infor?.workType}
+          defaultValue={currentForm.currentData?.info?.workType}
           label={'Loại công việc'}
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'pay_forms']}
+        name={['info', 'pay_forms']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <SelectCustom
           // onChange={(e) => setPayForm(e as number)}
           data={selectData.workPayMethodData}
-          defaultValue={currentForm.currentData?.infor?.pay_forms}
+          defaultValue={currentForm.currentData?.info?.pay_forms}
           required
           label={'Hình thức trả lương'}
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'wage']}
+        name={['info', 'wage']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
           required
-          defaultValue={currentForm.currentData?.infor?.wage}
+          defaultValue={currentForm.currentData?.info?.wage}
           // onChange={(e) => setWage(e as number)}
           type="number"
           label={'Lương'}
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'detailed_description']}
+        name={['info', 'detailed_description']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <TextAreaCustom
@@ -132,24 +132,24 @@ export default function CreatePostWorkForm(props: Props) {
 
       <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
-          name={['infor', 'minAge']}
+          name={['info', 'minAge']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
             required
             type="number"
-            defaultValue={currentForm.currentData?.infor?.minAge}
+            defaultValue={currentForm.currentData?.info?.minAge}
             // onChange={(e) => setMinAge(e as number)}
             label={'Độ tuổi tối thiểu'}
           />
         </Form.Item>
         <Form.Item<IPost>
-          name={['infor', 'maxAge']}
+          name={['info', 'maxAge']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
             required
-            defaultValue={currentForm.currentData?.infor?.maxAge}
+            defaultValue={currentForm.currentData?.info?.maxAge}
             // onChange={(e) => setMaxAge(e as number)}
             type="number"
             label={'Độ tuổi tối đa'}
@@ -158,12 +158,12 @@ export default function CreatePostWorkForm(props: Props) {
       </div>
 
       <Form.Item<IPost>
-        name={['infor', 'sex']}
+        name={['info', 'sex']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
           // onChange={(e) => setGenderId(e as number)}
-          defaultValue={currentForm.currentData?.infor?.sex}
+          defaultValue={currentForm.currentData?.info?.sex}
           data={[
             { id: 1, name: 'Nam' },
             { id: 2, name: 'Nữ' },
@@ -172,13 +172,13 @@ export default function CreatePostWorkForm(props: Props) {
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'experience']}
+        name={['info', 'experience']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <SelectCustom
           // onChange={(e) => setExperienceId(e as number)}
           data={[]}
-          defaultValue={currentForm.currentData?.infor?.experience}
+          defaultValue={currentForm.currentData?.info?.experience}
           required
           label={'Kinh nghiệm'}
         />

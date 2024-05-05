@@ -23,22 +23,22 @@ export default function CreatePostCarForm(props: Props) {
       <p className={titleClassName}>Thông tin chi tiết</p>
       <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
-          name={['infor', 'company']}
+          name={['info', 'company']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <SelectCustom
-            defaultValue={currentForm.currentData?.infor?.company}
+            defaultValue={currentForm.currentData?.info?.company}
             data={selectData.carCompanyData}
             //  // onChange={(e) => setCompany(e || '')}
             label={'Hãng'}
           />
         </Form.Item>
         <Form.Item<IPost>
-          name={['infor', 'year_produce']}
+          name={['info', 'year_produce']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <SelectCustom
-            defaultValue={currentForm.currentData?.infor?.year_produce}
+            defaultValue={currentForm.currentData?.info?.year_produce}
             data={selectData.yearData}
             // // onChange={(e) => setYearManufacture(e || '')}
             label={'Năm sản xuất'}
@@ -46,7 +46,7 @@ export default function CreatePostCarForm(props: Props) {
         </Form.Item>
       </div>
       <Form.Item<IPost>
-        name={['infor', 'carGear']}
+        name={['info', 'carGear']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
@@ -56,7 +56,7 @@ export default function CreatePostCarForm(props: Props) {
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'carFuel']}
+        name={['info', 'carFuel']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
@@ -67,22 +67,22 @@ export default function CreatePostCarForm(props: Props) {
       </Form.Item>
       <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
-          name={['infor', 'guarantee']}
+          name={['info', 'guarantee']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <SelectCustom
-            defaultValue={currentForm.currentData?.infor?.guarantee}
+            defaultValue={currentForm.currentData?.info?.guarantee}
             data={selectData.guaranteeData}
             // onChange={(e) => setGuarantee(e || '')}
             label={'Bảo hành'}
           />
         </Form.Item>
         <Form.Item<IPost>
-          name={['infor', 'seatNumber']}
+          name={['info', 'seatNumber']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
-            defaultValue={currentForm.currentData?.infor?.seatNumber}
+            defaultValue={currentForm.currentData?.info?.seatNumber}
             type="number"
             // onChange={(e) => setSeatNumber(e || '')}
             label={'Số chỗ'}
@@ -90,7 +90,7 @@ export default function CreatePostCarForm(props: Props) {
         </Form.Item>
       </div>
       <Form.Item<IPost>
-        name={['infor', 'usage_status']}
+        name={['info', 'usage_status']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
@@ -100,11 +100,11 @@ export default function CreatePostCarForm(props: Props) {
       </Form.Item>
       <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
-          name={['infor', 'walked']}
+          name={['info', 'walked']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
-            defaultValue={currentForm.currentData?.infor?.walked}
+            defaultValue={currentForm.currentData?.info?.walked}
             // onChange={(e) => setWalked(e || '')}
             label={'Số km đã đi'}
           />
@@ -114,7 +114,7 @@ export default function CreatePostCarForm(props: Props) {
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
-            defaultValue={currentForm.currentData?.infor?.price}
+            defaultValue={currentForm.currentData?.info?.price}
             type="number"
             // onChange={(e) => setPrice(e || '')}
             label={'Giá'}
@@ -128,7 +128,7 @@ export default function CreatePostCarForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
-          defaultValue={currentForm.currentData?.infor?.title}
+          defaultValue={currentForm.currentData?.info?.title}
           // onChange={(e) => setTitle(e || '')}
           label={'Tiêu đề tin đăng'}
         />
@@ -145,18 +145,18 @@ export default function CreatePostCarForm(props: Props) {
       </Form.Item>
       <p className={titleClassName}>Thông tin người bán</p>
       <Form.Item<IPost>
-        name={['infor', 'seller_information']}
+        name={['info', 'seller_information']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          defaultValue={currentForm.currentData?.infor?.seller_information}
+          defaultValue={currentForm.currentData?.info?.seller_information}
           label="Bạn là"
           // onChange={(e) => setSellerInformation(e as number)}
           data={selectData.sellerInformationData}
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'address']}
+        name={['info', 'address']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <ModalLocationSelectCustom

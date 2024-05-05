@@ -6,7 +6,9 @@ interface IJob {
   name?: string;
   value?: string;
   Url?: string;
+  type?: string;
   keyForm?: string;
+  category?: string;
   Creation_time?: string; // Nếu bạn muốn xử lý ngày thì có thể sử dụng kiểu Date
   Update_time?: string; // Tương tự, nếu muốn xử lý ngày thì có thể sử dụng kiểu Date
 }
@@ -81,7 +83,7 @@ interface IPost {
   item_category?: string;
   images?: UploadFile[];
   video?: UploadFile;
-  infor?: {
+  info?: {
     image: IImage[];
     location?: ILocation;
     category?: string;

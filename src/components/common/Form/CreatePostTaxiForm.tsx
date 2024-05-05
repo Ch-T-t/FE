@@ -244,7 +244,7 @@ export default function CreatePostTaxiForm(props: Props) {
     <Flex vertical gap={20}>
       <p className={titleClassName}>Thông tin chi tiết</p>
       <Form.Item<IPost>
-        name={['infor', 'price']}
+        name={['info', 'price']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
@@ -255,7 +255,7 @@ export default function CreatePostTaxiForm(props: Props) {
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'postedNews']}
+        name={['info', 'postedNews']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
@@ -319,7 +319,7 @@ export default function CreatePostTaxiForm(props: Props) {
       </Flex>
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
       <Form.Item<IPost>
-        name={['infor', 'title']}
+        name={['info', 'title']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
@@ -329,7 +329,7 @@ export default function CreatePostTaxiForm(props: Props) {
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'detailed_description']}
+        name={['info', 'detailed_description']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <TextAreaCustom
@@ -340,7 +340,7 @@ export default function CreatePostTaxiForm(props: Props) {
       </Form.Item>
       <p className={titleClassName}>Thông tin người đăng</p>
       <Form.Item<IPost>
-        name={['infor', 'posterInformation']}
+        name={['info', 'posterInformation']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect

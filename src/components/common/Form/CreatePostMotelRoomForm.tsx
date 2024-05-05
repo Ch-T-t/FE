@@ -22,7 +22,7 @@ export default function CreatePostMotelRoomForm(props: Props) {
     <Flex vertical gap={20}>
       <p className={titleClassName}>Địa chỉ</p>
       <Form.Item<IPost>
-        name={['infor', 'address']}
+        name={['info', 'address']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <ModalLocationSelectCustom
@@ -36,21 +36,21 @@ export default function CreatePostMotelRoomForm(props: Props) {
       <p className={titleClassName}>Diện tích & Giá</p>
       <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
-          name={['infor', 'acreage']}
+          name={['info', 'acreage']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
-            defaultValue={currentForm.currentData?.infor?.acreage}
+            defaultValue={currentForm.currentData?.info?.acreage}
             // onChange={(e) => setAcreage(e || '')}
             label={'Diện tích'}
           />
         </Form.Item>
         <Form.Item<IPost>
-          name={['infor', 'price']}
+          name={['info', 'price']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
-            defaultValue={currentForm.currentData?.infor?.price}
+            defaultValue={currentForm.currentData?.info?.price}
             type="number"
             // onChange={(e) => setPriceValue(e || '')}
             label={'Giá'}
@@ -60,21 +60,21 @@ export default function CreatePostMotelRoomForm(props: Props) {
       <p className={titleClassName}>Thông tin khác</p>
       <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
-          name={['infor', 'depositAmount']}
+          name={['info', 'depositAmount']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
-            defaultValue={currentForm.currentData?.infor?.depositAmount}
+            defaultValue={currentForm.currentData?.info?.depositAmount}
             // onChange={(e) => setDepositAmount(e || '')}
             label={'Số tiền cọc'}
           />
         </Form.Item>
         <Form.Item<IPost>
-          name={['infor', 'usage_status']}
+          name={['info', 'usage_status']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <SelectCustom
-            defaultValue={currentForm.currentData?.infor?.usage_status}
+            defaultValue={currentForm.currentData?.info?.usage_status}
             // onChange={(e) => setInteriorCondition(e || '')}
             label={'Tình trạng nội thất'}
             data={selectData.goodHouseUsageStatus}
@@ -87,7 +87,7 @@ export default function CreatePostMotelRoomForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
-          defaultValue={currentForm.currentData?.infor?.title}
+          defaultValue={currentForm.currentData?.info?.title}
           // onChange={(e) => setTitle(e || '')}
           label={'Tiêu đề tin đăng'}
         />
@@ -104,11 +104,11 @@ export default function CreatePostMotelRoomForm(props: Props) {
       </Form.Item>
       <p className={titleClassName}>Thông tin người đăng</p>
       <Form.Item<IPost>
-        name={['infor', 'seller_information']}
+        name={['info', 'seller_information']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          defaultValue={currentForm.currentData?.infor?.seller_information}
+          defaultValue={currentForm.currentData?.info?.seller_information}
           label="Thông tin người bán"
           // onChange={(e) => setSellerInformation(e as number)}
           data={[

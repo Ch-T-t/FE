@@ -1,62 +1,70 @@
-import { Flex, Form } from 'antd';
+import { Flex, Form, Space } from 'antd';
 import { useContext, useState } from 'react';
 import InputCustom from '../InputCustom';
 import ModalLocationSelectCustom from '../ModalLocationSelectCustom';
+import SelectCustom from '../SelectCustom';
 import TextAreaCustom from '../TextAreaCustom';
 
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import selectData from '@/services/selectData';
-import { IGoodHousePost, IPost } from '@/types/Job';
+import { IPost, IServices } from '@/types/Job';
 import HorizontalSelect from '../HorizontalSelect';
 
 interface Props {
   edit?: boolean;
-  data?: IGoodHousePost;
+  data?: IServices;
 }
-
-export default function CreatePostBusinessPremisesForm(props: Props) {
+export default function CreateCommonForm(props: Props) {
   const currentForm = useContext(CurrentFormContext);
   const [checked, setChecked] = useState<boolean>();
   const titleClassName = 'pt-[20px] text-[20px] font-semibold';
   return (
-    <Flex vertical gap={15}>
-      <p className={titleClassName}>Diện tích & Giá</p>
-      <div className="grid grid-cols-2 gap-x-[10px]">
-        <Form.Item
-          name={'acreage'}
-          // className="w-1/2"
+    <Flex vertical gap={20}>
+      <p className={titleClassName}>Thông tin chi tiết</p>
+      <Form.Item<IPost>
+        name={['info', 'usage_status']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <HorizontalSelect
+          defaultValue={currentForm.currentData?.info?.usage_status}
+          // onChange={(e) => setUsageStatus(e || '')}
+          data={selectData.usageStatusData}
+          required
+          label={'Tình trạng'}
+        />
+      </Form.Item>
+      <div className="grid grid-cols-2 gap-3">
+        <Form.Item<IPost>
+          name={['info', 'guarantee']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
-          <InputCustom
-            defaultValue={currentForm.currentData?.info?.acreage}
-            // onChange={(e) => setAcreage(e || '')}
-            label={'Diện tích'}
+          <SelectCustom
+            data={selectData.guaranteeData}
+            defaultValue={currentForm.currentData?.info?.guarantee}
+            // onChange={(e) => setGuarantee(e || '')}
+            label={'Bảo Hành'}
           />
         </Form.Item>
-        <Form.Item
-          name={'price'}
-          // className="w-1/2"
+      </div>
+
+      <Space>
+        {/* <Checkbox checked={checked} onChange={() => setChecked(!checked)} /> */}
+        <p>Tôi muốn cho tặng miễn phí</p>
+      </Space>
+
+      {!checked && (
+        <Form.Item<IPost>
+          name={['info', 'price']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
             defaultValue={currentForm.currentData?.info?.price}
             type="number"
-            // onChange={(e) => setPriceValue(e || '')}
+            // onChange={(e) => setPrice(e || '')}
             label={'Giá'}
           />
         </Form.Item>
-        <Form.Item<IPost>
-          name={['info', 'depositAmount']}
-          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
-        >
-          <InputCustom
-            // className="!w-1/2"
-            defaultValue={currentForm.currentData?.info?.depositAmount}
-            // onChange={(e) => setDepositAmount(e || '')}
-            label={'Số tiền cọc'}
-          />
-        </Form.Item>
-      </div>
+      )}
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
       <Form.Item<IPost>
@@ -79,14 +87,14 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
           label="Mô tả chi tiết"
         />
       </Form.Item>
-      <p className={titleClassName}>Thông tin người đăng</p>
+      <p className={titleClassName}>Thông tin người bán</p>
       <Form.Item<IPost>
         name={['info', 'seller_information']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
           defaultValue={currentForm.currentData?.info?.seller_information}
-          label="Thông tin người bán"
+          label="Bạn là"
           // onChange={(e) => setSellerInformation(e as number)}
           data={selectData.sellerInformationData}
         />
@@ -96,12 +104,13 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <ModalLocationSelectCustom
+          // defaultValue={defaultLabel}
+          // onChangeLabel={(e) => setDefaultLabel(e || '')}
           // onChange={(location, address) => {
           //   setLocationId((location as number) || 0);
           //   setAddressId((address as number) || 0);
           // }}
-          // label={'Địa chỉ'}
-          label=""
+          label={'Địa chỉ'}
         />
       </Form.Item>
     </Flex>

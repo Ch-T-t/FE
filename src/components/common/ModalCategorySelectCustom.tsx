@@ -7,7 +7,6 @@ import {
   CaretRightOutlined,
   ProfileOutlined,
 } from '@ant-design/icons';
-import categoryList from '@/services/categoryList';
 import { IJob } from '@/types/Job';
 import instanceAxios from '@/api/instanceAxios';
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
@@ -24,7 +23,9 @@ export default function ModalCategorySelectCustom(props: Props) {
 
   const [showModal, setShowModal] = useState(false);
   const [isSubMenu, setIsSubMenu] = useState(false);
+  const [categoryList, setCategoryList] = useState<IJob[]>([]);
   const [subMenuList, setSubMenuList] = useState<IJob[]>([]);
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState<string | number>(
     currentForm.currentLabel || ''
   );
@@ -32,13 +33,43 @@ export default function ModalCategorySelectCustom(props: Props) {
     setValue(e);
     props.onChange?.(e || undefined);
   };
-  const fetchSubMenuList = async (urlSub: string) => {
-    await instanceAxios
-      .get(urlSub)
+  useEffect(() => {
+    instanceAxios
+      .get(`/api/category`)
       .then((res) => {
-        setSubMenuList(res.data.data || []);
+        setCategoryList(res.data || []);
       })
       .catch((err) => {});
+  }, []);
+
+  const fetchSubMenuList = async (id?: string | number) => {
+    setLoading(true);
+    await instanceAxios
+      .get(`/api/item_category`)
+      .then((res) => {
+        const categoryListData: Array<IJob> = res.data;
+        const filteredData = categoryListData.filter(
+          (item) => item.category === id
+        );
+        if (filteredData.length) {
+          setIsSubMenu(true);
+          setSubMenuList(filteredData || []);
+        } else {
+          currentForm.setCurrentForm?.(
+            categoryList.find((item) => item.id === id)?.type || ''
+          );
+          currentForm.setCurrentLabel?.(
+            categoryList.find((item) => item.id === id)?.name || ''
+          );
+          currentForm.setCurrentCategoryId?.(
+            categoryList.find((item) => item.id === id)?.id || ''
+          );
+          setValue(categoryList.find((item) => item.id === id)?.name || '');
+          setShowModal(false);
+        }
+      })
+      .catch((err) => {})
+      .finally(() => setLoading(false));
   };
   return (
     <div className={`w-full ${props.className}`}>
@@ -57,7 +88,9 @@ export default function ModalCategorySelectCustom(props: Props) {
             {props.label} <span className="text-red-500">*</span>
           </Space>
           <p className="text-[14px]">
-            {subMenuList.find((item) => item.id === value)?.name || value}
+            {currentForm.currentLabel}
+            {/* {subMenuList.find((item) => item.id === value)?.name ||
+              currentForm.currentLabel} */}
           </p>
         </div>
 
@@ -100,10 +133,10 @@ export default function ModalCategorySelectCustom(props: Props) {
                   key={index}
                   onClick={() => {
                     handleChange(item.id || '');
-                    currentForm.setCurrentForm?.(item.keyForm || '');
+                    currentForm.setCurrentForm?.(item.type || '');
                     currentForm.setCurrentLabel?.(item.name || '');
                     currentForm.setCurrentCategoryId?.(item.id || '');
-                    props.onChangeKey?.(item.keyForm || '');
+                    props.onChangeKey?.(item.type || '');
                     isSubMenu ? setShowModal(false) : setIsSubMenu(true);
                   }}
                   className="flex justify-between p-[10px] border-b hover:bg-[#f5f5f5]"
@@ -119,23 +152,24 @@ export default function ModalCategorySelectCustom(props: Props) {
                 <div
                   key={index}
                   onClick={() => {
-                    if (item.urlSub) {
-                      setIsSubMenu(true);
-                      fetchSubMenuList(item.urlSub || '');
-                    } else {
-                      props.onChangeKey?.(item.key);
-                      currentForm.setCurrentForm?.(item.key || '');
-                      currentForm.setCurrentLabel?.(item.label || '');
-                      currentForm.setCurrentCategoryId?.('');
-                      setValue(item.label);
-                      setShowModal(false);
-                    }
+                    !loading && fetchSubMenuList(item.id || '');
+                    // if (item.urlSub) {
+                    //   setIsSubMenu(true);
+                    //   fetchSubMenuList(item.urlSub || '');
+                    // } else {
+                    // props.onChangeKey?.(item.key);
+                    // currentForm.setCurrentForm?.(item.key || '');
+                    // currentForm.setCurrentLabel?.(item.label || '');
+                    // currentForm.setCurrentCategoryId?.('');
+                    // setValue(item.label);
+                    //   setShowModal(false);
+                    // }
                   }}
                   className="flex justify-between p-[10px] border-b hover:bg-[#f5f5f5]"
                 >
                   <Space className="">
                     {!isSubMenu && <ProfileOutlined />}
-                    {item.label}
+                    {item.name}
                   </Space>
                   <CaretRightOutlined />
                 </div>

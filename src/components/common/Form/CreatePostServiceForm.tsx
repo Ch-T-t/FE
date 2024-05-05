@@ -22,11 +22,11 @@ export default function CreatePostServiceForm(props: Props) {
     <Flex vertical gap={20}>
       <p className={titleClassName}>Thông tin chi tiết</p>
       <Form.Item<IPost>
-        name={['infor', 'usage_status']}
+        name={['info', 'usage_status']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          defaultValue={currentForm.currentData?.infor?.usage_status}
+          defaultValue={currentForm.currentData?.info?.usage_status}
           // onChange={(e) => setUsageStatus(e || '')}
           data={selectData.usageStatusData}
           required
@@ -35,12 +35,12 @@ export default function CreatePostServiceForm(props: Props) {
       </Form.Item>
       <div className="grid grid-cols-2 gap-3">
         <Form.Item<IPost>
-          name={['infor', 'guarantee']}
+          name={['info', 'guarantee']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <SelectCustom
             data={selectData.guaranteeData}
-            defaultValue={currentForm.currentData?.infor?.guarantee}
+            defaultValue={currentForm.currentData?.info?.guarantee}
             // onChange={(e) => setGuarantee(e || '')}
             label={'Bảo Hành'}
           />
@@ -54,11 +54,11 @@ export default function CreatePostServiceForm(props: Props) {
 
       {!checked && (
         <Form.Item<IPost>
-          name={['infor', 'price']}
+          name={['info', 'price']}
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <InputCustom
-            defaultValue={currentForm.currentData?.infor?.price}
+            defaultValue={currentForm.currentData?.info?.price}
             type="number"
             // onChange={(e) => setPrice(e || '')}
             label={'Giá'}
@@ -72,7 +72,7 @@ export default function CreatePostServiceForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
-          defaultValue={currentForm.currentData?.infor?.title}
+          defaultValue={currentForm.currentData?.info?.title}
           // onChange={(e) => setTitle(e || '')}
           label={'Tiêu đề tin đăng'}
         />
@@ -89,18 +89,18 @@ export default function CreatePostServiceForm(props: Props) {
       </Form.Item>
       <p className={titleClassName}>Thông tin người bán</p>
       <Form.Item<IPost>
-        name={['infor', 'seller_information']}
+        name={['info', 'seller_information']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          defaultValue={currentForm.currentData?.infor?.seller_information}
+          defaultValue={currentForm.currentData?.info?.seller_information}
           label="Bạn là"
           // onChange={(e) => setSellerInformation(e as number)}
           data={selectData.sellerInformationData}
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'address']}
+        name={['info', 'address']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <ModalLocationSelectCustom

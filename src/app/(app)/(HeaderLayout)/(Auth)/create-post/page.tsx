@@ -109,12 +109,21 @@ export default function CreatePostPage() {
     //   }
     // }
 
-    // fetchCreatePost(formData).then((res) => {
-    //   console.log('OK');
-    //   currentForm.setCurrentData?.({});
-    // });
+    formData.append('info', JSON.stringify(e.info));
+    formData.append('item_category', String(currentForm.currentCategoryId));
+    formData.append('name', String(e.name));
+    formData.append('description', String(e.description));
+    formData.append('quantity', String(e.quantity || 0));
+    formData.append('shop', String(e.shop));
+    formData.append('brand', String(e.brand));
+    formData.append('images', fileList[0].originFileObj as Blob);
+    // formData.append('video', String(currentForm.currentCategoryId));
     instanceAxios
-      .post(`/api/products`, e)
+      .post(`/api/products`, formData, {
+        headers: {
+          'Content-Type': `multipart/form-data`,
+        },
+      })
       .then((res) => {
         message.success('Đã tạo bài đăng!');
       })
@@ -142,22 +151,6 @@ export default function CreatePostPage() {
           <PreviewProduct onCancel={() => setPreview(false)} />
         ) : (
           <>
-            {/* <Form name="basic" autoComplete="off" onFinish={fetchCreate}>
-            <Form.Item required name={'ok'} rules={[{ required: true }]}>
-              <InputCustom
-                defaultValue={currentForm.currentData?.infor?.title}
-                label={'Tiêu đề tin đăng'}
-              />
-            </Form.Item>
-            <Form.Item required name={'ab'} rules={[{ required: true }]}>
-              <Input
-                defaultValue={currentForm.currentData?.infor?.title}
-              />
-            </Form.Item>
-            <Form.Item rules={[{ required: true }]}>
-              <Button htmlType="submit">as</Button>
-            </Form.Item>
-          </Form> */}
             <div className="w-full flex gap-x-10 max-lg:flex-col">
               <ModalCategorySelectCustom
                 className="hidden max-lg:block mb-[20px]"
@@ -175,36 +168,34 @@ export default function CreatePostPage() {
                   </Link>
                 </Space>
                 <div className="w-[300px] max-lg:w-full min-h-[200px] flex items-center justify-center">
-                  <Form.Item<IPost>
+                  {/* <Form.Item<IPost>
                     name={`images`}
                     rules={[
                       { required: true, message: 'Trường này bắt buộc!' },
                     ]}
                     className="w-full"
+                  > */}
+                  <Dragger
+                    className="truncate w-full"
+                    name="images_A1_data"
+                    listType="picture"
+                    fileList={fileList}
+                    accept="image/*"
+                    maxCount={5}
+                    // onPreview={handlePreview}
+                    onChange={handleChange}
                   >
-                    <Dragger
-                      className="truncate w-full"
-                      name="images_A1_data"
-                      listType="picture"
-                      fileList={fileList}
-                      accept="image/*"
-                      maxCount={5}
-                      // onPreview={handlePreview}
-                      onChange={handleChange}
-                    >
-                      <p className="ant-upload-drag-icon">
-                        <InboxOutlined />
+                    <p className="ant-upload-drag-icon">
+                      <InboxOutlined />
+                    </p>
+                    <Flex vertical justify="center">
+                      <p className="ant-upload-text !text-[14px]">
+                        Hình ảnh có kích thước tối thiệu{' '}
                       </p>
-                      <Flex vertical justify="center">
-                        <p className="ant-upload-text !text-[14px]">
-                          Hình ảnh có kích thước tối thiệu{' '}
-                        </p>
-                        <p className="ant-upload-text !text-[14px]">
-                          240 x 240
-                        </p>
-                      </Flex>
-                    </Dragger>
-                  </Form.Item>
+                      <p className="ant-upload-text !text-[14px]">240 x 240</p>
+                    </Flex>
+                  </Dragger>
+                  {/* </Form.Item> */}
                   <Modal
                     open={previewOpen}
                     title={previewTitle}
@@ -219,30 +210,30 @@ export default function CreatePostPage() {
                   </Modal>
                 </div>
                 <div className="w-[300px] max-lg:w-full min-h-[200px] py-[20px] flex items-center justify-center">
-                  <Form.Item<IPost>
+                  {/* <Form.Item<IPost>
                     className="w-full"
                     name={`video`}
                     rules={[
                       { required: true, message: 'Trường này bắt buộc!' },
                     ]}
+                  > */}
+                  <Dragger
+                    className="truncate w-full"
+                    name="video"
+                    listType="picture"
+                    fileList={videoFileList}
+                    maxCount={1}
+                    accept="video/*"
+                    onChange={handleChangeVideo}
                   >
-                    <Dragger
-                      className="truncate w-full"
-                      name="video"
-                      listType="picture"
-                      fileList={videoFileList}
-                      maxCount={1}
-                      accept="video/*"
-                      onChange={handleChangeVideo}
-                    >
-                      <p className="ant-upload-drag-icon">
-                        <VideoCameraOutlined />
-                      </p>
-                      <p className="ant-upload-text !text-[14px]">
-                        Đăng tối đa 1 video{' '}
-                      </p>
-                    </Dragger>
-                  </Form.Item>
+                    <p className="ant-upload-drag-icon">
+                      <VideoCameraOutlined />
+                    </p>
+                    <p className="ant-upload-text !text-[14px]">
+                      Đăng tối đa 1 video{' '}
+                    </p>
+                  </Dragger>
+                  {/* </Form.Item> */}
                   <Modal
                     open={previewOpen}
                     title={previewTitle}
@@ -263,7 +254,7 @@ export default function CreatePostPage() {
                   onChangeKey={(e) => currentForm.setCurrentForm?.(e)}
                   label="Danh mục tin đăng"
                 />
-                <CreatePostElectronicDeviceForm />
+                {getFormByKey(currentForm.currentForm || 'COMMON')}
                 <Flex gap={20} className="my-[20px]">
                   <Form.Item className="flex-1">
                     <button

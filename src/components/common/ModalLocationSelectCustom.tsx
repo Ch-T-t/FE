@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons';
 import { fetchAreaList } from '@/api/addressRequest';
 import { ILocationResponse } from '@/types/Job';
+import taiwanProvinces from '@/services/taiwanProvinces';
 
 interface Props {
   maxLength?: number;
@@ -19,7 +20,7 @@ interface Props {
   defaultValue?: string | number | undefined;
   onChange?: (
     location: string | number | undefined,
-    address: string | number | undefined
+    address?: string | number | undefined
   ) => void;
   onChangeLabel?: (e: string | number | undefined) => void;
 }
@@ -32,18 +33,12 @@ export default function ModalLocationSelectCustom(props: Props) {
 
   const handleChange = (e: string | number, address: string | number) => {
     setValue(e);
-    props.onChange?.(e || undefined, address || undefined);
+    props.onChange?.(value);
   };
-  useEffect(() => {
-    const fethAreaListData = async () => {
-      await fetchAreaList()
-        .then((res) => {
-          setAreaList(res.data.data || []);
-        })
-        .catch((err) => {});
-    };
-    fethAreaListData();
-  }, []);
+
+  // const fethAreaListData = async (name?: string) => {
+  //   taiwanProvinces.filter((item) => item.name === name);
+  // };
 
   return (
     <div className="w-full ">
@@ -101,17 +96,17 @@ export default function ModalLocationSelectCustom(props: Props) {
             Lọc khu vực
           </Space>
           <div className="flex justify-center gap-x-5 my-[20px]">
-            {[...Array(3)].map((_, index) => (
+            {taiwanProvinces.map((item, index) => (
               <p
                 key={index}
                 className="w-fit px-[20px] py-[5px] rounded-full bg-[#f4f4f4] text-nowrap"
               >
-                Đài Bắc
+                {item.name}
               </p>
             ))}
           </div>
           <div className="rounded-lg cursor-pointer border overflow-hidden">
-            {areaList.map((item, index) => (
+            {taiwanProvinces.map((item, index) => (
               <Collapse
                 key={index}
                 className="w-full !rounded-none !border-0"
@@ -123,33 +118,31 @@ export default function ModalLocationSelectCustom(props: Props) {
                     key: '1',
                     label: (
                       <Space direction="vertical">
-                        <p className="text-[16px]">{item.Name}</p>
+                        <p className="text-[16px]">{item.name}</p>
                         <p>Taipei City</p>
                       </Space>
                     ),
-                    children: item.Address_Location.map(
-                      (addressItem, index) => (
-                        <Flex
-                          key={index}
-                          onClick={() => {
-                            setShowModal(false);
-                            handleChange(item.id, addressItem.id);
-                            setValue(addressItem.Name);
-                            props.onChangeLabel?.(addressItem.Name || '');
-                          }}
-                          justify="space-between"
-                        >
-                          <p>{addressItem.Name}</p>
-                          <p
-                            className={`w-[20px] h-[20px] rounded-full bg-white  ${
-                              index % 2 == 0
-                                ? 'border-[#c8c8c8]'
-                                : 'border-yellow-500'
-                            } border-[6px]`}
-                          ></p>
-                        </Flex>
-                      )
-                    ),
+                    children: item.cities.map((citie, index) => (
+                      <Flex
+                        key={index}
+                        onClick={() => {
+                          setShowModal(false);
+                          handleChange(citie.name, citie.name);
+                          setValue(citie.name);
+                          props.onChangeLabel?.(citie.name || '');
+                        }}
+                        justify="space-between"
+                      >
+                        <p>{citie.name}</p>
+                        <p
+                          className={`w-[20px] h-[20px] rounded-full bg-white  ${
+                            index % 2 == 0
+                              ? 'border-[#c8c8c8]'
+                              : 'border-yellow-500'
+                          } border-[6px]`}
+                        ></p>
+                      </Flex>
+                    )),
                     className: '!rounded-none',
                   },
                 ]}
