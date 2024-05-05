@@ -65,7 +65,7 @@ export default function SelectCustom(props: Props) {
       {showModal && (
         <Flex
           vertical
-          className={`w-full flex justify-between  rounded-lg border`}
+          className={`w-full max-h-[200px] overflow-y-auto flex justify-between rounded-lg border`}
         >
           {props.data.map((item, index) => (
             <div

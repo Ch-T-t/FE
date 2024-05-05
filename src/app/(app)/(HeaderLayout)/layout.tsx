@@ -45,7 +45,7 @@ export default function HeaderLayout({
   return (
     <div className="overflow-hidden w-full h-full">
       <Header />
-      <div className="max-lg:mt-[88px]">{children}</div>
+      <div className="max-lg:mt-[88px] max-lg:mb-[45px]">{children}</div>
       <Footer />
       <FooterPhone />
     </div>

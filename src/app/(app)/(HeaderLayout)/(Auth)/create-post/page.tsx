@@ -1,5 +1,6 @@
 'use client';
 import { fetchCreatePost } from '@/api/allRequest';
+import instanceAxios from '@/api/instanceAxios';
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import CreatePostAirConditionForm from '@/components/common/Form/CreatePostAirConditionForm';
 import CreatePostBusinessPremisesForm from '@/components/common/Form/CreatePostBusinessPremisesForm';
@@ -11,6 +12,7 @@ import ModalCategorySelectCustom from '@/components/common/ModalCategorySelectCu
 import PreviewProduct from '@/components/common/PreviewProduct';
 import getBase64, { FileType } from '@/services/getBase64';
 import getFormByKey from '@/services/getFormByKey';
+import { IPost } from '@/types/Job';
 import { InboxOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import {
   Button,
@@ -22,6 +24,7 @@ import {
   Space,
   UploadFile,
   UploadProps,
+  message,
   notification,
 } from 'antd';
 import Dragger from 'antd/es/upload/Dragger';
@@ -80,36 +83,42 @@ export default function CreatePostPage() {
   };
   const handleCancel = () => setPreviewOpen(false);
 
-  const fetchCreate = () => {
+  const fetchCreate = (e: IPost) => {
     const formData = new FormData();
-    currentForm.currentData?.name &&
-      formData.append('name', currentForm.currentData?.name as string);
-    currentForm.currentData?.description &&
-      formData.append(
-        'description',
-        currentForm.currentData?.description as string
-      );
-    currentForm.currentData?.quantity &&
-      formData.append('quantity', currentForm.currentData?.quantity as string);
-    currentForm.currentData?.shop &&
-      formData.append('shop', currentForm.currentData?.shop as string);
-    currentForm.currentData?.item_category &&
-      formData.append(
-        'item_category',
-        currentForm.currentData?.item_category as string
-      );
-    for (const [key, value] of Object.entries(
-      currentForm.currentData?.infor || {}
-    )) {
-      if (value !== undefined && value !== null && value !== '') {
-        formData.append(key, value.toString());
-      }
-    }
+    // currentForm.currentData?.name &&
+    //   formData.append('name', currentForm.currentData?.name as string);
+    // currentForm.currentData?.description &&
+    //   formData.append(
+    //     'description',
+    //     currentForm.currentData?.description as string
+    //   );
+    // currentForm.currentData?.quantity &&
+    //   formData.append('quantity', currentForm.currentData?.quantity as string);
+    // currentForm.currentData?.shop &&
+    //   formData.append('shop', currentForm.currentData?.shop as string);
+    // currentForm.currentData?.item_category &&
+    //   formData.append(
+    //     'item_category',
+    //     currentForm.currentData?.item_category as string
+    //   );
+    // for (const [key, value] of Object.entries(
+    //   currentForm.currentData?.infor || {}
+    // )) {
+    //   if (value !== undefined && value !== null && value !== '') {
+    //     formData.append(key, value.toString());
+    //   }
+    // }
 
-    fetchCreatePost(formData).then((res) => {
-      console.log('OK');
-      currentForm.setCurrentData?.({});
-    });
+    // fetchCreatePost(formData).then((res) => {
+    //   console.log('OK');
+    //   currentForm.setCurrentData?.({});
+    // });
+    instanceAxios
+      .post(`/api/products`, e)
+      .then((res) => {
+        message.success('Đã tạo bài đăng!');
+      })
+      .catch((err) => console.log(e));
   };
 
   return (
@@ -166,25 +175,36 @@ export default function CreatePostPage() {
                   </Link>
                 </Space>
                 <div className="w-[300px] max-lg:w-full min-h-[200px] flex items-center justify-center">
-                  <Dragger
-                    className="truncate w-full"
-                    name="images_A1_data"
-                    listType="picture"
-                    fileList={fileList}
-                    accept="image/*"
-                    // onPreview={handlePreview}
-                    onChange={handleChange}
+                  <Form.Item<IPost>
+                    name={`images`}
+                    rules={[
+                      { required: true, message: 'Trường này bắt buộc!' },
+                    ]}
+                    className="w-full"
                   >
-                    <p className="ant-upload-drag-icon">
-                      <InboxOutlined />
-                    </p>
-                    <Flex vertical justify="center">
-                      <p className="ant-upload-text !text-[14px]">
-                        Hình ảnh có kích thước tối thiệu{' '}
+                    <Dragger
+                      className="truncate w-full"
+                      name="images_A1_data"
+                      listType="picture"
+                      fileList={fileList}
+                      accept="image/*"
+                      maxCount={5}
+                      // onPreview={handlePreview}
+                      onChange={handleChange}
+                    >
+                      <p className="ant-upload-drag-icon">
+                        <InboxOutlined />
                       </p>
-                      <p className="ant-upload-text !text-[14px]">240 x 240</p>
-                    </Flex>
-                  </Dragger>
+                      <Flex vertical justify="center">
+                        <p className="ant-upload-text !text-[14px]">
+                          Hình ảnh có kích thước tối thiệu{' '}
+                        </p>
+                        <p className="ant-upload-text !text-[14px]">
+                          240 x 240
+                        </p>
+                      </Flex>
+                    </Dragger>
+                  </Form.Item>
                   <Modal
                     open={previewOpen}
                     title={previewTitle}
@@ -199,22 +219,30 @@ export default function CreatePostPage() {
                   </Modal>
                 </div>
                 <div className="w-[300px] max-lg:w-full min-h-[200px] py-[20px] flex items-center justify-center">
-                  <Dragger
-                    className="truncate w-full"
-                    name="Video"
-                    listType="picture"
-                    fileList={videoFileList}
-                    maxCount={1}
-                    accept="video/*"
-                    onChange={handleChangeVideo}
+                  <Form.Item<IPost>
+                    className="w-full"
+                    name={`video`}
+                    rules={[
+                      { required: true, message: 'Trường này bắt buộc!' },
+                    ]}
                   >
-                    <p className="ant-upload-drag-icon">
-                      <VideoCameraOutlined />
-                    </p>
-                    <p className="ant-upload-text !text-[14px]">
-                      Đăng tối đa 1 video{' '}
-                    </p>
-                  </Dragger>
+                    <Dragger
+                      className="truncate w-full"
+                      name="video"
+                      listType="picture"
+                      fileList={videoFileList}
+                      maxCount={1}
+                      accept="video/*"
+                      onChange={handleChangeVideo}
+                    >
+                      <p className="ant-upload-drag-icon">
+                        <VideoCameraOutlined />
+                      </p>
+                      <p className="ant-upload-text !text-[14px]">
+                        Đăng tối đa 1 video{' '}
+                      </p>
+                    </Dragger>
+                  </Form.Item>
                   <Modal
                     open={previewOpen}
                     title={previewTitle}

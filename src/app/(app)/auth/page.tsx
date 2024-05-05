@@ -98,7 +98,10 @@ export default function AuthPage() {
             route.push('/');
           })
           .catch((err) => {
-            notification.error({ message: 'Đăng nhập thất bại!' });
+            notification.error({
+              message: 'Đăng nhập thất bại!',
+              description: 'Email đã được sử dụng!',
+            });
           });
       })
       .catch((error) => {
@@ -143,6 +146,7 @@ export default function AuthPage() {
   };
   const onRegister = async (e: IUserRegister) => {
     setAuthLoading(true);
+    console.log(e);
     await instanceAxios
       .post('/api/user/register/', e)
       .then((res) => {
@@ -353,7 +357,7 @@ export default function AuthPage() {
               //   style={{ backgroundColor: '#ffb057' }}
               htmlType="submit"
             >
-              ĐĂNG NHẬP
+              XÁC NHẬN
             </Button>
           </Form.Item>
         </Form>

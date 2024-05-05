@@ -104,7 +104,7 @@ export default function ModalLocationSelectCustom(props: Props) {
             {[...Array(3)].map((_, index) => (
               <p
                 key={index}
-                className="w-fit px-[20px] py-[5px] rounded-full bg-[#f4f4f4]"
+                className="w-fit px-[20px] py-[5px] rounded-full bg-[#f4f4f4] text-nowrap"
               >
                 Đài Bắc
               </p>

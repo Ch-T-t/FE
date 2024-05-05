@@ -1,3 +1,4 @@
+import { UploadFile } from 'antd';
 import { ReactNode } from 'react';
 
 interface IJob {
@@ -78,6 +79,8 @@ interface IPost {
   shop?: string;
   brand?: string;
   item_category?: string;
+  images?: UploadFile[];
+  video?: UploadFile;
   infor?: {
     image: IImage[];
     location?: ILocation;
