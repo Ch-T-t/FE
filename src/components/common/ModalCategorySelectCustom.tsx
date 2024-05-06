@@ -66,7 +66,7 @@ export default function ModalCategorySelectCustom(props: Props) {
           );
           currentForm.setCurrentData?.({
             ...currentForm?.currentData,
-            item_category: String(id),
+            category: String(id),
           });
           setValue(categoryList.find((item) => item.id === id)?.name || '');
           setShowModal(false);
