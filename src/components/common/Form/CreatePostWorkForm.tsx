@@ -56,7 +56,15 @@ export default function CreatePostWorkForm(props: Props) {
         <InputCustom
           required
           defaultValue={currentForm.currentData?.info?.title}
-          // onChange={(e) => setTitle(e as string)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                title: String(e),
+              },
+            })
+          }
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
@@ -68,7 +76,15 @@ export default function CreatePostWorkForm(props: Props) {
           required
           type="number"
           defaultValue={currentForm.currentData?.info?.recruitment}
-          // onChange={(e) => setRecruitment(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                recruitment: Number(e),
+              },
+            })
+          }
           label={'Số lượng tuyển dụng'}
         />
       </Form.Item>
@@ -77,7 +93,15 @@ export default function CreatePostWorkForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <SelectCustom
-          // onChange={(e) => setCareerId(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                career: String(e),
+              },
+            })
+          }
           data={selectData.workCarrerData}
           defaultValue={currentForm.currentData?.info?.career}
           label={'Nghành nghề'}
@@ -88,7 +112,15 @@ export default function CreatePostWorkForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <SelectCustom
-          // onChange={(e) => setWorkTypeId(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                workType: String(e),
+              },
+            })
+          }
           data={selectData.workTypeData}
           defaultValue={currentForm.currentData?.info?.workType}
           label={'Loại công việc'}
@@ -99,7 +131,15 @@ export default function CreatePostWorkForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <SelectCustom
-          // onChange={(e) => setPayForm(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                pay_forms: String(e),
+              },
+            })
+          }
           data={selectData.workPayMethodData}
           defaultValue={currentForm.currentData?.info?.pay_forms}
           required
@@ -113,7 +153,15 @@ export default function CreatePostWorkForm(props: Props) {
         <InputCustom
           required
           defaultValue={currentForm.currentData?.info?.wage}
-          // onChange={(e) => setWage(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                wage: String(e),
+              },
+            })
+          }
           type="number"
           label={'Lương'}
         />
@@ -123,7 +171,16 @@ export default function CreatePostWorkForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <TextAreaCustom
-          // onChange={(e) => setDescription(e as string)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                detailed_description: String(e),
+              },
+              description: String(e),
+            })
+          }
           required
           label={'Mô tả chi tiết'}
         />
@@ -139,7 +196,15 @@ export default function CreatePostWorkForm(props: Props) {
             required
             type="number"
             defaultValue={currentForm.currentData?.info?.minAge}
-            // onChange={(e) => setMinAge(e as number)}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  minAge: String(e),
+                },
+              })
+            }
             label={'Độ tuổi tối thiểu'}
           />
         </Form.Item>
@@ -150,7 +215,15 @@ export default function CreatePostWorkForm(props: Props) {
           <InputCustom
             required
             defaultValue={currentForm.currentData?.info?.maxAge}
-            // onChange={(e) => setMaxAge(e as number)}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  maxAge: String(e),
+                },
+              })
+            }
             type="number"
             label={'Độ tuổi tối đa'}
           />
@@ -162,11 +235,19 @@ export default function CreatePostWorkForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          // onChange={(e) => setGenderId(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                sex: String(e),
+              },
+            })
+          }
           defaultValue={currentForm.currentData?.info?.sex}
           data={[
-            { id: 1, name: 'Nam' },
-            { id: 2, name: 'Nữ' },
+            { id: 1, value: 'Nam', name: 'Nam' },
+            { id: 2, value: 'Nữ', name: 'Nữ' },
           ]}
           label={'Giới tính'}
         />
@@ -176,8 +257,16 @@ export default function CreatePostWorkForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <SelectCustom
-          // onChange={(e) => setExperienceId(e as number)}
-          data={[]}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                experience: String(e),
+              },
+            })
+          }
+          data={selectData.experience}
           defaultValue={currentForm.currentData?.info?.experience}
           required
           label={'Kinh nghiệm'}

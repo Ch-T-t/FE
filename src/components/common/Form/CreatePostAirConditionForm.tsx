@@ -39,7 +39,15 @@ export default function CreatePostAirConditionForm(props: Props) {
       >
         <HorizontalSelect
           defaultValue={currentForm.currentData?.info?.usage_status}
-          // onChange={(e) => setUsageStatus(e || '')}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                usage_status: String(e),
+              },
+            })
+          }
           data={selectData.usageStatusData}
           required
           label={'Tình trạng'}
@@ -55,7 +63,15 @@ export default function CreatePostAirConditionForm(props: Props) {
           <SelectCustom
             data={selectData.guaranteeData}
             defaultValue={currentForm.currentData?.info?.guarantee}
-            // onChange={(e) => setGuarantee(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  guarantee: String(e),
+                },
+              })
+            }
             label={'Bảo Hành'}
           />
         </Form.Item>
@@ -67,7 +83,15 @@ export default function CreatePostAirConditionForm(props: Props) {
           <SelectCustom
             data={selectData.fridgeWattageData}
             defaultValue={currentForm.currentData?.info?.wattage}
-            // onChange={(e) => setWattage(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  wattage: String(e),
+                },
+              })
+            }
             label={'Công suất'}
           />
         </Form.Item>
@@ -87,7 +111,15 @@ export default function CreatePostAirConditionForm(props: Props) {
           <InputCustom
             defaultValue={currentForm.currentData?.info?.price}
             type="number"
-            // onChange={(e) => setPrice(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  price: String(e),
+                },
+              })
+            }
             label={'Giá'}
           />
         </Form.Item>

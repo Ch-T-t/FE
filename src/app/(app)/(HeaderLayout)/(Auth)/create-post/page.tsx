@@ -108,7 +108,7 @@ export default function CreatePostPage() {
     //     formData.append(key, value.toString());
     //   }
     // }
-
+    console.log('aaaaaaaaaaaa', currentForm.currentData);
     formData.append('info', JSON.stringify(e.info));
     formData.append('item_category', String(currentForm.currentCategoryId));
     formData.append('name', String(e.name));
@@ -116,7 +116,8 @@ export default function CreatePostPage() {
     formData.append('quantity', String(e.quantity || 0));
     formData.append('shop', String(e.shop));
     formData.append('brand', String(e.brand));
-    formData.append('images', fileList[0].originFileObj as Blob);
+    fileList.length > 0 &&
+      formData.append('images', fileList[0].originFileObj as Blob);
     // formData.append('video', String(currentForm.currentCategoryId));
     instanceAxios
       .post(`/api/products`, formData, {
@@ -250,7 +251,7 @@ export default function CreatePostPage() {
               </div>
               <div className="flex-[3_2_0%]">
                 <ModalCategorySelectCustom
-                  className="max-lg:hidden"
+                  className="max-lg:hidden mb-[10px]"
                   onChangeKey={(e) => currentForm.setCurrentForm?.(e)}
                   label="Danh mục tin đăng"
                 />

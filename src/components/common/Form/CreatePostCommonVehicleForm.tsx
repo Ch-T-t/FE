@@ -27,7 +27,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
         >
           <InputCustom
             defaultValue={currentForm.currentData?.info?.company}
-            // onChange={(e) => setCompany(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  company: String(e),
+                },
+              })
+            }
             label={'Hãng'}
           />
         </Form.Item>
@@ -38,7 +46,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
           <InputCustom
             defaultValue={currentForm.currentData?.info?.year_produce}
             type="number"
-            // onChange={(e) => setYearManufacture(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  year_produce: String(e),
+                },
+              })
+            }
             label={'Năm sản xuất'}
           />
         </Form.Item>
@@ -48,7 +64,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          // onChange={(e) => setGearBox(e || '')}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                carGear: String(e),
+              },
+            })
+          }
           data={selectData.carGearData}
           label={'Hộp sô'}
         />
@@ -58,7 +82,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          // onChange={(e) => setFuel(e || '')}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                carFuel: String(e),
+              },
+            })
+          }
           data={selectData.carFuelData}
           label={'Nhiên liệu'}
         />
@@ -70,7 +102,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
         >
           <InputCustom
             defaultValue={currentForm.currentData?.info?.guarantee}
-            // onChange={(e) => setGuarantee(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  guarantee: String(e),
+                },
+              })
+            }
             label={'Bảo hành'}
           />
         </Form.Item>
@@ -81,7 +121,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
           <InputCustom
             defaultValue={currentForm.currentData?.info?.seatNumber}
             type="number"
-            // onChange={(e) => setSeatNumber(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  seatNumber: Number(e),
+                },
+              })
+            }
             label={'Số chỗ'}
           />
         </Form.Item>
@@ -102,7 +150,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
         >
           <InputCustom
             defaultValue={currentForm.currentData?.info?.walked}
-            // onChange={(e) => setWalked(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  walked: Number(e),
+                },
+              })
+            }
             label={'Số km đã đi'}
           />
         </Form.Item>
@@ -113,7 +169,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
           <InputCustom
             defaultValue={currentForm.currentData?.info?.price}
             type="number"
-            // onChange={(e) => setPrice(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  price: String(e),
+                },
+              })
+            }
             label={'Giá'}
           />
         </Form.Item>
@@ -126,7 +190,16 @@ export default function CreatePostCommonVehicleForm(props: Props) {
       >
         <InputCustom
           defaultValue={currentForm.currentData?.info?.title}
-          // onChange={(e) => setTitle(e || '')}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                title: String(e),
+              },
+              name: String(e),
+            })
+          }
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
@@ -136,7 +209,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
       >
         <TextAreaCustom
           defaultValue={currentForm.currentData?.description}
-          // onChange={(e) => setDetailedDescription(e as string)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                detailed_description: String(e),
+              },
+            })
+          }
           label="Mô tả chi tiết"
         />
       </Form.Item>
@@ -148,7 +229,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
         <HorizontalSelect
           defaultValue={currentForm.currentData?.info?.seller_information}
           label="Bạn là"
-          // onChange={(e) => setSellerInformation(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                seller_information: String(e),
+              },
+            })
+          }
           data={selectData.sellerInformationData}
         />
       </Form.Item>
@@ -163,6 +252,15 @@ export default function CreatePostCommonVehicleForm(props: Props) {
           //   setLocationId((location as number) || 0);
           //   setAddressId((address as number) || 0);
           // }}
+          onChange={(e) => {
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                address: String(e),
+              },
+            });
+          }}
           label={'Địa chỉ'}
         />
       </Form.Item>

@@ -27,7 +27,15 @@ export default function CreatePostServiceForm(props: Props) {
       >
         <HorizontalSelect
           defaultValue={currentForm.currentData?.info?.usage_status}
-          // onChange={(e) => setUsageStatus(e || '')}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                usage_status: String(e),
+              },
+            })
+          }
           data={selectData.usageStatusData}
           required
           label={'Tình trạng'}
@@ -41,7 +49,15 @@ export default function CreatePostServiceForm(props: Props) {
           <SelectCustom
             data={selectData.guaranteeData}
             defaultValue={currentForm.currentData?.info?.guarantee}
-            // onChange={(e) => setGuarantee(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  guarantee: String(e),
+                },
+              })
+            }
             label={'Bảo Hành'}
           />
         </Form.Item>
@@ -60,7 +76,15 @@ export default function CreatePostServiceForm(props: Props) {
           <InputCustom
             defaultValue={currentForm.currentData?.info?.price}
             type="number"
-            // onChange={(e) => setPrice(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  price: String(e),
+                },
+              })
+            }
             label={'Giá'}
           />
         </Form.Item>
@@ -73,7 +97,16 @@ export default function CreatePostServiceForm(props: Props) {
       >
         <InputCustom
           defaultValue={currentForm.currentData?.info?.title}
-          // onChange={(e) => setTitle(e || '')}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                title: String(e),
+              },
+              name: String(e),
+            })
+          }
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
@@ -83,7 +116,16 @@ export default function CreatePostServiceForm(props: Props) {
       >
         <TextAreaCustom
           defaultValue={currentForm.currentData?.description}
-          // onChange={(e) => setDetailedDescription(e as string)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                detailed_description: String(e),
+              },
+              description: String(e),
+            })
+          }
           label="Mô tả chi tiết"
         />
       </Form.Item>
@@ -95,7 +137,15 @@ export default function CreatePostServiceForm(props: Props) {
         <HorizontalSelect
           defaultValue={currentForm.currentData?.info?.seller_information}
           label="Bạn là"
-          // onChange={(e) => setSellerInformation(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                seller_information: String(e),
+              },
+            })
+          }
           data={selectData.sellerInformationData}
         />
       </Form.Item>
@@ -110,6 +160,15 @@ export default function CreatePostServiceForm(props: Props) {
           //   setLocationId((location as number) || 0);
           //   setAddressId((address as number) || 0);
           // }}
+          onChange={(e) => {
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                address: String(e),
+              },
+            });
+          }}
           label={'Địa chỉ'}
         />
       </Form.Item>

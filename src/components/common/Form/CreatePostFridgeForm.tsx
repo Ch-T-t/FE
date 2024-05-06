@@ -26,8 +26,16 @@ export default function CreatePostFridgeForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          defaultValue={currentForm.currentData?.info?.wattage}
-          // onChange={(e) => setUsageStatus(e || '')}
+          defaultValue={currentForm.currentData?.info?.usage_status}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                usage_status: String(e),
+              },
+            })
+          }
           data={selectData.usageStatusData}
           required
           label={'Tình trạng'}
@@ -41,7 +49,15 @@ export default function CreatePostFridgeForm(props: Props) {
           <SelectCustom
             data={selectData.guaranteeData}
             defaultValue={currentForm.currentData?.info?.guarantee}
-            // onChange={(e) => setGuarantee(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  guarantee: String(e),
+                },
+              })
+            }
             label={'Bảo Hành'}
           />
         </Form.Item>
@@ -52,7 +68,15 @@ export default function CreatePostFridgeForm(props: Props) {
           <SelectCustom
             data={selectData.fridgeWattageData}
             defaultValue={currentForm.currentData?.info?.wattage}
-            // onChange={(e) => setWattage(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  wattage: String(e),
+                },
+              })
+            }
             label={'Công suất'}
           />
         </Form.Item>
@@ -71,7 +95,15 @@ export default function CreatePostFridgeForm(props: Props) {
           <InputCustom
             defaultValue={currentForm.currentData?.info?.price}
             type="number"
-            // onChange={(e) => setPrice(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  price: String(e),
+                },
+              })
+            }
             label={'Giá'}
           />
         </Form.Item>
@@ -84,7 +116,15 @@ export default function CreatePostFridgeForm(props: Props) {
       >
         <InputCustom
           defaultValue={currentForm.currentData?.info?.title}
-          // onChange={(e) => setTitle(e || '')}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                title: String(e),
+              },
+            })
+          }
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
@@ -94,7 +134,16 @@ export default function CreatePostFridgeForm(props: Props) {
       >
         <TextAreaCustom
           defaultValue={currentForm.currentData?.description}
-          // onChange={(e) => setDetailedDescription(e as string)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                detailed_description: String(e),
+              },
+              description: String(e),
+            })
+          }
           label="Mô tả chi tiết"
         />
       </Form.Item>
@@ -121,6 +170,15 @@ export default function CreatePostFridgeForm(props: Props) {
           //   setLocationId((location as number) || 0);
           //   setAddressId((address as number) || 0);
           // }}
+          onChange={(e) => {
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                address: String(e),
+              },
+            });
+          }}
           label={'Địa chỉ'}
         />
       </Form.Item>

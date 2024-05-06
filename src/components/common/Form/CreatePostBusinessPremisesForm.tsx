@@ -29,7 +29,15 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
         >
           <InputCustom
             defaultValue={currentForm.currentData?.info?.acreage}
-            // onChange={(e) => setAcreage(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  acreage: String(e),
+                },
+              })
+            }
             label={'Diện tích'}
           />
         </Form.Item>
@@ -41,7 +49,15 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
           <InputCustom
             defaultValue={currentForm.currentData?.info?.price}
             type="number"
-            // onChange={(e) => setPriceValue(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  price: String(e),
+                },
+              })
+            }
             label={'Giá'}
           />
         </Form.Item>
@@ -52,7 +68,15 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
           <InputCustom
             // className="!w-1/2"
             defaultValue={currentForm.currentData?.info?.depositAmount}
-            // onChange={(e) => setDepositAmount(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  depositAmount: String(e),
+                },
+              })
+            }
             label={'Số tiền cọc'}
           />
         </Form.Item>
@@ -65,7 +89,16 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
       >
         <InputCustom
           defaultValue={currentForm.currentData?.info?.title}
-          // onChange={(e) => setTitle(e || '')}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                title: String(e),
+              },
+              name: String(e),
+            })
+          }
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
@@ -75,7 +108,16 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
       >
         <TextAreaCustom
           defaultValue={currentForm.currentData?.description}
-          // onChange={(e) => setDetailedDescription(e as string)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                detailed_description: String(e),
+              },
+              description: String(e),
+            })
+          }
           label="Mô tả chi tiết"
         />
       </Form.Item>
@@ -87,7 +129,15 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
         <HorizontalSelect
           defaultValue={currentForm.currentData?.info?.seller_information}
           label="Thông tin người bán"
-          // onChange={(e) => setSellerInformation(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                seller_information: String(e),
+              },
+            })
+          }
           data={selectData.sellerInformationData}
         />
       </Form.Item>
@@ -101,6 +151,15 @@ export default function CreatePostBusinessPremisesForm(props: Props) {
           //   setAddressId((address as number) || 0);
           // }}
           // label={'Địa chỉ'}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                address: String(e),
+              },
+            })
+          }
           label=""
         />
       </Form.Item>

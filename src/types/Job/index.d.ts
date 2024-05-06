@@ -82,12 +82,14 @@ interface IPost {
   brand?: string;
   item_category?: string;
   images?: UploadFile[];
+  banner?: UploadFile;
   video?: UploadFile;
+  category?: string;
   info?: {
-    image: IImage[];
-    location?: ILocation;
+    image?: IImage[];
+    location?: string;
     category?: string;
-    address?: IAddress;
+    address?: string;
     career?: string;
     type_of_work?: string;
     pay_forms?: string;

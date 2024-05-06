@@ -136,7 +136,7 @@ export default function ModalLocationSelectCustom(props: Props) {
                         <p>{citie.name}</p>
                         <p
                           className={`w-[20px] h-[20px] rounded-full bg-white  ${
-                            index % 2 == 0
+                            value !== citie.name
                               ? 'border-[#c8c8c8]'
                               : 'border-yellow-500'
                           } border-[6px]`}

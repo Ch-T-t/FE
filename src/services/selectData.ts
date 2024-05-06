@@ -182,6 +182,29 @@ const carFuelData: IJob[] = [
   },
 ];
 
+const experience: IJob[] = [
+  {
+    name: '1 Năm',
+    value: '1 Năm',
+  },
+  {
+    name: '2 Năm',
+    value: '2 Năm',
+  },
+  {
+    name: '3 Năm',
+    value: '3 Năm',
+  },
+  {
+    name: '5 Năm',
+    value: '5 Năm',
+  },
+  {
+    name: '>5 Năm',
+    value: '>5 Năm',
+  },
+];
+
 const usageStatusData: IJob[] = [
   {
     name: 'Đã sử dụng',
@@ -532,6 +555,7 @@ const selectData = {
   fridgeWattageData,
   washingWeightData,
   phoneCompanyData,
+  experience,
 };
 
 export default selectData;

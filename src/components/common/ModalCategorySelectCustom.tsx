@@ -64,6 +64,10 @@ export default function ModalCategorySelectCustom(props: Props) {
           currentForm.setCurrentCategoryId?.(
             categoryList.find((item) => item.id === id)?.id || ''
           );
+          currentForm.setCurrentData?.({
+            ...currentForm?.currentData,
+            item_category: String(id),
+          });
           setValue(categoryList.find((item) => item.id === id)?.name || '');
           setShowModal(false);
         }
@@ -136,6 +140,11 @@ export default function ModalCategorySelectCustom(props: Props) {
                     currentForm.setCurrentForm?.(item.type || '');
                     currentForm.setCurrentLabel?.(item.name || '');
                     currentForm.setCurrentCategoryId?.(item.id || '');
+                    currentForm.setCurrentData?.({
+                      ...currentForm?.currentData,
+                      item_category: String(item.id),
+                    });
+
                     props.onChangeKey?.(item.type || '');
                     isSubMenu ? setShowModal(false) : setIsSubMenu(true);
                   }}
