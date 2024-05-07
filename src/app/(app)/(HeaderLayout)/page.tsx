@@ -5,7 +5,7 @@ import CardItem from '@/components/common/CardItem';
 import InputCustom from '@/components/common/InputCustom';
 import InputTest from '@/components/common/InputTest';
 import categoryList from '@/services/categoryList';
-import { IProduct } from '@/types/Job';
+import { IPost, IProduct } from '@/types/Job';
 import {
   BellFilled,
   CaretLeftOutlined,
@@ -20,7 +20,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 export default function HomePage() {
   const ref = useRef<HTMLDivElement>(null);
-  const [productList, setProducList] = useState<IProduct[]>([]);
+  const [productList, setProducList] = useState<IPost[]>([]);
   const router = useRouter();
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
@@ -32,14 +32,15 @@ export default function HomePage() {
     lineHeight: '160px',
     textAlign: 'center',
     background: '#364d79',
+    height: '300px',
   };
 
   useEffect(() => {
     const fetchProducHome = async () => {
       await instanceAxios
-        .get(`list_home/`)
+        .get(`/api/products`)
         .then((res) => {
-          setProducList(res.data.data);
+          setProducList(res.data || []);
         })
         .catch((err) => console.log(err));
     };
@@ -53,7 +54,7 @@ export default function HomePage() {
           className="rounded-lg max-lg:rounded-none overflow-hidden"
           autoplay
         >
-          <div className="max-lg:h-[100px]">
+          <div className="max-lg:h-[100px] ">
             <h3 style={contentStyle}>1</h3>
           </div>
           <div>
@@ -203,7 +204,7 @@ export default function HomePage() {
               key={index}
             />
           ))}
-          {[...Array(3)].map((_, index) => (
+          {/* {[...Array(3)].map((_, index) => (
             <CardItem
               data={{
                 id: index,
@@ -211,7 +212,7 @@ export default function HomePage() {
               ribbon={index % 2 == 0 ? 'Việc 24h' : ''}
               key={index}
             />
-          ))}
+          ))} */}
         </div>
       </div>
       <div className="bg-white p-[10px] rounded-md">

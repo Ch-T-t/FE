@@ -26,13 +26,14 @@ export default function ModalCategorySelectCustom(props: Props) {
   const [categoryList, setCategoryList] = useState<IJob[]>([]);
   const [subMenuList, setSubMenuList] = useState<IJob[]>([]);
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState<string | number>(
-    currentForm.currentLabel || ''
-  );
+  const [value, setValue] = useState<string | number>();
   const handleChange = (e: string | number) => {
     setValue(e);
     props.onChange?.(e || undefined);
   };
+  useEffect(() => {
+    setValue(currentForm.currentLabel || '');
+  }, [currentForm.currentLabel]);
   useEffect(() => {
     instanceAxios
       .get(`/api/category`)

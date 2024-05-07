@@ -107,7 +107,7 @@ const getFormByKey = (key: string, data?: any, edit?: boolean) => {
     //   return;
 
     default:
-      break;
+      return null;
   }
 };
 export default getFormByKey;

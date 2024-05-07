@@ -79,12 +79,15 @@ interface IPost {
   updated_at?: string;
   quantity?: string;
   shop?: string;
+  user?: string;
   brand?: string;
   item_category?: string;
   images?: UploadFile[];
-  banner?: UploadFile;
+  banner?: string;
+  bannerUpload?: UploadFile;
   video?: UploadFile;
   category?: string;
+  status?: string;
   info?: {
     image?: IImage[];
     location?: string;

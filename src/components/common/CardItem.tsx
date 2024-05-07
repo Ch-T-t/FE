@@ -1,5 +1,5 @@
 import getImageLink from '@/services/getImageLink';
-import { IProduct } from '@/types/Job';
+import { IPost, IProduct } from '@/types/Job';
 import { Avatar, Badge, Image, Space } from 'antd';
 import Ribbon from 'antd/es/badge/Ribbon';
 import moment from 'moment';
@@ -10,7 +10,7 @@ interface Props {
   ribbon?: string;
   imageHeight?: number;
   imageWidth?: number;
-  data?: IProduct;
+  data?: IPost;
   className?: string;
   classImg?: string;
 }
@@ -26,23 +26,22 @@ export default function CardItem(props: Props) {
         preview={false}
         className="object-cover rounded-lg overflow-hidden"
         alt={''}
-        src={getImageLink(props.data || {})}
+        src={props.data?.banner}
       />
       <div className={`w-full`}>
         <p className="line-clamp-2 h-[50px] font-medium text-[15px] max-lg:font-normal max-lg:text-[13px]">
-          {props.data?.Title || 'ádd dd ddd ddd dd ddd dd'}
+          {props.data?.name || 'ádd dd ddd ddd dd ddd dd'}
         </p>
         <p className="truncate text-[#808080] h-[30px] py-[5px] text-[14px] max-lg:hidden">
-          Ngày làm: {moment(props.data?.Creation_time).format('DD/MM/YYYY')}
+          Ngày làm: {moment(props.data?.created_at).format('DD/MM/YYYY')}
         </p>
         <p className="text-[#d0021b] h-[30px] my-[5px] !text[15px] !font-sans font-bold">
-          ${props.data?.Price || 0}/ngày
+          ${props.data?.info?.price || 0}/ngày
         </p>
         <Space className="w-full h-[40px]">
           <Avatar src="" className="max-lg:!w-[20px] max-lg:!h-[20px]" />
           <p className="w-[150px] block text-[12px] text-[#c7c7c7] truncate max-lg:text-[10px]">
-            {moment(props.data?.Creation_time).fromNow()} •{' '}
-            {props.data?.User?.last_name}
+            {moment(props.data?.created_at).fromNow()} • {props.data?.name}
           </p>
         </Space>
       </div>
