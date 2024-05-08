@@ -1,5 +1,5 @@
 import TagItem from '@/components/common/TagItem';
-import { IProduct } from '@/types/Job';
+import { IPost, IProduct } from '@/types/Job';
 import { textDefault } from './dataDefault';
 import {
   AlertOutlined,
@@ -17,126 +17,126 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 
-const renderTagItem = (data: IProduct) => {
+const renderTagItem = (data: IPost) => {
   let tabList = [];
-  for (let index = 0; index < Object.keys(data).length; index++) {
-    switch (Object.keys(data)[index]) {
-      case 'Usage_status':
+  for (let index = 0; index < Object.keys(data || {}).length; index++) {
+    switch (Object.keys(data.info || {})[index]) {
+      case 'usage_status':
         tabList.push(
           <TagItem
             icon={<ScheduleOutlined />}
             title={`Tình trạng sử dụng: ${
-              data.Usage_status?.name || textDefault
+              data.info?.usage_status || textDefault
             } `}
           />
         );
         break;
-      case 'Seller_information':
+      case 'seller_information':
         tabList.push(
           <TagItem
             icon={<UserOutlined />}
             title={`Thông tin người bán: ${
-              data.Seller_information?.name || textDefault
+              data.info?.seller_information || textDefault
             }`}
           />
         );
         break;
-      case 'Guarantee':
+      case 'guarantee':
         tabList.push(
           <TagItem
             icon={<BarcodeOutlined />}
-            title={`Bảo hành: ${data.Guarantee?.name || textDefault}`}
+            title={`Bảo hành: ${data.info?.capacity || textDefault}`}
           />
         );
         break;
-      case 'Company':
+      case 'company':
         tabList.push(
           <TagItem
             icon={<AuditOutlined />}
-            title={`Công ty: ${data.Company?.name || textDefault}`}
+            title={`Công ty: ${data.info?.company || textDefault}`}
           />
         );
         break;
-      case 'Capacity':
+      case 'capacity':
         tabList.push(
           <TagItem
             icon={<AlertOutlined />}
-            title={`Dung tích: ${data.Capacity?.name || textDefault}`}
+            title={`Dung tích: ${data.info?.capacity || textDefault}`}
           />
         );
         break;
-      case 'Volume':
+      case 'volume':
         tabList.push(
           <TagItem
             icon={<FilterOutlined />}
-            title={`Khối lượng: ${data.Volume?.name || textDefault}`}
+            title={`Khối lượng: ${data.info?.volume || textDefault}`}
           />
         );
         break;
-      case 'Wattage':
+      case 'wattage':
         tabList.push(
           <TagItem
             icon={<FunnelPlotOutlined />}
-            title={`Công suất: ${data.Wattage?.name || textDefault}`}
+            title={`Công suất: ${data.info?.wattage || textDefault}`}
           />
         );
         break;
-      case 'Washing_volume':
+      case 'washing_volume':
         tabList.push(
           <TagItem
             icon={undefined}
             title={`Khối lượng giặt: ${
-              data.Washing_volume?.name || textDefault
+              data.info?.washing_volume || textDefault
             }`}
           />
         );
         break;
-      case 'Color':
+      case 'color':
         tabList.push(
           <TagItem
             icon={<BgColorsOutlined />}
-            title={`Màu: ${data.Color?.name || textDefault}`}
+            title={`Màu: ${data.info?.color || textDefault}`}
           />
         );
         break;
-      case 'Microprocessor':
+      case 'microprocessor':
         tabList.push(
           <TagItem
             icon={<BorderInnerOutlined />}
-            title={`Bộ vi xử lí: ${data.Microprocessor?.name || textDefault}`}
+            title={`Bộ vi xử lí: ${data.info?.microprocessor || textDefault}`}
           />
         );
         break;
-      case 'Ram':
+      case 'ram':
         tabList.push(
           <TagItem
             icon={<InsertRowBelowOutlined />}
-            title={`Ram: ${data.Ram?.name || textDefault}`}
+            title={`Ram: ${data.info?.ram || textDefault}`}
           />
         );
         break;
-      case 'HardDrive':
+      case 'hardDrive':
         tabList.push(
           <TagItem
             icon={<MergeCellsOutlined />}
-            title={`Ổ cứng: ${data.HardDrive?.name || textDefault}`}
+            title={`Ổ cứng: ${data.info?.hardDrive || textDefault}`}
           />
         );
         break;
-      case 'MonitorCard':
+      case 'monitorCard':
         tabList.push(
           <TagItem
             icon={<BoxPlotOutlined />}
-            title={`Card màn hình: ${data.MonitorCard?.name || textDefault}`}
+            title={`Card màn hình: ${data.info?.monitorCard || textDefault}`}
           />
         );
         break;
-      case 'ScreenSize':
+      case 'screenSize':
         tabList.push(
           <TagItem
             icon={<PictureOutlined />}
             title={`Kích thước màn hình ${
-              data.ScreenSize?.name || textDefault
+              data.info?.screenSize || textDefault
             }`}
           />
         );

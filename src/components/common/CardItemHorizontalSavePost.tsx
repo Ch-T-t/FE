@@ -11,7 +11,7 @@ import React from 'react';
 
 export default function CardItemHorizontalSavePost() {
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <Badge.Ribbon
         // className="invisible"
         color="red"
@@ -21,11 +21,11 @@ export default function CardItemHorizontalSavePost() {
         <Flex
           align="center"
           gap={20}
-          className=" relative bg-white rounded-lg p-[10px]"
+          className="w-full relative bg-white rounded-lg p-[10px] max-lg:pb-[30px]"
         >
-          <div className="relative rounded-lg overflow-hidden">
+          <div className="relative rounded-lg w-1/3 overflow-hidden">
             <Image
-              width={130}
+              width={`100%`}
               height={130}
               preview={false}
               className=""
@@ -36,8 +36,8 @@ export default function CardItemHorizontalSavePost() {
               Đẫ ẩn
             </p>
           </div>
-          <Flex vertical gap={5}>
-            <p className="font-medium">
+          <Flex className="w-2/3 " vertical gap={5}>
+            <p className="font-medium w-full line-clamp-2">
               SH 125 CBS 2020 xe CVC Chät Siéu Li-rdT NEW
             </p>
             <b className="text-red-500 text-[14px]">$3000/tháng</b>
@@ -45,24 +45,33 @@ export default function CardItemHorizontalSavePost() {
               <Avatar src={''} size={20} />
               <p className="text-[#9b9b9b] font-medium">SimpRaidenEi</p>
             </Space>
-            <Space>
+            <Space className="max-lg:!hidden">
               <WindowsOutlined />
               <p className="text-[#9b9b9b] font-normal">Thành phố đài nam</p>
             </Space>
-            <Flex gap={10}>
+            <Flex
+              gap={10}
+              className="max-lg:justify-between max-md:items-center"
+            >
               <p className="bg-[#f4f4f4] text-[12px] px-[10px] py-[5px] rounded-lg">
                 2 giờ trước
               </p>
-              <p className="bg-[#f4f4f4] text-[12px] px-[10px] py-[5px] rounded-lg">
+              <p className="bg-[#f4f4f4] text-[12px] px-[10px] py-[5px] rounded-lg max-lg:hidden">
                 Ngày làm: 10/10 /23
               </p>
+              <div className="hidden max-lg:block">
+                <HeartFilled style={{ color: 'red' }} />
+              </div>
             </Flex>
           </Flex>
-          <Flex className="absolute bottom-5 right-5" gap={20}>
+          <Flex
+            className="absolute bottom-5 right-5 max-lg:bottom-1 max-lg:right-1/2 max-lg:translate-x-full"
+            gap={20}
+          >
             <button className=" text-[12px] font-semibold  px-[20px] py-[2px] border border-green-500 text-green-500 rounded-full">
               Chat
             </button>
-            <HeartFilled style={{ color: 'red' }} />
+            <HeartFilled className="max-lg:!hidden" style={{ color: 'red' }} />
           </Flex>
 
           <Dropdown

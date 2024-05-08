@@ -3,6 +3,7 @@ import {
   Collapse,
   DatePicker,
   Flex,
+  Form,
   Image,
   Modal,
   Space,
@@ -18,7 +19,7 @@ import TextAreaCustom from '../TextAreaCustom';
 
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import getBase64, { FileType } from '@/services/getBase64';
-import { IJob, ILocationResponse, IVehicle } from '@/types/Job';
+import { IJob, ILocationResponse, IPost, IVehicle } from '@/types/Job';
 import {
   CalendarOutlined,
   CaretLeftOutlined,
@@ -242,19 +243,29 @@ export default function CreatePostTaxiForm(props: Props) {
   return (
     <Flex vertical gap={20}>
       <p className={titleClassName}>Thông tin chi tiết</p>
-      <InputCustom
-        defaultValue={price}
-        type="number"
-        onChange={(e) => setPrice(e || '')}
-        label={'Giá'}
-      />
-      <HorizontalSelect
-        onChange={(e) => setPostedNews(e || '')}
-        defaultValue={postedNews}
-        data={postedNewsList}
-        required
-        label={'Tin đăng'}
-      />
+      <Form.Item<IPost>
+        name={['info', 'price']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <InputCustom
+          defaultValue={price}
+          type="number"
+          onChange={(e) => setPrice(e || '')}
+          label={'Giá'}
+        />
+      </Form.Item>
+      <Form.Item<IPost>
+        name={['info', 'postedNews']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <HorizontalSelect
+          onChange={(e) => setPostedNews(e || '')}
+          defaultValue={postedNews}
+          data={postedNewsList}
+          required
+          label={'Tin đăng'}
+        />
+      </Form.Item>
       <Flex className="border rounded-lg py-[5px]">
         <Flex
           align="center"
@@ -307,23 +318,38 @@ export default function CreatePostTaxiForm(props: Props) {
         </Flex>
       </Flex>
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
-      <InputCustom
-        defaultValue={title}
-        onChange={(e) => setTitle(e || '')}
-        label={'Tiêu đề tin đăng'}
-      />
-      <TextAreaCustom
-        defaultValue={detailedDescription}
-        onChange={(e) => setDetailedDescription(e as string)}
-        label="Mô tả chi tiết"
-      />
+      <Form.Item<IPost>
+        name={['info', 'title']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <InputCustom
+          defaultValue={title}
+          onChange={(e) => setTitle(e || '')}
+          label={'Tiêu đề tin đăng'}
+        />
+      </Form.Item>
+      <Form.Item<IPost>
+        name={['info', 'detailed_description']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <TextAreaCustom
+          defaultValue={detailedDescription}
+          onChange={(e) => setDetailedDescription(e as string)}
+          label="Mô tả chi tiết"
+        />
+      </Form.Item>
       <p className={titleClassName}>Thông tin người đăng</p>
-      <HorizontalSelect
-        defaultValue={posterInformation}
-        label="Bạn là"
-        onChange={(e) => setPosterInformation(e as number)}
-        data={posterInformationList}
-      />
+      <Form.Item<IPost>
+        name={['info', 'posterInformation']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <HorizontalSelect
+          defaultValue={posterInformation}
+          label="Bạn là"
+          onChange={(e) => setPosterInformation(e as number)}
+          data={posterInformationList}
+        />
+      </Form.Item>
     </Flex>
   );
 }

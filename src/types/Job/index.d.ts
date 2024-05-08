@@ -1,3 +1,4 @@
+import { UploadFile } from 'antd';
 import { ReactNode } from 'react';
 
 interface IJob {
@@ -5,7 +6,9 @@ interface IJob {
   name?: string;
   value?: string;
   Url?: string;
+  type?: string;
   keyForm?: string;
+  category?: string;
   Creation_time?: string; // Nếu bạn muốn xử lý ngày thì có thể sử dụng kiểu Date
   Update_time?: string; // Tương tự, nếu muốn xử lý ngày thì có thể sử dụng kiểu Date
 }
@@ -68,6 +71,14 @@ interface IAddress {
   Location: ILocation;
 }
 
+interface ISlide {
+  id?: string;
+  banner?: string;
+  created_at?: string;
+  updated_at?: string;
+  status?: boolean;
+}
+
 interface IPost {
   id?: string;
   name?: string;
@@ -76,13 +87,20 @@ interface IPost {
   updated_at?: string;
   quantity?: string;
   shop?: string;
+  user?: string;
   brand?: string;
   item_category?: string;
-  infor?: {
-    image: IImage[];
-    location?: ILocation;
+  images?: UploadFile[];
+  banner?: string;
+  bannerUpload?: UploadFile;
+  video?: UploadFile;
+  category?: string;
+  status?: string;
+  info?: {
+    image?: IImage[];
+    location?: string;
     category?: string;
-    address?: IAddress;
+    address?: string;
     career?: string;
     type_of_work?: string;
     pay_forms?: string;
@@ -126,6 +144,10 @@ interface IPost {
     workType?: string;
     minAge?: string;
     maxAge?: string;
+    postedNews?: string;
+    posterInformation?: string;
+    carGear?: string;
+    carFuel?: string;
   };
   // payMethod?:string;
 }

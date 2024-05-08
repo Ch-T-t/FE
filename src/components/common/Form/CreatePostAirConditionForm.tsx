@@ -34,13 +34,20 @@ export default function CreatePostAirConditionForm(props: Props) {
     <Flex vertical gap={15}>
       <p className={titleClassName}>Thông tin chi tiết</p>
       <Form.Item<IPost>
-        name={['infor', 'usage_status']}
-        className="w-1/2"
+        name={['info', 'usage_status']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          defaultValue={currentForm.currentData?.infor?.usage_status}
-          // onChange={(e) => setUsageStatus(e || '')}
+          defaultValue={currentForm.currentData?.info?.usage_status}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                usage_status: String(e),
+              },
+            })
+          }
           data={selectData.usageStatusData}
           required
           label={'Tình trạng'}
@@ -49,26 +56,42 @@ export default function CreatePostAirConditionForm(props: Props) {
 
       <Flex gap={10}>
         <Form.Item<IPost>
-          name={['infor', 'guarantee']}
+          name={['info', 'guarantee']}
           className="w-1/2"
           rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
         >
           <SelectCustom
             data={selectData.guaranteeData}
-            defaultValue={currentForm.currentData?.infor?.guarantee}
-            // onChange={(e) => setGuarantee(e || '')}
+            defaultValue={currentForm.currentData?.info?.guarantee}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  guarantee: String(e),
+                },
+              })
+            }
             label={'Bảo Hành'}
           />
         </Form.Item>
         <Form.Item<IPost>
-          name={['infor', 'wattage']}
+          name={['info', 'wattage']}
           className="w-1/2"
           rules={[{ required: true }]}
         >
           <SelectCustom
             data={selectData.fridgeWattageData}
-            defaultValue={currentForm.currentData?.infor?.wattage}
-            // onChange={(e) => setWattage(e || '')}
+            defaultValue={currentForm.currentData?.info?.wattage}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  wattage: String(e),
+                },
+              })
+            }
             label={'Công suất'}
           />
         </Form.Item>
@@ -81,14 +104,22 @@ export default function CreatePostAirConditionForm(props: Props) {
 
       {!checked && (
         <Form.Item<IPost>
-          name={['infor', 'price']}
+          name={['info', 'price']}
           className="w-1/2"
           rules={[{ required: true }]}
         >
           <InputCustom
-            defaultValue={currentForm.currentData?.infor?.price}
+            defaultValue={currentForm.currentData?.info?.price}
             type="number"
-            // onChange={(e) => setPrice(e || '')}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  price: String(e),
+                },
+              })
+            }
             label={'Giá'}
           />
         </Form.Item>
@@ -96,17 +127,17 @@ export default function CreatePostAirConditionForm(props: Props) {
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
       <Form.Item<IPost>
-        name={['infor', 'title']}
+        name={['info', 'title']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
-          defaultValue={currentForm.currentData?.infor?.title}
+          defaultValue={currentForm.currentData?.info?.title}
           // onChange={(e) => setTitle(e || '')}
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
       <Form.Item<IPost>
-        name={['infor', 'detailed_description']}
+        name={['info', 'detailed_description']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <TextAreaCustom
@@ -117,18 +148,18 @@ export default function CreatePostAirConditionForm(props: Props) {
       </Form.Item>
       <p className={titleClassName}>Thông tin người bán</p>
       <Form.Item<IPost>
-        name={['infor', 'seller_information']}
+        name={['info', 'seller_information']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          defaultValue={currentForm.currentData?.infor?.seller_information}
+          defaultValue={currentForm.currentData?.info?.seller_information}
           label="Bạn là"
           // onChange={(e) => setSellerInformation(e as number)}
           data={selectData.sellerInformationData}
         />
       </Form.Item>
       <Form.Item
-        name={['infor', 'address']}
+        name={['info', 'address']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <ModalLocationSelectCustom

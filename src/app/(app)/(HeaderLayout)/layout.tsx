@@ -10,8 +10,8 @@ import { useAuth, useSignIn } from '@clerk/nextjs';
 import { useAppDispatch } from '@/app/hooks';
 import instanceAxios from '@/api/instanceAxios';
 import { login } from '@/app/reducers/userReducer';
-import { setCookie } from 'cookies-next';
-import Footer from '@/components/Footer';
+import { getCookie, setCookie } from 'cookies-next';
+import Footer from '@/components/common/Footer';
 import FooterPhone from '@/components/FooterPhone';
 
 export default function HeaderLayout({
@@ -19,36 +19,33 @@ export default function HeaderLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isLoaded, userId, sessionId, getToken } = useAuth();
   const { signIn } = useSignIn();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const fechAuthSocial = async () => {
-      const token = await getToken();
-      if (token) {
-        await instanceAxios
-          .post(`/api/token/google-oauth/`, {
-            access_token: token,
-          })
-          .then((res) => {
-            console.log(res);
-            dispatch(login(res.data.user));
-            setCookie('access', res.data.access);
-            setCookie('refresh', res.data.refresh);
-          })
-          .catch((err) => {
-            console.log('assassdsdas', getToken());
-          });
-      }
-    };
+  // useEffect(() => {
+  //   const fechAuthSocial = async () => {
+  //     const token = getCookie('access');
+  //     if (token) {
+  //       await instanceAxios
+  //         .get(`/api/user/get_me`)
+  //         .then((res) => {
+  //           console.log(res);
+  //           dispatch(login(res.data));
+  //           setCookie('access', res.data.access);
+  //           setCookie('refresh', res.data.refresh);
+  //         })
+  //         .catch((err) => {
+  //           console.log('assassdsdas', token);
+  //         });
+  //     }
+  //   };
 
-    fechAuthSocial();
-  }, [dispatch, getToken]);
+  //   fechAuthSocial();
+  // }, [dispatch]);
   return (
     <div className="overflow-hidden w-full h-full">
       <Header />
-      <div className="max-lg:mt-[88px]">{children}</div>
+      <div className="max-lg:mt-[88px] max-lg:mb-[45px]">{children}</div>
       <Footer />
       <FooterPhone />
     </div>

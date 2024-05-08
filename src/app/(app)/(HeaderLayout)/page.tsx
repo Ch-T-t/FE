@@ -1,15 +1,21 @@
 'use client';
 import instanceAxios from '@/api/instanceAxios';
+import Introduce from '@/components/Introduce';
 import CardItem from '@/components/common/CardItem';
 import InputCustom from '@/components/common/InputCustom';
 import InputTest from '@/components/common/InputTest';
 import categoryList from '@/services/categoryList';
-import { IProduct } from '@/types/Job';
+import { IPost, IProduct, ISlide } from '@/types/Job';
 import {
   BellFilled,
   CaretLeftOutlined,
   CaretRightOutlined,
+  CheckOutlined,
+  DingdingOutlined,
   HeartFilled,
+  HeatMapOutlined,
+  PlayCircleOutlined,
+  PlusCircleOutlined,
 } from '@ant-design/icons';
 import { UserButton } from '@clerk/nextjs';
 import { Badge, Button, Carousel, Flex, Form, Image, Input } from 'antd';
@@ -19,7 +25,9 @@ import React, { useEffect, useRef, useState } from 'react';
 
 export default function HomePage() {
   const ref = useRef<HTMLDivElement>(null);
-  const [productList, setProducList] = useState<IProduct[]>([]);
+  const [productList, setProducList] = useState<IPost[]>([]);
+  const [slideList, setSlideList] = useState<ISlide[]>([]);
+
   const router = useRouter();
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
@@ -31,18 +39,23 @@ export default function HomePage() {
     lineHeight: '160px',
     textAlign: 'center',
     background: '#364d79',
+    height: '300px',
   };
 
   useEffect(() => {
-    const fetchProducHome = async () => {
-      await instanceAxios
-        .get(`list_home/`)
-        .then((res) => {
-          setProducList(res.data.data);
-        })
-        .catch((err) => console.log(err));
-    };
-    fetchProducHome();
+    instanceAxios
+      .get(`/api/products`)
+      .then((res) => {
+        setProducList((res.data as IPost[]) || []);
+      })
+      .catch((err) => console.log(err));
+
+    instanceAxios
+      .get(`/api/slide`)
+      .then((res) => {
+        setSlideList((res.data as ISlide[]) || []);
+      })
+      .catch((err) => {});
   }, []);
 
   return (
@@ -52,18 +65,13 @@ export default function HomePage() {
           className="rounded-lg max-lg:rounded-none overflow-hidden"
           autoplay
         >
-          <div className="max-lg:h-[100px]">
-            <h3 style={contentStyle}>1</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>2</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>3</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>4</h3>
-          </div>
+          {slideList.map((item, index) => (
+            <div key={index} className="max-lg:h-[100px] ">
+              <div style={contentStyle}>
+                <Image alt="" preview={false} src={item.banner} />
+              </div>
+            </div>
+          ))}
         </Carousel>
         <Flex
           justify="space-between"
@@ -77,7 +85,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1]"
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <PlayCircleOutlined className="!text-white text-[20px] p-[15px] bg-[#cfd145] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Liên hệ quảng cáo
             </p>
@@ -101,7 +109,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <CheckOutlined className="!text-white text-[20px] p-[15px] bg-[#4a90e2] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Danh mục theo dõi
             </p>
@@ -113,7 +121,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <PlusCircleOutlined className="!text-white text-[20px] p-[15px] bg-[#3db53b] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Tạo cửa hàng / Chuyên trang
             </p>
@@ -125,7 +133,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <HeatMapOutlined className="!text-white text-[20px] p-[15px] bg-[#3f87d9] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Thêm vào chợ tốt Map
             </p>
@@ -137,7 +145,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <DingdingOutlined className="!text-white text-[20px] p-[15px] bg-[#c34040] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Đăng tin cho tặng
             </p>
@@ -145,7 +153,7 @@ export default function HomePage() {
         </Flex>
       </div>
 
-      <div className="p-[10px]  relative rounded-lg bg-white">
+      <div className="p-[10px] relative rounded-lg bg-white">
         <p className="uppercase font-semibold py-[20px] p-[10px] text-[20px] max-lg:text-[14px]">
           Khám phá danh mục
         </p>
@@ -189,8 +197,9 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
       <div className="max-lg:bg-white">
-        <div className="rounded-lg bg-white max-lg:text-[14px] max-lg:border-none max-lg:shadow-none font-semibold uppercase text-[20px] px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
+        <div className="rounded-lg bg-white max-lg:text-[14px] max-lg:border-none max-lg:shadow-none font-semibold uppercase text-[16px] px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
           Tin đăng mới
         </div>
         <div className="flex flex-wrap justify-center gap-[9.5px] max-lg:gap-1 mt-[20px] max-lg:mt-[10px] max-lg:grid max-lg:gap-y-5 max-lg:grid-cols-2">
@@ -201,7 +210,7 @@ export default function HomePage() {
               key={index}
             />
           ))}
-          {[...Array(3)].map((_, index) => (
+          {/* {[...Array(3)].map((_, index) => (
             <CardItem
               data={{
                 id: index,
@@ -209,8 +218,11 @@ export default function HomePage() {
               ribbon={index % 2 == 0 ? 'Việc 24h' : ''}
               key={index}
             />
-          ))}
+          ))} */}
         </div>
+      </div>
+      <div className="bg-white p-[10px] rounded-md">
+        <Introduce />
       </div>
     </div>
   );

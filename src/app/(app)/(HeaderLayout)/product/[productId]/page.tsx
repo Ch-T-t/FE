@@ -5,7 +5,7 @@ import CardItem from '@/components/common/CardItem';
 import { textCensorship, textDefault } from '@/services/dataDefault';
 import getPrefixUrl from '@/services/getPrefixUrl';
 import renderTagItem from '@/services/renderTagItem';
-import { IProduct } from '@/types/Job';
+import { IPost, IProduct } from '@/types/Job';
 import {
   CaretLeftOutlined,
   CaretRightOutlined,
@@ -33,7 +33,7 @@ export default function ProductInfoPage({
   const ref = useRef<HTMLDivElement>(null);
   const [loadingPage, setLoadingPage] = useState(true);
   const currentUser = useAppSelector((state) => state.user.data);
-  const [productData, setProductData] = useState<IProduct>();
+  const [productData, setProductData] = useState<IPost>();
   const router = useRouter();
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
@@ -43,13 +43,9 @@ export default function ProductInfoPage({
   useEffect(() => {
     const fetchProductData = async () => {
       await instanceAxios
-        .get(
-          `/${getPrefixUrl(params.category as string)}/items/${
-            params.productId
-          }/`
-        )
+        .get(`/api/products/${params.productId}`)
         .then((res) => {
-          setProductData(res.data.data);
+          setProductData(res.data);
         })
         .catch((err) => {})
         .finally(() => setLoadingPage(false));
@@ -58,7 +54,7 @@ export default function ProductInfoPage({
   }, [params.category, params.productId]);
   const fetchFolow = async () => {
     await instanceAxios
-      .post(`follow/followers/`, { watching: productData?.User?.id })
+      .post(`follow/followers/`, { watching: productData?.id })
       .then((res) => {
         message.success('Đã theo dõi');
       })
@@ -68,7 +64,7 @@ export default function ProductInfoPage({
   };
   const handleStartChat = () => {
     localStorage.setItem('productChatId', (productData?.id || 0).toString());
-    localStorage.setItem('productChatKey', productData?.Url || '');
+    // localStorage.setItem('productChatKey', productData?.Url || '');
     router.push(`/chat`);
   };
   return (
@@ -82,7 +78,7 @@ export default function ProductInfoPage({
                 height={300}
                 className="object-cover "
                 preview={false}
-                src={''}
+                src={productData?.banner}
                 alt=""
               />
               <div className="w-full overflow-x-auto">
@@ -102,10 +98,10 @@ export default function ProductInfoPage({
               </div>
             </div>
             <div className="p-[10px] rounded-lg bg-white">
-              <p className="font-semibold">{productData?.Title}</p>
+              <p className="font-semibold text-[16px]">{productData?.name}</p>
               <div className="flex justify-between">
                 <b className="text-[#d0021b]">
-                  ${productData?.Price?.toLocaleString() || 0}
+                  ${productData?.info?.price?.toLocaleString() || 0}
                 </b>
                 <div className="flex gap-x-5">
                   <Space>
@@ -119,34 +115,36 @@ export default function ProductInfoPage({
                 </div>
               </div>
               <div className="py-[10px]">
-                <Space className="text-[#777777] max-lg:text-[14px]">
+                <Space className="text-[#777777] ">
                   <ShareAltOutlined />
-                  <p className="truncate w-[500px]">
-                    {productData?.Map || textDefault}
+                  <p className="truncate w-[500px] text-[14px]">
+                    {productData?.info?.address || textDefault}
                   </p>
                 </Space>
                 <Space className="text-[#777777] ">
                   <ShareAltOutlined />
-                  <p className="truncate w-[500px] max-lg:text-[14px]">
-                    {moment(productData?.Creation_time).format('DD/MM/YYYY') ||
+                  <p className="truncate w-[500px] text-[14px]">
+                    {moment(productData?.created_at).format('DD/MM/YYYY') ||
                       textDefault}
                   </p>
                 </Space>
-                <Space className="text-[#777777] max-lg:text-[14px]">
+                <Space className="text-[#777777] ">
                   <ShareAltOutlined />
-                  <p className="truncate w-[500px]">{textCensorship}</p>
+                  <p className="truncate w-[500px] text-[14px]">
+                    {textCensorship}
+                  </p>
                 </Space>
               </div>
             </div>
             <div className="p-[10px] rounded-lg bg-white">
               <p className="font-semibold">Mô tả chi tiết</p>
-              <div className="py-[10px] max-lg:text-[14px]">
-                {productData?.Detailed_description || textDefault}
+              <div className="py-[10px] text-[14px]">
+                {productData?.description || textDefault}
               </div>
             </div>
             <div className="p-[10px] rounded-lg bg-white">
               <p className="font-semibold">Đặc điểm công việc</p>
-              <div className="grid grid-cols-2 gap-y-2 py-[10px]">
+              <div className="grid grid-cols-2 gap-2 py-[10px]">
                 {renderTagItem(productData || {}).map((item, index) => item)}
               </div>
             </div>
@@ -179,7 +177,7 @@ export default function ProductInfoPage({
                   Đang theo dõi
                 </button>
                 <button className="flex flex-1 items-center justify-center rounded-md hover:bg-[#fe9900] hover:text-white border-2 border-[#fe9900] text-[#fe9900]">
-                  <Link href={`/user/${productData?.User?.id}`}>
+                  <Link href={`/user/${productData?.user}`}>
                     {`Trang cá nhân >`}
                   </Link>
                 </button>
@@ -199,15 +197,13 @@ export default function ProductInfoPage({
                   ))}
                 </div>
               </div>
-              {currentUser?.id === productData?.User?.id ? (
+              {currentUser?.id === productData?.user ? (
                 <>
                   <div className="flex items-center mt-[20px] gap-3 rounded-lg px-[10px] py-[5px] text-white justify-center bg-[#48862d]">
                     <EyeOutlined />
                     <b className="uppercase">Đã bán/ẩn tin</b>
                   </div>
-                  <Link
-                    href={`/edit-post/${params.category}/${params.productId}`}
-                  >
+                  <Link href={`/edit-post/${params.productId}`}>
                     <div className="flex items-center mt-[20px] gap-3 rounded-lg px-[10px] py-[5px] text-white justify-center bg-[#48862d]">
                       <EditOutlined />
                       <b className="uppercase">Sửa tin</b>
@@ -231,7 +227,7 @@ export default function ProductInfoPage({
           </div>
         </div>
         <div className="relative max-lg:bg-white max-lg:mt-[10px]">
-          <div className="flex justify-between rounded-lg my-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
+          <div className="flex justify-between rounded-lg mt-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
             <p>Tin tương tự</p>
             <Space className="text-blue-800 text-[12px]">Xem tất cả</Space>
           </div>

@@ -7,7 +7,7 @@ import TextAreaCustom from '../TextAreaCustom';
 
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import selectData from '@/services/selectData';
-import { IGoodHousePost } from '@/types/Job';
+import { IGoodHousePost, IPost } from '@/types/Job';
 import HorizontalSelect from '../HorizontalSelect';
 
 interface Props {
@@ -21,72 +21,164 @@ export default function CreatePostMotelRoomForm(props: Props) {
   return (
     <Flex vertical gap={20}>
       <p className={titleClassName}>Địa chỉ</p>
-      <ModalLocationSelectCustom
-        // onChange={(location, address) => {
-        //   setLocationId((location as number) || 0);
-        //   setAddressId((address as number) || 0);
-        // }}
-        label={'Địa chỉ'}
-      />
+      <Form.Item<IPost>
+        name={['info', 'address']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <ModalLocationSelectCustom
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                address: String(e),
+              },
+            })
+          }
+          label={'Địa chỉ'}
+        />
+      </Form.Item>
       <p className={titleClassName}>Diện tích & Giá</p>
-      <Flex gap={10}>
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.acreage}
-          // onChange={(e) => setAcreage(e || '')}
-          label={'Diện tích'}
-        />
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.price}
-          type="number"
-          // onChange={(e) => setPriceValue(e || '')}
-          label={'Giá'}
-        />
-      </Flex>
+      <div className="grid grid-cols-2 gap-3">
+        <Form.Item<IPost>
+          name={['info', 'acreage']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.info?.acreage}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  acreage: String(e),
+                },
+              })
+            }
+            label={'Diện tích'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['info', 'price']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.info?.price}
+            type="number"
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  price: String(e),
+                },
+              })
+            }
+            label={'Giá'}
+          />
+        </Form.Item>
+      </div>
       <p className={titleClassName}>Thông tin khác</p>
-      <Flex gap={10}>
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.depositAmount}
-          // onChange={(e) => setDepositAmount(e || '')}
-          label={'Số tiền cọc'}
-        />
-        <SelectCustom
-          defaultValue={currentForm.currentData?.infor?.usage_status}
-          // onChange={(e) => setInteriorCondition(e || '')}
-          label={'Tình trạng nội thất'}
-          data={selectData.goodHouseUsageStatus}
-        />
-      </Flex>
+      <div className="grid grid-cols-2 gap-3">
+        <Form.Item<IPost>
+          name={['info', 'depositAmount']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.info?.depositAmount}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  depositAmount: String(e),
+                },
+              })
+            }
+            label={'Số tiền cọc'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['info', 'usage_status']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            defaultValue={currentForm.currentData?.info?.usage_status}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  usage_status: String(e),
+                },
+              })
+            }
+            label={'Tình trạng nội thất'}
+            data={selectData.goodHouseUsageStatus}
+          />
+        </Form.Item>
+      </div>
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
-      <Form.Item
-        name={'title'}
+      <Form.Item<IPost>
+        name={'name'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
-          defaultValue={currentForm.currentData?.infor?.title}
-          // onChange={(e) => setTitle(e || '')}
+          defaultValue={currentForm.currentData?.info?.title}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                title: String(e),
+              },
+            })
+          }
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
-      <Form.Item
+      <Form.Item<IPost>
         name={'description'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <TextAreaCustom
           defaultValue={currentForm.currentData?.description}
-          // onChange={(e) => setDetailedDescription(e as string)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                detailed_description: String(e),
+              },
+              description: String(e),
+            })
+          }
           label="Mô tả chi tiết"
         />
       </Form.Item>
       <p className={titleClassName}>Thông tin người đăng</p>
-      <HorizontalSelect
-        defaultValue={currentForm.currentData?.infor?.seller_information}
-        label="Thông tin người bán"
-        // onChange={(e) => setSellerInformation(e as number)}
-        data={[
-          { id: 1, name: 'Cá nhân' },
-          { id: 2, name: 'Môi giới' },
-        ]}
-      />
+      <Form.Item<IPost>
+        name={['info', 'seller_information']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <HorizontalSelect
+          defaultValue={currentForm.currentData?.info?.seller_information}
+          label="Thông tin người bán"
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                seller_information: String(e),
+              },
+            })
+          }
+          data={[
+            { id: 1, name: 'Cá nhân' },
+            { id: 2, name: 'Môi giới' },
+          ]}
+        />
+      </Form.Item>
     </Flex>
   );
 }

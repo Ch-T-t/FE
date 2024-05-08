@@ -17,7 +17,7 @@ import {
   useUser,
 } from '@clerk/nextjs';
 
-import { Button, Form, Image, Input, message, notification } from 'antd';
+import { Button, Flex, Form, Image, Input, message, notification } from 'antd';
 import { setCookie } from 'cookies-next';
 import {
   signInWithPopup,
@@ -98,7 +98,10 @@ export default function AuthPage() {
             route.push('/');
           })
           .catch((err) => {
-            notification.error({ message: 'Đăng nhập thất bại!' });
+            notification.error({
+              message: 'Đăng nhập thất bại!',
+              description: 'Email đã được sử dụng!',
+            });
           });
       })
       .catch((error) => {
@@ -143,6 +146,7 @@ export default function AuthPage() {
   };
   const onRegister = async (e: IUserRegister) => {
     setAuthLoading(true);
+    console.log(e);
     await instanceAxios
       .post('/api/user/register/', e)
       .then((res) => {
@@ -241,17 +245,17 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="w-full h-[900px] bg-cover bg-no-repeat bg-[url('https://static.chotot.com/storage/marketplace/login-background.webp')]">
-      <div className="w-1/3 m-auto p-[50px] rounded-lg shadow-xl max-lg:w-[80%] bg-white mt-[100px] cursor-pointer">
-        <div className="flex items-center justify-center">
+    <div className="w-full h-[900px] bg-cover bg-no-repeat max-lg:!bg-white bg-[url('https://static.chotot.com/storage/marketplace/login-background.webp')]">
+      <div className="w-1/3 max-lg:w-full m-auto p-[50px] max-lg:p-[10px] rounded-lg shadow-xl bg-white mt-[100px] max-lg:m-0 cursor-pointer max-lg:shadow-none">
+        <div className="flex items-center max-lg:items-start max-lg:justify-start justify-center">
           <Image
-            className="m-auto"
+            className="m-auto max-lg:!w-[120px]"
             preview={false}
             src="https://static.chotot.com/storage/marketplace/logo.png"
             alt="Chotot Logo"
           />
         </div>
-        <p className="py-[20px] text-center text-[30px] font-semibold">
+        <p className="py-[20px] text-center max-lg:text-left text-[30px] max-lg:text-[20px] max-lg:font-bold font-semibold">
           {currentForm === 'LOGIN' ? 'Đăng nhập' : 'Đăng kí'}
         </p>
         <SignIn />
@@ -342,10 +346,10 @@ export default function AuthPage() {
             </>
           )}
           <p
-            className="py-[10px] text-blue-700 text-[12px]"
+            className="py-[10px] text-blue-700 text-[14px]"
             onClick={() => setCurrentForm('FORGET')}
           >
-            Quên mật khẩu
+            Quên mật khẩu ?
           </p>
           <Form.Item>
             <Button
@@ -353,7 +357,7 @@ export default function AuthPage() {
               //   style={{ backgroundColor: '#ffb057' }}
               htmlType="submit"
             >
-              ĐĂNG NHẬP
+              XÁC NHẬN
             </Button>
           </Form.Item>
         </Form>
@@ -391,6 +395,11 @@ export default function AuthPage() {
           }`}</b>
         </p>
       </div>
+      <Flex className="text-[10px] mt-[10px]" gap={10} justify="center">
+        <p>Quy chế hoạt động sàn</p>
+        <li>Chính sách bảo mật</li>
+        <li>Liên hệ hỗ trợ</li>
+      </Flex>
     </div>
   );
 }

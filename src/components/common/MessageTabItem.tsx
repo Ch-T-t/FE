@@ -1,9 +1,9 @@
 import { Avatar, Badge, Flex } from 'antd';
 import React from 'react';
 
-export default function MessageTabItem() {
+export default function MessageTabItem({ onClick }: { onClick?: () => void }) {
   return (
-    <div>
+    <div onClick={() => onClick?.()}>
       <Flex
         className="p-[10px] hover:bg-[#fff0d9]"
         justify="space-between"
@@ -29,8 +29,11 @@ export default function MessageTabItem() {
                 Xe này còn
                 khôngqweeeeeeeasddddddddddddddddddddddddddddddddddddddddddddddddd
               </p>
-              <p>12 giờ truóc</p>
+              <p className="max-lg:hidden">12 giờ truóc</p>
             </Flex>
+            <p className="hidden max-lg:block text-[10px] w-full text-[#b4b4b4]">
+              12 giờ truóc
+            </p>
           </Flex>
         </Flex>
         <div>

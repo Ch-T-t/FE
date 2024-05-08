@@ -7,7 +7,7 @@ import TextAreaCustom from '../TextAreaCustom';
 
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import selectData from '@/services/selectData';
-import { IElectroDevice } from '@/types/Job';
+import { IElectroDevice, IPost } from '@/types/Job';
 import HorizontalSelect from '../HorizontalSelect';
 
 interface Props {
@@ -21,126 +21,292 @@ export default function CreatePostLaptopForm(props: Props) {
   return (
     <Flex vertical gap={20}>
       <p className={titleClassName}>Thông tin chi tiết</p>
-      <Flex gap={10}>
-        <SelectCustom
-          data={selectData.laptopCompanyData}
-          defaultValue={currentForm.currentData?.infor?.company}
-          // onChange={(e) => setCompany(e || '')}
-          label={'Hãng'}
+      <div className="grid grid-cols-2 gap-3">
+        <Form.Item<IPost>
+          name={['info', 'company']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.laptopCompanyData}
+            defaultValue={currentForm.currentData?.info?.company}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  company: String(e),
+                },
+              })
+            }
+            label={'Hãng'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['info', 'guarantee']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.guaranteeData}
+            defaultValue={currentForm.currentData?.info?.guarantee}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  guarantee: String(e),
+                },
+              })
+            }
+            label={'Bảo hành'}
+          />
+        </Form.Item>
+      </div>
+      <Form.Item<IPost>
+        name={['info', 'usage_status']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <HorizontalSelect
+          defaultValue={currentForm.currentData?.info?.usage_status}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                usage_status: String(e),
+              },
+            })
+          }
+          data={selectData.usageStatusData}
+          required
+          label={'Tình trạng'}
         />
-        <SelectCustom
-          data={selectData.guaranteeData}
-          defaultValue={currentForm.currentData?.infor?.guarantee}
-          // onChange={(e) => setGuarantee(e || '')}
-          label={'Bảo hành'}
-        />
-      </Flex>
-      <HorizontalSelect
-        defaultValue={currentForm.currentData?.infor?.usage_status}
-        // onChange={(e) => setUsageStatus(e || '')}
-        data={selectData.usageStatusData}
-        required
-        label={'Tình trạng'}
-      />
+      </Form.Item>
 
-      <Flex gap={10}>
-        <SelectCustom
-          data={selectData.colorData}
-          defaultValue={currentForm.currentData?.infor?.color}
-          // onChange={(e) => setColor(e || '')}
-          label={'Màu sắc'}
-        />
-        <SelectCustom
-          data={selectData.laptopRamData}
-          defaultValue={currentForm.currentData?.infor?.ram}
-          // onChange={(e) => setRam(e || '')}
-          label={'RAM'}
-        />
-      </Flex>
-      <Flex gap={10}>
-        <SelectCustom
-          data={[]}
-          defaultValue={currentForm.currentData?.infor?.hardDrive}
-          // onChange={(e) => setHardDrive(e || '')}
-          label={'Ổ cứng'}
-        />
-        <SelectCustom
-          data={selectData.laptopCardData}
-          defaultValue={currentForm.currentData?.infor?.monitorCard}
-          // onChange={(e) => setMonitorCard(e || '')}
-          label={'Card màn hình'}
-        />
-      </Flex>
-      <Flex gap={10}>
-        <SelectCustom
-          data={selectData.laptopScreenSizeData}
-          defaultValue={currentForm.currentData?.infor?.screenSize}
-          // onChange={(e) => setScreenSize(e || '')}
-          label={'Kích cỡ màn hình'}
-        />
-        <SelectCustom
-          data={selectData.colorData}
-          defaultValue={currentForm.currentData?.infor?.color}
-          // onChange={(e) => setColor(e || '')}
-          label={'Màu sắc'}
-        />
-      </Flex>
+      <div className="grid grid-cols-2 gap-3">
+        <Form.Item<IPost>
+          name={['info', 'color']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.colorData}
+            defaultValue={currentForm.currentData?.info?.color}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  color: String(e),
+                },
+              })
+            }
+            label={'Màu sắc'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['info', 'ram']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.laptopRamData}
+            defaultValue={currentForm.currentData?.info?.ram}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  ram: String(e),
+                },
+              })
+            }
+            label={'RAM'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['info', 'hardDrive']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={[]}
+            defaultValue={currentForm.currentData?.info?.hardDrive}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  hardDrive: String(e),
+                },
+              })
+            }
+            label={'Ổ cứng'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['info', 'monitorCard']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.laptopCardData}
+            defaultValue={currentForm.currentData?.info?.monitorCard}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  monitorCard: String(e),
+                },
+              })
+            }
+            label={'Card màn hình'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['info', 'screenSize']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.laptopScreenSizeData}
+            defaultValue={currentForm.currentData?.info?.screenSize}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  screenSize: String(e),
+                },
+              })
+            }
+            label={'Kích cỡ màn hình'}
+          />
+        </Form.Item>
+        <Form.Item<IPost>
+          name={['info', 'color']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <SelectCustom
+            data={selectData.colorData}
+            defaultValue={currentForm.currentData?.info?.color}
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  color: String(e),
+                },
+              })
+            }
+            label={'Màu sắc'}
+          />
+        </Form.Item>
+      </div>
       <Space>
         {/* <Checkbox checked={checked} onChange={() => setChecked(!checked)} /> */}
         <p>Tôi muốn cho tặng miễn phí</p>
       </Space>
 
       {!checked && (
-        <InputCustom
-          defaultValue={currentForm.currentData?.infor?.price}
-          type="number"
-          // onChange={(e) => setPrice(e || '')}
-          label={'Giá'}
-        />
+        <Form.Item<IPost>
+          name={['info', 'price']}
+          rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+        >
+          <InputCustom
+            defaultValue={currentForm.currentData?.info?.price}
+            type="number"
+            onChange={(e) =>
+              currentForm.setCurrentData?.({
+                ...currentForm?.currentData,
+                info: {
+                  ...currentForm.currentData?.info,
+                  price: String(e),
+                },
+              })
+            }
+            label={'Giá'}
+          />
+        </Form.Item>
       )}
 
       <p className={titleClassName}>Tiêu đề và mô tả chi tiết</p>
-      <Form.Item
-        name={'title'}
+      <Form.Item<IPost>
+        name={'name'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
-          defaultValue={currentForm.currentData?.infor?.title}
-          // onChange={(e) => setTitle(e || '')}
+          defaultValue={currentForm.currentData?.info?.title}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                title: String(e),
+              },
+              name: String(e),
+            })
+          }
           label={'Tiêu đề tin đăng'}
         />
       </Form.Item>
-      <Form.Item
+      <Form.Item<IPost>
         name={'description'}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <TextAreaCustom
           defaultValue={currentForm.currentData?.description}
-          // onChange={(e) => setDetailedDescription(e as string)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                detailed_description: String(e),
+              },
+              description: String(e),
+            })
+          }
           label="Mô tả chi tiết"
         />
       </Form.Item>
       <p className={titleClassName}>Thông tin người bán</p>
-      <Form.Item
-        name={'sellerInformation'}
+      <Form.Item<IPost>
+        name={['info', 'seller_information']}
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <HorizontalSelect
-          defaultValue={currentForm.currentData?.infor?.seller_information}
+          defaultValue={currentForm.currentData?.info?.seller_information}
           label="Bạn là"
-          // onChange={(e) => setSellerInformation(e as number)}
+          onChange={(e) =>
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                seller_information: String(e),
+              },
+            })
+          }
           data={selectData.sellerInformationData}
         />
       </Form.Item>
-      <ModalLocationSelectCustom
-        // defaultValue={defaultLabel}
-        // onChangeLabel={(e) => setDefaultLabel(e || '')}
-        // onChange={(location, address) => {
-        //   setLocationId((location as number) || 0);
-        //   setAddressId((address as number) || 0);
-        // }}
-        label={'Địa chỉ'}
-      />
+      <Form.Item<IPost>
+        name={['info', 'address']}
+        rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
+      >
+        <ModalLocationSelectCustom
+          // defaultValue={defaultLabel}
+          // onChangeLabel={(e) => setDefaultLabel(e || '')}
+          // onChange={(location, address) => {
+          //   setLocationId((location as number) || 0);
+          //   setAddressId((address as number) || 0);
+          // }}
+          onChange={(e) => {
+            currentForm.setCurrentData?.({
+              ...currentForm?.currentData,
+              info: {
+                ...currentForm.currentData?.info,
+                address: String(e),
+              },
+            });
+          }}
+          label={'Địa chỉ'}
+        />
+      </Form.Item>
     </Flex>
   );
 }

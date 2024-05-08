@@ -1,5 +1,5 @@
 import { ShareAltOutlined } from '@ant-design/icons';
-import { Space, Tooltip } from 'antd';
+import { Flex, Space, Tooltip } from 'antd';
 import React, { ReactNode } from 'react';
 interface Props {
   icon: ReactNode;
@@ -8,12 +8,10 @@ interface Props {
 export default function TagItem(props: Props) {
   return (
     <div>
-      <Space className="w-1/2" key={'as'}>
+      <Flex className="w-full" gap={10} key={'as'}>
         {props.icon}
-        <Tooltip>
-          <p className="truncate w-[300px]">{props.title}</p>
-        </Tooltip>
-      </Space>
+        <p className="truncate text-[13px]">{props.title}</p>
+      </Flex>
     </div>
   );
 }

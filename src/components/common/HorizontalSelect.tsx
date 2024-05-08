@@ -19,7 +19,7 @@ export default function HorizontalSelect(props: Props) {
       <Space
         className={`w-full text-[#9b9b9b] py-[5px] transition-all !text-[12px] font-medium`}
       >
-        {props.label}{' '}
+        {props.label}
         {props.required && <span className="text-red-500">*</span>}
       </Space>
       <Flex className="text-[14px] cursor-pointer" wrap="wrap" gap={10}>

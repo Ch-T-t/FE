@@ -212,7 +212,11 @@ export default function Header() {
                   align="center"
                 >
                   <UserOutlined className="text-[20px]" />
-                  <p className="max-lg:hidden">Đăng nhập</p>
+                  <p className="max-lg:hidden">
+                    {user.logged
+                      ? user.data.fullname || `Tên chưa cung cấp`
+                      : `Đăng nhập`}
+                  </p>
                 </Flex>
                 {openMenu && (
                   <Flex
@@ -227,7 +231,9 @@ export default function Header() {
                     >
                       <Avatar size={50} />
                       <p className=" uppercase font-semibold">
-                        Đăng nhập / Đăng kí
+                        {user.logged
+                          ? user.data.fullname || `Tên chưa cung cấp`
+                          : ` Đăng nhập / Đăng kí`}
                       </p>
                     </Flex>
                     <Flex vertical>

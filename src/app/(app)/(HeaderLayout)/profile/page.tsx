@@ -38,8 +38,12 @@ export default function ProfilePage() {
       <Flex gap={15} align="center" className=" text-[14px] p-[10px]">
         <Avatar size={50} />
         <Flex vertical>
-          <p className=" uppercase font-semibold">Tên chưa cung cấp</p>
-          <Space>
+          <p className="font-semibold">
+            {user.logged
+              ? user.data.fullname || `Tên chưa cung cấp`
+              : `Đăng nhập`}
+          </p>
+          <Space className="border-b">
             <p>0.0</p>
             <Rate className="!text-[12px]" />
             <p className="text-[12px]">Chưa có đánh giá</p>
@@ -121,16 +125,14 @@ export default function ProfilePage() {
           Trợ giúp
         </Space>
 
-        {sessionId || user.logged ? (
-          <SignOutButton signOutCallback={handleLogout}>
-            <Space
-              //   onClick={handleLogout}
-              className="font-medium p-[10px] hover:bg-[#e1e1e1]"
-            >
-              <LogoutOutlined className="!text-white p-[5px] bg-[#9b9b9b] rounded-full" />
-              Đăng xuất
-            </Space>
-          </SignOutButton>
+        {user.logged ? (
+          <Space
+            onClick={handleLogout}
+            className="font-medium p-[10px] hover:bg-[#e1e1e1]"
+          >
+            <LogoutOutlined className="!text-white p-[5px] bg-[#9b9b9b] rounded-full" />
+            Đăng xuất
+          </Space>
         ) : (
           <Space
             className="font-medium p-[10px] hover:bg-[#e1e1e1]"
@@ -144,8 +146,6 @@ export default function ProfilePage() {
             Đăng nhập
           </Space>
         )}
-
-        {/* {!sessionId || !user.logged ? 'Đăng xuất' : 'Đăng nhập'} */}
       </Flex>
     </Flex>
   );

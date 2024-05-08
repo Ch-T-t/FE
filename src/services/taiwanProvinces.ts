@@ -1,14 +1,91 @@
 const taiwanProvinces = [
-  { name_vn: 'Đài Bắc', name_en: 'Taipei', ma: 'TP1' },
-  { name_vn: 'Tây Bắc', name_en: 'Taoyuan', ma: 'TP2' },
-  { name_vn: 'Đài Trung', name_en: 'Taichung', ma: 'TP3' },
-  { name_vn: 'Nam Đài', name_en: 'Tainan', ma: 'TP4' },
-  { name_vn: 'Đài Bắc', name_en: 'Taipei', ma: 'TP5' },
-  { name_vn: 'Tây Bắc', name_en: 'Taoyuan', ma: 'TP6' },
-  { name_vn: 'Đài Trung', name_en: 'Taichung', ma: 'TP7' },
-  { name_vn: 'Nam Đài', name_en: 'Tainan', ma: 'TP8' },
-  { name_vn: 'Đài Bắc', name_en: 'Taipei', ma: 'TP9' },
-  { name_vn: 'Tây Bắc', name_en: 'Taoyuan', ma: 'TP10' },
-  { name_vn: 'Đài Trung', name_en: 'Taichung', ma: 'TP11' },
-  { name_vn: 'Nam Đài', name_en: 'Tainan', ma: 'TP12' },
+  {
+    name: 'Đài Bắc',
+    type: 'Tỉnh',
+    population: 7879266,
+    cities: [
+      {
+        name: 'Đài Bắc',
+        type: 'Thành phố',
+        population: 2775240,
+      },
+      {
+        name: 'Xinbei',
+        type: 'Thành phố',
+        population: 3966785,
+      },
+      {
+        name: 'Taoyuan',
+        type: 'Thành phố',
+        population: 2167241,
+      },
+    ],
+  },
+  {
+    name: 'Đài Trung',
+    type: 'Tỉnh',
+    population: 3015473,
+    cities: [
+      {
+        name: 'Đài Trung',
+        type: 'Thành phố',
+        population: 2102401,
+      },
+      {
+        name: 'Zhanghua',
+        type: 'Thành phố',
+        population: 403728,
+      },
+      {
+        name: 'Nantou',
+        type: 'Thành phố',
+        population: 518344,
+      },
+    ],
+  },
+  {
+    name: 'Đài Nam',
+    type: 'Tỉnh',
+    population: 4664258,
+    cities: [
+      {
+        name: 'Đài Nam',
+        type: 'Thành phố',
+        population: 1538473,
+      },
+      {
+        name: 'Kaohsiung',
+        type: 'Thành phố',
+        population: 2777290,
+      },
+      {
+        name: 'Tainan',
+        type: 'Thành phố',
+        population: 1885495,
+      },
+    ],
+  },
+  {
+    name: 'Đài Đông',
+    type: 'Tỉnh',
+    population: 1254227,
+    cities: [
+      {
+        name: 'Đài Đông',
+        type: 'Thành phố',
+        population: 1043163,
+      },
+      {
+        name: 'Hualien',
+        type: 'Thành phố',
+        population: 106368,
+      },
+      {
+        name: 'Taitung',
+        type: 'Thành phố',
+        population: 107315,
+      },
+    ],
+  },
 ];
+export default taiwanProvinces;
