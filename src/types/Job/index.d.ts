@@ -71,6 +71,14 @@ interface IAddress {
   Location: ILocation;
 }
 
+interface ISlide {
+  id?: string;
+  banner?: string;
+  created_at?: string;
+  updated_at?: string;
+  status?: boolean;
+}
+
 interface IPost {
   id?: string;
   name?: string;

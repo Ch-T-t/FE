@@ -5,7 +5,7 @@ import CardItem from '@/components/common/CardItem';
 import InputCustom from '@/components/common/InputCustom';
 import InputTest from '@/components/common/InputTest';
 import categoryList from '@/services/categoryList';
-import { IPost, IProduct } from '@/types/Job';
+import { IPost, IProduct, ISlide } from '@/types/Job';
 import {
   BellFilled,
   CaretLeftOutlined,
@@ -26,6 +26,8 @@ import React, { useEffect, useRef, useState } from 'react';
 export default function HomePage() {
   const ref = useRef<HTMLDivElement>(null);
   const [productList, setProducList] = useState<IPost[]>([]);
+  const [slideList, setSlideList] = useState<ISlide[]>([]);
+
   const router = useRouter();
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
@@ -41,15 +43,19 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    const fetchProducHome = async () => {
-      await instanceAxios
-        .get(`/api/products`)
-        .then((res) => {
-          setProducList(res.data || []);
-        })
-        .catch((err) => console.log(err));
-    };
-    fetchProducHome();
+    instanceAxios
+      .get(`/api/products`)
+      .then((res) => {
+        setProducList((res.data as IPost[]) || []);
+      })
+      .catch((err) => console.log(err));
+
+    instanceAxios
+      .get(`/api/slide`)
+      .then((res) => {
+        setSlideList((res.data as ISlide[]) || []);
+      })
+      .catch((err) => {});
   }, []);
 
   return (
@@ -59,18 +65,13 @@ export default function HomePage() {
           className="rounded-lg max-lg:rounded-none overflow-hidden"
           autoplay
         >
-          <div className="max-lg:h-[100px] ">
-            <h3 style={contentStyle}>1</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>2</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>3</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>4</h3>
-          </div>
+          {slideList.map((item, index) => (
+            <div key={index} className="max-lg:h-[100px] ">
+              <div style={contentStyle}>
+                <Image alt="" preview={false} src={item.banner} />
+              </div>
+            </div>
+          ))}
         </Carousel>
         <Flex
           justify="space-between"
