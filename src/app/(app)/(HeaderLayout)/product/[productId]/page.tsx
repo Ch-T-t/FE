@@ -203,9 +203,7 @@ export default function ProductInfoPage({
                     <EyeOutlined />
                     <b className="uppercase">Đã bán/ẩn tin</b>
                   </div>
-                  <Link
-                    href={`/edit-post/${params.category}/${params.productId}`}
-                  >
+                  <Link href={`/edit-post/${params.productId}`}>
                     <div className="flex items-center mt-[20px] gap-3 rounded-lg px-[10px] py-[5px] text-white justify-center bg-[#48862d]">
                       <EditOutlined />
                       <b className="uppercase">Sửa tin</b>
@@ -229,7 +227,7 @@ export default function ProductInfoPage({
           </div>
         </div>
         <div className="relative max-lg:bg-white max-lg:mt-[10px]">
-          <div className="flex justify-between rounded-lg my-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
+          <div className="flex justify-between rounded-lg mt-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
             <p>Tin tương tự</p>
             <Space className="text-blue-800 text-[12px]">Xem tất cả</Space>
           </div>

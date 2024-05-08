@@ -126,9 +126,9 @@ export default function ModalLocationSelectCustom(props: Props) {
                       <Flex
                         key={index}
                         onClick={() => {
+                          setValue(citie.name);
                           setShowModal(false);
                           handleChange(citie.name, citie.name);
-                          setValue(citie.name);
                           props.onChangeLabel?.(citie.name || '');
                         }}
                         justify="space-between"

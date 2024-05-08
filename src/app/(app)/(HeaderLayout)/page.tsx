@@ -10,7 +10,12 @@ import {
   BellFilled,
   CaretLeftOutlined,
   CaretRightOutlined,
+  CheckOutlined,
+  DingdingOutlined,
   HeartFilled,
+  HeatMapOutlined,
+  PlayCircleOutlined,
+  PlusCircleOutlined,
 } from '@ant-design/icons';
 import { UserButton } from '@clerk/nextjs';
 import { Badge, Button, Carousel, Flex, Form, Image, Input } from 'antd';
@@ -79,7 +84,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1]"
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <PlayCircleOutlined className="!text-white text-[20px] p-[15px] bg-[#cfd145] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Liên hệ quảng cáo
             </p>
@@ -103,7 +108,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <CheckOutlined className="!text-white text-[20px] p-[15px] bg-[#4a90e2] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Danh mục theo dõi
             </p>
@@ -115,7 +120,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <PlusCircleOutlined className="!text-white text-[20px] p-[15px] bg-[#3db53b] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Tạo cửa hàng / Chuyên trang
             </p>
@@ -127,7 +132,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <HeatMapOutlined className="!text-white text-[20px] p-[15px] bg-[#3f87d9] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Thêm vào chợ tốt Map
             </p>
@@ -139,7 +144,7 @@ export default function HomePage() {
             onClick={() => router.push('/save-post')}
             className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
           >
-            <BellFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
+            <DingdingOutlined className="!text-white text-[20px] p-[15px] bg-[#c34040] rounded-full max-lg:text-[16px]" />
             <p className="text-center text-[14px] max-lg:text-[8px]">
               Đăng tin cho tặng
             </p>
