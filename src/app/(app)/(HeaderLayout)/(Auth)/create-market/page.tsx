@@ -51,11 +51,17 @@ export default function CreateMarketPage() {
   return (
     <div className="w-full">
       <div className="w-full overflow-x-auto no-scrollbar px-[10px]">
-        <Flex className="my-[20px] w-fit" gap={10} justify="center">
+        <Flex
+          className="my-[20px] max-lg:w-fit max-lg:!gap-5"
+          gap={10}
+          justify="center"
+        >
           {lableStepList.map((item, index) => (
-            <Space
+            <Flex
+              align="center"
+              gap={5}
               onClick={() => finalStep && setCurrentStep(index)}
-              className="flex cursor-pointer"
+              className="cursor-pointer"
               key={index}
             >
               <div
@@ -72,7 +78,7 @@ export default function CreateMarketPage() {
               >
                 {item.lablel}
               </p>
-            </Space>
+            </Flex>
           ))}
         </Flex>
       </div>

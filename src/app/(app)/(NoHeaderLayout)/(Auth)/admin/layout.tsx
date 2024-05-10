@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { Button, Result } from 'antd';
 import { getCookie } from 'cookies-next';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 
 export default function AuthLayout({
   children,
@@ -10,7 +10,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   const [loadingPage, setLoadingPage] = useState(true);
-  // const logged = useAppSelector((state) => state.user.logged);
+  const user = useAppSelector((state) => state.user);
   const token = getCookie('access');
   useEffect(() => {
     setLoadingPage(false);
@@ -18,7 +18,7 @@ export default function AuthLayout({
   return (
     !loadingPage && (
       <>
-        {token ? (
+        {user.logged ? (
           children
         ) : (
           <Result

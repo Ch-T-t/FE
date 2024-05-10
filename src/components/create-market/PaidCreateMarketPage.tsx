@@ -1,14 +1,17 @@
-import { Button, Flex, Image } from 'antd';
+import { Button, Flex, Image, notification } from 'antd';
 import React, { useContext, useState } from 'react';
 import InputCustom from '../common/InputCustom';
 import { CloseOutlined } from '@ant-design/icons';
 import { CurrentShopDataContext } from '@/app/(app)/CurentFormContext';
 import { fetchCreateShop } from '@/api/allRequest';
+import instanceAxios from '@/api/instanceAxios';
+import { useAppSelector } from '@/app/hooks';
 interface Props {
   onFinish?: (e?: any) => void;
 }
 export default function PaidCreateMarketPage(props: Props) {
   const currentShopData = useContext(CurrentShopDataContext);
+  const currentUser = useAppSelector((state) => state.user);
   const [email, setEmail] = useState(currentShopData.currentData?.email);
 
   const labelClassName = 'font-semibold pt-[20px] text-[18px]';
@@ -18,16 +21,17 @@ export default function PaidCreateMarketPage(props: Props) {
       ...currentShopData.currentData,
       email,
     });
-    fetchCreateShop(
-      {
+    instanceAxios
+      .post(`/api/shop`, {
         ...currentShopData.currentData,
-        email,
-      } || {}
-    )
-      .then((res) => {
-        props.onFinish?.();
+        user: currentUser.data.id,
       })
-      .catch((err) => {});
+      .then((res) => {
+        notification.success({ message: 'Đã tạo cửa hàng' });
+      })
+      .catch((err) => {
+        notification.error({ message: 'Tạo cửa hàng thất bại!' });
+      });
   };
 
   return (
