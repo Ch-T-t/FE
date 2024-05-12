@@ -220,7 +220,7 @@ export default function TaxiPage() {
             <Flex wrap="wrap" gap={10}>
               {productList.map((item, index) => (
                 <CardItemHorizontalSavePost
-                  //   data={item as unknown as IProduct}
+                  //   data={item as unknown as IPost}
                   //   imageHeight={220}
                   //   imageWidth={225}
                   key={index}

@@ -43,6 +43,7 @@ export default function CreatePostPage() {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [videoFileList, setVideoFileList] = useState<UploadFile[]>([]);
   const [submittable, setSubmittable] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
   // Watch all values
@@ -134,11 +135,25 @@ export default function CreatePostPage() {
         },
       })
       .then((res) => {
-        message.success('Đã tạo bài đăng!');
-        currentForm.setCurrentData?.({});
-        currentForm.setCurrentForm?.('');
-        currentForm.setCurrentLabel?.('');
-        currentForm.setCurrentCategoryId?.('');
+        const formImageData = new FormData();
+        fileList.length > 0 &&
+          fileList.map((item, index) =>
+            formImageData.append('files', item.originFileObj as Blob)
+          );
+        instanceAxios
+          .post(`api/media/${res.data.id}/upload/`, formImageData)
+          .then((res) => {})
+          .catch((err) => {
+            message.error('Upload thất bại!');
+          })
+          .finally(() => {
+            message.success('Đã tạo bài đăng!');
+            setFileList([]);
+            currentForm.setCurrentData?.({});
+            currentForm.setCurrentForm?.('');
+            currentForm.setCurrentLabel?.('');
+            currentForm.setCurrentCategoryId?.('');
+          });
       })
       .catch((err) => console.log(e));
   };

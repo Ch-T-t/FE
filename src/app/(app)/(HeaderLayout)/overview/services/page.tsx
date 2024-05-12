@@ -9,7 +9,13 @@ import CardItem from '@/components/common/CardItem';
 import ModalCategorySelectFilterCustom from '@/components/common/ModalCategorySelectFilterCustom';
 import ModalLocationSelectFilterCustom from '@/components/common/ModalLocationSelectFilterCustom';
 import ModalLocationSliderFilterCustom from '@/components/common/ModalLocationSliderFilterCustom';
-import { IGoodHousePost, IJob, ILocationResponse, IProduct } from '@/types/Job';
+import {
+  IGoodHousePost,
+  IJob,
+  ILocationResponse,
+  IPost,
+  IProduct,
+} from '@/types/Job';
 import {
   CaretDownOutlined,
   CaretLeftOutlined,
@@ -176,7 +182,7 @@ export default function ServicesPage() {
         <Flex wrap="wrap" gap={10}>
           {productList.map((item, index) => (
             <CardItem
-              data={item as unknown as IProduct}
+              data={item as unknown as IPost}
               imageHeight={220}
               imageWidth={225}
               key={index}

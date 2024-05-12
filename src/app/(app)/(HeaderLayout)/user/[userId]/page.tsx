@@ -2,7 +2,7 @@
 import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
 import { textDefault } from '@/services/dataDefault';
-import { IProduct } from '@/types/Job';
+import { IPost, IProduct } from '@/types/Job';
 import {
   ContactsOutlined,
   EllipsisOutlined,
@@ -32,7 +32,7 @@ export default function UserIdPage({
 }) {
   const [currentTab, setCurrentTab] = useState<'POST' | 'RATE'>('POST');
   const [userData, setUserData] = useState<IUser>();
-  const [productList, setProductList] = useState<IProduct[]>([]);
+  const [productList, setProductList] = useState<IPost[]>([]);
 
   useEffect(() => {
     const fechUserInfo = async () => {
