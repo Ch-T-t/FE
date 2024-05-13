@@ -20,9 +20,9 @@ export default function FooterPhone() {
     router.push(url);
     setOpenNotification(false);
   };
-  useOnClickOutside(notificationRef, () => {
-    setOpenNotification(false);
-  });
+  // useOnClickOutside(notificationRef, () => {
+  //   setOpenNotification(false);
+  // });
 
   return (
     <div className="w-full max-h-[calc(100%-88px)] fixed z-50 hidden max-lg:flex max-lg:flex-col max-lg:justify-end bg-transparent bottom-0 px-[10px] max-lg:p-0 py-[5px]">
@@ -63,7 +63,7 @@ export default function FooterPhone() {
         className="w-full relative bg-white pt-[5px] border-t"
       >
         <Flex
-          onClick={() => setOpenNotification(false)}
+          // onClick={() => setOpenNotification(false)}
           className="w-[40%]"
           justify="space-around"
         >
@@ -97,7 +97,9 @@ export default function FooterPhone() {
         <Flex className="w-[40%]" justify="space-around">
           {/* <Link className="text-[#9f9f9f]" href={'/'}> */}
           <Flex
-            onClick={() => setOpenNotification(!openNotification)}
+            onClick={() => {
+              setOpenNotification(!openNotification);
+            }}
             vertical
             justify="center"
             align="center"

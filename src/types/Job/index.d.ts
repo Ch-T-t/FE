@@ -22,6 +22,23 @@ interface ICategory {
   urlSub?: string;
   icon: ReactNode;
   form?: ReactNode;
+  id?: string;
+  name?: string;
+  type?: string;
+}
+interface IITemCategory {
+  key: string;
+  label: string;
+  children?: boolean;
+  img?: string;
+  url?: string;
+  urlSub?: string;
+  icon: ReactNode;
+  form?: ReactNode;
+  id?: string;
+  name?: string;
+  type?: string;
+  category?: string;
 }
 
 interface IShop {
@@ -87,14 +104,16 @@ interface IPost {
   updated_at?: string;
   quantity?: string;
   shop?: string;
-  user?: string;
+  user?: IUser;
   brand?: string;
-  item_category?: string;
+  item_category?: IITemCategory;
+  item_category_tmp?: string;
   images?: UploadFile[];
   banner?: string;
   bannerUpload?: UploadFile;
   video?: UploadFile;
-  category?: string;
+  category?: ICategory;
+  category_tmp?: string;
   status?: string;
   info?: {
     image?: IImage[];

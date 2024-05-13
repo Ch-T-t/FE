@@ -9,8 +9,10 @@ import { IPost, IProduct } from '@/types/Job';
 import {
   CaretLeftOutlined,
   CaretRightOutlined,
+  CheckCircleTwoTone,
   EditOutlined,
   EyeOutlined,
+  FieldTimeOutlined,
   HeartFilled,
   MailOutlined,
   MessageFilled,
@@ -122,14 +124,16 @@ export default function ProductInfoPage({
                   </p>
                 </Space>
                 <Space className="text-[#777777] ">
-                  <ShareAltOutlined />
+                  <FieldTimeOutlined />
                   <p className="truncate w-[500px] text-[14px]">
-                    {moment(productData?.created_at).format('DD/MM/YYYY') ||
-                      textDefault}
+                    {`Đăng ${
+                      moment(productData?.created_at).format('DD/MM/YYYY') ||
+                      textDefault
+                    }`}
                   </p>
                 </Space>
                 <Space className="text-[#777777] ">
-                  <ShareAltOutlined />
+                  <CheckCircleTwoTone />
                   <p className="truncate w-[500px] text-[14px]">
                     {textCensorship}
                   </p>
@@ -154,7 +158,7 @@ export default function ProductInfoPage({
               <div className="flex gap-x-3">
                 <Avatar size={50} src={''} />
                 <div className="flex flex-col gap-y-1">
-                  <b>Dương Lê Văn Anh</b>
+                  <b>{productData?.user?.fullname || textDefault}</b>
                   <Space className="text-[14px]">
                     <Rate
                       className={'!text-[14px]'}
@@ -177,7 +181,7 @@ export default function ProductInfoPage({
                   Đang theo dõi
                 </button>
                 <button className="flex flex-1 items-center justify-center rounded-md hover:bg-[#fe9900] hover:text-white border-2 border-[#fe9900] text-[#fe9900]">
-                  <Link href={`/user/${productData?.user}`}>
+                  <Link href={`/user/${productData?.user?.id}`}>
                     {`Trang cá nhân >`}
                   </Link>
                 </button>

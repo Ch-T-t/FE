@@ -87,6 +87,7 @@ export default function CreatePostPage() {
   const handleCancel = () => setPreviewOpen(false);
 
   const fetchCreate = (e: IPost) => {
+    setLoading(true);
     const formData = new FormData();
     // currentForm.currentData?.name &&
     //   formData.append('name', currentForm.currentData?.name as string);
@@ -111,23 +112,30 @@ export default function CreatePostPage() {
     //     formData.append(key, value.toString());
     //   }
     // }
-    formData.append('info', JSON.stringify(e.info));
+    formData.append('info', JSON.stringify(currentForm.currentData?.info));
     currentForm.currentData?.item_category &&
       formData.append(
         'item_category',
-        String(currentForm.currentData?.item_category)
+        String(currentForm.currentData?.item_category_tmp)
       );
     currentForm.currentData?.category &&
-      formData.append('category', String(currentForm.currentData?.category));
-    formData.append('name', String(e.name));
-    formData.append('description', String(e.description));
-    formData.append('quantity', String(e.quantity || 0));
-    currentForm.currentData?.shop && formData.append('shop', String(e.shop));
-    currentForm.currentData?.brand && formData.append('brand', String(e.brand));
+      formData.append(
+        'category',
+        String(currentForm.currentData?.category_tmp)
+      );
+    formData.append('name', String(currentForm.currentData?.name));
+    formData.append(
+      'description',
+      String(currentForm.currentData?.description)
+    );
+    formData.append('quantity', String(currentForm.currentData?.quantity || 0));
+    currentForm.currentData?.shop &&
+      formData.append('shop', String(currentForm.currentData?.shop));
+    currentForm.currentData?.brand &&
+      formData.append('brand', String(currentForm.currentData?.brand));
     formData.append('user', String(user.data.id));
     fileList.length > 0 &&
       formData.append('banner', fileList[0].originFileObj as Blob);
-    // formData.append('video', String(currentForm.currentCategoryId));
     instanceAxios
       .post(`/api/products`, formData, {
         headers: {
@@ -140,6 +148,8 @@ export default function CreatePostPage() {
           fileList.map((item, index) =>
             formImageData.append('files', item.originFileObj as Blob)
           );
+        formImageData.append('video', fileList[0].originFileObj as Blob);
+
         instanceAxios
           .post(`api/media/${res.data.id}/upload/`, formImageData)
           .then((res) => {})
@@ -149,13 +159,16 @@ export default function CreatePostPage() {
           .finally(() => {
             message.success('Đã tạo bài đăng!');
             setFileList([]);
+            setVideoFileList([]);
             currentForm.setCurrentData?.({});
             currentForm.setCurrentForm?.('');
             currentForm.setCurrentLabel?.('');
             currentForm.setCurrentCategoryId?.('');
+            setLoading(false);
           });
       })
-      .catch((err) => console.log(e));
+      .catch((err) => console.log(e))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -173,7 +186,7 @@ export default function CreatePostPage() {
             description: 'Vui lòng nhập đầy đủ!',
           });
         }}
-        onFinish={fetchCreate}
+        onFinish={(e) => !loading && fetchCreate(e)}
       >
         {preview ? (
           <PreviewProduct onCancel={() => setPreview(false)} />
@@ -303,6 +316,7 @@ export default function CreatePostPage() {
                       <Form.Item className="flex-1">
                         <button
                           type="submit"
+                          disabled={loading}
                           // onClick={fetchCreate}
                           className="w-full py-[10px] rounded-lg border text-white bg-[#da7502] border-[#da7502] hover:text-white hover:bg-[#da6702]"
                         >

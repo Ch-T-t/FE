@@ -1,6 +1,15 @@
 import { fetchCreateWorkPost } from '@/api/jobRequest';
-import { HeartFilled, ShareAltOutlined } from '@ant-design/icons';
+import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
+import { textCensorship, textDefault } from '@/services/dataDefault';
+import renderTagItem from '@/services/renderTagItem';
+import {
+  CheckCircleTwoTone,
+  FieldTimeOutlined,
+  HeartFilled,
+  ShareAltOutlined,
+} from '@ant-design/icons';
 import { Flex, Image, Space, notification } from 'antd';
+import moment from 'moment';
 import React, { useContext } from 'react';
 
 interface Props {
@@ -8,6 +17,7 @@ interface Props {
 }
 
 export default function PreviewProduct(props: Props) {
+  const currentForm = useContext(CurrentFormContext);
   // const data = useContext(PreviewDataContext);
   // const onSubmit = async () => {
   //   console.log(data.previewData);
@@ -53,9 +63,11 @@ export default function PreviewProduct(props: Props) {
         </div>
       </div>
       <div className="p-[10px] rounded-lg bg-white">
-        <p className="font-semibold">Tuyển NV Nam, Nữ PV Nhà hàng tại quận 5</p>
+        <p className="font-semibold">{currentForm.currentData?.name}</p>
         <div className="flex justify-between">
-          <b className="text-[#d0021b]">$26.000</b>
+          <b className="text-[#d0021b]">
+            ${currentForm.currentData?.info?.price}
+          </b>
           <div className="flex gap-x-5">
             <Space>
               <ShareAltOutlined />
@@ -67,38 +79,29 @@ export default function PreviewProduct(props: Props) {
             </Space>
           </div>
         </div>
-        <div className="py-[10px]">
+        <Flex vertical gap={5} className="py-[10px]">
           <Space className="text-[#777777] ">
             <ShareAltOutlined />
-            <p className="truncate w-[500px]">
-              23 duröng Sö 14, Phuong 5, Quén Gö Väp, Tp Hö Chi Mi
+            <p className="truncate w-[500px] text-[14px]">
+              {currentForm.currentData?.info?.address || textDefault}
+            </p>
+          </Space>
+          <Space className="text-[#777777]">
+            <FieldTimeOutlined />
+            <p className="truncate w-[500px] text-[14px]">
+              {`Đăng ${moment(Date.now()).format('DD/MM/YYYY') || textDefault}`}
             </p>
           </Space>
           <Space className="text-[#777777] ">
-            <ShareAltOutlined />
-            <p className="truncate w-[500px]">
-              23 duröng Sö 14, Phuong 5, Quén Gö Väp, Tp Hö Chi Mi
-            </p>
+            <CheckCircleTwoTone />
+            <p className="truncate w-[500px] text-[14px]">{textCensorship}</p>
           </Space>
-          <Space className="text-[#777777] ">
-            <ShareAltOutlined />
-            <p className="truncate w-[500px]">
-              23 duröng Sö 14, Phuong 5, Quén Gö Väp, Tp Hö Chi Mi
-            </p>
-          </Space>
-        </div>
+        </Flex>
       </div>
       <div className="p-[10px] rounded-lg bg-white">
         <p className="font-semibold">Đặc điểm công việc</p>
         <div className="grid grid-cols-2 gap-y-2 py-[10px]">
-          {[...Array(7)].map((_, index) => (
-            <Space className="w-1/2" key={index}>
-              <ShareAltOutlined />
-              <p className="truncate w-[300px]">
-                23 duröng Sö 14, Phuong 5, Quén Gö Väp, Tp Hö Chi Mi
-              </p>
-            </Space>
-          ))}
+          {renderTagItem(currentForm.currentData || {})}
         </div>
       </div>
       <Flex gap={20}>

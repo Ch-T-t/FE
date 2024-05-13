@@ -43,14 +43,19 @@ export default function EditProductPage({
         .finally(() => setLoadingPage(false));
     };
     fetchProductData();
-  }, [currentForm, params.category, params.productId]);
-  console.log(currentUser.id === productData?.user);
+  }, []);
   return (
     !loadingPage && (
       <>
-        {currentUser.id === productData?.user ? (
+        {currentUser.id === productData?.user?.id ? (
           <div className="w-2/3 m-auto my-[20px] p-[20px] rounded-lg bg-white">
-            {getFormByKey('as', productData, true)}
+            {getFormByKey(
+              productData?.item_category?.type ||
+                productData?.category?.type ||
+                '',
+              productData,
+              true
+            )}
           </div>
         ) : (
           <Result
