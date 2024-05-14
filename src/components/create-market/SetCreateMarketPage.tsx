@@ -66,14 +66,26 @@ export default function SetCreateMarketPage(props: Props) {
             <p className={labelClassName}>Cửa hàng / Chuyên trang</p>
             <InputCustom
               type="text"
-              onChange={(e) => setName(e)}
+              onChange={(e) => {
+                // currentShopData.setCurrentData?.({
+                //   ...currentShopData.currentData,
+                //   email: String(e),
+                // });
+                setName(e);
+              }}
               label="Tên cửa hàng"
             />
           </Flex>
           <Flex vertical>
             <p className={labelClassName}>Địa chỉ/Khu vực</p>
             <ModalLocationSelectCustom
-              onChange={(e) => setAddress(e)}
+              onChange={(e) => {
+                // currentShopData.setCurrentData?.({
+                //   ...currentShopData.currentData,
+                //   address: String(e),
+                // });
+                setAddress(e);
+              }}
               label="Địa chỉ cửa hàng"
             />
           </Flex>
@@ -82,7 +94,13 @@ export default function SetCreateMarketPage(props: Props) {
             <Space>
               <Checkbox
                 checked={checked}
-                onChange={(e) => setChecked(e.target.checked)}
+                onChange={(e) => {
+                  // currentShopData.setCurrentData?.({
+                  //   ...currentShopData.currentData,
+                  //   activate: e.target.value,
+                  // });
+                  setChecked(e.target.checked);
+                }}
               />
               <p>Tôi muốn thêm vào cửa hàng chợ tốt Map</p>
             </Space>
@@ -90,7 +108,13 @@ export default function SetCreateMarketPage(props: Props) {
           <Flex vertical>
             <p className={labelClassName}>Liện hệ</p>
             <InputCustom
-              onChange={(e) => setPhone(e)}
+              onChange={(e) => {
+                // currentShopData.setCurrentData?.({
+                //   ...currentShopData.currentData,
+                //   contact: { phone: String(e) },
+                // });
+                setPhone(e);
+              }}
               type="number"
               label="Số điện thoại liên hệ"
               required
@@ -111,7 +135,7 @@ export default function SetCreateMarketPage(props: Props) {
               currentShopData.setCurrentData?.({
                 ...currentShopData.currentData,
                 address: address as string,
-                contact: { number: phone || 0 },
+                contact: { phone: String(phone) },
                 activate: checked,
                 name: name as string,
               });

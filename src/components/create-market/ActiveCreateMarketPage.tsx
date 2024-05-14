@@ -1,5 +1,6 @@
 import { CheckCircleFilled } from '@ant-design/icons';
 import { Button, Col, Flex, Row, Space } from 'antd';
+import Link from 'next/link';
 import React from 'react';
 
 export default function ActiveCreateMarketPage() {
@@ -25,7 +26,8 @@ export default function ActiveCreateMarketPage() {
         </Row>
         <Flex className="w-full justify-end mt-[20px]">
           <button className="!text-white !text-[16px] flex items-center border-2 rounded-lg px-[15px] justify-center !py-[5px] !bg-transparent !font-semibold">
-            Chỉnh sửa
+            {/* Chỉnh sửa */}
+            <Link href={'/'}>Về trang chủ</Link>
           </button>
         </Flex>
       </Flex>

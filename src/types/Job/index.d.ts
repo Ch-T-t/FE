@@ -46,7 +46,9 @@ interface IShop {
   name?: string;
   address?: string;
   activate?: boolean;
-  contact?: object;
+  contact?: {
+    phone: string;
+  };
   user?: IUser;
   email?: string;
   description?: string;

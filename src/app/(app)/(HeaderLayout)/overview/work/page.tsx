@@ -4,6 +4,7 @@ import TitleBar from '@/components/common/TitleBar';
 import TopWork from '@/components/common/TopWork';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { Avatar, Carousel, Image, Space } from 'antd';
+import Link from 'next/link';
 import React, { useRef } from 'react';
 
 export default function WorkPage() {
@@ -14,6 +15,15 @@ export default function WorkPage() {
       ref.current.scrollLeft += scrollOffset;
     }
   };
+  const categoryList = [
+    { icon: '', name: 'Xây dựng', tag: '' },
+    { icon: '', name: 'Năng lượng mặt trời', tag: '' },
+    { icon: '', name: 'Nông nghiệp', tag: '' },
+    { icon: '', name: 'Nhân viên phục vụ', tag: '' },
+    { icon: '', name: 'Bán Hàng', tag: '' },
+    { icon: '', name: 'Chuyển chủ', tag: '' },
+    { icon: '', name: 'Việc làm khác', tag: '' },
+  ];
   const contentStyle: React.CSSProperties = {
     height: '300px',
     color: '#fff',
@@ -65,23 +75,22 @@ export default function WorkPage() {
           className="w-full mt-[10px] scroll-smooth transition relative overflow-x-auto no-scrollbar"
         >
           <div className="flex gap-x-4  justify-between">
-            {[...Array(15)].map((item, index) => (
-              <div
-                key={index}
-                className="flex w-[100px] hover:bg-[#f5f5f5] px-[20px] py-[10px] rounded-md flex-col gap-y-5 items-center"
-              >
-                <Image
-                  className=" hover:bg-white bg-[#f5f5f5] rounded-full object-cover"
-                  width={70}
-                  preview={false}
-                  height={70}
-                  src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/411846395_1033629967741924_4686555832896425400_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=173fa1&_nc_ohc=TFo6GokxkkoAX8QCOlI&_nc_ht=scontent.fhan2-4.fna&oh=00_AfCyB703T6CTQ_eLMh6Rk8c3C6MYPVeCwXKcELXXWL0vyg&oe=65A4E06E"
-                  alt=""
-                />
-                <p className="text-wrap text-center text-[12px] font-medium">
-                  Nội thất cây cảnh
-                </p>
-              </div>
+            {categoryList.map((item, index) => (
+              <Link href={'/list/work'} key={index}>
+                <div className="flex w-[120px] hover:bg-[#f5f5f5] px-[20px] py-[10px] rounded-md flex-col gap-y-5 items-center">
+                  <Image
+                    className=" hover:bg-white bg-[#f5f5f5] rounded-full object-cover"
+                    width={70}
+                    preview={false}
+                    height={70}
+                    src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/411846395_1033629967741924_4686555832896425400_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=173fa1&_nc_ohc=TFo6GokxkkoAX8QCOlI&_nc_ht=scontent.fhan2-4.fna&oh=00_AfCyB703T6CTQ_eLMh6Rk8c3C6MYPVeCwXKcELXXWL0vyg&oe=65A4E06E"
+                    alt=""
+                  />
+                  <p className="text-wrap text-center text-[12px] font-medium">
+                    {item.name}
+                  </p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

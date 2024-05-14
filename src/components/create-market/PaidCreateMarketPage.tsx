@@ -27,6 +27,7 @@ export default function PaidCreateMarketPage(props: Props) {
         user: currentUser.data.id,
       })
       .then((res) => {
+        props.onFinish?.();
         notification.success({ message: 'Đã tạo cửa hàng' });
       })
       .catch((err) => {
@@ -90,7 +91,13 @@ export default function PaidCreateMarketPage(props: Props) {
             Kích hoạt Cửa hàng / Chuyên trang
           </p>
           <InputCustom
-            onChange={(e) => setEmail(e as string)}
+            onChange={(e) => {
+              currentShopData.setCurrentData?.({
+                ...currentShopData.currentData,
+                email: String(e),
+              });
+              setEmail(e as string);
+            }}
             label="Email của bạn"
             required
           />
