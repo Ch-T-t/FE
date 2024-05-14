@@ -2,7 +2,7 @@
 import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
 import { textDefault } from '@/services/dataDefault';
-import { IProduct } from '@/types/Job';
+import { IPost, IProduct } from '@/types/Job';
 import {
   ContactsOutlined,
   EllipsisOutlined,
@@ -32,14 +32,15 @@ export default function UserIdPage({
 }) {
   const [currentTab, setCurrentTab] = useState<'POST' | 'RATE'>('POST');
   const [userData, setUserData] = useState<IUser>();
-  const [productList, setProductList] = useState<IProduct[]>([]);
+  const [productList, setProductList] = useState<IPost[]>([]);
 
   useEffect(() => {
     const fechUserInfo = async () => {
       await instanceAxios
-        .get(`/users/${params.userId}/`)
+        .get(`/api/user/${params.userId}`)
         .then((res) => {
-          setUserData(res.data.data);
+          console.log(res.data);
+          setUserData(res.data);
         })
         .catch((err) => {});
     };
@@ -92,7 +93,7 @@ export default function UserIdPage({
             </Flex>
             <Space direction="vertical" className="mt-[20px]">
               <p className="font-semibold text-[20px]">
-                {userData?.first_name || textDefault}
+                {userData?.fullname || textDefault}
               </p>
               <Space className="text-[14px]">
                 <Rate className={'!text-[20px]'} allowHalf defaultValue={2.5} />

@@ -127,9 +127,10 @@ export default function ModalLocationSelectCustom(props: Props) {
                         key={index}
                         onClick={() => {
                           setValue(citie.name);
-                          setShowModal(false);
                           handleChange(citie.name, citie.name);
                           props.onChangeLabel?.(citie.name || '');
+                          props.onChange?.(citie.name || '');
+                          setShowModal(false);
                         }}
                         justify="space-between"
                       >

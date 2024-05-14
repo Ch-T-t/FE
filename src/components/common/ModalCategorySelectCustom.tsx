@@ -67,7 +67,7 @@ export default function ModalCategorySelectCustom(props: Props) {
           );
           currentForm.setCurrentData?.({
             ...currentForm?.currentData,
-            category: String(id),
+            category_tmp: String(id),
           });
           setValue(categoryList.find((item) => item.id === id)?.name || '');
           setShowModal(false);
@@ -143,7 +143,7 @@ export default function ModalCategorySelectCustom(props: Props) {
                     currentForm.setCurrentCategoryId?.(item.id || '');
                     currentForm.setCurrentData?.({
                       ...currentForm?.currentData,
-                      item_category: String(item.id),
+                      item_category_tmp: String(item.id),
                     });
 
                     props.onChangeKey?.(item.type || '');
