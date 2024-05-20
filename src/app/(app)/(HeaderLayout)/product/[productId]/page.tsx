@@ -21,7 +21,36 @@ import {
   ShareAltOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Avatar, Flex, Image, Rate, Space, message } from 'antd';
+import { Avatar, Flex, Image, Popover, Rate, Space, message } from 'antd';
+import {
+  EmailIcon,
+  FacebookIcon,
+  FacebookMessengerIcon,
+  FacebookShareButton,
+  FacebookShareCount,
+  GabIcon,
+  HatenaIcon,
+  InstapaperIcon,
+  LineIcon,
+  LinkedinIcon,
+  LivejournalIcon,
+  MailruIcon,
+  OKIcon,
+  PinterestIcon,
+  PocketIcon,
+  RedditIcon,
+  TelegramIcon,
+  TelegramShareButton,
+  TumblrIcon,
+  TwitterIcon,
+  TwitterShareButton,
+  ViberIcon,
+  VKIcon,
+  WeiboIcon,
+  WhatsappIcon,
+  WorkplaceIcon,
+  XIcon,
+} from 'react-share';
 import moment from 'moment';
 import Link from 'next/link';
 import React, { useContext, useEffect, useRef, useState } from 'react';
@@ -105,11 +134,37 @@ export default function ProductInfoPage({
                 <b className="text-[#d0021b]">
                   ${productData?.info?.price?.toLocaleString() || 0}
                 </b>
-                <div className="flex gap-x-5">
-                  <Space>
-                    <ShareAltOutlined />
-                    Chia sẻ
-                  </Space>
+                <div className="flex gap-x-5 cursor-pointer">
+                  <Popover
+                    content={
+                      <Flex gap={10}>
+                        <FacebookShareButton
+                          url={`${process.env.NEXT_PUBLIC_URL_ORIGIN}/product/${params.productId}`}
+                        >
+                          <FacebookIcon size={32} round={true} />
+                        </FacebookShareButton>
+
+                        <TwitterShareButton
+                          url={`${process.env.NEXT_PUBLIC_URL_ORIGIN}/product/${params.productId}`}
+                        >
+                          <TwitterIcon size={32} round={true} />
+                        </TwitterShareButton>
+
+                        <TelegramShareButton
+                          url={`${process.env.NEXT_PUBLIC_URL_ORIGIN}/product/${params.productId}`}
+                        >
+                          <TelegramIcon size={32} round={true} />
+                        </TelegramShareButton>
+                      </Flex>
+                    }
+                    trigger="click"
+                  >
+                    <Space>
+                      {' '}
+                      <ShareAltOutlined />
+                      Chia sẻ
+                    </Space>
+                  </Popover>
                   <Space>
                     <HeartFilled />
                     lưu tin
