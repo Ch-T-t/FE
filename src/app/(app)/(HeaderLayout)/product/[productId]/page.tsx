@@ -85,7 +85,7 @@ export default function ProductInfoPage({
   }, [params.category, params.productId]);
   const fetchFolow = async () => {
     await instanceAxios
-      .post(`follow/followers/`, { watching: productData?.id })
+      .post(`/api/follower`, { user_to: productData?.user?.id })
       .then((res) => {
         message.success('Đã theo dõi');
       })

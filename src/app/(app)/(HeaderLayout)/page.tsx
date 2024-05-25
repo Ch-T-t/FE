@@ -18,7 +18,16 @@ import {
   PlusCircleOutlined,
 } from '@ant-design/icons';
 import { UserButton } from '@clerk/nextjs';
-import { Badge, Button, Carousel, Flex, Form, Image, Input } from 'antd';
+import {
+  Badge,
+  Button,
+  Carousel,
+  Flex,
+  Form,
+  Image,
+  Input,
+  Pagination,
+} from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
@@ -27,6 +36,9 @@ export default function HomePage() {
   const ref = useRef<HTMLDivElement>(null);
   const [productList, setProducList] = useState<IPost[]>([]);
   const [slideList, setSlideList] = useState<ISlide[]>([]);
+  const [limit, setLimit] = useState(10);
+  const [currentPagination, setCurrentPagination] = useState(1);
+  const [productTotal, setProductTotal] = useState(0);
 
   const router = useRouter();
   const scroll = (scrollOffset: number) => {
@@ -44,9 +56,10 @@ export default function HomePage() {
 
   useEffect(() => {
     instanceAxios
-      .get(`/api/products`)
+      .get(`/api/products?limit=${limit}&offset=2`)
       .then((res) => {
-        setProducList((res.data as IPost[]) || []);
+        setProducList((res.data.results as IPost[]) || []);
+        setProductTotal(res.data.count);
       })
       .catch((err) => console.log(err));
 
@@ -203,7 +216,7 @@ export default function HomePage() {
           Tin đăng mới
         </div>
         <div className="flex flex-wrap justify-center gap-[9.5px] max-lg:gap-1 mt-[20px] max-lg:mt-[10px] max-lg:grid max-lg:gap-y-5 max-lg:grid-cols-2">
-          {productList.map((item, index) => (
+          {productList.map?.((item, index) => (
             <CardItem
               data={item}
               ribbon={index % 2 == 0 ? 'Việc 24h' : ''}
@@ -220,6 +233,11 @@ export default function HomePage() {
             />
           ))} */}
         </div>
+        <Pagination
+          className="flex items-center justify-center !mt-[20px]"
+          defaultCurrent={currentPagination}
+          total={productTotal}
+        />
       </div>
       <div className="bg-white p-[10px] rounded-md">
         <Introduce />
