@@ -42,12 +42,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <Provider store={store}>
         <SWRConfig
           value={{
-            refreshInterval: 3000,
+            // refreshInterval: 3000,
             fetcher: (resource, init) =>
               fetch(resource, init).then((res) => res.json()),
             revalidateIfStale: false,
             revalidateOnFocus: false,
-            revalidateOnReconnect: true,
+            revalidateOnReconnect: false,
             revalidateOnMount: false,
           }}
         >

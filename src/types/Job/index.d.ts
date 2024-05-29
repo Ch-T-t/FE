@@ -49,7 +49,7 @@ interface IShop {
   contact?: {
     phone: string;
   };
-  user?: IUser;
+  user?: IUser | string;
   email?: string;
   description?: string;
 }

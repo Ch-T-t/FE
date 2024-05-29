@@ -92,6 +92,7 @@ import GuaranteeProductServicePage from '@/components/CMS/PostManagerPage/Produc
 import PostProductServicePage from '@/components/CMS/PostManagerPage/Product/ProductService/PostProductServicePage';
 import UsageStatusProductServicePage from '@/components/CMS/PostManagerPage/Product/ProductService/UsageStatusProductServicePage';
 import SellerInformationServicePage from '@/components/CMS/PostManagerPage/Product/ProductService/SellerInformationServicePage';
+import PostPage from '@/components/CMS/PostManagerPage/Product/PostPage';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -200,6 +201,7 @@ const serviceList = [
 const items: MenuItem[] = [
   getItem('Tổng quan', 'OVERVIEW', <PieChartOutlined />),
   getItem('Slide', 'SLIDE', <DesktopOutlined />),
+  getItem('Bài đăng', 'POST', <DesktopOutlined />),
   //   getItem('Doanh thu', 'REVENUE', <DesktopOutlined />),
   //   getItem('Giao dịch an toàn', 'SAFE_TRANSACTIONS', <DesktopOutlined />),
   //   getItem('Giao dịch nạp thẻ', 'RECHARGE_TRANSACTIONS', <DesktopOutlined />),
@@ -399,6 +401,7 @@ const items: MenuItem[] = [
 const pageList = [
   { key: 'OVERVIEW', children: <OverViewPage /> },
   { key: 'SLIDE', children: <SliderPage /> },
+  { key: 'POST', children: <PostPage /> },
   // { key: 'REVENUE', children: <div>Doanh thu</div> },
   // { key: 'SAFE_TRANSACTIONS', children: <div>Giao dịch an toàn</div> },
   // { key: 'RECHARGE_TRANSACTIONS', children: <div>Giao dịch nạp thẻ</div> },

@@ -1,3 +1,5 @@
+import { IShop } from '../Job';
+
 interface IChartCart {
   uniqueId: string | number;
   label: string;
@@ -62,4 +64,5 @@ interface IUser {
   last_login?: string | null; // Dạng chuỗi đại diện cho thời điểm đăng nhập gần nhất hoặc null nếu chưa đăng nhập
   last_logout?: string | null; // Dạng chuỗi đại diện cho thời điểm đăng xuất gần nhất hoặc null nếu chưa đăng xuất
   date_joined?: string; // Dạng chuỗi đại diện cho thời điểm tham gia hệ thống
+  shop: IShop[];
 }
