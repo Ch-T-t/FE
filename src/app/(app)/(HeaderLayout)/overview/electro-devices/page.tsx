@@ -1,14 +1,67 @@
 'use client';
+import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
 import TitleBar from '@/components/common/TitleBar';
 import TopWork from '@/components/common/TopWork';
+import { IPost } from '@/types/Job';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { Avatar, Carousel, Flex, Image, Space } from 'antd';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function ElectroDevicePage() {
   const ref = useRef<HTMLDivElement>(null);
+  const [productList, setProductList] = useState<IPost[]>([]);
 
+  useEffect(() => {
+    instanceAxios
+      .get(`/api/products`, {
+        params: {
+          limit: 10,
+          offset: 1,
+          category: 'WORKER',
+        },
+      })
+      .then((res) => {
+        setProductList(res.data.results);
+      })
+      .catch((err) => {})
+      .finally(() => {});
+  }, []);
+
+  const categoryList = [
+    {
+      iconLink: ``,
+      name: 'Điện thoại',
+    },
+    {
+      iconLink: ``,
+      name: 'Đồng hồ',
+    },
+    {
+      iconLink: ``,
+      name: 'Laptop',
+    },
+    {
+      iconLink: ``,
+      name: 'Máy tính để bàn',
+    },
+    {
+      iconLink: ``,
+      name: 'Máy tính bảng',
+    },
+    {
+      iconLink: ``,
+      name: 'Tai nghe',
+    },
+    {
+      iconLink: ``,
+      name: 'Phụ kiện màn hình',
+    },
+    {
+      iconLink: ``,
+      name: 'Loa',
+    },
+  ];
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
       ref.current.scrollLeft += scrollOffset;
@@ -65,7 +118,7 @@ export default function ElectroDevicePage() {
           className="w-full mt-[10px] scroll-smooth transition relative overflow-x-auto no-scrollbar"
         >
           <div className="flex gap-x-4  justify-between">
-            {[...Array(15)].map((item, index) => (
+            {categoryList.map((item, index) => (
               <div
                 key={index}
                 className="flex w-[100px] hover:bg-[#f5f5f5] px-[20px] py-[10px] rounded-md flex-col gap-y-5 items-center"
@@ -79,7 +132,7 @@ export default function ElectroDevicePage() {
                   alt=""
                 />
                 <p className="text-wrap text-center text-[12px] font-medium">
-                  Nội thất cây cảnh
+                  {item.name}
                 </p>
               </div>
             ))}
@@ -96,8 +149,8 @@ export default function ElectroDevicePage() {
 
         <div className="w-full scroll-smooth overflow-x-auto no-scrollbar ">
           <div className="flex gap-x-2 py-[20px] px-[10px]">
-            {[...Array(4)].map((_, index) => (
-              <CardItem key={index} />
+            {productList.map((item, index) => (
+              <CardItem data={item} key={index} />
             ))}
           </div>
         </div>

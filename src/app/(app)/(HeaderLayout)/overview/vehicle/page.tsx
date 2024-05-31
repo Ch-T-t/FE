@@ -1,13 +1,33 @@
 'use client';
+import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
 import TitleBar from '@/components/common/TitleBar';
 import TopWork from '@/components/common/TopWork';
+import { IPost } from '@/types/Job';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { Avatar, Carousel, Flex, Image, Space } from 'antd';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function OverViewGoodHousePage() {
+  const [productList, setProductList] = useState<IPost[]>([]);
+
   const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    instanceAxios
+      .get(`/api/products`, {
+        params: {
+          limit: 10,
+          offset: 1,
+          category: 'VEHICLE',
+        },
+      })
+      .then((res) => {
+        setProductList(res.data.results);
+      })
+      .catch((err) => {})
+      .finally(() => {});
+  }, []);
 
   const scroll = (scrollOffset: number) => {
     if (ref.current) {

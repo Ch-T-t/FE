@@ -3,6 +3,7 @@ import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
 import { textDefault } from '@/services/dataDefault';
 import { IPost, IProduct } from '@/types/Job';
+import { IUser } from '@/types/User';
 import {
   ContactsOutlined,
   EllipsisOutlined,

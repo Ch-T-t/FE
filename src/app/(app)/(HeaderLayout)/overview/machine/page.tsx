@@ -36,31 +36,21 @@ export default function MachinePage() {
   const [addressFilter, setAddressFilter] = useState('');
   const [currentOrder, setCurrentOrder] = useState('NEWEST');
 
-  const fetchGoodHouseList = useCallback(() => {
-    fetchGoodHousePostList({
-      ...(goodHouseTypeFilter && { goodHouseTypeFilter: goodHouseTypeFilter }),
-      addressFilter,
-      currentTab,
-    })
-      .then((res) => {
-        setProductList(res.data.data.results || []);
-      })
-      .catch((err) => {});
-  }, [addressFilter, currentTab, goodHouseTypeFilter]);
-
   useEffect(() => {
-    // const fetchProductList = async () => {
-    //   await instanceAxios.get(`1`);
-    // };
-    fetchGoodHouseCategory()
-      .then((res) => {
-        setCategoryList(res.data.data || []);
+    instanceAxios
+      .get(`/api/products`, {
+        params: {
+          limit: 10,
+          offset: 1,
+          category: 'MACHINES',
+        },
       })
-      .catch((err) => {});
+      .then((res) => {
+        setProductList(res.data.results);
+      })
+      .catch((err) => {})
+      .finally(() => {});
   }, []);
-  useEffect(() => {
-    fetchGoodHouseList();
-  }, [fetchGoodHouseList]);
 
   const orderList = [
     {

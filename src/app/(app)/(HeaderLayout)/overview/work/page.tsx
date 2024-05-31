@@ -1,14 +1,48 @@
 'use client';
+import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
 import TitleBar from '@/components/common/TitleBar';
 import TopWork from '@/components/common/TopWork';
+import { IPost } from '@/types/Job';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { Avatar, Carousel, Image, Space } from 'antd';
 import Link from 'next/link';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function WorkPage() {
+  const [productList, setProductList] = useState<IPost[]>([]);
+
   const ref = useRef<HTMLDivElement>(null);
+
+  // function getUserAccount() {
+  //   return instanceAxios.get('/user/12345');
+  // }
+
+  // function getUserPermissions() {
+  //   return instanceAxios.get('/user/12345/permissions');
+  // }
+
+  // Promise.all([getUserAccount(), getUserPermissions()])
+  //   .then(function (results) {
+  //     const acct = results[0];
+  //     const perm = results[1];
+  //   });
+
+  useEffect(() => {
+    instanceAxios
+      .get(`/api/products`, {
+        params: {
+          limit: 10,
+          offset: 1,
+          category: 'MACHINES',
+        },
+      })
+      .then((res) => {
+        setProductList(res.data.results);
+      })
+      .catch((err) => {})
+      .finally(() => {});
+  }, []);
 
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
@@ -121,8 +155,8 @@ export default function WorkPage() {
 
         <div className="w-full scroll-smooth overflow-x-auto no-scrollbar ">
           <div className="flex gap-x-2 py-[20px] px-[10px]">
-            {[...Array(4)].map((_, index) => (
-              <CardItem key={index} />
+            {productList.map((item, index) => (
+              <CardItem data={item} key={index} />
             ))}
           </div>
         </div>
@@ -137,8 +171,8 @@ export default function WorkPage() {
 
         <div className="w-full scroll-smooth overflow-x-auto no-scrollbar ">
           <div className="flex gap-x-2 py-[20px] px-[10px]">
-            {[...Array(4)].map((_, index) => (
-              <CardItem key={index} />
+            {productList.map((item, index) => (
+              <CardItem data={item} key={index} />
             ))}
           </div>
         </div>
