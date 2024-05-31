@@ -116,8 +116,8 @@ export default function OverViewGoodHousePage() {
 
         <div className="w-full scroll-smooth overflow-x-auto no-scrollbar ">
           <div className="flex gap-x-2 py-[20px] px-[10px]">
-            {[...Array(4)].map((_, index) => (
-              <CardItem key={index} />
+            {productList.map((item, index) => (
+              <CardItem data={item} key={index} />
             ))}
           </div>
         </div>

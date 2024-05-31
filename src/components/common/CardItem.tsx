@@ -1,3 +1,4 @@
+import { textDefault } from '@/services/dataDefault';
 import getImageLink from '@/services/getImageLink';
 import { IPost, IProduct } from '@/types/Job';
 import { Avatar, Badge, Image, Space } from 'antd';
@@ -30,7 +31,7 @@ export default function CardItem(props: Props) {
       />
       <div className={`w-full`}>
         <p className="line-clamp-2 h-[50px] font-medium text-[15px] max-lg:font-normal max-lg:text-[13px]">
-          {props.data?.name || 'ádd dd ddd ddd dd ddd dd'}
+          {props.data?.name || textDefault}
         </p>
         <p className="truncate text-[#808080] h-[30px] py-[5px] text-[14px] max-lg:hidden">
           Ngày làm: {moment(props.data?.created_at).format('DD/MM/YYYY')}
