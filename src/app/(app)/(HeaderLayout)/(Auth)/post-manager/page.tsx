@@ -2,7 +2,7 @@
 import instanceAxios from '@/api/instanceAxios';
 import { useAppSelector } from '@/app/hooks';
 import CardItemHorizontalManager from '@/components/common/CardItemHorizontalManager';
-import { IProduct } from '@/types/Job';
+import { IPost, IProduct } from '@/types/Job';
 import { PlusOutlined } from '@ant-design/icons';
 import { Avatar, Flex, Image, List, Pagination, Space } from 'antd';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 export default function PostManagePage() {
   const currentUser = useAppSelector((state) => state.user.data);
   const [currentTab, setCurrentTab] = useState('active');
-  const [productList, setProductList] = useState<IProduct[]>([]);
+  const [productList, setProductList] = useState<IPost[]>([]);
   const tabList = [
     { key: 'active', label: 'Đang hiện thị', children: <p>ok</p> },
     { key: 'expired', label: 'Hết hạn', children: <p>ok</p> },
@@ -19,15 +19,21 @@ export default function PostManagePage() {
     { key: 'not_active', label: 'Đã ẩn', children: <p>ok</p> },
     { key: 'different', label: 'Khác', children: <p>ok</p> },
   ];
-  // useEffect(() => {
-  //   const fethUserPost = async () => {
-  //     await instanceAxios
-  //       .get(`/list_home/`)
-  //       .then((res) => setProductList(res.data.data || []))
-  //       .catch((err) => console.log(err));
-  //   };
-  //   fethUserPost();
-  // }, [currentUser?.id]);
+  useEffect(() => {
+    instanceAxios
+      .get(`/api/products`, {
+        params: {
+          user_id: currentUser.id,
+          // offset: 10,
+          // limit: 5,
+        },
+      })
+      .then((res) => {
+        setProductList(res.data);
+      })
+      .catch((err) => {});
+  }, []);
+
   return (
     <div className="w-2/3 m-auto max-lg:w-full">
       <p className="py-[20px] font-bold max-lg:hidden">Quản lí tin đăng</p>

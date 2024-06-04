@@ -54,15 +54,6 @@ interface IShop {
   description?: string;
 }
 
-interface IImage {
-  id: number;
-  Image: string;
-  Creation_time: string;
-  Update_time: string;
-  Job: number;
-  Items: number;
-}
-
 interface ILocation {
   id: number;
   Name: string;
@@ -96,6 +87,12 @@ interface ISlide {
   created_at?: string;
   updated_at?: string;
   status?: boolean;
+}
+
+interface IImage {
+  id?: string;
+  image?: string;
+  product?: string;
 }
 
 interface IPost {

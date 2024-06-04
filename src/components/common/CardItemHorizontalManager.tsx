@@ -1,6 +1,6 @@
 import { textDefault } from '@/services/dataDefault';
 import getImageLink from '@/services/getImageLink';
-import { IProduct } from '@/types/Job';
+import { IPost, IProduct } from '@/types/Job';
 import {
   EditOutlined,
   EyeOutlined,
@@ -8,10 +8,11 @@ import {
   ShareAltOutlined,
 } from '@ant-design/icons';
 import { Dropdown, Flex, Image } from 'antd';
+import moment from 'moment';
 import Link from 'next/link';
 import React from 'react';
 interface Props {
-  data?: IProduct;
+  data?: IPost;
 }
 export default function CardItemHorizontalManager(props: Props) {
   return (
@@ -28,21 +29,26 @@ export default function CardItemHorizontalManager(props: Props) {
             preview={false}
             className=""
             alt=""
-            src={getImageLink(props.data || {})}
+            src={props.data?.banner}
           />
           <p className="absolute w-full left-0 bottom-0 py-[5px] text-[10px] text-white text-center bg-[rgba(0,0,0,0.7)]">
             Đẫ ẩn
           </p>
         </div>
         <Flex vertical gap={5}>
-          <p className="truncate">{props.data?.Title || textDefault}</p>
-          <b className="text-red-500 text-[14px]">${props.data?.Price || 0}</b>
+          <p className="truncate">{props.data?.name || textDefault}</p>
+          <b className="text-red-500 text-[14px]">
+            ${props.data?.info?.price || 0}
+          </b>
           <p className="text-[#9b9b9b] text-[12px] max-lg:hidden">
             Hiện thị: <b className="text-[#9b9b9b]">03/06/23 - 07/10/23</b>
           </p>
           <Flex vertical>
             <p className="text-[#9b9b9b] text-[12px] hidden max-lg:block">
-              Ngày đăng: <b className="text-[#9b9b9b]">03/06/23</b>
+              Ngày đăng:{' '}
+              <b className="text-[#9b9b9b]">
+                {moment(props.data?.created_at).format('DD/MM/YYYY - HH:mm:ss')}
+              </b>
             </p>
             <p className="text-[#9b9b9b] text-[12px] hidden max-lg:block">
               Ngày hết hạn <b className="text-[#9b9b9b]">03/06/23</b>
@@ -70,9 +76,7 @@ export default function CardItemHorizontalManager(props: Props) {
                 key: '3',
                 icon: <EditOutlined />,
                 label: (
-                  <Link href={`/product/${props.data?.Url}/${props.data?.id}`}>
-                    Sửa tin
-                  </Link>
+                  <Link href={`/edit-post/${props.data?.id}`}>Sửa tin</Link>
                 ),
               },
             ],

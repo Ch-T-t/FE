@@ -3,9 +3,8 @@ import instanceAxios from '@/api/instanceAxios';
 import { useAppSelector } from '@/app/hooks';
 import CardItem from '@/components/common/CardItem';
 import { textCensorship, textDefault } from '@/services/dataDefault';
-import getPrefixUrl from '@/services/getPrefixUrl';
 import renderTagItem from '@/services/renderTagItem';
-import { IPost, IProduct } from '@/types/Job';
+import { IImage, IPost, ISlide } from '@/types/Job';
 import {
   CaretLeftOutlined,
   CaretRightOutlined,
@@ -21,40 +20,32 @@ import {
   ShareAltOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Avatar, Flex, Image, Popover, Rate, Space, message } from 'antd';
 import {
-  EmailIcon,
-  FacebookIcon,
-  FacebookMessengerIcon,
-  FacebookShareButton,
-  FacebookShareCount,
-  GabIcon,
-  HatenaIcon,
-  InstapaperIcon,
-  LineIcon,
-  LinkedinIcon,
-  LivejournalIcon,
-  MailruIcon,
-  OKIcon,
-  PinterestIcon,
-  PocketIcon,
-  RedditIcon,
-  TelegramIcon,
-  TelegramShareButton,
-  TumblrIcon,
-  TwitterIcon,
-  TwitterShareButton,
-  ViberIcon,
-  VKIcon,
-  WeiboIcon,
-  WhatsappIcon,
-  WorkplaceIcon,
-  XIcon,
-} from 'react-share';
+  Avatar,
+  Button,
+  Flex,
+  Image,
+  Input,
+  Modal,
+  Popover,
+  Radio,
+  Rate,
+  Space,
+  message,
+} from 'antd';
+import TextArea from 'antd/es/input/TextArea';
 import moment from 'moment';
 import Link from 'next/link';
-import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from 'react-share';
 
 export default function ProductInfoPage({
   params,
@@ -65,22 +56,41 @@ export default function ProductInfoPage({
   const [loadingPage, setLoadingPage] = useState(true);
   const currentUser = useAppSelector((state) => state.user.data);
   const [productData, setProductData] = useState<IPost>();
+  const [imageList, setImageList] = useState<IImage[]>([]);
+  const [currentImg, setCurrentImg] = useState('');
+  const [openReport, setOpenReport] = useState(false);
+  const [reportValue, setReportValue] = useState('');
+
   const router = useRouter();
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
       ref.current.scrollLeft += scrollOffset;
     }
   };
+
   useEffect(() => {
     const fetchProductData = async () => {
       await instanceAxios
         .get(`/api/products/${params.productId}`)
         .then((res) => {
           setProductData(res.data);
+          setCurrentImg(res.data.banner);
         })
         .catch((err) => {})
         .finally(() => setLoadingPage(false));
     };
+    instanceAxios
+      .get(`/api/media`, {
+        params: {
+          product_id: params.productId,
+        },
+      })
+      .then((res) => {
+        setImageList(res.data);
+      })
+      .catch((err) => {})
+      .finally(() => setLoadingPage(false));
+
     fetchProductData();
   }, [params.category, params.productId]);
   const fetchFolow = async () => {
@@ -98,6 +108,28 @@ export default function ProductInfoPage({
     // localStorage.setItem('productChatKey', productData?.Url || '');
     router.push(`/chat`);
   };
+  const reportCategory = [
+    {
+      name: 'Lừa đảo',
+      value: 'Lừa đảo',
+    },
+    {
+      name: 'Trùng lặp',
+      value: 'Trùng lặp',
+    },
+    {
+      name: 'Sản phẩm đã bán',
+      value: 'Sản phẩm đã bán',
+    },
+    {
+      name: 'Thông tin không đúng thực tế',
+      value: 'Thông tin không đúng thực tế',
+    },
+    {
+      name: 'Lý do khác',
+      value: 'Lý do khác',
+    },
+  ];
   return (
     !loadingPage && (
       <div className="w-3/4 max-lg:w-full m-auto">
@@ -109,19 +141,20 @@ export default function ProductInfoPage({
                 height={300}
                 className="object-cover "
                 preview={false}
-                src={productData?.banner}
+                src={currentImg}
                 alt=""
               />
               <div className="w-full overflow-x-auto">
                 <div className="flex gap-x-2">
-                  {[...Array(50)].map((_, index) => (
+                  {imageList.map((item, index) => (
                     <Image
                       key={index}
                       width={100}
+                      onClick={() => setCurrentImg(item.image || '')}
                       height={100}
                       className="object-cover "
                       preview={false}
-                      src={''}
+                      src={item.image}
                       alt=""
                     />
                   ))}
@@ -160,7 +193,6 @@ export default function ProductInfoPage({
                     trigger="click"
                   >
                     <Space>
-                      {' '}
                       <ShareAltOutlined />
                       Chia sẻ
                     </Space>
@@ -279,10 +311,44 @@ export default function ProductInfoPage({
                 </div>
               )}
             </div>
-            <Space className="text-[#b5b5b5]">
+            <Space
+              onClick={() => setOpenReport(true)}
+              className="text-[#b5b5b5]"
+            >
               <WarningOutlined />
               Báo cáo tin đăng này
             </Space>
+            <Modal
+              centered
+              open={openReport}
+              title={
+                <p className="text-[20px] text-center font-bold">
+                  Báo cáo tin đăng này
+                </p>
+              }
+              onCancel={() => setOpenReport(false)}
+              footer={[]}
+            >
+              <b>Tin rao này có vấn đề gì?</b>
+              <Flex className="mt-[10px]" vertical gap={10}>
+                {reportCategory.map((item, index) => (
+                  <Flex key={index} justify="space-between">
+                    <p>{item.name}</p>
+                    <div className="w-[20px] h-[20px] border-[7px] bg-white rounded-full"></div>
+                  </Flex>
+                ))}
+              </Flex>
+              <p className="mt-[20px] font-bold">Chi tiết</p>
+              <TextArea placeholder="Vui lòng mô tả thêm dấu hiệu lừa đảo" />
+              <p className="mt-[20px] font-bold">
+                Thông tin để chợ tốt Đài Loan liên hệ với bạn khi cần thiết
+              </p>
+              <Input placeholder="Số điện thoại của bạn" />
+              <Input className="!mt-[10px]" placeholder="Email của bạn" />
+              <Button className="mt-[20px] !text-white !w-full !bg-[#ff9902]">
+                GỬI BÁO CÁO
+              </Button>
+            </Modal>
           </div>
         </div>
         <div className="relative max-lg:bg-white max-lg:mt-[10px]">

@@ -148,7 +148,7 @@ export default function CreatePostPage() {
           fileList.map((item, index) =>
             formImageData.append('files', item.originFileObj as Blob)
           );
-        formImageData.append('video', fileList[0].originFileObj as Blob);
+        formImageData.append('files', videoFileList[0].originFileObj as Blob);
 
         instanceAxios
           .post(`api/media/${res.data.id}/upload/`, formImageData)
