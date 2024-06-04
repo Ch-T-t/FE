@@ -1,7 +1,7 @@
 import instanceAxios from '@/api/instanceAxios';
 import { useAppDispatch } from '@/app/hooks';
 import CMSCategory from '@/components/common/CMSCategory';
-import { IGoodHousePost } from '@/types/Job';
+import { IGoodHousePost, IPost } from '@/types/Job';
 import {
   CloseOutlined,
   ColumnHeightOutlined,
@@ -46,7 +46,7 @@ export default function PostGoodHousePage() {
     setCurrentPage(e);
   };
 
-  const fetchDelete = async (id: number) => {
+  const fetchDelete = async (id: number | string) => {
     await instanceAxios
       .delete(`/good-house/items/${id}/`)
       .then((res) => {
@@ -86,7 +86,7 @@ export default function PostGoodHousePage() {
   // useEffect(() => {
   //   fetchUserList(valueFilter);
   // }, [fetchUserList, valueFilter]);
-  const columns: ColumnsType<IGoodHousePost> = [
+  const columns: ColumnsType<IPost> = [
     {
       title: 'STT',
       render: (value, record, index) => index + 1,
@@ -103,7 +103,7 @@ export default function PostGoodHousePage() {
         <Image
           className="rounded"
           alt=""
-          src={record.images_A2[0]?.Image || ''}
+          src={record.banner || ''}
           width={100}
           height={60}
         />
@@ -112,12 +112,12 @@ export default function PostGoodHousePage() {
     {
       title: 'Tiêu đề',
       dataIndex: 'Name',
-      render: (value, record, index) => record.Title,
+      render: (value, record, index) => record.name,
     },
     {
       title: 'User',
       dataIndex: 'Name',
-      render: (value, record, index) => record.User.username,
+      render: (value, record, index) => record.user.fullname,
     },
 
     {

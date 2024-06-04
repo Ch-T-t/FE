@@ -1,7 +1,7 @@
 import instanceAxios from '@/api/instanceAxios';
 import { useAppDispatch } from '@/app/hooks';
 import CMSCategory from '@/components/common/CMSCategory';
-import { IRefrigeratorPost } from '@/types/Job';
+import { IPost, IRefrigeratorPost } from '@/types/Job';
 import {
   CloseOutlined,
   ColumnHeightOutlined,
@@ -49,7 +49,7 @@ export default function PostRefrigeratorPage() {
     setCurrentPage(e);
   };
 
-  const fetchDelete = async (id: number) => {
+  const fetchDelete = async (id: number | string) => {
     await instanceAxios
       .delete(`/refrigerator-airconditioner-washingmachine/items/${id}/`)
       .then((res) => {
@@ -89,7 +89,7 @@ export default function PostRefrigeratorPage() {
   // useEffect(() => {
   //   fetchUserList(valueFilter);
   // }, [fetchUserList, valueFilter]);
-  const columns: ColumnsType<IRefrigeratorPost> = [
+  const columns: ColumnsType<IPost> = [
     {
       title: 'STT',
       render: (value, record, index) => index + 1,
@@ -106,7 +106,7 @@ export default function PostRefrigeratorPage() {
         <Image
           className="rounded"
           alt=""
-          src={record.images_A3[0].Image || ''}
+          src={record.banner || ''}
           width={100}
           height={60}
         />
@@ -115,12 +115,12 @@ export default function PostRefrigeratorPage() {
     {
       title: 'Tiêu đề',
       dataIndex: 'Name',
-      render: (value, record, index) => record.Title,
+      render: (value, record, index) => record.name,
     },
     {
       title: 'User',
       dataIndex: 'Name',
-      render: (value, record, index) => record.User.username,
+      render: (value, record, index) => record.user.fullname,
     },
 
     {
