@@ -14,6 +14,7 @@ interface Props {
   data?: IPost;
   className?: string;
   classImg?: string;
+  pricerSuffixes?: string;
 }
 
 export default function CardItem(props: Props) {
@@ -37,7 +38,8 @@ export default function CardItem(props: Props) {
           Ngày làm: {moment(props.data?.created_at).format('DD/MM/YYYY')}
         </p>
         <p className="text-[#d0021b] h-[30px] my-[5px] !text[15px] !font-sans font-bold">
-          ${props.data?.info?.price || 0}/ngày
+          ${props.data?.info?.price || 0}
+          {props.pricerSuffixes && `/${props.pricerSuffixes}`}
         </p>
         <Space className="w-full h-[40px]">
           <Avatar src="" className="max-lg:!w-[20px] max-lg:!h-[20px]" />

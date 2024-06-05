@@ -2,6 +2,7 @@
 import instanceAxios from '@/api/instanceAxios';
 import { useAppSelector } from '@/app/hooks';
 import CardItemHorizontalManager from '@/components/common/CardItemHorizontalManager';
+import { textDefault } from '@/services/dataDefault';
 import { IPost, IProduct } from '@/types/Job';
 import { PlusOutlined } from '@ant-design/icons';
 import { Avatar, Flex, Image, List, Pagination, Space } from 'antd';
@@ -46,8 +47,10 @@ export default function PostManagePage() {
           <>
             <Avatar size={100} />
             <Flex vertical gap={10}>
-              <p className="font-semibold text-[18px]">Khánh sky</p>
-              <Link href={'/user/1'}>
+              <p className="font-semibold text-[18px]">
+                {currentUser.fullname || textDefault}
+              </p>
+              <Link href={`/user/${currentUser.id}`}>
                 <p className="px-[20px] py-[5px] text-[14px] cursor-pointer rounded-lg text-[#4e8bef] border border-[#4e8bef]">
                   Xem trang cá nhân
                 </p>
@@ -58,7 +61,7 @@ export default function PostManagePage() {
               className="absolute right-0 top-1/2 -translate-y-1/2 py-[5px] pl-[5px] pr-[20px] rounded-s-full bg-[#ffba00]"
               gap={10}
             >
-              <Avatar size={30} />
+              <Avatar size={30} src={currentUser.avatar || ''} />
               <p className="text-[12px] font-medium">BlueCar Auto</p>
             </Flex>
           </>
@@ -82,7 +85,7 @@ export default function PostManagePage() {
             onClick={() => setCurrentTab(item.key)}
             className={`flex-1 relative text-center px-2 transition-all py-[10px] uppercase text-[#9b9b9b] font-semibold ${
               currentTab === item.key &&
-              "before:content-[''] before:absolute  before:bg-[#ffba00] before:w-full before:h-[2px] before:rounded-full before:top-full before:left-0"
+              "before:content-[''] before:absolute border-b-2 border-[#ffba00] before:bg-[#ffba00] before:w-full before:h-[2px] before:rounded-full before:top-full before:left-0"
             }`}
             key={index}
           >
