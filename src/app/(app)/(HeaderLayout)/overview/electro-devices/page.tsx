@@ -3,7 +3,7 @@ import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
 import TitleBar from '@/components/common/TitleBar';
 import TopWork from '@/components/common/TopWork';
-import { IPost } from '@/types/Job';
+import { IPost, ISlide } from '@/types/Job';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { Avatar, Carousel, Flex, Image, Space } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
@@ -11,6 +11,7 @@ import React, { useEffect, useRef, useState } from 'react';
 export default function ElectroDevicePage() {
   const ref = useRef<HTMLDivElement>(null);
   const [productList, setProductList] = useState<IPost[]>([]);
+  const [slideList, setSlideList] = useState<ISlide[]>([]);
 
   useEffect(() => {
     instanceAxios
@@ -26,39 +27,45 @@ export default function ElectroDevicePage() {
       })
       .catch((err) => {})
       .finally(() => {});
+    instanceAxios
+      .get(`/api/slide`)
+      .then((res) => {
+        setSlideList((res.data as ISlide[]) || []);
+      })
+      .catch((err) => {});
   }, []);
 
   const categoryList = [
     {
-      iconLink: ``,
+      iconLink: `../phone.png`,
       name: 'Điện thoại',
     },
     {
-      iconLink: ``,
+      iconLink: `../dong_ho.png`,
       name: 'Đồng hồ',
     },
     {
-      iconLink: ``,
+      iconLink: `../laptop.png`,
       name: 'Laptop',
     },
     {
-      iconLink: ``,
+      iconLink: `../pc.png`,
       name: 'Máy tính để bàn',
     },
     {
-      iconLink: ``,
+      iconLink: `../tablet.png`,
       name: 'Máy tính bảng',
     },
     {
-      iconLink: ``,
+      iconLink: `../headphone.png`,
       name: 'Tai nghe',
     },
     {
-      iconLink: ``,
+      iconLink: `../phu_kien_man_hinh.png`,
       name: 'Phụ kiện màn hình',
     },
     {
-      iconLink: ``,
+      iconLink: `../headphone.png`,
       name: 'Loa',
     },
   ];
@@ -78,18 +85,13 @@ export default function ElectroDevicePage() {
     <div className="w-3/4 max-lg:w-full max-lg:p-[10px]  flex flex-col gap-y-5 m-auto">
       <div className="p-[10px] bg-white shadow-xl rounded-lg">
         <Carousel className="rounded-lg overflow-hidden" autoplay>
-          <div>
-            <h3 style={contentStyle}>1</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>2</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>3</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>4</h3>
-          </div>
+          {slideList.map((item, index) => (
+            <div key={index} className="max-lg:h-[100px] ">
+              <div style={contentStyle}>
+                <Image alt="" preview={false} src={item.banner} />
+              </div>
+            </div>
+          ))}
         </Carousel>
       </div>
       <div className="p-[10px] relative rounded-lg bg-white">
@@ -128,7 +130,7 @@ export default function ElectroDevicePage() {
                   width={70}
                   preview={false}
                   height={70}
-                  src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/411846395_1033629967741924_4686555832896425400_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=173fa1&_nc_ohc=TFo6GokxkkoAX8QCOlI&_nc_ht=scontent.fhan2-4.fna&oh=00_AfCyB703T6CTQ_eLMh6Rk8c3C6MYPVeCwXKcELXXWL0vyg&oe=65A4E06E"
+                  src={item.iconLink}
                   alt=""
                 />
                 <p className="text-wrap text-center text-[12px] font-medium">
