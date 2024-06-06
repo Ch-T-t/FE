@@ -56,6 +56,7 @@ export default function ProductInfoPage({
   const [loadingPage, setLoadingPage] = useState(true);
   const currentUser = useAppSelector((state) => state.user.data);
   const [productData, setProductData] = useState<IPost>();
+  const [relateProductList, setRelateProductList] = useState<IPost[]>([]);
   const [imageList, setImageList] = useState<IImage[]>([]);
   const [currentImg, setCurrentImg] = useState('');
   const [openReport, setOpenReport] = useState(false);
@@ -75,6 +76,14 @@ export default function ProductInfoPage({
         .then((res) => {
           setProductData(res.data);
           setCurrentImg(res.data.banner);
+          instanceAxios
+            .get(
+              `/api/products?limit=10&offset=1&category=${res.data.item_category?.name || res.data.category?.name}`
+            )
+            .then((res) => {
+              setRelateProductList(res.data.results);
+            })
+            .catch((err) => {});
         })
         .catch((err) => {})
         .finally(() => setLoadingPage(false));
@@ -351,34 +360,38 @@ export default function ProductInfoPage({
             </Modal>
           </div>
         </div>
-        <div className="relative max-lg:bg-white max-lg:mt-[10px]">
-          <div className="flex justify-between rounded-lg mt-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
-            <p>Tin tương tự</p>
-            <Space className="text-blue-800 text-[12px]">Xem tất cả</Space>
-          </div>
-          <button
-            className="absolute -translate-x-full left-0 top-1/2"
-            onClick={() => scroll(-200)}
-          >
-            <CaretLeftOutlined />
-          </button>
-          <button
-            className="absolute translate-x-full right-0 top-1/2"
-            onClick={() => scroll(200)}
-          >
-            <CaretRightOutlined />
-          </button>
-          <div
-            ref={ref}
-            className="w-full scroll-smooth overflow-x-auto no-scrollbar "
-          >
-            <div className="flex gap-x-2 py-[20px] px-[10px]">
-              {[...Array(12)].map((_, index) => (
-                <CardItem key={index} />
-              ))}
+        {relateProductList.length ? (
+          <div className="relative max-lg:bg-white max-lg:mt-[10px]">
+            <div className="flex justify-between rounded-lg mt-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
+              <p>Tin tương tự</p>
+              <Space className="text-blue-800 text-[12px]">Xem tất cả</Space>
+            </div>
+            <button
+              className="absolute -translate-x-full left-0 top-1/2"
+              onClick={() => scroll(-200)}
+            >
+              <CaretLeftOutlined />
+            </button>
+            <button
+              className="absolute translate-x-full right-0 top-1/2"
+              onClick={() => scroll(200)}
+            >
+              <CaretRightOutlined />
+            </button>
+            <div
+              ref={ref}
+              className="w-full scroll-smooth overflow-x-auto no-scrollbar "
+            >
+              <div className="flex gap-x-2 py-[20px] px-[10px]">
+                {relateProductList.map((item, index) => (
+                  <CardItem data={item} key={index} />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
         <div className="hidden max-lg:flex w-full fixed bottom-0 z-10 bg-white">
           <Flex
             align="center"
