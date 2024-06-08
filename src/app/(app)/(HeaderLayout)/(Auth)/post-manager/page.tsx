@@ -120,7 +120,6 @@ export default function PostManagePage() {
             Không thấy dữ liệu
           </div>
         )}
-        <CardItemHorizontalManager data={{}} />
         {/* {productList.map((item, index) => (
           <CardItemHorizontalManager key={index} />
         ))}
