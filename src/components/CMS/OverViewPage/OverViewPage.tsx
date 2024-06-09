@@ -1,6 +1,7 @@
 import React from 'react';
 import ChartCard from './components/ChartCard';
 import OverViewCard from './components/OverViewCard';
+import { IChartCart } from '@/types/User';
 
 export default function OverViewPage() {
   const staticticalData: IChartCart[] = [

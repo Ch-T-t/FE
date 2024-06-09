@@ -97,7 +97,10 @@ export default function CreatePostMachineryEquipmentForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <InputCustom
-          defaultValue={currentForm.currentData?.info?.title}
+          defaultValue={
+            currentForm.currentData?.name ||
+            currentForm.currentData?.info?.title
+          }
           onChange={(e) =>
             currentForm.setCurrentData?.({
               ...currentForm?.currentData,
@@ -105,6 +108,7 @@ export default function CreatePostMachineryEquipmentForm(props: Props) {
                 ...currentForm.currentData?.info,
                 title: String(e),
               },
+              name: String(e),
             })
           }
           label={'Tiêu đề tin đăng'}
@@ -154,7 +158,7 @@ export default function CreatePostMachineryEquipmentForm(props: Props) {
         rules={[{ required: true, message: 'Trường này bắt buộc!' }]}
       >
         <ModalLocationSelectCustom
-          // defaultValue={defaultLabel}
+          defaultValue={currentForm.currentData?.info?.address}
           // onChangeLabel={(e) => setDefaultLabel(e || '')}
           // onChange={(location, address) => {
           //   setLocationId((location as number) || 0);

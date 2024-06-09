@@ -1,4 +1,5 @@
 import instanceAxios from '@/api/instanceAxios';
+import { IUserRegister } from '@/types/User';
 import { Button, Form, Input, notification } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';

@@ -58,7 +58,7 @@ export default function ProfilePage() {
           </Flex>
         </Flex>
       </Flex>
-      <Flex vertical>
+      {/* <Flex vertical>
         <p className="bg-[#f4f4f4] px-[10px] py-[5px] text-[#9b9b9b] font-semibold">
           Quản lí đơn hàng
         </p>
@@ -76,7 +76,7 @@ export default function ProfilePage() {
           <BellFilled className="!text-white p-[5px] bg-red-500 rounded-full" />
           Đơn bán
         </Space>
-      </Flex>
+      </Flex> */}
       <Flex vertical>
         <p className="bg-[#f4f4f4] px-[10px] py-[5px] text-[#9b9b9b] font-semibold">
           Tiện ích

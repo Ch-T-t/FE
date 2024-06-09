@@ -43,11 +43,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <SWRConfig
           value={{
             // refreshInterval: 3000,
-            //   fetcher: (resource, init) =>
-            //     fetch(resource, init).then((res) => res.json()),
+            fetcher: (resource, init) =>
+              fetch(resource, init).then((res) => res.json()),
             revalidateIfStale: false,
             revalidateOnFocus: false,
-            revalidateOnReconnect: true,
+            revalidateOnReconnect: false,
             revalidateOnMount: false,
           }}
         >

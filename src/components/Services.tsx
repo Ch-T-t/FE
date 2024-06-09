@@ -9,7 +9,8 @@ export default function Services({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
   const route = useRouter();
   const [loadingPage, setLoadingPage] = useState(true);
-  const cookie = getCookie('access');
+  const access = getCookie('access');
+  const refresh = getCookie('refresh');
   useEffect(() => {
     const fetchUserInfomation = async () => {
       await instanceAxios
@@ -23,9 +24,27 @@ export default function Services({ children }: { children: React.ReactNode }) {
           console.log(err);
         });
     };
-    if (cookie) fetchUserInfomation();
+    const fetchRefresToken = async () => {
+      setInterval(() => {
+        instanceAxios
+          .post('/api/auth/refresh/', {
+            refresh: refresh,
+          })
+          .then((res) => {
+            setCookie('access', res.data.access);
+          })
+          .catch((err) => {
+            dispatch(logout());
+            deleteCookie('access');
+            console.log(err);
+          });
+      }, 5000);
+    };
+
+    if (access) fetchUserInfomation();
+    if (refresh) fetchRefresToken();
     setLoadingPage(false);
-  }, [dispatch, route, cookie]);
+  }, [route]);
 
   return !loadingPage && children;
 }

@@ -1,3 +1,4 @@
+import { IChartCart } from '@/types/User';
 import { Area, AreaChart, ResponsiveContainer } from 'recharts';
 
 export default function ChartCard(props: IChartCart) {

@@ -23,6 +23,7 @@ import {
   Input,
   Modal,
   Space,
+  Spin,
   UploadFile,
   UploadProps,
   message,
@@ -148,7 +149,7 @@ export default function CreatePostPage() {
           fileList.map((item, index) =>
             formImageData.append('files', item.originFileObj as Blob)
           );
-        formImageData.append('video', fileList[0].originFileObj as Blob);
+        formImageData.append('files', videoFileList[0].originFileObj as Blob);
 
         instanceAxios
           .post(`api/media/${res.data.id}/upload/`, formImageData)
@@ -320,6 +321,7 @@ export default function CreatePostPage() {
                           // onClick={fetchCreate}
                           className="w-full py-[10px] rounded-lg border text-white bg-[#da7502] border-[#da7502] hover:text-white hover:bg-[#da6702]"
                         >
+                          <Spin spinning={loading} />
                           Đăng tin
                         </button>
                       </Form.Item>

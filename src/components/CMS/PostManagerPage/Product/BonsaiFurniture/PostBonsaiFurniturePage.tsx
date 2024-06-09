@@ -1,7 +1,7 @@
 import instanceAxios from '@/api/instanceAxios';
 import { useAppDispatch } from '@/app/hooks';
 import CMSCategory from '@/components/common/CMSCategory';
-import { IElectroDevice, IHomeAppliance } from '@/types/Job';
+import { IElectroDevice, IHomeAppliance, IPost } from '@/types/Job';
 import {
   CloseOutlined,
   ColumnHeightOutlined,
@@ -46,7 +46,7 @@ export default function PostBonsaiFurniturePage() {
     setCurrentPage(e);
   };
 
-  const fetchDelete = async (id: number) => {
+  const fetchDelete = async (id: number | string) => {
     await instanceAxios
       .delete(`/home-appliance/items/${id}/`)
       .then((res) => {
@@ -86,7 +86,7 @@ export default function PostBonsaiFurniturePage() {
   // useEffect(() => {
   //   fetchUserList(valueFilter);
   // }, [fetchUserList, valueFilter]);
-  const columns: ColumnsType<IElectroDevice> = [
+  const columns: ColumnsType<IPost> = [
     {
       title: 'STT',
       render: (value, record, index) => index + 1,
@@ -103,7 +103,7 @@ export default function PostBonsaiFurniturePage() {
         <Image
           className="rounded"
           alt=""
-          src={record.images_A3[0].Image || ''}
+          src={record.banner || ''}
           width={100}
           height={60}
         />
@@ -112,12 +112,12 @@ export default function PostBonsaiFurniturePage() {
     {
       title: 'Tiêu đề',
       dataIndex: 'Name',
-      render: (value, record, index) => record.Title,
+      render: (value, record, index) => record.name,
     },
     {
       title: 'User',
       dataIndex: 'Name',
-      render: (value, record, index) => record.User.username,
+      render: (value, record, index) => record.user.fullname,
     },
 
     {
@@ -129,7 +129,7 @@ export default function PostBonsaiFurniturePage() {
           <Switch />
           <Popconfirm
             title={'Xác nhận xóa'}
-            onConfirm={() => fetchDelete(record.id || 0)}
+            onConfirm={() => fetchDelete(record.id || '')}
           >
             <CloseOutlined />
           </Popconfirm>

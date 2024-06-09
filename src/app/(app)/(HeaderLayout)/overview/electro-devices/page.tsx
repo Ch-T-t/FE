@@ -1,14 +1,74 @@
 'use client';
+import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
 import TitleBar from '@/components/common/TitleBar';
 import TopWork from '@/components/common/TopWork';
+import { IPost, ISlide } from '@/types/Job';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { Avatar, Carousel, Flex, Image, Space } from 'antd';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function ElectroDevicePage() {
   const ref = useRef<HTMLDivElement>(null);
+  const [productList, setProductList] = useState<IPost[]>([]);
+  const [slideList, setSlideList] = useState<ISlide[]>([]);
 
+  useEffect(() => {
+    instanceAxios
+      .get(`/api/products`, {
+        params: {
+          limit: 10,
+          offset: 1,
+          category: 'WORKER',
+        },
+      })
+      .then((res) => {
+        setProductList(res.data.results);
+      })
+      .catch((err) => {})
+      .finally(() => {});
+    instanceAxios
+      .get(`/api/slide`)
+      .then((res) => {
+        setSlideList((res.data as ISlide[]) || []);
+      })
+      .catch((err) => {});
+  }, []);
+
+  const categoryList = [
+    {
+      iconLink: `../phone.png`,
+      name: 'Điện thoại',
+    },
+    {
+      iconLink: `../dong_ho.png`,
+      name: 'Đồng hồ',
+    },
+    {
+      iconLink: `../laptop.png`,
+      name: 'Laptop',
+    },
+    {
+      iconLink: `../pc.png`,
+      name: 'Máy tính để bàn',
+    },
+    {
+      iconLink: `../tablet.png`,
+      name: 'Máy tính bảng',
+    },
+    {
+      iconLink: `../headphone.png`,
+      name: 'Tai nghe',
+    },
+    {
+      iconLink: `../phu_kien_man_hinh.png`,
+      name: 'Phụ kiện màn hình',
+    },
+    {
+      iconLink: `../headphone.png`,
+      name: 'Loa',
+    },
+  ];
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
       ref.current.scrollLeft += scrollOffset;
@@ -25,18 +85,13 @@ export default function ElectroDevicePage() {
     <div className="w-3/4 max-lg:w-full max-lg:p-[10px]  flex flex-col gap-y-5 m-auto">
       <div className="p-[10px] bg-white shadow-xl rounded-lg">
         <Carousel className="rounded-lg overflow-hidden" autoplay>
-          <div>
-            <h3 style={contentStyle}>1</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>2</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>3</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>4</h3>
-          </div>
+          {slideList.map((item, index) => (
+            <div key={index} className="max-lg:h-[100px] ">
+              <div style={contentStyle}>
+                <Image alt="" preview={false} src={item.banner} />
+              </div>
+            </div>
+          ))}
         </Carousel>
       </div>
       <div className="p-[10px] relative rounded-lg bg-white">
@@ -65,7 +120,7 @@ export default function ElectroDevicePage() {
           className="w-full mt-[10px] scroll-smooth transition relative overflow-x-auto no-scrollbar"
         >
           <div className="flex gap-x-4  justify-between">
-            {[...Array(15)].map((item, index) => (
+            {categoryList.map((item, index) => (
               <div
                 key={index}
                 className="flex w-[100px] hover:bg-[#f5f5f5] px-[20px] py-[10px] rounded-md flex-col gap-y-5 items-center"
@@ -75,11 +130,11 @@ export default function ElectroDevicePage() {
                   width={70}
                   preview={false}
                   height={70}
-                  src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/411846395_1033629967741924_4686555832896425400_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=173fa1&_nc_ohc=TFo6GokxkkoAX8QCOlI&_nc_ht=scontent.fhan2-4.fna&oh=00_AfCyB703T6CTQ_eLMh6Rk8c3C6MYPVeCwXKcELXXWL0vyg&oe=65A4E06E"
+                  src={item.iconLink}
                   alt=""
                 />
                 <p className="text-wrap text-center text-[12px] font-medium">
-                  Nội thất cây cảnh
+                  {item.name}
                 </p>
               </div>
             ))}
@@ -96,8 +151,8 @@ export default function ElectroDevicePage() {
 
         <div className="w-full scroll-smooth overflow-x-auto no-scrollbar ">
           <div className="flex gap-x-2 py-[20px] px-[10px]">
-            {[...Array(4)].map((_, index) => (
-              <CardItem key={index} />
+            {productList.map((item, index) => (
+              <CardItem data={item} key={index} />
             ))}
           </div>
         </div>

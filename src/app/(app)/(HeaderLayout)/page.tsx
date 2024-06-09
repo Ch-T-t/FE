@@ -18,7 +18,16 @@ import {
   PlusCircleOutlined,
 } from '@ant-design/icons';
 import { UserButton } from '@clerk/nextjs';
-import { Badge, Button, Carousel, Flex, Form, Image, Input } from 'antd';
+import {
+  Badge,
+  Button,
+  Carousel,
+  Flex,
+  Form,
+  Image,
+  Input,
+  Pagination,
+} from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
@@ -27,6 +36,9 @@ export default function HomePage() {
   const ref = useRef<HTMLDivElement>(null);
   const [productList, setProducList] = useState<IPost[]>([]);
   const [slideList, setSlideList] = useState<ISlide[]>([]);
+  const [limit, setLimit] = useState(10);
+  const [currentPagination, setCurrentPagination] = useState(1);
+  const [productTotal, setProductTotal] = useState(0);
 
   const router = useRouter();
   const scroll = (scrollOffset: number) => {
@@ -44,9 +56,10 @@ export default function HomePage() {
 
   useEffect(() => {
     instanceAxios
-      .get(`/api/products`)
+      .get(`/api/products?limit=${limit}&offset=2`)
       .then((res) => {
-        setProducList((res.data as IPost[]) || []);
+        setProducList((res.data.results as IPost[]) || []);
+        setProductTotal(res.data.count);
       })
       .catch((err) => console.log(err));
 
@@ -174,11 +187,11 @@ export default function HomePage() {
           ref={ref}
           className="w-full scroll-smooth transition relative overflow-x-auto no-scrollbar px-[24px]"
         >
-          <div className="grid h-[300px] max-lg:h-[230px] grid-flow-col-dense grid-rows-2 flex-wrap gap-x-24 max-md:gap-10  justify-start">
+          <div className="grid max-lg:h-[230px] grid-flow-col-dense grid-rows-2 flex-wrap gap-x-24 gap-y-10 max-md:gap-10  justify-start">
             {categoryList.map((item, index) => (
               <Link key={index} href={item.url || ''}>
-                <div className="flex w-[100px] flex-col max-md:w-[50px] items-center">
-                  <div className="w-full h-[100px] max-md:w-[70px] max-md:h-[70px]">
+                <div className="flex flex-col max-md:w-[50px] items-center">
+                  <div className=" w-[120px] h-[120px] max-md:w-[70px] max-md:h-[70px]">
                     <Image
                       preview={false}
                       width={`100%`}
@@ -188,7 +201,7 @@ export default function HomePage() {
                       alt=""
                     />
                   </div>
-                  <p className="text-wrap w-full text-center text-[14px] max-md:text-[8px] font-medium">
+                  <p className="text-wrap w-full text-center text-[14px] mt-[5px] max-md:text-[8px] font-medium">
                     {item.label}
                   </p>
                 </div>
@@ -202,14 +215,24 @@ export default function HomePage() {
         <div className="rounded-lg bg-white max-lg:text-[14px] max-lg:border-none max-lg:shadow-none font-semibold uppercase text-[16px] px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
           Tin đăng mới
         </div>
-        <div className="flex flex-wrap justify-center gap-[9.5px] max-lg:gap-1 mt-[20px] max-lg:mt-[10px] max-lg:grid max-lg:gap-y-5 max-lg:grid-cols-2">
-          {productList.map((item, index) => (
+        <div className="grid grid-cols-5 justify-center gap-3 max-lg:gap-1 mt-[20px] max-lg:mt-[10px] max-lg:grid max-lg:gap-y-5 max-lg:grid-cols-2">
+          {productList.map?.((item, index) => (
             <CardItem
+              className="w-full"
               data={item}
               ribbon={index % 2 == 0 ? 'Việc 24h' : ''}
               key={index}
             />
           ))}
+          {productList.map?.((item, index) => (
+            <CardItem
+              className="w-full"
+              data={item}
+              ribbon={index % 2 == 0 ? 'Việc 24h' : ''}
+              key={index}
+            />
+          ))}
+
           {/* {[...Array(3)].map((_, index) => (
             <CardItem
               data={{
@@ -220,6 +243,11 @@ export default function HomePage() {
             />
           ))} */}
         </div>
+        <Pagination
+          className="flex items-center justify-center !mt-[20px]"
+          defaultCurrent={currentPagination}
+          total={productTotal}
+        />
       </div>
       <div className="bg-white p-[10px] rounded-md">
         <Introduce />

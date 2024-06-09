@@ -5,6 +5,7 @@ import { login } from '@/app/reducers/userReducer';
 import LoginForm from '@/components/common/LoginForm';
 import RegisterForm from '@/components/common/RegisterForm';
 import { auth } from '@/services/base';
+import { IUserLogin, IUserRegister } from '@/types/User';
 // import { auth } from '@/services/base';
 import { FacebookFilled, GoogleSquareFilled } from '@ant-design/icons';
 import {

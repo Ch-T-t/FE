@@ -49,18 +49,9 @@ interface IShop {
   contact?: {
     phone: string;
   };
-  user?: IUser;
+  user?: IUser | string;
   email?: string;
   description?: string;
-}
-
-interface IImage {
-  id: number;
-  Image: string;
-  Creation_time: string;
-  Update_time: string;
-  Job: number;
-  Items: number;
 }
 
 interface ILocation {
@@ -96,6 +87,12 @@ interface ISlide {
   created_at?: string;
   updated_at?: string;
   status?: boolean;
+}
+
+interface IImage {
+  id?: string;
+  image?: string;
+  product?: string;
 }
 
 interface IPost {

@@ -1,3 +1,4 @@
+import { IUser } from '@/types/User';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 

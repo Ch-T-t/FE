@@ -9,13 +9,41 @@ interface Props {
 export default function ChooseCategoryPage(props: Props) {
   const currentShopData = useContext(CurrentShopDataContext);
 
+  const categoryList = [
+    {
+      img: '../oto.png',
+      title: 'Cửa hàng',
+      name: 'Xe cộ',
+    },
+    {
+      img: '../viec_lam.png',
+      title: 'Chuyên trang',
+      name: 'Việc làm',
+    },
+    {
+      img: '../dien_tu.png',
+      title: 'Cửa hàng',
+      name: 'Điện tử',
+    },
+    {
+      img: '../taxi.png',
+      title: 'Chuyên trang',
+      name: 'Taxi',
+    },
+    {
+      img: '../dien_lanh.png',
+      title: 'Cửa hàng',
+      name: 'Điện lạnh',
+    },
+  ];
+
   return (
     <div className="w-full p-[20px] bg-white rounded-xl cursor-pointer">
       <p className="pb-[20px] font-bold text-[20px]">
         Tạo cửa hàng / chuyên trang
       </p>
       <Row gutter={[16, 16]} className="w-full">
-        {[...Array(5)].map((_, index) => (
+        {categoryList.map((item, index) => (
           <Col key={index} span={12}>
             <div
               onClick={() => {
@@ -33,12 +61,12 @@ export default function ChooseCategoryPage(props: Props) {
                 height={`100%`}
                 className="object-cover rounded-lg !m-0 overflow-hidden "
                 preview={false}
-                src="https://st.nettruyenbb.com/data/comics/160/cuong-loan-lenh-nuong-nia-liston.jpg"
+                src={item.img}
               />
               <span className="w-1/2 absolute left-0 h-full bg-gradient-to-r from-[#121212a2]"></span>
               <div className="absolute w-full h-full text-white top-0 pl-[30px] flex flex-col justify-center ">
-                <p>Cửa hàng</p>
-                <strong>Xe cộ</strong>
+                <p>{item.title}</p>
+                <strong>{item.name}</strong>
               </div>
             </div>
           </Col>
@@ -63,7 +91,7 @@ export default function ChooseCategoryPage(props: Props) {
               height={`100%`}
               className="object-cover rounded-lg !m-0 overflow-hidden "
               preview={false}
-              src="https://st.nettruyenbb.com/data/comics/160/cuong-loan-lenh-nuong-nia-liston.jpg"
+              src="../map.png"
             />
             <span className="w-1/2 absolute left-0 h-full bg-gradient-to-r from-[#121212a2]"></span>
             <div className="absolute w-full h-full text-white top-0 pl-[30px] flex flex-col justify-center ">

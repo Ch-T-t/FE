@@ -3,6 +3,7 @@ import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
 import { textDefault } from '@/services/dataDefault';
 import { IPost, IProduct } from '@/types/Job';
+import { IUser } from '@/types/User';
 import {
   ContactsOutlined,
   EllipsisOutlined,
@@ -33,6 +34,8 @@ export default function UserIdPage({
   const [currentTab, setCurrentTab] = useState<'POST' | 'RATE'>('POST');
   const [userData, setUserData] = useState<IUser>();
   const [productList, setProductList] = useState<IPost[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [followList, setFollowList] = useState<any[]>([]);
 
   useEffect(() => {
     const fechUserInfo = async () => {
@@ -46,12 +49,33 @@ export default function UserIdPage({
     };
     const fechProductUserList = async () => {
       await instanceAxios
-        .get(`/list_home/user/${params.userId}/`)
+        .get(`/api/products`, {
+          params: {
+            user_id: params.userId,
+            // offset: 10,
+            // limit: 5,
+          },
+        })
         .then((res) => {
-          setProductList(res.data.data);
+          setProductList(res.data);
         })
         .catch((err) => {});
     };
+    const fechFollowtUserList = async () => {
+      await instanceAxios
+        .get(`/api/follower/following`, {
+          params: {
+            user_id: params.userId,
+            // offset: 10,
+            // limit: 5,
+          },
+        })
+        .then((res) => {
+          setFollowList(res.data);
+        })
+        .catch((err) => {});
+    };
+    fechFollowtUserList();
     fechProductUserList();
     fechUserInfo();
   }, [params.userId]);
@@ -121,7 +145,7 @@ export default function UserIdPage({
                 <p className="text-[12px] text-center text-[#666666] font-semibold">
                   Số người theo dõi
                 </p>
-                <b>5</b>
+                <b>{followList.length}</b>
               </Space>
             </Flex>
             <Space className="w-full" direction="vertical">
@@ -185,13 +209,14 @@ export default function UserIdPage({
                   }}
                   grid={{
                     column: 3,
+                    gutter: 40,
                   }}
                   itemLayout="horizontal"
                   dataSource={productList}
                   renderItem={(item) => (
                     <List.Item>
-                      {/* <Card title={item.title}>Card content</Card> */}
                       <CardItem
+                        className="w-[265px]"
                         imageWidth={240}
                         data={item}
                         imageHeight={250}

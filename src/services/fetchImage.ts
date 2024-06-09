@@ -15,7 +15,7 @@ export const convertImageToUploadFile = async (
   item: IImage
 ): Promise<UploadFile> => {
   try {
-    const blob = await fetchImageBlob(item.Image);
+    const blob = await fetchImageBlob(item.image || '');
     // Tạo đối tượng File từ dữ liệu nhận được
     const file = new File([blob], `image${item.id}.jpg`, { type: 'image/jpg' });
     // Trả về đối tượng UploadFile đã tạo
@@ -23,7 +23,7 @@ export const convertImageToUploadFile = async (
       uid: `-${item.id}`,
       name: `image${item.id}.jpg`,
       status: 'done',
-      url: item.Image,
+      url: item.image,
       originFileObj: file as RcFile,
     };
   } catch (error) {

@@ -3,9 +3,8 @@ import instanceAxios from '@/api/instanceAxios';
 import { useAppSelector } from '@/app/hooks';
 import CardItem from '@/components/common/CardItem';
 import { textCensorship, textDefault } from '@/services/dataDefault';
-import getPrefixUrl from '@/services/getPrefixUrl';
 import renderTagItem from '@/services/renderTagItem';
-import { IPost, IProduct } from '@/types/Job';
+import { IImage, IPost, ISlide } from '@/types/Job';
 import {
   CaretLeftOutlined,
   CaretRightOutlined,
@@ -21,11 +20,32 @@ import {
   ShareAltOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Avatar, Flex, Image, Rate, Space, message } from 'antd';
+import {
+  Avatar,
+  Button,
+  Flex,
+  Image,
+  Input,
+  Modal,
+  Popover,
+  Radio,
+  Rate,
+  Space,
+  message,
+} from 'antd';
+import TextArea from 'antd/es/input/TextArea';
 import moment from 'moment';
 import Link from 'next/link';
-import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from 'react-share';
 
 export default function ProductInfoPage({
   params,
@@ -36,27 +56,55 @@ export default function ProductInfoPage({
   const [loadingPage, setLoadingPage] = useState(true);
   const currentUser = useAppSelector((state) => state.user.data);
   const [productData, setProductData] = useState<IPost>();
+  const [relateProductList, setRelateProductList] = useState<IPost[]>([]);
+  const [imageList, setImageList] = useState<IImage[]>([]);
+  const [currentImg, setCurrentImg] = useState('');
+  const [openReport, setOpenReport] = useState(false);
+  const [reportValue, setReportValue] = useState('');
+
   const router = useRouter();
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
       ref.current.scrollLeft += scrollOffset;
     }
   };
+
   useEffect(() => {
     const fetchProductData = async () => {
       await instanceAxios
         .get(`/api/products/${params.productId}`)
         .then((res) => {
           setProductData(res.data);
+          setCurrentImg(res.data.banner);
+          instanceAxios
+            .get(
+              `/api/products?limit=10&offset=1&category=${res.data.item_category?.name || res.data.category?.name}`
+            )
+            .then((res) => {
+              setRelateProductList(res.data.results);
+            })
+            .catch((err) => {});
         })
         .catch((err) => {})
         .finally(() => setLoadingPage(false));
     };
+    instanceAxios
+      .get(`/api/media`, {
+        params: {
+          product_id: params.productId,
+        },
+      })
+      .then((res) => {
+        setImageList(res.data);
+      })
+      .catch((err) => {})
+      .finally(() => setLoadingPage(false));
+
     fetchProductData();
   }, [params.category, params.productId]);
   const fetchFolow = async () => {
     await instanceAxios
-      .post(`follow/followers/`, { watching: productData?.id })
+      .post(`/api/follower`, { user_to: productData?.user?.id })
       .then((res) => {
         message.success('Đã theo dõi');
       })
@@ -69,6 +117,28 @@ export default function ProductInfoPage({
     // localStorage.setItem('productChatKey', productData?.Url || '');
     router.push(`/chat`);
   };
+  const reportCategory = [
+    {
+      name: 'Lừa đảo',
+      value: 'Lừa đảo',
+    },
+    {
+      name: 'Trùng lặp',
+      value: 'Trùng lặp',
+    },
+    {
+      name: 'Sản phẩm đã bán',
+      value: 'Sản phẩm đã bán',
+    },
+    {
+      name: 'Thông tin không đúng thực tế',
+      value: 'Thông tin không đúng thực tế',
+    },
+    {
+      name: 'Lý do khác',
+      value: 'Lý do khác',
+    },
+  ];
   return (
     !loadingPage && (
       <div className="w-3/4 max-lg:w-full m-auto">
@@ -80,19 +150,20 @@ export default function ProductInfoPage({
                 height={300}
                 className="object-cover "
                 preview={false}
-                src={productData?.banner}
+                src={currentImg}
                 alt=""
               />
               <div className="w-full overflow-x-auto">
                 <div className="flex gap-x-2">
-                  {[...Array(50)].map((_, index) => (
+                  {imageList.map((item, index) => (
                     <Image
                       key={index}
                       width={100}
+                      onClick={() => setCurrentImg(item.image || '')}
                       height={100}
                       className="object-cover "
                       preview={false}
-                      src={''}
+                      src={item.image}
                       alt=""
                     />
                   ))}
@@ -105,11 +176,36 @@ export default function ProductInfoPage({
                 <b className="text-[#d0021b]">
                   ${productData?.info?.price?.toLocaleString() || 0}
                 </b>
-                <div className="flex gap-x-5">
-                  <Space>
-                    <ShareAltOutlined />
-                    Chia sẻ
-                  </Space>
+                <div className="flex gap-x-5 cursor-pointer">
+                  <Popover
+                    content={
+                      <Flex gap={10}>
+                        <FacebookShareButton
+                          url={`${process.env.NEXT_PUBLIC_URL_ORIGIN}/product/${params.productId}`}
+                        >
+                          <FacebookIcon size={32} round={true} />
+                        </FacebookShareButton>
+
+                        <TwitterShareButton
+                          url={`${process.env.NEXT_PUBLIC_URL_ORIGIN}/product/${params.productId}`}
+                        >
+                          <TwitterIcon size={32} round={true} />
+                        </TwitterShareButton>
+
+                        <TelegramShareButton
+                          url={`${process.env.NEXT_PUBLIC_URL_ORIGIN}/product/${params.productId}`}
+                        >
+                          <TelegramIcon size={32} round={true} />
+                        </TelegramShareButton>
+                      </Flex>
+                    }
+                    trigger="click"
+                  >
+                    <Space>
+                      <ShareAltOutlined />
+                      Chia sẻ
+                    </Space>
+                  </Popover>
                   <Space>
                     <HeartFilled />
                     lưu tin
@@ -224,40 +320,78 @@ export default function ProductInfoPage({
                 </div>
               )}
             </div>
-            <Space className="text-[#b5b5b5]">
+            <Space
+              onClick={() => setOpenReport(true)}
+              className="text-[#b5b5b5]"
+            >
               <WarningOutlined />
               Báo cáo tin đăng này
             </Space>
+            <Modal
+              centered
+              open={openReport}
+              title={
+                <p className="text-[20px] text-center font-bold">
+                  Báo cáo tin đăng này
+                </p>
+              }
+              onCancel={() => setOpenReport(false)}
+              footer={[]}
+            >
+              <b>Tin rao này có vấn đề gì?</b>
+              <Flex className="mt-[10px]" vertical gap={10}>
+                {reportCategory.map((item, index) => (
+                  <Flex key={index} justify="space-between">
+                    <p>{item.name}</p>
+                    <div className="w-[20px] h-[20px] border-[7px] bg-white rounded-full"></div>
+                  </Flex>
+                ))}
+              </Flex>
+              <p className="mt-[20px] font-bold">Chi tiết</p>
+              <TextArea placeholder="Vui lòng mô tả thêm dấu hiệu lừa đảo" />
+              <p className="mt-[20px] font-bold">
+                Thông tin để chợ tốt Đài Loan liên hệ với bạn khi cần thiết
+              </p>
+              <Input placeholder="Số điện thoại của bạn" />
+              <Input className="!mt-[10px]" placeholder="Email của bạn" />
+              <Button className="mt-[20px] !text-white !w-full !bg-[#ff9902]">
+                GỬI BÁO CÁO
+              </Button>
+            </Modal>
           </div>
         </div>
-        <div className="relative max-lg:bg-white max-lg:mt-[10px]">
-          <div className="flex justify-between rounded-lg mt-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
-            <p>Tin tương tự</p>
-            <Space className="text-blue-800 text-[12px]">Xem tất cả</Space>
-          </div>
-          <button
-            className="absolute -translate-x-full left-0 top-1/2"
-            onClick={() => scroll(-200)}
-          >
-            <CaretLeftOutlined />
-          </button>
-          <button
-            className="absolute translate-x-full right-0 top-1/2"
-            onClick={() => scroll(200)}
-          >
-            <CaretRightOutlined />
-          </button>
-          <div
-            ref={ref}
-            className="w-full scroll-smooth overflow-x-auto no-scrollbar "
-          >
-            <div className="flex gap-x-2 py-[20px] px-[10px]">
-              {[...Array(12)].map((_, index) => (
-                <CardItem key={index} />
-              ))}
+        {relateProductList.length ? (
+          <div className="relative max-lg:bg-white max-lg:mt-[10px]">
+            <div className="flex justify-between rounded-lg mt-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
+              <p>Tin tương tự</p>
+              <Space className="text-blue-800 text-[12px]">Xem tất cả</Space>
+            </div>
+            <button
+              className="absolute -translate-x-full left-0 top-1/2"
+              onClick={() => scroll(-200)}
+            >
+              <CaretLeftOutlined />
+            </button>
+            <button
+              className="absolute translate-x-full right-0 top-1/2"
+              onClick={() => scroll(200)}
+            >
+              <CaretRightOutlined />
+            </button>
+            <div
+              ref={ref}
+              className="w-full scroll-smooth overflow-x-auto no-scrollbar "
+            >
+              <div className="flex gap-x-2 py-[20px] px-[10px]">
+                {relateProductList.map((item, index) => (
+                  <CardItem data={item} key={index} />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
         <div className="hidden max-lg:flex w-full fixed bottom-0 z-10 bg-white">
           <Flex
             align="center"

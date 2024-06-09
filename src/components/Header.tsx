@@ -30,6 +30,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import NotificationItem from './common/NotificationItem';
 import { SignOutButton, useAuth } from '@clerk/nextjs';
+import { INotification } from '@/types/User';
 
 export default function Header() {
   const [showModalMenu, setShowModalMenu] = useState(false);
