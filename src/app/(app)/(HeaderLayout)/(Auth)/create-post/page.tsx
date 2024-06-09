@@ -1,14 +1,7 @@
 'use client';
-import { fetchCreatePost } from '@/api/allRequest';
 import instanceAxios from '@/api/instanceAxios';
 import { CurrentFormContext } from '@/app/(app)/CurentFormContext';
 import { useAppSelector } from '@/app/hooks';
-import CreatePostAirConditionForm from '@/components/common/Form/CreatePostAirConditionForm';
-import CreatePostBusinessPremisesForm from '@/components/common/Form/CreatePostBusinessPremisesForm';
-import CreatePostCarForm from '@/components/common/Form/CreatePostCarForm';
-import CreatePostDesktopForm from '@/components/common/Form/CreatePostDesktopForm';
-import CreatePostElectronicDeviceForm from '@/components/common/Form/CreatePostElectronicDeviceForm';
-import InputCustom from '@/components/common/InputCustom';
 import ModalCategorySelectCustom from '@/components/common/ModalCategorySelectCustom';
 import PreviewProduct from '@/components/common/PreviewProduct';
 import getBase64, { FileType } from '@/services/getBase64';
@@ -16,11 +9,9 @@ import getFormByKey from '@/services/getFormByKey';
 import { IPost } from '@/types/Job';
 import { InboxOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import {
-  Button,
   Flex,
   Form,
   Image,
-  Input,
   Modal,
   Space,
   Spin,

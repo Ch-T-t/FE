@@ -1,10 +1,9 @@
 'use client';
 import ActiveCreateMarketPage from '@/components/create-market/ActiveCreateMarketPage';
-import ChooseCategoryPage from '@/components/create-market/ChooseCategoryPage';
 import PaidCreateMarketPage from '@/components/create-market/PaidCreateMarketPage';
 import SetCreateMarketPage from '@/components/create-market/SetCreateMarketPage';
 import { Flex, Space } from 'antd';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function CreateMapPage() {
   const [currentStep, setCurrentStep] = useState(0);
