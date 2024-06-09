@@ -43,7 +43,10 @@ export default function CardItem(props: Props) {
           {props.pricerSuffixes && `/${props.pricerSuffixes}`}
         </p>
         <Space className="w-full h-[40px]">
-          <Avatar src="" className="max-lg:!w-[20px] max-lg:!h-[20px]" />
+          <Avatar
+            src="../user_default.png"
+            className="max-lg:!w-[20px] max-lg:!h-[20px]"
+          />
           <p className="w-[150px] block text-[12px] text-[#c7c7c7] truncate max-lg:text-[10px]">
             {moment(props.data?.created_at).fromNow()} • {props.data?.name}
           </p>
@@ -58,10 +61,14 @@ export default function CardItem(props: Props) {
       href={`/product/${props.data?.id}`}
     >
       <Ribbon
-        // className="invisible"
+        className="-translate-y-[10px]"
         color="red"
         placement="start"
-        text={<i className="font-semibold">Việc làm 24h</i>}
+        text={
+          <p className="italic font-semibold py-[5px] rounded-lg ">
+            Việc làm 24h
+          </p>
+        }
       >
         {children}
       </Ribbon>

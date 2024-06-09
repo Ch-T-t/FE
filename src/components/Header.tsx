@@ -104,17 +104,16 @@ export default function Header() {
                 alt="Chotot Logo"
               />
             </Link>
-            <Flex
-              gap={20}
-              justify="center"
-              align="center"
-              className="relative "
-            >
+            <Flex gap={20} justify="center" className="relative">
               <div className="relative max-lg:hidden">
-                <BellOutlined
-                  className="text-[20px] "
+                <Image
+                  width={20}
+                  alt=""
+                  src="../bell.png"
                   onClick={() => setOpenNotification(true)}
+                  preview={false}
                 />
+                {/* <BellOutlined className="text-[20px] " /> */}
                 {openNotification && (
                   <div
                     ref={notificationRef}
@@ -146,7 +145,7 @@ export default function Header() {
                 className="text-black hover:text-black max-lg:hidden"
                 href={'/chat'}
               >
-                <MessageOutlined className="text-[20px]" />
+                <Image width={20} alt="" src="../message.png" preview={false} />
               </Link>
               <Link
                 className="text-black hover:text-black max-lg:text-[12px] text-nowrap max-lg:hidden"
@@ -193,7 +192,12 @@ export default function Header() {
                 href={'/post-manager'}
               >
                 <Flex className="text-nowrap" gap={10} align="center">
-                  <ProfileOutlined className="text-[20px]" />
+                  <Image
+                    width={30}
+                    preview={false}
+                    alt=""
+                    src="../quan_li_tin.png"
+                  />
                   <p className="max-lg:hidden">Quản lí tin</p>
                 </Flex>
               </Link>
@@ -212,7 +216,13 @@ export default function Header() {
                   gap={10}
                   align="center"
                 >
-                  <UserOutlined className="text-[20px]" />
+                  <Image
+                    width={30}
+                    preview={false}
+                    alt=""
+                    src="../user_avatar.png"
+                  />
+                  {/* <UserOutlined className="text-[20px]" /> */}
                   <p className="max-lg:hidden">
                     {user.logged
                       ? user.data.fullname || `Tên chưa cung cấp`
