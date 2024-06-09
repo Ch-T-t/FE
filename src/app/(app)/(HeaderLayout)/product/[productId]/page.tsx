@@ -141,7 +141,7 @@ export default function ProductInfoPage({
   ];
   return (
     !loadingPage && (
-      <div className="w-3/4 max-lg:w-full m-auto">
+      <div className="w-[90%] max-lg:w-full m-auto">
         <div className="flex gap-x-5">
           <div className="w-2/3 max-lg:w-full flex flex-col gap-y-5">
             <div className="w-full bg-white p-[10px] rounded-lg">

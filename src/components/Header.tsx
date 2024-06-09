@@ -93,7 +93,7 @@ export default function Header() {
   return (
     !loading && (
       <div className="w-full flex-col items-center justify-between gap-x-5 max-lg:px-[10px] py-[10px] bg-[#ffba00] max-lg:!fixed max-lg:!top-0 z-50">
-        <div className="w-[75%] max-lg:w-full m-auto">
+        <div className="w-[90%] max-lg:w-full m-auto">
           <Flex className="w-full" align="center" justify="space-between">
             <Link className="max-lg:m-auto max-lg:justify-center" href={'/'}>
               <Image

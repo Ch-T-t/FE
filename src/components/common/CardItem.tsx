@@ -1,11 +1,9 @@
 import { textDefault } from '@/services/dataDefault';
-import getImageLink from '@/services/getImageLink';
-import { IPost, IProduct } from '@/types/Job';
-import { Avatar, Badge, Image, Space } from 'antd';
+import { IPost } from '@/types/Job';
+import { Avatar, Image, Space } from 'antd';
 import Ribbon from 'antd/es/badge/Ribbon';
 import moment from 'moment';
 import Link from 'next/link';
-import React, { ClassAttributes, HTMLAttributes } from 'react';
 
 interface Props {
   ribbon?: string;
@@ -14,22 +12,25 @@ interface Props {
   data?: IPost;
   className?: string;
   classImg?: string;
+  classNameImg?: string;
   pricerSuffixes?: string;
 }
 
 export default function CardItem(props: Props) {
   const children = (
     <div
-      className={`w-[200px] ${props.className} max-lg:w-full max-lg:shadow-none max-lg:h-[300px] bg-white shadow-[0_2px_8px_rgba(0,0,0,.15)] p-[10px] rounded-lg `}
+      className={`w-[200px] ${props.className} max-lg:w-full max-lg:shadow-none  bg-white shadow-[0_2px_8px_rgba(0,0,0,.15)] p-[10px] rounded-lg `}
     >
-      <Image
-        width={`100%`}
-        height={250}
-        preview={false}
-        className="object-cover rounded-lg overflow-hidden"
-        alt={''}
-        src={props.data?.banner}
-      />
+      <div className={`w-full h-[250px] ${props.classNameImg}`}>
+        <Image
+          width={`100%`}
+          height={`100%`}
+          preview={false}
+          className="object-cover rounded-lg overflow-hidden"
+          alt={''}
+          src={props.data?.banner}
+        />
+      </div>
       <div className={`w-full`}>
         <p className="line-clamp-2 h-[50px] font-medium text-[15px] max-lg:font-normal max-lg:text-[13px]">
           {props.data?.name || textDefault}

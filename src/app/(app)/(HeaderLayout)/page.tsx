@@ -93,7 +93,7 @@ export default function HomePage() {
     },
   ];
   return (
-    <div className="w-[93%] flex max-lg:w-full p-[10px] max-lg:p-0 flex-col gap-y-5 m-auto overflow-hidden">
+    <div className="w-[90%] flex max-lg:w-full p-[10px] max-lg:p-0 flex-col gap-y-5 m-auto overflow-hidden">
       <div className="p-[10px] max-lg:p-0 bg-white shadow-xl rounded-lg max-lg:rounded-none">
         <Carousel
           className="rounded-lg max-lg:rounded-none overflow-hidden"
