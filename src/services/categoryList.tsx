@@ -72,5 +72,13 @@ const categoryList: ICategory[] = [
     img: 'https://lighthouse.chotot.com/_next/image?url=https%3A%2F%2Fstatic.chotot.com%2Fstorage%2Fchapy-pro%2Fnewcats%2Fv8%2F6000.png&w=256&q=95',
     urlSub: 'service/category/',
   },
+  {
+    key: 'a',
+    label: 'Dịch vụ a',
+    icon: <GithubOutlined />,
+    url: '/overview/services',
+    img: 'https://lighthouse.chotot.com/_next/image?url=https%3A%2F%2Fstatic.chotot.com%2Fstorage%2Fchapy-pro%2Fnewcats%2Fv8%2F6000.png&w=256&q=95',
+    urlSub: 'service/category/',
+  },
 ];
 export default categoryList;

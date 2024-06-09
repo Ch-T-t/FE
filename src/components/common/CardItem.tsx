@@ -57,10 +57,10 @@ export default function CardItem(props: Props) {
       href={`/product/${props.data?.id}`}
     >
       <Ribbon
-        className="invisible"
+        // className="invisible"
         color="red"
         placement="start"
-        text="Hippies"
+        text={<i className="font-semibold">Việc làm 24h</i>}
       >
         {children}
       </Ribbon>
