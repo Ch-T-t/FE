@@ -39,7 +39,7 @@ export default function Introduce() {
         và kích thước khác nhau
       </p>
       <p>Và còn rất nhiều món hời khác đang chờ bạn săn ngay</p>
-      <b className="text-[16px]">Các từ khóa phổ biến</b>
+      {/* <b className="text-[16px]">Các từ khóa phổ biến</b>
       <Flex justify="space-between">
         <Flex vertical className="!list-disc !m-0 !p-0">
           <li>Điện thoại cũ</li>
@@ -68,7 +68,7 @@ export default function Introduce() {
           <li>APPLE WATCH </li>
           <li>Đồng hồ thông minh </li>
         </Flex>
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 }

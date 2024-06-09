@@ -24,7 +24,7 @@ export default function CardItem(props: Props) {
     >
       <Image
         width={`100%`}
-        height={150}
+        height={250}
         preview={false}
         className="object-cover rounded-lg overflow-hidden"
         alt={''}

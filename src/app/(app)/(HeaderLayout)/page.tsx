@@ -51,7 +51,7 @@ export default function HomePage() {
     lineHeight: '160px',
     textAlign: 'center',
     background: '#364d79',
-    height: '300px',
+    height: '400px',
   };
 
   useEffect(() => {
@@ -70,9 +70,30 @@ export default function HomePage() {
       })
       .catch((err) => {});
   }, []);
-
+  const simpleCategoryList = [
+    {
+      icon: '../lien_he_quang_cao.png',
+      name: 'Liên hệ quảng cáo',
+    },
+    {
+      icon: '../tin_dang_da_luu.png',
+      name: 'Tin đăng đã lưu',
+    },
+    {
+      icon: '../danh_muc_theo_doi.png',
+      name: 'Danh mục theo dõi',
+    },
+    {
+      icon: '../tao_cua_hang_chuyen_trang.png',
+      name: 'Tạo cửa hàng chuyên trang',
+    },
+    {
+      icon: '../dang_tin_cho_tang.png',
+      name: 'Đăng tin cho tặng',
+    },
+  ];
   return (
-    <div className="w-3/4 flex max-lg:w-full p-[10px] max-lg:p-0 flex-col gap-y-5 m-auto overflow-hidden">
+    <div className="w-[93%] flex max-lg:w-full p-[10px] max-lg:p-0 flex-col gap-y-5 m-auto overflow-hidden">
       <div className="p-[10px] max-lg:p-0 bg-white shadow-xl rounded-lg max-lg:rounded-none">
         <Carousel
           className="rounded-lg max-lg:rounded-none overflow-hidden"
@@ -91,78 +112,27 @@ export default function HomePage() {
           wrap="wrap"
           className="mt-[10px] max-lg:!flex-nowrap max-lg:overflow-y-auto max-lg:gap-5 no-scrollbar"
         >
-          <Flex
-            vertical
-            align="center"
-            gap={10}
-            onClick={() => router.push('/save-post')}
-            className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1]"
-          >
-            <PlayCircleOutlined className="!text-white text-[20px] p-[15px] bg-[#cfd145] rounded-full max-lg:text-[16px]" />
-            <p className="text-center text-[14px] max-lg:text-[8px]">
-              Liên hệ quảng cáo
-            </p>
-          </Flex>
-          <Flex
-            vertical
-            align="center"
-            gap={10}
-            onClick={() => router.push('/save-post')}
-            className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
-          >
-            <HeartFilled className="!text-white text-[20px] p-[15px] bg-red-500 rounded-full max-lg:text-[16px]" />
-            <p className="text-center text-[14px] max-lg:text-[8px]">
-              Tin đã lưu
-            </p>
-          </Flex>
-          <Flex
-            vertical
-            align="center"
-            gap={10}
-            onClick={() => router.push('/save-post')}
-            className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
-          >
-            <CheckOutlined className="!text-white text-[20px] p-[15px] bg-[#4a90e2] rounded-full max-lg:text-[16px]" />
-            <p className="text-center text-[14px] max-lg:text-[8px]">
-              Danh mục theo dõi
-            </p>
-          </Flex>
-          <Flex
-            vertical
-            align="center"
-            gap={10}
-            onClick={() => router.push('/save-post')}
-            className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
-          >
-            <PlusCircleOutlined className="!text-white text-[20px] p-[15px] bg-[#3db53b] rounded-full max-lg:text-[16px]" />
-            <p className="text-center text-[14px] max-lg:text-[8px]">
-              Tạo cửa hàng / Chuyên trang
-            </p>
-          </Flex>
-          <Flex
-            vertical
-            align="center"
-            gap={10}
-            onClick={() => router.push('/save-post')}
-            className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
-          >
-            <HeatMapOutlined className="!text-white text-[20px] p-[15px] bg-[#3f87d9] rounded-full max-lg:text-[16px]" />
-            <p className="text-center text-[14px] max-lg:text-[8px]">
-              Thêm vào chợ tốt Map
-            </p>
-          </Flex>
-          <Flex
-            vertical
-            align="center"
-            gap={10}
-            onClick={() => router.push('/save-post')}
-            className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1] "
-          >
-            <DingdingOutlined className="!text-white text-[20px] p-[15px] bg-[#c34040] rounded-full max-lg:text-[16px]" />
-            <p className="text-center text-[14px] max-lg:text-[8px]">
-              Đăng tin cho tặng
-            </p>
-          </Flex>
+          {simpleCategoryList.map((item, index) => (
+            <Flex
+              key={index}
+              vertical
+              align="center"
+              gap={10}
+              onClick={() => router.push('/save-post')}
+              className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1]"
+            >
+              <Image
+                width={50}
+                height={50}
+                alt=""
+                src={item.icon}
+                preview={false}
+              />
+              <p className="text-center text-[14px] max-lg:text-[8px]">
+                Liên hệ quảng cáo
+              </p>
+            </Flex>
+          ))}
         </Flex>
       </div>
 
