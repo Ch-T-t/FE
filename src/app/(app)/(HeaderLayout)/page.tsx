@@ -119,15 +119,11 @@ export default function HomePage() {
               align="center"
               gap={10}
               onClick={() => router.push('/save-post')}
-              className="w-[140px] max-lg:w-[90px] rounded-md font-medium p-[10px] hover:bg-[#e1e1e1]"
+              className="rounded-md font-medium p-[10px] hover:bg-[#e1e1e1]"
             >
-              <Image
-                width={50}
-                height={50}
-                alt=""
-                src={item.icon}
-                preview={false}
-              />
+              <div className="w-[60px] max-lg:w-[30px] ">
+                <Image width={`100%`} alt="" src={item.icon} preview={false} />
+              </div>
               <p className="text-center text-[14px] max-lg:text-[8px]">
                 Liên hệ quảng cáo
               </p>
