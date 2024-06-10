@@ -136,7 +136,7 @@ export default function HomePage() {
         </Flex>
       </div>
 
-      <div className="p-[10px] relative rounded-lg bg-white">
+      <div className="p-[10px] w-full relative rounded-lg bg-white">
         <p className="uppercase font-semibold py-[20px] p-[10px] text-[20px] max-lg:text-[14px]">
           Khám phá danh mục
         </p>
@@ -157,11 +157,11 @@ export default function HomePage() {
           ref={ref}
           className="w-full scroll-smooth transition relative overflow-x-auto no-scrollbar px-[24px]"
         >
-          <div className="grid  grid-flow-col-dense grid-rows-2 grid-cols-4 flex-wrap gap-x-24 gap-y-10 max-md:gap-10  justify-start">
+          <div className="!w-max grid grid-cols-5 flex-wrap gap-x-16 gap-y-10 max-md:!gap-10 justify-start">
             {categoryList.map((item, index) => (
               <Link key={index} href={item.url || ''}>
                 <div className="flex flex-col max-md:w-[50px] items-center">
-                  <div className=" w-[120px] h-[120px] max-md:w-[70px] max-md:h-[70px]">
+                  <div className="w-[120px] h-[120px] max-md:w-[70px] max-md:h-[70px]">
                     <Image
                       preview={false}
                       width={`100%`}
@@ -189,6 +189,7 @@ export default function HomePage() {
           {productList.map?.((item, index) => (
             <CardItem
               className="w-full"
+              classNameImg="max-lg:!h-[100px]"
               data={item}
               ribbon={index % 2 == 0 ? 'Việc 24h' : ''}
               key={index}
@@ -197,6 +198,7 @@ export default function HomePage() {
           {productList.map?.((item, index) => (
             <CardItem
               className="w-full"
+              classNameImg="max-lg:!h-[100px]"
               data={item}
               ribbon={index % 2 == 0 ? 'Việc 24h' : ''}
               key={index}

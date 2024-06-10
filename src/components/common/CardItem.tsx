@@ -21,7 +21,7 @@ export default function CardItem(props: Props) {
     <div
       className={`w-[200px] ${props.className} max-lg:w-full max-lg:shadow-none  bg-white shadow-[0_2px_8px_rgba(0,0,0,.15)] p-[10px] rounded-lg `}
     >
-      <div className={`w-full h-[250px] ${props.classNameImg}`}>
+      <div className={`w-full h-[220px] ${props.classNameImg}`}>
         <Image
           width={`100%`}
           height={`100%`}
