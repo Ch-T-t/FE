@@ -140,7 +140,7 @@ export default function HomePage() {
         <p className="uppercase font-semibold py-[20px] p-[10px] text-[20px] max-lg:text-[14px]">
           Khám phá danh mục
         </p>
-        <button
+        {/* <button
           className="absolute  left-0 top-1/2"
           onClick={() => scroll(-200)}
         >
@@ -151,13 +151,13 @@ export default function HomePage() {
           onClick={() => scroll(200)}
         >
           <CaretRightOutlined />
-        </button>
+        </button> */}
         <div
           // style={{ scrollBehavior: 'smooth' }}
           ref={ref}
           className="w-full scroll-smooth transition relative overflow-x-auto no-scrollbar px-[24px]"
         >
-          <div className="grid max-lg:h-[230px] grid-flow-col-dense grid-rows-2 flex-wrap gap-x-24 gap-y-10 max-md:gap-10  justify-start">
+          <div className="grid  grid-flow-col-dense grid-rows-2 grid-cols-4 flex-wrap gap-x-24 gap-y-10 max-md:gap-10  justify-start">
             {categoryList.map((item, index) => (
               <Link key={index} href={item.url || ''}>
                 <div className="flex flex-col max-md:w-[50px] items-center">

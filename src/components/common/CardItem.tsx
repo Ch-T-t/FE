@@ -1,6 +1,6 @@
 import { textDefault } from '@/services/dataDefault';
 import { IPost } from '@/types/Job';
-import { Avatar, Image, Space } from 'antd';
+import { Avatar, Flex, Image, Space } from 'antd';
 import Ribbon from 'antd/es/badge/Ribbon';
 import moment from 'moment';
 import Link from 'next/link';
@@ -42,7 +42,7 @@ export default function CardItem(props: Props) {
           ${props.data?.info?.price || 0}
           {props.pricerSuffixes && `/${props.pricerSuffixes}`}
         </p>
-        <Space className="w-full h-[40px]">
+        <Flex gap={2} align="center" className="w-full h-[40px]">
           <Avatar
             src="../user_default.png"
             className="max-lg:!w-[20px] max-lg:!h-[20px]"
@@ -50,7 +50,7 @@ export default function CardItem(props: Props) {
           <p className="w-[150px] block text-[12px] text-[#c7c7c7] truncate max-lg:text-[10px]">
             {moment(props.data?.created_at).fromNow()} • {props.data?.name}
           </p>
-        </Space>
+        </Flex>
       </div>
     </div>
   );
