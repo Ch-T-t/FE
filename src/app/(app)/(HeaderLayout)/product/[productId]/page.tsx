@@ -201,40 +201,60 @@ export default function ProductInfoPage({
                     }
                     trigger="click"
                   >
-                    <Space>
-                      <ShareAltOutlined />
-                      Chia sẻ
-                    </Space>
+                    <Flex align="center" gap={10}>
+                      <Image
+                        src="../share.png"
+                        width={20}
+                        alt=""
+                        preview={false}
+                      />
+                      <p>Chia sẻ</p>
+                    </Flex>
                   </Popover>
-                  <Space>
-                    <HeartFilled />
-                    lưu tin
-                  </Space>
+                  <Flex align="center" gap={10}>
+                    <Image
+                      src="../heart.png"
+                      width={20}
+                      alt=""
+                      preview={false}
+                    />
+                    <p>Lưu tin</p>
+                  </Flex>
                 </div>
               </div>
-              <div className="py-[10px]">
-                <Space className="text-[#777777] ">
-                  <ShareAltOutlined />
+              <Flex vertical gap={5} className="py-[10px]">
+                <Flex align="center" gap={10} className="text-[#777777] ">
+                  <Image
+                    src="../location.png"
+                    width={20}
+                    alt=""
+                    preview={false}
+                  />
                   <p className="truncate w-[500px] text-[14px]">
                     {productData?.info?.address || textDefault}
                   </p>
-                </Space>
-                <Space className="text-[#777777] ">
-                  <FieldTimeOutlined />
+                </Flex>
+                <Flex align="center" gap={10} className="text-[#777777] ">
+                  <Image src="../clock.png" width={20} alt="" preview={false} />
                   <p className="truncate w-[500px] text-[14px]">
                     {`Đăng ${
                       moment(productData?.created_at).format('DD/MM/YYYY') ||
                       textDefault
                     }`}
                   </p>
-                </Space>
-                <Space className="text-[#777777] ">
-                  <CheckCircleTwoTone />
+                </Flex>
+                <Flex align="center" gap={10} className="text-[#777777] ">
+                  <Image
+                    src="../da_kiem_duyet.png"
+                    width={20}
+                    alt=""
+                    preview={false}
+                  />
                   <p className="truncate w-[500px] text-[14px]">
                     {textCensorship}
                   </p>
-                </Space>
-              </div>
+                </Flex>
+              </Flex>
             </div>
             <div className="p-[10px] rounded-lg bg-white">
               <p className="font-semibold">Mô tả chi tiết</p>
