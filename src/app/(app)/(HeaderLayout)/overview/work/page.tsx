@@ -5,7 +5,7 @@ import TitleBar from '@/components/common/TitleBar';
 import TopWork from '@/components/common/TopWork';
 import { IPost, ISlide } from '@/types/Job';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
-import { Avatar, Carousel, Image, Space } from 'antd';
+import { Avatar, Carousel, Flex, Image, Space } from 'antd';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -97,7 +97,7 @@ export default function WorkPage() {
           onClick={() => alert('OK')}
         />
 
-        <button
+        {/* <button
           className="absolute -translate-x-full left-0 top-1/2"
           onClick={() => scroll(-200)}
         >
@@ -108,7 +108,7 @@ export default function WorkPage() {
           onClick={() => scroll(200)}
         >
           <CaretRightOutlined />
-        </button>
+        </button> */}
         <div
           // style={{ scrollBehavior: 'smooth' }}
           ref={ref}
@@ -142,13 +142,15 @@ export default function WorkPage() {
           shadow={false}
           onClick={() => alert('OK')}
         />
-        <div className="flex gap-x-3">
-          <div className="flex-1">
-            <TopWork />
-          </div>
-          <div className="flex-1">
-            <TopWork />
-          </div>
+        <div className="flex w-full overflow-x-auto no-scrollbar gap-x-3">
+          <Flex gap={10} className=" w-max">
+            <div className="min-w-[300px]">
+              <TopWork />
+            </div>
+            <div className="min-w-[300px]">
+              <TopWork />
+            </div>
+          </Flex>
         </div>
       </div>
       <div className="relative">
