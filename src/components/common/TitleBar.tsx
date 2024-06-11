@@ -13,11 +13,11 @@ export default function TitleBar(props: Props) {
     <div
       className={`font-bold bg-white rounded-lg ${
         props.shadow && 'shadow-[0_2px_8px_rgba(0,0,0,.15)]'
-      } cursor-pointer flex justify-between py-[10px] p-[10px] text-[20px]`}
+      } cursor-pointer flex items-center justify-between py-[10px] p-[10px] text-[20px]`}
     >
-      <p className="text-[17px]">{props.title}</p>
-      <div onClick={props.onClick} className="flex items-center gap-x-3">
-        <b className="text-[14px] font-medium text-[#38699f]">
+      <p className="text-[17px] text-nowrap">{props.title}</p>
+      <div onClick={props.onClick} className="flex items-center gap-x-2">
+        <b className="text-[14px] font-medium text-[#38699f] text-nowrap">
           {props.subTitle}{' '}
         </b>
         <CaretRightOutlined />

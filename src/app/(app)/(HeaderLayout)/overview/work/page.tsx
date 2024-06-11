@@ -118,14 +118,16 @@ export default function WorkPage() {
             {categoryList.map((item, index) => (
               <Link href={'/list/work'} key={index}>
                 <div className="flex w-[120px] hover:bg-[#f5f5f5] px-[20px] py-[10px] rounded-md flex-col gap-y-5 items-center">
-                  <Image
-                    className=" hover:bg-white bg-[#f5f5f5] rounded-full object-cover"
-                    width={70}
-                    preview={false}
-                    height={70}
-                    src={item.icon}
-                    alt=""
-                  />
+                  <div className="w-[70px] h-[70px] max-md:w-[50px] max-md:h-[50px]">
+                    <Image
+                      className="hover:bg-white bg-[#f5f5f5] rounded-full object-cover"
+                      width={`100%`}
+                      preview={false}
+                      height={`100%`}
+                      src={item.icon}
+                      alt=""
+                    />
+                  </div>
                   <p className="text-wrap text-center text-[12px] font-medium">
                     {item.name}
                   </p>
