@@ -59,6 +59,7 @@ const renderTagItem = (data: IPost) => {
       case 'posterInformation':
         tabList.push(
           <TagItem
+            key={index}
             icon="../tuoi_toi_thieu.png"
             title={`posterInformation: ${
               data.info?.posterInformation || textDefault
@@ -69,6 +70,7 @@ const renderTagItem = (data: IPost) => {
       case 'postedNews':
         tabList.push(
           <TagItem
+            key={index}
             icon="../tuoi_toi_thieu.png"
             title={`postedNews: ${data.info?.postedNews || textDefault} `}
           />
@@ -77,6 +79,7 @@ const renderTagItem = (data: IPost) => {
       case 'maxAge':
         tabList.push(
           <TagItem
+            key={index}
             icon="../tuoi_toi_da.png"
             title={`Tuổi tối đa: ${data.info?.maxAge || textDefault} `}
           />
@@ -85,6 +88,7 @@ const renderTagItem = (data: IPost) => {
       case 'minAge':
         tabList.push(
           <TagItem
+            key={index}
             icon="../tuoi_toi_thieu.png"
             title={`Tuổi tối thiệu: ${data.info?.minAge || textDefault} `}
           />
@@ -93,6 +97,7 @@ const renderTagItem = (data: IPost) => {
       case 'workType':
         tabList.push(
           <TagItem
+            key={index}
             icon="../loai_cong_viec.png"
             title={`Loại việc: ${data.info?.workType || textDefault} `}
           />
@@ -101,6 +106,7 @@ const renderTagItem = (data: IPost) => {
       case 'pay_forms':
         tabList.push(
           <TagItem
+            key={index}
             icon="../hinh_thuc_tra_luong.png"
             title={`Hình thức trả lương: ${data.info?.pay_forms || textDefault} `}
           />
@@ -109,6 +115,7 @@ const renderTagItem = (data: IPost) => {
       case 'recruitment':
         tabList.push(
           <TagItem
+            key={index}
             icon="../tuoi_toi_thieu.png"
             title={`Số lượng tuyển dụng: ${data.info?.recruitment || textDefault} `}
           />
@@ -117,6 +124,7 @@ const renderTagItem = (data: IPost) => {
       case 'numberBedrooms':
         tabList.push(
           <TagItem
+            key={index}
             icon="../so_phong.png"
             title={`Số phòng: ${data.info?.numberBedrooms || textDefault} `}
           />
@@ -125,6 +133,7 @@ const renderTagItem = (data: IPost) => {
       case 'numberBathrooms':
         tabList.push(
           <TagItem
+            key={index}
             icon="../toliet.png"
             title={`Phòng vệ sinh: ${
               data.info?.numberBathrooms || textDefault
@@ -135,6 +144,7 @@ const renderTagItem = (data: IPost) => {
       case 'walked':
         tabList.push(
           <TagItem
+            key={index}
             icon="../tuoi_toi_thieu.png"
             title={`Đã đi: ${data.info?.walked || textDefault} `}
           />
@@ -143,6 +153,7 @@ const renderTagItem = (data: IPost) => {
       case 'seatNumber':
         tabList.push(
           <TagItem
+            key={index}
             icon="../cho_ngoi.png"
             title={`Số chỗ: ${data.info?.seatNumber || textDefault} `}
           />
@@ -151,6 +162,7 @@ const renderTagItem = (data: IPost) => {
       case 'year_produce':
         tabList.push(
           <TagItem
+            key={index}
             icon="../nam_sx.png"
             title={`Năm sản xuất: ${data.info?.year_produce || textDefault} `}
           />
@@ -159,6 +171,7 @@ const renderTagItem = (data: IPost) => {
       case 'depositAmount':
         tabList.push(
           <TagItem
+            key={index}
             icon="../so_tien_coc.png"
             title={`Số tiền cọc: ${data.info?.depositAmount || textDefault} `}
           />
@@ -167,6 +180,7 @@ const renderTagItem = (data: IPost) => {
       case 'screenSize':
         tabList.push(
           <TagItem
+            key={index}
             icon="../kich_thuoc_man_hinh.png"
             title={`Kích thước màn hình: ${data.info?.screenSize || textDefault} `}
           />
@@ -175,6 +189,7 @@ const renderTagItem = (data: IPost) => {
       case 'acreage':
         tabList.push(
           <TagItem
+            key={index}
             icon="../dien_tich.png"
             title={`Diện tích: ${data.info?.acreage || textDefault} `}
           />
@@ -183,6 +198,7 @@ const renderTagItem = (data: IPost) => {
       case 'carGear':
         tabList.push(
           <TagItem
+            key={index}
             icon="../hop_so.png"
             title={`Bánh xe: ${data.info?.carGear || textDefault} `}
           />
@@ -191,6 +207,7 @@ const renderTagItem = (data: IPost) => {
       case 'carFuel':
         tabList.push(
           <TagItem
+            key={index}
             icon="../nhien_lieu.png"
             title={`Nhiên liệu: ${data.info?.carFuel || textDefault} `}
           />
@@ -199,6 +216,7 @@ const renderTagItem = (data: IPost) => {
       case 'usage_status':
         tabList.push(
           <TagItem
+            key={index}
             icon="../tinh_trang_su_dung.png"
             title={`Tình trạng sử dụng: ${
               data.info?.usage_status || textDefault
@@ -209,6 +227,7 @@ const renderTagItem = (data: IPost) => {
       case 'seller_information':
         tabList.push(
           <TagItem
+            key={index}
             icon="../nghanh_nghe.png"
             title={`Thông tin người bán: ${
               data.info?.seller_information || textDefault
@@ -219,6 +238,7 @@ const renderTagItem = (data: IPost) => {
       case 'guarantee':
         tabList.push(
           <TagItem
+            key={index}
             icon="../bao_hanh.png"
             title={`Bảo hành: ${data.info?.capacity || textDefault}`}
           />
@@ -227,6 +247,7 @@ const renderTagItem = (data: IPost) => {
       case 'company':
         tabList.push(
           <TagItem
+            key={index}
             icon="../company.png"
             title={`Hãng: ${data.info?.company || textDefault}`}
           />
@@ -235,6 +256,7 @@ const renderTagItem = (data: IPost) => {
       case 'capacity':
         tabList.push(
           <TagItem
+            key={index}
             icon="../dung_tich.png"
             title={`Dung tích: ${data.info?.capacity || textDefault}`}
           />
@@ -243,6 +265,7 @@ const renderTagItem = (data: IPost) => {
       case 'hardDrive':
         tabList.push(
           <TagItem
+            key={index}
             icon="../dung_luong.png"
             title={`Dung lượng: ${data.info?.hardDrive || textDefault}`}
           />
@@ -251,6 +274,7 @@ const renderTagItem = (data: IPost) => {
       case 'volume':
         tabList.push(
           <TagItem
+            key={index}
             icon="../khoi_luong_giat.png"
             title={`Khối lượng: ${data.info?.volume || textDefault}`}
           />
@@ -259,6 +283,7 @@ const renderTagItem = (data: IPost) => {
       case 'wattage':
         tabList.push(
           <TagItem
+            key={index}
             icon="../cong_suat.png"
             title={`Công suất: ${data.info?.wattage || textDefault}`}
           />
@@ -267,6 +292,7 @@ const renderTagItem = (data: IPost) => {
       case 'washing_volume':
         tabList.push(
           <TagItem
+            key={index}
             icon="../khoi_luong_giat.png"
             title={`Khối lượng giặt: ${
               data.info?.washing_volume || textDefault
@@ -277,6 +303,7 @@ const renderTagItem = (data: IPost) => {
       case 'color':
         tabList.push(
           <TagItem
+            key={index}
             icon="../mau_sac.png"
             title={`Màu sắc: ${data.info?.color || textDefault}`}
           />
@@ -285,6 +312,7 @@ const renderTagItem = (data: IPost) => {
       case 'microprocessor':
         tabList.push(
           <TagItem
+            key={index}
             icon="../cpu.png"
             title={`Bộ vi xử lí: ${data.info?.microprocessor || textDefault}`}
           />
@@ -293,6 +321,7 @@ const renderTagItem = (data: IPost) => {
       case 'ram':
         tabList.push(
           <TagItem
+            key={index}
             icon="../ram.png"
             title={`Ram: ${data.info?.ram || textDefault}`}
           />
@@ -302,6 +331,7 @@ const renderTagItem = (data: IPost) => {
       case 'monitorCard':
         tabList.push(
           <TagItem
+            key={index}
             icon="../card_man_hinh.png"
             title={`Card màn hình: ${data.info?.monitorCard || textDefault}`}
           />
@@ -310,6 +340,7 @@ const renderTagItem = (data: IPost) => {
       case 'screenSize':
         tabList.push(
           <TagItem
+            key={index}
             icon="../kich_thuoc_man_hinh.png"
             title={`Kích thước màn hình: ${
               data.info?.screenSize || textDefault
@@ -320,6 +351,7 @@ const renderTagItem = (data: IPost) => {
       case 'experience':
         tabList.push(
           <TagItem
+            key={index}
             icon="../kinh_nghiem.png"
             title={`Kinh nghiệm: ${data.info?.experience || textDefault}`}
           />
@@ -328,6 +360,7 @@ const renderTagItem = (data: IPost) => {
       case 'sex':
         tabList.push(
           <TagItem
+            key={index}
             icon="../gioi_tinh.png"
             title={`Giới tính: ${data.info?.sex || textDefault}`}
           />

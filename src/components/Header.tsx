@@ -37,7 +37,9 @@ export default function Header() {
   const [isSubMenu, setIsSubMenu] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [openNotification, setOpenNotification] = useState(false);
+  const [changeNotification, setChangeNotification] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [tabIsRead, setTabIsRead] = useState(false);
   const [notificationList, setNotificationList] = useState<INotification[]>([]);
   const [currentCategoryList, setCurrentCategoryList] = useState<IJob[]>([]);
   const dispatch = useAppDispatch();
@@ -48,21 +50,19 @@ export default function Header() {
 
   const notificationRef = useRef<HTMLDivElement>(null);
 
-  console.log(user);
-
-  const fethCategoryList = async (url: string) => {
+  const fethReadNotification = async (id: string) => {
     await instanceAxios
-      .get(url)
-      .then((res) => setCurrentCategoryList(res.data.data || []))
+      .put(`/api/notification/${id}/read`)
+      .then((res) => setChangeNotification(!changeNotification))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     const fetchNotification = async () => {
       await instanceAxios
-        .get(`/notification/notification/`)
+        .get(`/api/notification`)
         .then((res) => {
-          setNotificationList(res.data.messages);
+          setNotificationList(res.data);
         })
         .catch((err) => {})
         .finally(() => {
@@ -70,7 +70,7 @@ export default function Header() {
         });
     };
     fetchNotification();
-  }, []);
+  }, [changeNotification]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -90,6 +90,7 @@ export default function Header() {
   useOnClickOutside(notificationRef, () => {
     setOpenNotification(false);
   });
+
   return (
     !loading && (
       <div className="w-full flex-col items-center justify-between gap-x-5 max-lg:px-[10px] py-[10px] bg-[#ffba00] max-lg:!fixed max-lg:!top-0 z-50">
@@ -117,7 +118,7 @@ export default function Header() {
                 {openNotification && (
                   <div
                     ref={notificationRef}
-                    className="w-[400px] max-lg:w-[250px] max-lg:-translate-x-7 absolute top-[120%] -translate-x-1/2 z-[9999] bg-white rounded-lg  shadow-xl"
+                    className="w-[400px] cursor-pointer max-lg:w-[250px] max-lg:-translate-x-7 absolute top-[120%] -translate-x-1/2 z-[9999] bg-white rounded-lg  shadow-xl"
                   >
                     <Flex className="px-[10px] pt-[10px] justify-between">
                       <b>Thông báo</b>
@@ -126,17 +127,41 @@ export default function Header() {
                       />
                     </Flex>
                     <Flex gap={10} className="p-[10px]">
-                      <p className="bg-[#ffe9c2] px-[20px] py-[3px] text-[#ffa031] rounded-full text-[14px]">
+                      <p
+                        onClick={() => setTabIsRead(false)}
+                        className={`${!tabIsRead && 'bg-[#ffe9c2] text-[#ffa031]'} px-[20px] py-[3px] rounded-full text-[14px]`}
+                      >
                         Tất cả
                       </p>
-                      <p className="bg-[#ffe9c2] px-[20px] py-[3px] text-[#ffa031] rounded-full text-[14px]">
+                      <p
+                        onClick={() => setTabIsRead(true)}
+                        className={`${tabIsRead && 'bg-[#ffe9c2] text-[#ffa031]'} px-[20px] py-[3px] rounded-full text-[14px]`}
+                      >
                         Chưa xem
                       </p>
                     </Flex>
                     <Flex vertical className="border-t border-[#ffa031]">
-                      {[...Array(5)].map((_, index) => (
-                        <NotificationItem key={index} />
-                      ))}
+                      {tabIsRead
+                        ? notificationList
+                            .filter((item, index) => !item.is_read)
+                            .map((newItem, newIndex) => (
+                              <NotificationItem
+                                onClick={() =>
+                                  fethReadNotification(newItem.id || '')
+                                }
+                                data={newItem}
+                                key={newItem.id}
+                              />
+                            ))
+                        : notificationList.map((item, index) => (
+                            <NotificationItem
+                              onClick={() =>
+                                fethReadNotification(item.id || '')
+                              }
+                              data={item}
+                              key={item.id}
+                            />
+                          ))}
                     </Flex>
                   </div>
                 )}

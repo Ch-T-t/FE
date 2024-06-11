@@ -1,11 +1,17 @@
+import { INotification } from '@/types/User';
 import { Avatar, Flex } from 'antd';
 import React from 'react';
 
-export default function NotificationItem() {
+interface Props {
+  data: INotification;
+  onClick?: () => void;
+}
+
+export default function NotificationItem(props: Props) {
   return (
-    <div>
+    <div className="cursor-pointer" onClick={() => props.onClick?.()}>
       <Flex
-        className="p-[10px] hover:bg-[#fff0d9]"
+        className={`p-[10px]  ${!props.data.is_read && `bg-[#fff0d9]`}`}
         justify="space-between"
         align="center"
         gap={10}

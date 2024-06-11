@@ -8,9 +8,11 @@ interface IChartCart {
   datasets: object;
 }
 interface INotification {
-  user: IUser;
-  user_send: IUser;
-  content: string;
+  id?: string;
+  data?: string;
+  notification_type?: string;
+  is_read?: boolean;
+  user?: number | string;
 }
 interface ITableDataType {
   key: React.Key;
