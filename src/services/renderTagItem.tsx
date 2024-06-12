@@ -17,41 +17,6 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 
-// location?: string;
-// category?: string;
-// address?: string;
-// career?: string;
-// type_of_work?: string;
-// pay_forms?: string;
-// sex?: string;
-// experience?: string;
-// map?: string;
-// title?: string;
-// number_of_recruitment?: string;
-// wage?: string;
-// detailed_description?: string;
-// minimum_age?: string;
-// maximum_age?: string;
-// video?: string;
-// contact_phone_number?: string;
-// url?: string;
-// usage_status?: string;
-// seller_information?: string;
-// guarantee?: string;
-// volume?: string;
-// wattage?: string;
-// washing_volume?: string;
-// free_giveaway?: string;
-// price?: string;
-// company?: string;
-// capacity?: string;
-// map?: string | number;
-// color?: string;
-// microprocessor?: string;
-// ram?: string;
-// hardDrive?: string;
-// monitorCard?: string;
-
 const renderTagItem = (data: IPost) => {
   let tabList = [];
   for (let index = 0; index < Object.keys(data || {}).length; index++) {

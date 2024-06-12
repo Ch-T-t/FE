@@ -7,22 +7,46 @@ import {
 } from '@ant-design/icons';
 import { Flex, Space } from 'antd';
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import NotificationItem from './common/NotificationItem';
 import { useRouter } from 'next/navigation';
 import { useOnClickOutside } from 'usehooks-ts';
+import { INotification } from '@/types/User';
+import instanceAxios from '@/api/instanceAxios';
 
 export default function FooterPhone() {
   const notificationRef = useRef<HTMLDivElement>(null);
   const [openNotification, setOpenNotification] = useState(false);
+  const [notificationList, setNotificationList] = useState<INotification[]>([]);
+  const [changeNotification, setChangeNotification] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   const router = useRouter();
   const redirectURL = (url: string) => {
     router.push(url);
     setOpenNotification(false);
   };
-  // useOnClickOutside(notificationRef, () => {
-  //   setOpenNotification(false);
-  // });
+  const fethReadNotification = async (id: string) => {
+    await instanceAxios
+      .put(`/api/notification/${id}/read`)
+      .then((res) => setChangeNotification(!changeNotification))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    const fetchNotification = async () => {
+      await instanceAxios
+        .get(`/api/notification`)
+        .then((res) => {
+          setNotificationList(res.data);
+        })
+        .catch((err) => {})
+        .finally(() => {
+          setLoading(false);
+        });
+    };
+    fetchNotification();
+  }, [changeNotification]);
 
   return (
     <div className="w-full max-h-[calc(100%-88px)] fixed z-50 hidden max-lg:flex max-lg:flex-col max-lg:justify-end bg-transparent bottom-0 px-[10px] max-lg:p-0 py-[5px]">
@@ -52,8 +76,12 @@ export default function FooterPhone() {
             vertical
             className="border-t border-[#ffa031] max-lg:h-full overflow-y-auto"
           >
-            {[...Array(10)].map((_, index) => (
-              <NotificationItem key={index} />
+            {notificationList.map((item, index) => (
+              <NotificationItem
+                data={item}
+                onClick={() => fethReadNotification(item.id || '')}
+                key={index}
+              />
             ))}
           </Flex>
         </div>
