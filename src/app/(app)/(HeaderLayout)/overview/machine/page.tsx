@@ -46,7 +46,7 @@ export default function MachinePage() {
         },
       })
       .then((res) => {
-        setProductList(res.data.results);
+        setProductList(res.data.results || []);
       })
       .catch((err) => {})
       .finally(() => {});

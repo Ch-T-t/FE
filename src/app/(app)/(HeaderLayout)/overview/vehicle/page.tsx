@@ -24,7 +24,7 @@ export default function OverViewGoodHousePage() {
         },
       })
       .then((res) => {
-        setProductList(res.data.results);
+        setProductList(res.data.results || []);
       })
       .catch((err) => {})
       .finally(() => {});
