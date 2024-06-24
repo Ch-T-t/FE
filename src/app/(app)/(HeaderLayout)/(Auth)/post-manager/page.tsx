@@ -15,10 +15,10 @@ export default function PostManagePage() {
   const [productList, setProductList] = useState<IPost[]>([]);
   const tabList = [
     { key: 'active', label: 'Đang hiện thị', children: <p>ok</p> },
-    { key: 'expired', label: 'Hết hạn', children: <p>ok</p> },
     { key: 'reject', label: 'Bị từ chối', children: <p>ok</p> },
-    { key: 'not_active', label: 'Đã ẩn', children: <p>ok</p> },
-    { key: 'different', label: 'Khác', children: <p>ok</p> },
+    { key: 'expired', label: 'Hết hạn', children: <p>ok</p> },
+    // { key: 'not_active', label: 'Đã ẩn', children: <p>ok</p> },
+    // { key: 'different', label: 'Khác', children: <p>ok</p> },
   ];
   useEffect(() => {
     instanceAxios
@@ -68,22 +68,31 @@ export default function PostManagePage() {
         ) : (
           <Flex>
             <Flex align="center" gap={10}>
-              <Avatar />
+              <Avatar size={90} />
               <Flex vertical>
-                <p className="font-semibold">Tên chưa cung cấp</p>
-                <Space className="text-blue-500 text-[12px]">
-                  <PlusOutlined /> Tạo cửa hàng
+                <p className="font-semibold text-[18px]">Tên chưa cung cấp</p>
+                <Space className="text-blue-500 mt-[10px]">
+                  <Image
+                    width={28}
+                    alt=""
+                    preview={false}
+                    src="../swap_page.png"
+                  />
+                  <p className="text-[14px] ">Chuyển sang trang cửa hàng</p>
                 </Space>
               </Flex>
             </Flex>
           </Flex>
         )}
       </Flex>
-      <Flex className="bg-white rounded-lg my-[10px] overflow-x-auto no-scrollbar cursor-pointer text-nowrap max-lg:text-[12px]">
+      <Flex
+        gap={10}
+        className="bg-white rounded-lg my-[10px] overflow-x-auto no-scrollbar cursor-pointer text-nowrap max-lg:text-[14px]"
+      >
         {tabList.map((item, index) => (
           <p
             onClick={() => setCurrentTab(item.key)}
-            className={`flex-1 relative text-center px-2 transition-all py-[10px] uppercase text-[#9b9b9b] font-semibold ${
+            className={`flex-1 relative text-center max-md:text-[14px] px-[12px] transition-all py-[10px] uppercase text-[#9b9b9b] font-semibold ${
               currentTab === item.key &&
               "before:content-[''] before:absolute border-b-2 border-[#ffba00] before:bg-[#ffba00] before:w-full before:h-[2px] before:rounded-full before:top-full before:left-0"
             }`}

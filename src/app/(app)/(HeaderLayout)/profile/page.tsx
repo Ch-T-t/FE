@@ -12,7 +12,7 @@ import {
   UserAddOutlined,
 } from '@ant-design/icons';
 import { SignOutButton, useAuth } from '@clerk/nextjs';
-import { Avatar, Flex, Rate, Space } from 'antd';
+import { Avatar, Flex, Image, Rate, Space } from 'antd';
 import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -35,20 +35,26 @@ export default function ProfilePage() {
       vertical
       className="w-full hidden max-lg:block text-[14px] top-full bg-white rounded-lg shadow-lg"
     >
-      <Flex gap={15} align="center" className=" text-[14px] p-[10px]">
-        <Avatar size={50} />
-        <Flex vertical>
-          <p className="font-semibold">
-            {user.logged
-              ? user.data.fullname || `Tên chưa cung cấp`
-              : `Đăng nhập`}
-          </p>
+      <Flex gap={15} align="center" className="w-full text-[14px] p-[10px]">
+        <div>
+          <Avatar size={64} />
+        </div>
+        <Flex vertical className="w-full">
+          <Flex className="w-full justify-between">
+            <p className="font-semibold text-[16px]">
+              {user.logged
+                ? user.data.fullname || `Tên chưa cung cấp`
+                : `Đăng nhập`}
+            </p>
+            <Image width={28} alt="" preview={false} src="../swap_page.png" />
+          </Flex>
           <Space className="border-b">
-            <p>0.0</p>
+            {/* <p>0.0</p> */}
             <Rate className="!text-[12px]" />
-            <p className="text-[12px]">Chưa có đánh giá</p>
+            <p className="text-[10px]">Chưa có đánh giá</p>
           </Space>
-          <Flex className="text-[12px]">
+
+          <Flex className="text-[12px] text-[#666666]">
             <p className="py-[3px] pr-[10px] border-r">
               <b>0</b> Người theo dõi
             </p>
@@ -78,7 +84,7 @@ export default function ProfilePage() {
         </Space>
       </Flex> */}
       <Flex vertical>
-        <p className="bg-[#f4f4f4] px-[10px] py-[5px] text-[#9b9b9b] font-semibold">
+        <p className="bg-[#f4f4f4] p-[10px] text-[#9b9b9b] font-semibold">
           Tiện ích
         </p>
         <Space
@@ -92,12 +98,19 @@ export default function ProfilePage() {
           //   onClick={() => redirectURL('/save-post')}
           className="font-medium p-[10px] hover:bg-[#e1e1e1] "
         >
+          <HeartFilled className="!text-white p-[5px] bg-red-500 rounded-full" />
+          Liên hệ quảng cáo
+        </Space>
+        <Space
+          //   onClick={() => redirectURL('/save-post')}
+          className="font-medium p-[10px] hover:bg-[#e1e1e1] "
+        >
           <BellFilled className="!text-white p-[5px] bg-red-500 rounded-full" />
           Danh mục theo dõi
         </Space>
       </Flex>
       <Flex vertical>
-        <p className="bg-[#f4f4f4] px-[10px] py-[5px] text-[#9b9b9b] font-semibold">
+        <p className="bg-[#f4f4f4] p-[10px] text-[#9b9b9b] font-semibold">
           Tiện ích
         </p>
         <Space
@@ -113,7 +126,7 @@ export default function ProfilePage() {
         </Space>
       </Flex>
       <Flex vertical>
-        <p className="bg-[#f4f4f4] px-[10px] py-[5px] text-[#9b9b9b] font-semibold">
+        <p className="bg-[#f4f4f4] p-[10px] text-[#9b9b9b] font-semibold">
           Khác
         </p>
         <Space className="font-medium p-[10px] hover:bg-[#e1e1e1]">

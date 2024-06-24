@@ -192,7 +192,7 @@ export default function Header() {
             justify="space-between"
             align="center"
           >
-            <div className="w-2/5 max-lg:w-4/5 flex items-center gap-x-3">
+            <div className="w-2/5 max-lg:w-full flex items-center gap-x-3">
               <div className="relative w-full z-30">
                 <Input
                   className="!w-full max-lg:!py-[5px] !pr-[100px] max-lg:!pr-[45px] max-lg:!pl-7 max-lg:!text-[10px]"
@@ -204,14 +204,14 @@ export default function Header() {
               </div>
             </div>
 
-            <div className="w-3/5 max-lg:w-1/5 flex gap-3 items-center justify-between max-lg:justify-center max-lg:gap-x-2 ">
+            <div className="w-3/5 max-lg:w-fit flex gap-3 items-center justify-between max-lg:justify-center max-lg:gap-x-2 ">
               <Link
-                className="text-black hover:text-black hidden max-lg:block"
+                className="text-black hover:text-black hidden max-lg:block mx-[10px]"
                 href={'/chat'}
               >
                 <CommentOutlined className="text-[20px]" />
               </Link>
-              <AppstoreOutlined className="text-[20px] !hidden max-lg:!block" />
+              {/* <AppstoreOutlined className="text-[20px] !hidden max-lg:!block" /> */}
               <Link
                 className="text-black hover:text-black max-lg:hidden"
                 href={'/post-manager'}

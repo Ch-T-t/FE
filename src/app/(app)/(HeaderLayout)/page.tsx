@@ -62,7 +62,7 @@ export default function HomePage() {
     },
     {
       icon: '../tao_cua_hang_chuyen_trang.png',
-      name: 'Tạo cửa hàng chuyên trang',
+      name: 'Tạo cửa hàng/ chuyên trang',
     },
     {
       icon: '../dang_tin_cho_tang.png',
@@ -87,22 +87,22 @@ export default function HomePage() {
         <Flex
           justify="space-between"
           wrap="wrap"
-          className="mt-[10px] max-lg:!flex-nowrap max-lg:overflow-y-auto max-lg:gap-5 no-scrollbar"
+          className="mt-[10px] max-lg:!flex-nowrap max-lg:overflow-y-auto max-lg:gap-1 no-scrollbar"
         >
           {simpleCategoryList.map((item, index) => (
             <Flex
               key={index}
               vertical
               align="center"
-              gap={10}
+              gap={5}
               onClick={() => router.push('/save-post')}
               className="rounded-md font-medium p-[10px] hover:bg-[#e1e1e1]"
             >
-              <div className="w-[33px] max-lg:w-[30px] ">
+              <div className="w-[33px] max-lg:w-[30px]">
                 <Image width={`100%`} alt="" src={item.icon} preview={false} />
               </div>
-              <p className="text-center text-[14px] max-lg:text-[8px]">
-                Liên hệ quảng cáo
+              <p className="text-center max-md:w-[80px] text-[14px] max-lg:text-[12px]">
+                {item.name}
               </p>
             </Flex>
           ))}
@@ -128,13 +128,13 @@ export default function HomePage() {
         <div
           // style={{ scrollBehavior: 'smooth' }}
           ref={ref}
-          className="w-full scroll-smooth transition relative overflow-x-auto no-scrollbar px-[24px]"
+          className="w-full scroll-smooth transition relative overflow-x-auto no-scrollbar px-[24px] max-md:px-0"
         >
-          <div className="!w-max grid grid-cols-5 gap-x-24 gap-y-10 max-md:!gap-10 justify-between">
+          <div className="!w-max grid grid-cols-5 gap-x-24 gap-y-10 max-md:!gap-x-3 max-md:!gap-y-0">
             {categoryList.map((item, index) => (
               <Link key={index} href={item.url || ''}>
-                <div className="flex flex-col max-w-[110px] max-md:w-[50px] items-center">
-                  <div className="w-[110px] h-[110px] max-md:w-[70px] max-md:h-[70px]">
+                <div className="flex flex-col max-w-[110px] max-md:w-[120px] items-center">
+                  <div className="w-[110px] h-[110px] max-md:w-[80px] max-md:h-[80px]">
                     <Image
                       preview={false}
                       width={`100%`}
@@ -144,7 +144,7 @@ export default function HomePage() {
                       alt=""
                     />
                   </div>
-                  <p className="text-wrap w-full text-center text-[14px] mt-[5px] max-md:text-[8px] font-medium">
+                  <p className="text-wrap w-full text-center text-[14px] mt-[5px] max-md:text-[15px] font-medium">
                     {item.label}
                   </p>
                 </div>
