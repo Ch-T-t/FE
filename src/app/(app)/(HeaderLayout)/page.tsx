@@ -2,32 +2,9 @@
 import instanceAxios from '@/api/instanceAxios';
 import Introduce from '@/components/Introduce';
 import CardItem from '@/components/common/CardItem';
-import InputCustom from '@/components/common/InputCustom';
-import InputTest from '@/components/common/InputTest';
 import categoryList from '@/services/categoryList';
-import { IPost, IProduct, ISlide } from '@/types/Job';
-import {
-  BellFilled,
-  CaretLeftOutlined,
-  CaretRightOutlined,
-  CheckOutlined,
-  DingdingOutlined,
-  HeartFilled,
-  HeatMapOutlined,
-  PlayCircleOutlined,
-  PlusCircleOutlined,
-} from '@ant-design/icons';
-import { UserButton } from '@clerk/nextjs';
-import {
-  Badge,
-  Button,
-  Carousel,
-  Flex,
-  Form,
-  Image,
-  Input,
-  Pagination,
-} from 'antd';
+import { IPost, ISlide } from '@/types/Job';
+import { Carousel, Flex, Image, Pagination } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
@@ -93,7 +70,7 @@ export default function HomePage() {
     },
   ];
   return (
-    <div className="w-[90%] flex max-lg:w-full p-[10px] max-lg:p-0 flex-col gap-y-5 m-auto overflow-hidden">
+    <div className="max-w-[1050px] flex max-lg:w-full p-[10px] max-lg:p-0 flex-col gap-y-5 m-auto overflow-hidden">
       <div className="p-[10px] max-lg:p-0 bg-white shadow-xl rounded-lg max-lg:rounded-none">
         <Carousel
           className="rounded-lg max-lg:rounded-none overflow-hidden"
@@ -121,7 +98,7 @@ export default function HomePage() {
               onClick={() => router.push('/save-post')}
               className="rounded-md font-medium p-[10px] hover:bg-[#e1e1e1]"
             >
-              <div className="w-[60px] max-lg:w-[30px] ">
+              <div className="w-[33px] max-lg:w-[30px] ">
                 <Image width={`100%`} alt="" src={item.icon} preview={false} />
               </div>
               <p className="text-center text-[14px] max-lg:text-[8px]">
@@ -153,11 +130,11 @@ export default function HomePage() {
           ref={ref}
           className="w-full scroll-smooth transition relative overflow-x-auto no-scrollbar px-[24px]"
         >
-          <div className="!w-max grid grid-cols-5 flex-wrap gap-x-16 gap-y-10 max-md:!gap-10 justify-start">
+          <div className="!w-max grid grid-cols-5 gap-x-24 gap-y-10 max-md:!gap-10 justify-between">
             {categoryList.map((item, index) => (
               <Link key={index} href={item.url || ''}>
-                <div className="flex flex-col max-md:w-[50px] items-center">
-                  <div className="w-[120px] h-[120px] max-md:w-[70px] max-md:h-[70px]">
+                <div className="flex flex-col max-w-[110px] max-md:w-[50px] items-center">
+                  <div className="w-[110px] h-[110px] max-md:w-[70px] max-md:h-[70px]">
                     <Image
                       preview={false}
                       width={`100%`}

@@ -1,37 +1,19 @@
 'use client';
 import {
-  fetchCreateGoodHouseCategory,
   fetchGoodHouseCategory,
   fetchGoodHousePostList,
 } from '@/api/goodHouseRequest';
-import instanceAxios from '@/api/instanceAxios';
 import CardItem from '@/components/common/CardItem';
-import CardItemHorizontalSavePost from '@/components/common/CardItemHorizontalSavePost';
 import ModalCategorySelectFilterCustom from '@/components/common/ModalCategorySelectFilterCustom';
 import ModalLocationSelectFilterCustom from '@/components/common/ModalLocationSelectFilterCustom';
 import ModalLocationSliderFilterCustom from '@/components/common/ModalLocationSliderFilterCustom';
-import {
-  IGoodHousePost,
-  IJob,
-  ILocationResponse,
-  IPost,
-  IProduct,
-} from '@/types/Job';
+import { IGoodHousePost, IJob, ILocationResponse, IPost } from '@/types/Job';
 import {
   CaretDownOutlined,
-  CaretLeftOutlined,
   DownOutlined,
   HolderOutlined,
 } from '@ant-design/icons';
-import {
-  Carousel,
-  Dropdown,
-  Flex,
-  Image,
-  Modal,
-  Pagination,
-  Space,
-} from 'antd';
+import { Carousel, Dropdown, Flex, Image, Pagination, Space } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 
 export default function WorkListPage() {

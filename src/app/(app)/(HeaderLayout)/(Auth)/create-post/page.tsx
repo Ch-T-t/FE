@@ -190,108 +190,106 @@ export default function CreatePostPage() {
                 // onChangeKey={(e) => currentForm.setCurrentForm?.(e)}
                 label="Danh mục tin đăng"
               />
-              {currentForm.currentForm && (
-                <div className="flex-1">
-                  <b>Ảnh / video sản phẩm</b>
-                  <Space className="flex text-[#9b9b9b] text-[13px]">
-                    Xem thêm về
-                    <Link href="/">
-                      <p className="text-blue-500 underline text-wrap">
-                        Quy định đăng tin của chợ tốt
-                      </p>
-                    </Link>
-                  </Space>
-                  <div className="w-[300px] max-lg:w-full min-h-[200px] flex items-center justify-center">
-                    {/* <Form.Item<IPost>
+              {/* {currentForm.currentForm && ( */}
+              <div className="flex-1">
+                <b>Ảnh / video sản phẩm</b>
+                <Space className="flex text-[#9b9b9b] text-[13px]">
+                  Xem thêm về
+                  <Link href="/">
+                    <p className="text-blue-500 underline text-wrap">
+                      Quy định đăng tin của chợ tốt
+                    </p>
+                  </Link>
+                </Space>
+                <div className="w-[300px] max-lg:w-full min-h-[200px] flex items-center justify-center">
+                  {/* <Form.Item<IPost>
                     name={`images`}
                     rules={[
                       { required: true, message: 'Trường này bắt buộc!' },
                     ]}
                     className="w-full"
                   > */}
-                    <Dragger
-                      className="truncate w-full"
-                      name="images_A1_data"
-                      listType="picture"
-                      fileList={fileList}
-                      accept="image/*"
-                      maxCount={5}
-                      // onPreview={handlePreview}
-                      onChange={handleChange}
-                    >
-                      <p className="ant-upload-drag-icon">
-                        <InboxOutlined />
+                  <Dragger
+                    className="truncate w-full"
+                    name="images_A1_data"
+                    listType="picture"
+                    fileList={fileList}
+                    accept="image/*"
+                    maxCount={5}
+                    // onPreview={handlePreview}
+                    onChange={handleChange}
+                  >
+                    <p className="ant-upload-drag-icon">
+                      <InboxOutlined />
+                    </p>
+                    <Flex vertical justify="center">
+                      <p className="ant-upload-text !text-[14px]">
+                        Hình ảnh có kích thước tối thiệu{' '}
                       </p>
-                      <Flex vertical justify="center">
-                        <p className="ant-upload-text !text-[14px]">
-                          Hình ảnh có kích thước tối thiệu{' '}
-                        </p>
-                        <p className="ant-upload-text !text-[14px]">
-                          240 x 240
-                        </p>
-                      </Flex>
-                    </Dragger>
-                    {/* </Form.Item> */}
-                    <Modal
-                      open={previewOpen}
-                      title={previewTitle}
-                      footer={null}
-                      onCancel={handleCancel}
-                    >
-                      <Image
-                        alt="example"
-                        style={{ width: '100%' }}
-                        src={previewImage}
-                      />
-                    </Modal>
-                  </div>
-                  <div className="w-[300px] max-lg:w-full min-h-[200px] py-[20px] flex items-center justify-center">
-                    {/* <Form.Item<IPost>
+                      <p className="ant-upload-text !text-[14px]">240 x 240</p>
+                    </Flex>
+                  </Dragger>
+                  {/* </Form.Item> */}
+                  <Modal
+                    open={previewOpen}
+                    title={previewTitle}
+                    footer={null}
+                    onCancel={handleCancel}
+                  >
+                    <Image
+                      alt="example"
+                      style={{ width: '100%' }}
+                      src={previewImage}
+                    />
+                  </Modal>
+                </div>
+                <div className="w-[300px] max-lg:w-full min-h-[200px] py-[20px] flex items-center justify-center">
+                  {/* <Form.Item<IPost>
                     className="w-full"
                     name={`video`}
                     rules={[
                       { required: true, message: 'Trường này bắt buộc!' },
                     ]}
                   > */}
-                    <Dragger
-                      className="truncate w-full"
-                      name="video"
-                      listType="picture"
-                      fileList={videoFileList}
-                      maxCount={1}
-                      accept="video/*"
-                      onChange={handleChangeVideo}
-                    >
-                      <p className="ant-upload-drag-icon">
-                        <VideoCameraOutlined />
-                      </p>
-                      <p className="ant-upload-text !text-[14px]">
-                        Đăng tối đa 1 video{' '}
-                      </p>
-                    </Dragger>
-                    {/* </Form.Item> */}
-                    <Modal
-                      open={previewOpen}
-                      title={previewTitle}
-                      footer={null}
-                      onCancel={handleCancel}
-                    >
-                      <Image
-                        alt="example"
-                        style={{ width: '100%' }}
-                        src={previewImage}
-                      />
-                    </Modal>
-                  </div>
+                  <Dragger
+                    className="truncate w-full"
+                    name="video"
+                    listType="picture"
+                    fileList={videoFileList}
+                    maxCount={1}
+                    accept="video/*"
+                    onChange={handleChangeVideo}
+                  >
+                    <p className="ant-upload-drag-icon">
+                      <VideoCameraOutlined />
+                    </p>
+                    <p className="ant-upload-text !text-[14px]">
+                      Đăng tối đa 1 video{' '}
+                    </p>
+                  </Dragger>
+                  {/* </Form.Item> */}
+                  <Modal
+                    open={previewOpen}
+                    title={previewTitle}
+                    footer={null}
+                    onCancel={handleCancel}
+                  >
+                    <Image
+                      alt="example"
+                      style={{ width: '100%' }}
+                      src={previewImage}
+                    />
+                  </Modal>
                 </div>
-              )}
-              <div className="flex-[3_2_0%]">
+              </div>
+              {/* )} */}
+              <div className="flex-[3_2_0%] flex flex-col justify-center">
                 <ModalCategorySelectCustom
                   className="max-lg:hidden mb-[10px]"
                   // onChangeKey={(e) => currentForm.setCurrentForm?.(e)}
                   label="Danh mục tin đăng"
                 />
-                {currentForm.currentForm && (
+                {currentForm.currentForm ? (
                   <>
                     {getFormByKey(currentForm.currentForm)}
                     <Flex gap={20} className="my-[20px]">
@@ -318,6 +316,15 @@ export default function CreatePostPage() {
                       </Form.Item>
                     </Flex>
                   </>
+                ) : (
+                  <div className="!m-auto">
+                    <Image
+                      width={400}
+                      alt=""
+                      src="../dang_nhanh_ban_goi.png"
+                      preview={false}
+                    />
+                  </div>
                 )}
               </div>
             </div>
