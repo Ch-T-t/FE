@@ -1,7 +1,7 @@
 'use client';
 import instanceAxios from '@/api/instanceAxios';
 import { useAppDispatch } from '@/app/hooks';
-import { login } from '@/app/reducers/userReducer';
+import { login, logout } from '@/app/reducers/userReducer';
 import LoginForm from '@/components/common/LoginForm';
 import RegisterForm from '@/components/common/RegisterForm';
 import { auth } from '@/services/base';
@@ -19,7 +19,7 @@ import {
 } from '@clerk/nextjs';
 
 import { Button, Flex, Form, Image, Input, message, notification } from 'antd';
-import { setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next';
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -42,6 +42,12 @@ export default function AuthPage() {
   const dispatch = useAppDispatch();
   const { getToken, isSignedIn } = useAuth();
   const { signIn, isLoaded } = useSignIn();
+  const handleLogout = () => {
+    dispatch(logout());
+    deleteCookie('access');
+    deleteCookie('refresh');
+    // setShowModal(true);
+  };
   useEffect(() => {
     const fetchApi = async () => {
       await instanceAxios
@@ -85,6 +91,8 @@ export default function AuthPage() {
         const token = credential?.accessToken;
         const user = result.user;
         console.log(user);
+        handleLogout();
+
         instanceAxios
           .post(
             `/api/auth/${providerType === 'FACEBOOK' ? 'facebook' : 'google'}/`,
@@ -125,6 +133,10 @@ export default function AuthPage() {
   //     redirectUrlComplete: '/',
   //   });
   const onLogin = async (e: IUserLogin) => {
+    setAuthLoading(true);
+
+    handleLogout();
+
     await instanceAxios
       .post('/api/auth/login/', e)
       .then((res) => {
@@ -143,11 +155,15 @@ export default function AuthPage() {
           description: 'Vui lòng xem lại thông tin của bạn.',
         });
         console.log(err);
+      })
+      .finally(() => {
+        setAuthLoading(false);
       });
   };
   const onRegister = async (e: IUserRegister) => {
     setAuthLoading(true);
-    console.log(e);
+    handleLogout();
+
     await instanceAxios
       .post('/api/user/register/', e)
       .then((res) => {
@@ -167,6 +183,8 @@ export default function AuthPage() {
   };
   const onConfirmOTP = async (e: IUserRegister) => {
     setAuthLoading(true);
+    handleLogout();
+
     await instanceAxios
       .get(`/api/user/verify/${e.verify_code}/`)
       .then((res) => {
@@ -188,6 +206,8 @@ export default function AuthPage() {
 
   const onForgot = async (e: IUserRegister) => {
     setAuthLoading(true);
+    handleLogout();
+
     await instanceAxios
       .post('/api/user/forgot-password/', e)
       .then((res) => {
@@ -208,6 +228,8 @@ export default function AuthPage() {
   };
   const onReset = async (e: IUserRegister) => {
     setAuthLoading(true);
+    handleLogout();
+
     await instanceAxios
       .post('/api/user/reset-password/', { ...e, email })
       .then((res) => {

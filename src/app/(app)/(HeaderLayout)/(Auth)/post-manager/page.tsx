@@ -43,7 +43,7 @@ export default function PostManagePage() {
         gap={20}
         className="relative p-[10px] rounded-lg bg-white "
       >
-        {currentUser?.id || 0 > 1 ? (
+        {/* {currentUser?.id ? (
           <>
             <Avatar size={100} />
             <Flex vertical gap={10}>
@@ -65,25 +65,25 @@ export default function PostManagePage() {
               <p className="text-[12px] font-medium">BlueCar Auto</p>
             </Flex>
           </>
-        ) : (
-          <Flex>
-            <Flex align="center" gap={10}>
-              <Avatar size={90} />
-              <Flex vertical>
-                <p className="font-semibold text-[18px]">Tên chưa cung cấp</p>
-                <Space className="text-blue-500 mt-[10px]">
-                  <Image
-                    width={28}
-                    alt=""
-                    preview={false}
-                    src="../swap_page.png"
-                  />
-                  <p className="text-[14px] ">Chuyển sang trang cửa hàng</p>
-                </Space>
-              </Flex>
+        ) : ( */}
+        <Flex>
+          <Flex align="center" gap={10}>
+            <Avatar size={90} />
+            <Flex vertical>
+              <p className="font-semibold text-[18px]">Tên chưa cung cấp</p>
+              <Space className="text-blue-500 mt-[10px]">
+                <Image
+                  width={28}
+                  alt=""
+                  preview={false}
+                  src="../swap_page.png"
+                />
+                <p className="text-[14px] ">Chuyển sang trang cửa hàng</p>
+              </Space>
             </Flex>
           </Flex>
-        )}
+        </Flex>
+        {/* )} */}
       </Flex>
       <Flex
         gap={10}

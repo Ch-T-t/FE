@@ -141,7 +141,7 @@ export default function ProductInfoPage({
   ];
   return (
     !loadingPage && (
-      <div className="w-[90%] max-lg:w-full m-auto">
+      <div className="max-w-[1050px] max-lg:w-full m-auto">
         <div className="flex gap-x-5">
           <div className="w-2/3 max-lg:w-full flex flex-col gap-y-5">
             <div className="w-full bg-white p-[10px] rounded-lg">
@@ -383,7 +383,7 @@ export default function ProductInfoPage({
         {relateProductList.length ? (
           <div className="relative max-lg:bg-white max-lg:mt-[10px]">
             <div className="flex justify-between rounded-lg mt-[20px] bg-white font-semibold  text-[20px] max-lg:text-[14px] max-lg:border-b max-lg:m-0 max-lg:shadow-none px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
-              <p>Tin tương tự</p>
+              <p className="text-[17px] font-bold">Tin tương tự</p>
               <Space className="text-blue-800 text-[12px]">Xem tất cả</Space>
             </div>
             <button
@@ -440,7 +440,7 @@ export default function ProductInfoPage({
           <Flex
             align="center"
             justify="center"
-            className="w-1/3 border-l "
+            className="w-1/3 border-l"
             vertical
           >
             <MessageOutlined />

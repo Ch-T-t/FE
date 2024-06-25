@@ -49,7 +49,9 @@ export default function FooterPhone() {
   }, [changeNotification]);
 
   return (
-    <div className="w-full max-h-[calc(100%-88px)] fixed z-50 hidden max-lg:flex max-lg:flex-col max-lg:justify-end bg-transparent bottom-0 px-[10px] max-lg:p-0 py-[5px]">
+    <div
+      className={`w-full ${openNotification && 'h-[calc(100%-88px)]'}  fixed z-50 hidden max-lg:flex max-lg:flex-col max-lg:justify-end bg-transparent bottom-0 px-[10px] max-lg:p-0 py-[5px]`}
+    >
       {openNotification && (
         <div ref={notificationRef} className="overflow-y-auto h-full bg-white">
           <Flex className="px-[10px] pt-[10px] justify-between max-lg:!hidden">

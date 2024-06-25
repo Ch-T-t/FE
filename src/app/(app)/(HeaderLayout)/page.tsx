@@ -109,8 +109,8 @@ export default function HomePage() {
         </Flex>
       </div>
 
-      <div className="p-[10px] w-full relative rounded-lg bg-white">
-        <p className="uppercase font-semibold py-[20px] p-[10px] text-[20px] max-lg:text-[14px]">
+      <div className="p-[10px] max-lg:p-[5px] max-lg:pt-[0px] w-full relative rounded-lg bg-white">
+        <p className="uppercase font-bold py-[20px] p-[10px] text-[20px] max-lg:text-[17px]">
           Khám phá danh mục
         </p>
         {/* <button
@@ -155,7 +155,7 @@ export default function HomePage() {
       </div>
 
       <div className="max-lg:bg-white">
-        <div className="rounded-md bg-white max-lg:text-[14px] max-lg:border-none max-lg:shadow-none font-semibold uppercase text-[16px] px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
+        <div className="rounded-md bg-white max-lg:text-[17px] max-lg:border-none max-lg:shadow-none font-bold uppercase text-[16px] px-[10px] py-[5px] shadow-[0_2px_8px_rgba(0,0,0,.15)]">
           Tin đăng mới
         </div>
         <div className="grid grid-cols-5 justify-center gap-3 max-lg:gap-1 mt-[20px] max-lg:mt-[10px] max-lg:grid max-lg:gap-y-5 max-lg:grid-cols-2">
@@ -194,7 +194,7 @@ export default function HomePage() {
           total={productTotal}
         />
       </div>
-      <div className="bg-white p-[10px] rounded-md">
+      <div className="bg-white p-[10px] rounded-md max-lg:hidden">
         <Introduce />
       </div>
     </div>

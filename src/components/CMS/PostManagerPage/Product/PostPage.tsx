@@ -8,12 +8,15 @@ import {
   FormOutlined,
 } from '@ant-design/icons';
 import {
+  Button,
   Dropdown,
+  Flex,
   Form,
   Image,
   Input,
   Modal,
   Popconfirm,
+  Popover,
   Switch,
   message,
 } from 'antd';
@@ -68,6 +71,18 @@ export default function PostPage() {
       });
   };
 
+  const fetchUpdateStatus = async (id: string, value: string) => {
+    await instanceAxios
+      .patch(`/api/products/${id}`, { status: value })
+      .then((res) => {
+        message.success('Cập nhật thành công');
+        mutate('fetchPostList');
+      })
+      .catch((err) => {
+        message.error('Thao tác thất bại');
+      });
+  };
+
   const fetchPostList = useCallback(async () => {
     await instanceAxios
       .get(`/api/products`, {
@@ -75,6 +90,7 @@ export default function PostPage() {
           ...(valueFilter && { search: valueFilter }),
           ...(limit && { limit: limit * currentPage }),
           ...(currentPage && { offset: currentPage }),
+          status: 'PENDING',
         },
       })
       .then((res) => {
@@ -137,13 +153,46 @@ export default function PostPage() {
       // className: 'flex item-center justify-center',
       render: (value, record, index) => (
         <div className="flex gap-x-5 text-[20px] text-[#aea9c6]">
-          <Switch />
+          <Popover
+            content={
+              <Flex vertical gap={10}>
+                <Button
+                  onClick={() =>
+                    fetchUpdateStatus(record.id || '', 'PROCESSING')
+                  }
+                  type="primary"
+                >
+                  Duyệt
+                </Button>
+                <Button
+                  onClick={() => fetchUpdateStatus(record.id || '', 'REJECTED')}
+                  type="primary"
+                >
+                  Từ chối
+                </Button>
+                <Button
+                  onClick={() => fetchDelete(record.id || '')}
+                  type="primary"
+                >
+                  Xóa
+                </Button>
+              </Flex>
+            }
+            title="Hành động"
+            trigger="click"
+            placement="left"
+            // open={open}
+            // onOpenChange={handleOpenChange}
+          >
+            <Button type="primary">Click me</Button>
+          </Popover>
+          {/* <Switch />
           <Popconfirm
             title={'Xác nhận xóa'}
             onConfirm={() => fetchDelete(record.id || '')}
           >
             <CloseOutlined />
-          </Popconfirm>
+          </Popconfirm> */}
         </div>
       ),
     },

@@ -77,8 +77,8 @@ export default function WorkPage() {
     background: '#364d79',
   };
   return (
-    <div className="w-3/4 max-lg:w-full max-lg:p-[10px]  flex flex-col gap-y-5 m-auto">
-      <div className="p-[10px] bg-white shadow-xl rounded-lg">
+    <div className="max-w-[1050px] max-lg:w-full max-lg:p-[0px] flex flex-col gap-y-5 m-auto">
+      <div className="p-[10px] max-lg:p-[0px] bg-white shadow-xl rounded-lg">
         <Carousel className="rounded-lg overflow-hidden" autoplay>
           {slideList.map((item, index) => (
             <div key={index} className="max-lg:h-[100px] ">
@@ -114,10 +114,10 @@ export default function WorkPage() {
           ref={ref}
           className="w-full mt-[10px] scroll-smooth transition relative overflow-x-auto no-scrollbar"
         >
-          <div className="flex gap-x-4  justify-between">
+          <div className="flex gap-x-4 max-lg:gap-x-1">
             {categoryList.map((item, index) => (
               <Link href={'/list/work'} key={index}>
-                <div className="flex w-[120px] hover:bg-[#f5f5f5] px-[20px] py-[10px] rounded-md flex-col gap-y-5 items-center">
+                <div className="flex w-[120px] max-lg:w-[100px] hover:bg-[#f5f5f5] px-[20px] py-[10px] max-lg:p-[5px] rounded-md flex-col gap-y-5 items-center">
                   <div className="w-[70px] h-[70px] max-md:w-[50px] max-md:h-[50px]">
                     <Image
                       className="hover:bg-white bg-[#f5f5f5] rounded-full object-cover"
@@ -145,7 +145,7 @@ export default function WorkPage() {
           onClick={() => alert('OK')}
         />
         <div className="flex w-full overflow-x-auto no-scrollbar gap-x-3">
-          <Flex gap={10} className=" w-max">
+          <Flex gap={10} className="w-max">
             <div className="min-w-[300px]">
               <TopWork />
             </div>

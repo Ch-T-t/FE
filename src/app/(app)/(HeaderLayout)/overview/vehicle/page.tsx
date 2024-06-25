@@ -70,7 +70,7 @@ export default function OverViewGoodHousePage() {
   ];
 
   return (
-    <div className="w-3/4 max-lg:w-full max-lg:p-[10px]  flex flex-col gap-y-5 m-auto">
+    <div className="max-w-[1050px] max-lg:w-full max-lg:p-[0px]  flex flex-col gap-y-5 m-auto">
       <div className="p-[10px] bg-white shadow-xl rounded-lg">
         <Carousel className="rounded-lg overflow-hidden" autoplay>
           {slideList.map((item, index) => (
@@ -85,7 +85,7 @@ export default function OverViewGoodHousePage() {
       <div className="p-[10px] relative rounded-lg bg-white">
         <TitleBar
           shadow={false}
-          title={'Khám phá tất cả danh mục'}
+          title={'Khám phá danh mục'}
           subTitle={'Xem tất cả'}
           onClick={() => alert('OK')}
         />
@@ -152,49 +152,51 @@ export default function OverViewGoodHousePage() {
           shadow={false}
           onClick={() => alert('OK')}
         />
-        <div className="grid grid-cols-2 gap-3">
-          <div className="col-span-1 ">
-            <TopWork />
-            <div className="grid grid-cols-3 gap-5 px-[20px] max-md:hidden">
-              {[...Array(3)].map((_, index) => (
-                <div key={index} className="w-full">
-                  <Image
-                    width={'100%'}
-                    className="rounded-lg"
-                    preview={false}
-                    height={150}
-                    alt=""
-                    src="https://res.cloudinary.com/postman/image/upload/t_user_profile_300/v1660311364/user/tcy2f7x3msweyrddcnjf"
-                  />
-                  <p className="h-[40px] my-[10px] text-[14px] line-clamp-2">
-                    Thanh lin ags das asd asdga sdada sasasda sdd
-                  </p>
-                  <p className="font-bold">$2000</p>
-                </div>
-              ))}
+        <div className="flex w-full overflow-x-auto no-scrollbar gap-x-3">
+          <Flex gap={10} className="w-max">
+            <div className="min-w-[300px]">
+              <TopWork />
+              <div className="grid grid-cols-3 gap-5 px-[20px] max-md:hidden">
+                {[...Array(3)].map((_, index) => (
+                  <div key={index} className="w-full">
+                    <Image
+                      width={'100%'}
+                      className="rounded-lg"
+                      preview={false}
+                      height={150}
+                      alt=""
+                      src="https://res.cloudinary.com/postman/image/upload/t_user_profile_300/v1660311364/user/tcy2f7x3msweyrddcnjf"
+                    />
+                    <p className="h-[40px] my-[10px] text-[14px] line-clamp-2">
+                      Thanh lin ags das asd asdga sdada sasasda sdd
+                    </p>
+                    <p className="font-bold">$2000</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="col-span-1">
-            <TopWork />
-            <div className="grid grid-cols-3 gap-5 px-[20px] max-md:hidden">
-              {[...Array(3)].map((_, index) => (
-                <div key={index} className="w-full">
-                  <Image
-                    width={'100%'}
-                    className="rounded-lg"
-                    preview={false}
-                    height={150}
-                    alt=""
-                    src="https://res.cloudinary.com/postman/image/upload/t_user_profile_300/v1660311364/user/tcy2f7x3msweyrddcnjf"
-                  />
-                  <p className="h-[40px] my-[10px] text-[14px] line-clamp-2">
-                    Thanh lin asda sas dasd asda dasa sa sd a sdd
-                  </p>
-                  <p className="font-bold">$2000</p>
-                </div>
-              ))}
+            <div className="min-w-[300px]">
+              <TopWork />
+              <div className="grid grid-cols-3 gap-5 px-[20px] max-md:hidden">
+                {[...Array(3)].map((_, index) => (
+                  <div key={index} className="w-full">
+                    <Image
+                      width={'100%'}
+                      className="rounded-lg"
+                      preview={false}
+                      height={150}
+                      alt=""
+                      src="https://res.cloudinary.com/postman/image/upload/t_user_profile_300/v1660311364/user/tcy2f7x3msweyrddcnjf"
+                    />
+                    <p className="h-[40px] my-[10px] text-[14px] line-clamp-2">
+                      Thanh lin ags das asd asdga sdada sasasda sdd
+                    </p>
+                    <p className="font-bold">$2000</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </Flex>
         </div>
       </div>
     </div>

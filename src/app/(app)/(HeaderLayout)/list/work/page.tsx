@@ -13,7 +13,16 @@ import {
   DownOutlined,
   HolderOutlined,
 } from '@ant-design/icons';
-import { Carousel, Dropdown, Flex, Image, Pagination, Space } from 'antd';
+import {
+  Button,
+  Carousel,
+  Drawer,
+  Dropdown,
+  Flex,
+  Image,
+  Pagination,
+  Space,
+} from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 
 export default function WorkListPage() {
@@ -22,6 +31,7 @@ export default function WorkListPage() {
   const [categoryList, setCategoryList] = useState<IJob[]>([]);
   const [productList, setProductList] = useState<IGoodHousePost[]>([]);
   const [isSubMenu, setIsSubMenu] = useState(false);
+  const [openDraw, setOpenDraw] = useState(false);
   const [goodHouseTypeFilter, setGoodHouseTypeFilter] = useState('');
   const [currentTab, setCurrentTab] = useState(1);
   const [addressFilter, setAddressFilter] = useState('');
@@ -77,7 +87,9 @@ export default function WorkListPage() {
         gap={20}
       >
         <ModalLocationSelectFilterCustom
-          onChange={(e) => setAddressFilter(e as string)}
+          onChange={(e) => {
+            setAddressFilter(e as string);
+          }}
           label={''}
         />
         <ModalCategorySelectFilterCustom
@@ -87,8 +99,8 @@ export default function WorkListPage() {
         />
         <ModalLocationSliderFilterCustom label={'Giá'} />
       </Flex>
-      <Flex className="w-full px-[100px]" vertical>
-        <div className="w-full p-[10px]   bg-white  m-auto shadow-xl rounded-lg">
+      <Flex className="w-full px-[100px] max-lg:p-0" vertical>
+        <div className="w-full p-[10px] bg-white  m-auto shadow-xl rounded-lg">
           <Carousel className="rounded-lg overflow-hidden" autoplay>
             <div>
               <h3 style={contentStyle}>1</h3>
@@ -105,7 +117,7 @@ export default function WorkListPage() {
           </Carousel>
         </div>
         <Flex className="w-full" gap={50}>
-          <Flex vertical gap={10} className=" w-2/3">
+          <Flex vertical gap={10} className="w-2/3 max-lg:w-full">
             <p className="font-bold py-[20px]">
               Thuê nhà vị trí thuận lợi, giá hợp lý
             </p>
@@ -217,11 +229,28 @@ export default function WorkListPage() {
             </Flex>
             <Pagination className="!m-auto" total={50} />
           </Flex>
-          <Flex className="w-1/3">
+          <Flex className="w-1/3 max-lg:!hidden">
             <div className="w-full h-[50px] bg-slate-600"></div>
           </Flex>
         </Flex>
       </Flex>
+      <Drawer
+        title="Drawer with extra actions"
+        placement="bottom"
+        width={500}
+        // onClose={onClose}
+        open={openDraw}
+        extra={
+          <Space>
+            <Button>Cancel</Button>
+            <Button type="primary">OK</Button>
+          </Space>
+        }
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer>
     </div>
   );
 }

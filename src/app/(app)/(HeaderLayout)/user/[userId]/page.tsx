@@ -80,7 +80,7 @@ export default function UserIdPage({
     fechUserInfo();
   }, [params.userId]);
   return (
-    <div className="w-4/5 max-lg:w-full m-auto mt-[10px] ">
+    <div className="max-w-[1050px] max-lg:w-full m-auto mt-[10px] ">
       <div className="flex max-lg:flex-col gap-x-5">
         <div className="w-1/3 max-lg:w-full rounded-lg bg-white">
           <div className="relative">

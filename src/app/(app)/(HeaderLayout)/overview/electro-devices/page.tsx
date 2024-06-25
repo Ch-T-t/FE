@@ -82,7 +82,7 @@ export default function ElectroDevicePage() {
     background: '#364d79',
   };
   return (
-    <div className="w-3/4 max-lg:w-full max-lg:p-[10px]  flex flex-col gap-y-5 m-auto">
+    <div className="max-w-[1050px] max-lg:w-full max-lg:p-[10px]  flex flex-col gap-y-5 m-auto">
       <div className="p-[10px] bg-white shadow-xl rounded-lg">
         <Carousel className="rounded-lg overflow-hidden" autoplay>
           {slideList.map((item, index) => (
@@ -97,7 +97,7 @@ export default function ElectroDevicePage() {
       <div className="p-[10px] relative rounded-lg bg-white">
         <TitleBar
           shadow={false}
-          title={'Khám phá tất cả danh mục'}
+          title={'Khám phá danh mục'}
           subTitle={'Xem tất cả'}
           onClick={() => alert('OK')}
         />
