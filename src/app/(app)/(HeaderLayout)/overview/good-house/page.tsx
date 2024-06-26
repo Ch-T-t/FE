@@ -61,25 +61,33 @@ export default function OverViewGoodHouse() {
   return (
     <div className="w-full">
       <Flex
-        className="bg-white py-[10px] pl-[200px] text-nowrap max-lg:pl-[20px] overflow-x-auto"
+        className="bg-white py-[10px] text-nowrap max-lg:pl-[20px] overflow-x-auto"
         gap={20}
       >
-        <ModalLocationSelectFilterCustom
-          onChange={(e) => setAddressFilter(e as string)}
-          label={''}
-        />
-        <ModalCategorySelectFilterCustom
-          onChange={(e) => setGoodHouseTypeFilter(e as string)}
-          label={'Loại nhà'}
-          menuList={categoryList}
-        />
-        <ModalLocationSliderFilterCustom label={'Giá'} />
-        <ModalLocationSliderFilterCustom label={'Diện tích'} />
+        <Flex
+          gap={20}
+          align="flex-start"
+          justify="start"
+          className="w-full max-w-[1050px] mx-auto"
+        >
+          <ModalLocationSelectFilterCustom
+            onChange={(e) => {
+              setAddressFilter(e as string);
+            }}
+            label={''}
+          />
+          <ModalCategorySelectFilterCustom
+            onChange={(e) => setGoodHouseTypeFilter(e as string)}
+            label={'Xe ghép'}
+            menuList={categoryList}
+          />
+          <ModalLocationSliderFilterCustom label={'Giá'} />
+        </Flex>
       </Flex>
       <Flex
         vertical
         gap={10}
-        className="ml-[200px] max-lg:px-[20px] max-lg:m-0 w-1/2 max-xl:w-3/4 max-md:w-full"
+        className="max-w-[1050px] mx-auto max-lg:px-[20px] max-lg:m-0  max-md:w-full"
       >
         <p className="font-bold py-[20px]">
           Thuê nhà vị trí thuận lợi, giá hợp lý

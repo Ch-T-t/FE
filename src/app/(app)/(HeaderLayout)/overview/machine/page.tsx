@@ -68,7 +68,7 @@ export default function MachinePage() {
       <Flex
         vertical
         gap={10}
-        className="ml-[200px] max-lg:px-[20px] max-lg:m-0 w-1/2 max-xl:w-3/4 max-md:w-full"
+        className="max-w-[1050px] mx-auto max-lg:px-[20px] max-lg:m-0  max-md:w-full"
       >
         <p className="font-bold py-[20px]">Mua bán thiết bị máy móc siêu rẻ</p>
 
