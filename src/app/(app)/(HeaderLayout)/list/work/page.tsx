@@ -83,23 +83,30 @@ export default function WorkListPage() {
   return (
     <div className="w-full">
       <Flex
-        className="bg-white py-[10px] pl-[200px] text-nowrap max-lg:pl-[20px] overflow-x-auto"
+        className="bg-white py-[10px] text-nowrap max-lg:pl-[20px] overflow-x-auto"
         gap={20}
       >
-        <ModalLocationSelectFilterCustom
-          onChange={(e) => {
-            setAddressFilter(e as string);
-          }}
-          label={''}
-        />
-        <ModalCategorySelectFilterCustom
-          onChange={(e) => setGoodHouseTypeFilter(e as string)}
-          label={'Xe ghép'}
-          menuList={categoryList}
-        />
-        <ModalLocationSliderFilterCustom label={'Giá'} />
+        <Flex
+          gap={20}
+          align="flex-start"
+          justify="start"
+          className="w-full max-w-[1000px] mx-auto"
+        >
+          <ModalLocationSelectFilterCustom
+            onChange={(e) => {
+              setAddressFilter(e as string);
+            }}
+            label={''}
+          />
+          <ModalCategorySelectFilterCustom
+            onChange={(e) => setGoodHouseTypeFilter(e as string)}
+            label={'Xe ghép'}
+            menuList={categoryList}
+          />
+          <ModalLocationSliderFilterCustom label={'Giá'} />
+        </Flex>
       </Flex>
-      <Flex className="w-full px-[100px] max-lg:p-0" vertical>
+      <Flex className="max-w-[1000px] mx-auto max-lg:p-0" vertical>
         <div className="w-full p-[10px] bg-white  m-auto shadow-xl rounded-lg">
           <Carousel className="rounded-lg overflow-hidden" autoplay>
             <div>
