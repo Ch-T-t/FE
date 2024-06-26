@@ -96,7 +96,7 @@ export default function HomePage() {
               align="center"
               gap={5}
               onClick={() => router.push('/save-post')}
-              className="rounded-md font-medium p-[10px] hover:bg-[#e1e1e1]"
+              className="rounded-md w-[120px] h-[97px] font-medium p-[10px] hover:bg-[#e1e1e1]"
             >
               <div className="w-[33px] max-lg:w-[30px]">
                 <Image width={`100%`} alt="" src={item.icon} preview={false} />
