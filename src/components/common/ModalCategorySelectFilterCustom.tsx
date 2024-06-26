@@ -55,7 +55,7 @@ export default function ModalCategorySelectFilterCustom(props: Props) {
         open={showModal}
         footer={[]}
       >
-        <div className="rounded-lg border mx-[30px] overflow-hidden">
+        <div className="rounded-[5px] border-[#8E8C8C] border mx-[30px] overflow-hidden">
           {props.menuList.map((item, index) => (
             <div
               key={index}
@@ -64,9 +64,9 @@ export default function ModalCategorySelectFilterCustom(props: Props) {
                 props.onChange?.(item.id || '');
                 setShowModal(false);
               }}
-              className="flex justify-between p-[10px] border-b hover:bg-[#f5f5f5]"
+              className="flex justify-between px-[10px] py-[6px] border-b hover:bg-[#f5f5f5]"
             >
-              <Space className="">
+              <Space className="text-[14px]">
                 {/* {!isSubMenu && <ProfileOutlined />} */}
                 {item.name}
               </Space>

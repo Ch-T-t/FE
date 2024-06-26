@@ -94,7 +94,7 @@ export default function Header() {
   return (
     !loading && (
       <div className="w-full flex-col items-center justify-between gap-x-5 max-lg:px-[10px] py-[10px] bg-[#ffba00] max-lg:!fixed max-lg:!top-0 z-50">
-        <div className="w-[90%] max-lg:w-full m-auto">
+        <div className="max-w-[1050px] max-lg:w-full m-auto">
           <Flex className="w-full" align="center" justify="space-between">
             <Link className="max-lg:m-auto max-lg:justify-center" href={'/'}>
               <Image
@@ -192,10 +192,10 @@ export default function Header() {
             justify="space-between"
             align="center"
           >
-            <div className="w-2/5 max-lg:w-full flex items-center gap-x-3">
+            <div className="w-3/5 max-lg:w-full flex items-center gap-x-3">
               <div className="relative w-full z-30">
                 <Input
-                  className="!w-full max-lg:!py-[5px] !pr-[100px] max-lg:!pr-[45px] max-lg:!pl-7 max-lg:!text-[10px]"
+                  className="max-w-[600px] max-lg:!py-[5px] !pr-[100px] max-lg:!pr-[45px] max-lg:!pl-7 max-lg:!text-[10px]"
                   placeholder="Tìm kiếm"
                 />
                 <div className="absolute right-[5px] max-lg:left-0 max-lg:bg-transparent max-lg:right-auto top-1/2 rounded-md -translate-y-1/2 bg-[#ffba00] px-[20px] py-[5px] max-lg:px-[10px] max-lg:py-[1px]">
@@ -204,7 +204,7 @@ export default function Header() {
               </div>
             </div>
 
-            <div className="w-3/5 max-lg:w-fit flex gap-3 items-center justify-between max-lg:justify-center max-lg:gap-x-2 ">
+            <div className="w-2/5 max-lg:w-fit flex gap-8 items-center justify-end  max-lg:justify-center max-lg:gap-x-2 ">
               <Link
                 className="text-black hover:text-black hidden max-lg:block mx-[10px]"
                 href={'/chat'}
@@ -223,7 +223,7 @@ export default function Header() {
                     alt=""
                     src="../quan_li_tin.png"
                   />
-                  <p className="max-lg:hidden">Quản lí tin</p>
+                  {/* <p className="max-lg:hidden">Quản lí tin</p> */}
                 </Flex>
               </Link>
               <Flex
@@ -232,7 +232,7 @@ export default function Header() {
                 align="center"
               >
                 <AimOutlined className="text-[20px] max-lg:hidden" />
-                <p className="max-lg:hidden">Chợ tốt map</p>
+                {/* <p className="max-lg:hidden">Chợ tốt map</p> */}
               </Flex>
               <div className="relative cursor-pointer text-nowrap max-lg:hidden">
                 <Flex
@@ -248,11 +248,11 @@ export default function Header() {
                     src="../user_avatar.png"
                   />
                   {/* <UserOutlined className="text-[20px]" /> */}
-                  <p className="max-lg:hidden">
+                  {/* <p className="max-lg:hidden">
                     {user.logged
                       ? user.data.fullname || `Tên chưa cung cấp`
                       : `Đăng nhập`}
-                  </p>
+                  </p> */}
                 </Flex>
                 {openMenu && (
                   <Flex
@@ -260,7 +260,7 @@ export default function Header() {
                     vertical
                     className="absolute min-w-[250px] -translate-x-1/2 z-[9999] text-[14px] top-full bg-white rounded-lg shadow-lg"
                   >
-                    <Flex
+                    {/* <Flex
                       gap={15}
                       align="center"
                       className="font-semibold text-[14px] p-[10px]"
@@ -271,7 +271,7 @@ export default function Header() {
                           ? user.data.fullname || `Tên chưa cung cấp`
                           : ` Đăng nhập / Đăng kí`}
                       </p>
-                    </Flex>
+                    </Flex> */}
                     <Flex vertical>
                       <p className="bg-[#f4f4f4] px-[10px] py-[5px] text-[#9b9b9b] font-semibold">
                         Tiện ích
@@ -350,10 +350,17 @@ export default function Header() {
                 )}
               </div>
               <Link className="max-lg:hidden" href={'/create-post'}>
-                <Space className="bg-[#dd8500] text-white rounded-md px-[15px] py-[5px] text-nowrap">
+                <Flex
+                  align="center"
+                  justify="center"
+                  gap={10}
+                  className="bg-[#FF8800] w-[130px] h-[36px] text-white rounded-[5px] px-[15px] py-[5px] text-nowrap"
+                >
                   <ImportOutlined />
-                  <p className=" font-semibold">Đăng tin</p>
-                </Space>
+                  <p className="uppercase font-extrabold text-[14px]">
+                    Đăng tin
+                  </p>
+                </Flex>
               </Link>
             </div>
           </Flex>
