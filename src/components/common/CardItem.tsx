@@ -19,9 +19,9 @@ interface Props {
 export default function CardItem(props: Props) {
   const children = (
     <div
-      className={`w-[200px] ${props.className} max-lg:w-full max-lg:shadow-none  bg-white shadow-[0_2px_8px_rgba(0,0,0,.15)] p-[10px] rounded-lg `}
+      className={`w-[202px] h-[320px] ${props.className} max-lg:w-full max-lg:shadow-none  bg-white shadow-[0_2px_8px_rgba(0,0,0,.15)] p-[10px] rounded-lg `}
     >
-      <div className={`w-full h-[220px] ${props.classNameImg}`}>
+      <div className={`w-full h-[177px] ${props.classNameImg}`}>
         <Image
           width={`100%`}
           height={`100%`}
@@ -32,20 +32,21 @@ export default function CardItem(props: Props) {
         />
       </div>
       <div className={`w-full`}>
-        <p className="line-clamp-2 h-[50px] font-medium text-[15px] max-lg:font-normal max-lg:text-[13px]">
+        <p className="line-clamp-2 h-[40px] font-medium text-[15px] max-lg:font-normal max-lg:text-[14px]">
           {props.data?.name || textDefault}
         </p>
-        <p className="truncate text-[#808080] h-[30px] py-[5px] text-[14px] max-lg:hidden">
+        <p className="truncate text-[#808080] h-[20px] mt-[10px] text-[14px] max-lg:hidden">
           Ngày làm: {moment(props.data?.created_at).format('DD/MM/YYYY')}
         </p>
-        <p className="text-[#d0021b] h-[30px] my-[5px] !text[15px] !font-sans font-bold">
+        <p className="text-[#D0021B] h-[17px]  !text[14px] !font-sans font-bold">
           ${props.data?.info?.price || 0}
           {props.pricerSuffixes && `/${props.pricerSuffixes}`}
         </p>
-        <Flex gap={2} align="center" className="w-full h-[40px]">
+        <Flex gap={2} align="center" className="w-full h-[21px] mt-[10px]">
           <Avatar
+            size={16}
             src="../user_default.png"
-            className="max-lg:!w-[20px] max-lg:!h-[20px]"
+            className="max-lg:!w-[16px] max-lg:!h-[20px]"
           />
           <p className="w-[150px] block text-[12px] text-[#c7c7c7] truncate max-lg:text-[10px]">
             {moment(props.data?.created_at).fromNow()} • {props.data?.name}
