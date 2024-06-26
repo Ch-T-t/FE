@@ -114,21 +114,21 @@ export default function WorkPage() {
           ref={ref}
           className="w-full mt-[10px] scroll-smooth transition relative overflow-x-auto no-scrollbar"
         >
-          <div className="flex gap-x-4 max-lg:gap-x-1">
+          <div className="flex gap-x-6 max-lg:gap-x-1">
             {categoryList.map((item, index) => (
               <Link href={'/list/work'} key={index}>
-                <div className="flex w-[120px] max-lg:w-[100px] hover:bg-[#f5f5f5] px-[20px] py-[10px] max-lg:p-[5px] rounded-md flex-col gap-y-5 items-center">
-                  <div className="w-[70px] h-[70px] max-md:w-[50px] max-md:h-[50px]">
+                <div className="flex justify-center w-[120px] hover:bg-[#f5f5f5] py-[10px] max-lg:p-[5px] rounded-md flex-col gap-y-3 items-center">
+                  <div className="w-[52px] h-[52px] max-md:w-[52px] max-md:h-[52px]">
                     <Image
                       className="hover:bg-white bg-[#f5f5f5] rounded-full object-cover"
-                      width={`100%`}
+                      width={52}
                       preview={false}
-                      height={`100%`}
+                      height={52}
                       src={item.icon}
                       alt=""
                     />
                   </div>
-                  <p className="text-wrap text-center text-[12px] font-medium">
+                  <p className="w-[110px] mx-auto text-wrap text-center text-[14px] font-medium">
                     {item.name}
                   </p>
                 </div>
@@ -146,10 +146,10 @@ export default function WorkPage() {
         />
         <div className="flex w-full overflow-x-auto no-scrollbar gap-x-3">
           <Flex gap={10} className="w-max">
-            <div className="min-w-[300px]">
+            <div className="min-w-[310px]">
               <TopWork />
             </div>
-            <div className="min-w-[300px]">
+            <div className="min-w-[310px]">
               <TopWork />
             </div>
           </Flex>
